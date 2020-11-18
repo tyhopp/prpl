@@ -1,0 +1,16 @@
+{
+  "name": "prpl",
+  "version": "1.0.0",
+  "description": "A PRPL pattern static site generator.",
+  "author": "Ty Hopp (https://tyhopp.com)",
+  "scripts": {
+    "build": "node prpl/src/index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "static-site-generator",
+    "ssg",
+    "prpl"
+  ],
+  "license": "MIT"
+}
