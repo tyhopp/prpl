@@ -22,8 +22,11 @@ In addition, the [prefetch](/src/prefetch.js) and [router](/src/router.js) scrip
     - Transform markdown files to html
     - Find the associated template in `src/` (e.g. `/content/notes/my-first-note.md` corresponds to `/src/notes/note.html`)
     - Inject the html into the template where a `<prpl></prpl>` tag is found
-    - Write the completed file to `/dist` in the associated location (e.g. `/content/notes/my-first-note.html`)
+    - Write the completed file to `/dist` in the associated location (e.g. `/dist/notes/my-first-note.html`)
 
 ## TODO
 - [ ] Add feature to render a list of content items
 - [ ] Add a zero-dependency dev server solution
+
+## Reference
+- See readme from an [earlier repo](https://github.com/tyhopp/prpl-html) for more notes about how the [prefetch](/src/prefetch.js) and [router](/src/router.js) packages work in tandem to achieve the PRPL pattern.
