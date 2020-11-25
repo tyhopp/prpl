@@ -1,10 +1,10 @@
 {
-  "name": "prpl",
+  "name": "prpl-example-basic",
   "version": "1.0.0",
-  "description": "A PRPL pattern static site generator.",
+  "description": "Basic example site using PRPL.",
   "author": "Ty Hopp (https://tyhopp.com)",
   "scripts": {
-    "build": "node prpl/src/index.js",
+    "build": "node ../../prpl/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
@@ -12,5 +12,8 @@
     "ssg",
     "prpl"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "prpl": "file:../../prpl"
+  }
 }

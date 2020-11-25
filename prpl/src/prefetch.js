@@ -5,7 +5,6 @@ const prefetch = () => {
     ...Array.from(document.querySelectorAll('a')).map(link => link.href)
   ]
     .map(link => {
-      console.log(link);
       return fetch(link)
         .then(response => response.text())
         .then(html => localStorage.setItem(link, html))
