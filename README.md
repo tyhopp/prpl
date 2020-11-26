@@ -17,7 +17,7 @@ Given this HTML file,
 <head></head>
 <body>
   <main>
-    <prpl src="content/notes"></prpl>
+    <prpl type="inject" src="content/notes"></prpl>
   </main>
 </body>
 ```
@@ -55,6 +55,5 @@ prpl/
 ```
 
 ## TODO
-- [ ] Add feature to render a list of content items
 - [ ] Add a zero-dependency dev server solution
 - [ ] Demonstrate npm pre/post hook solution to writing remote files to the local filesystem for use
