@@ -1,6 +1,6 @@
 <!--
 title: Hello world!
-slug: my-first-note
+slug: /notes/my-first-note
 date: 2020-11-26
 description: This is my first note
 categories: Misc

@@ -4,8 +4,6 @@
   <main>
     <h1>This is the notes page</h1>
     <prpl type="list" src="content/notes">
-
-      <!-- One option is to make the properties available like this in html -->
       <article>
         <a href="[slug]">
           <h3>[title]</h3>
@@ -14,15 +12,6 @@
         <time>[date]</time>
         <span>[categories]</span>
       </article>
-
-      <!-- Another option is to execute JavaScript -->
-      notes.forEach(note => {
-        const { title, slug, date, description, categories } = note;
-        const anchor = document.createElement('a');
-        anchor.href = slug;
-        ... and so on
-      });
-
     </prpl>
     <p>Or back to the <a href="index.html">index</a> page.</p>
   </main>

@@ -15,7 +15,7 @@ const replace = (src, content) => {
 }
 
 /**
- * Injects content into a template, outputting a new file fo reach content item.
+ * Injects content into a template, outputting a new file for each content item.
  * @param {Object} obj
  * @param {Array} obj.contentFiles The files to inject into the template
  * @param {string} obj.contentSrc The path to the directory containing the content files

@@ -1,6 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { copy } = require('./copy');
+const { list } = require('./list');
 const { inject } = require('./inject');
 
 /**
@@ -37,11 +38,13 @@ const interpolate = item => {
 
   switch(contentType) {
     case 'list':
+      list({ contentFiles, contentSrc, template });
       break;
     case 'inject':
       inject({ contentFiles, contentSrc, template });
       break;
     default:
+      inject({ contentFiles, contentSrc, template });
   }
 }
 
