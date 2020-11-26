@@ -1,37 +1,31 @@
-const fs = require('fs');
 const path = require('path');
 const createTree = require('directory-tree');
-const transformMarkdown = require('marked');
-const { writeFile } = require(path.resolve(__dirname, 'utils/write-file'));
+const { ensure } = require(path.resolve(__dirname, 'actions/ensure'));
+const { copy } = require(path.resolve(__dirname, 'actions/copy'));
+const { interpolate } = require('./actions/interpolate');
 
-const src = path.resolve('src');
-const srcTree = createTree(src, { normalizePath: true });
-srcTree.children.forEach(item => {
-  if (item.type !== 'directory') {
-    const file = fs.readFileSync(item.path).toString();
-    fs.writeFileSync(path.resolve('dist', item.name), file);
-  }
-});
+// Ensure the dist directory exists
+ensure('dist');
 
-const content = path.resolve('content');
-const contentTree = createTree(content, { normalizePath: true });
-
-const render = items => items.forEach(item => {
+/**
+ * Recursively operates on a list of items in a file system directory.
+ * @param {Array} items A list of objects describing items in a file system
+ */
+const walk = items => items.forEach(item => {
   switch(item.type) {
     case 'file':
-      if (item.extension !== '.md') {
-        return;
+      if (item.extension === '.html') {
+        interpolate(item);
+        break;
       }
-      const markdown = fs.readFileSync(item.path).toString();
-      const html = transformMarkdown(markdown);
-      const context = item.path.replace(item.name, '').replace('content', 'dist');
-      const file = item.name.replace('.md', '.html');
-      writeFile(context, file, html);
+      copy(item);
       break;
     case 'directory':
-      render(item.children);
+      walk(item.children);
       break;
   }
 });
 
-render(contentTree.children);
+// Create and walk the source tree
+const tree = createTree(path.resolve('src'), { normalizePath: true }).children;
+walk(tree);

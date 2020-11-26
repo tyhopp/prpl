@@ -25,7 +25,6 @@ document.addEventListener('click', e => {
       history.pushState(state, null, url);
       dispatchEvent(new PopStateEvent('popstate', { state }));
     } catch (e) {
-      console.log(e);
       window.location.assign(url);
     }
   }

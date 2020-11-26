@@ -1,32 +1,60 @@
 # PRPL
 An experimental [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/) static site generator.
 
-## Structure
+## Gains
+- One dependency
+- One API (a single HTML element)
+- No bundlers or config files
+- Next.js/Gatsby speed without the kitchen sink
+
+## Usage
+Use a `<prpl>` element to interpolate content in any HTML file.
+
+Given this HTML file,
+
+```html
+<!DOCTYPE html>
+<head></head>
+<body>
+  <main>
+    <prpl src="content/notes"></prpl>
+  </main>
+</body>
+```
+
+and a markdown file,
+
+```markdown
+# Hello World!
+
+This is my first note
+```
+
+the output is:
+
+```html
+<!DOCTYPE html>
+<head></head>
+<body>
+  <main>
+    <h1 id="hello-world">Hello World!</h1>
+    <p>This is my first note</p>
+  </main>
+</body>
+```
+
+## Project structure
 ```
 prpl/
-  ├─ content/
-  ├─ dist/
-  ├─ prpl/ [1]
-  └─ src/
+  └─ examples/
+    └─ basic/
+      ├─ content/
+      ├─ src/
+      └─ dist/
+  └─ prpl/
 ```
-
-[1] Currently, the `prpl` framework package is colocated here while in development. The idea is eventually to have it as a node module.
-
-In addition, the [prefetch](/src/prefetch.js) and [router](/src/router.js) scripts are also colocated. The idea is they will exist as packages exported from the `prpl` npm package.
-
-## How it works
-1. You write your site in `src/`.
-2. You write your content in markdown in `content/`.
-3. When you build your site `prpl` will:
-    - Check your `content/` directory for files
-    - Transform markdown files to html
-    - Find the associated template in `src/` (e.g. `/content/notes/my-first-note.md` corresponds to `/src/notes/note.html`)
-    - Inject the html into the template where a `<prpl></prpl>` tag is found
-    - Write the completed file to `/dist` in the associated location (e.g. `/dist/notes/my-first-note.html`)
 
 ## TODO
 - [ ] Add feature to render a list of content items
 - [ ] Add a zero-dependency dev server solution
-
-## Reference
-- See readme from an [earlier repo](https://github.com/tyhopp/prpl-html) for more notes about how the [prefetch](/src/prefetch.js) and [router](/src/router.js) packages work in tandem to achieve the PRPL pattern.
+- [ ] Demonstrate npm pre/post hook solution to writing remote files to the local filesystem for use

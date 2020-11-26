@@ -12,5 +12,9 @@
     "ssg",
     "prpl"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "directory-tree": "^2.2.5",
+    "marked": "^1.2.5"
+  }
 }
