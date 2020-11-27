@@ -10,7 +10,7 @@ An experimental [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/)
 This is a bit more complicated than it will be temporarily.
 
 - `git clone https://github.com/tyhopp/prpl.git` to download the project
-- `cd prpl && npm i` to install prpl
+- `cd prpl/prpl && npm i` to install prpl
 - `cd ../examples/basic && npm run start` to start the example app
 
 ## API
