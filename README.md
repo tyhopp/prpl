@@ -7,6 +7,13 @@ An experimental [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/)
 - Next.js/Gatsby speed without the kitchen sink
 
 ## Usage
+This is a bit more complicated than it will be temporarily.
+
+- `git clone https://github.com/tyhopp/prpl.git` to download the project
+- `cd prpl && npm i` to install prpl
+- `cd ../examples/basic && npm run start` to start the example app
+
+## API
 Use a `<prpl>` element to interpolate content in any HTML file.
 
 Given this HTML file,

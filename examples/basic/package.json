@@ -5,16 +5,12 @@
   "author": "Ty Hopp (https://tyhopp.com)",
   "scripts": {
     "start": "node ../../prpl/src/index.js && node ../../prpl/server/index.js",
-    "build": "node ../../prpl/src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node ../../prpl/src/index.js"
   },
   "keywords": [
     "static-site-generator",
     "ssg",
     "prpl"
   ],
-  "license": "MIT",
-  "dependencies": {
-    "prpl": "file:../../prpl"
-  }
+  "license": "MIT"
 }
