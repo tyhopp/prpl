@@ -4,6 +4,7 @@
   "description": "Basic example site using PRPL.",
   "author": "Ty Hopp (https://tyhopp.com)",
   "scripts": {
+    "start": "node ../../prpl/src/index.js && node ../../prpl/server/index.js",
     "build": "node ../../prpl/src/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
