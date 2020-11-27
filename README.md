@@ -2,8 +2,7 @@
 An experimental [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/) static site generator.
 
 ## Gains
-- One dependency
-- One API (a single HTML element)
+- An API that fits on one line - `<prpl></prpl>`
 - No bundlers or config files
 - Next.js/Gatsby speed without the kitchen sink
 
