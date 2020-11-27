@@ -55,5 +55,4 @@ prpl/
 ```
 
 ## TODO
-- [ ] Add a zero-dependency dev server solution
 - [ ] Demonstrate npm pre/post hook solution to writing remote files to the local filesystem for use

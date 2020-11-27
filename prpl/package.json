@@ -13,7 +13,9 @@
     "prpl"
   ],
   "license": "MIT",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "chokidar": "^3.4.3",
     "directory-tree": "^2.2.5",
     "marked": "^1.2.5"
   }
