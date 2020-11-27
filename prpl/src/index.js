@@ -1,10 +1,15 @@
 const path = require('path');
+const fs = require('fs');
 const createTree = require('directory-tree');
 const { ensure } = require(path.resolve(__dirname, 'actions/ensure'));
 const { copy } = require(path.resolve(__dirname, 'actions/copy'));
 const { interpolate } = require('./actions/interpolate');
 
-// Ensure the dist directory exists
+// Refresh dist
+const dist = path.resolve('dist');
+if (fs.existsSync(dist)) {
+  fs.rmdirSync(dist, { recursive: true });
+}
 ensure('dist');
 
 /**
