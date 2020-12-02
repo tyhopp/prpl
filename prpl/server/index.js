@@ -61,9 +61,12 @@ chokidar.watch(path.resolve('./src')).on('change', changedPath => {
     extension,
     type: 'file'
   };
-  interpolate(item);
-  ws.send('reload');
-  console.log(`[Server] Updated ${relevantPath}`);
+  Promise.resolve()
+  .then(() => interpolate(item))
+  .then(() => {
+    ws.send('reload');
+    console.log(`[Server] Updated ${relevantPath}`);
+  });
 });
 
 open('http://localhost:8000');

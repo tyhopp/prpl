@@ -1,0 +1,37 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --text: #000;
+  --background: #FFF:
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #FFF;
+    --background: #000;
+  }
+}
+
+body {
+  font-family: monospace;
+  color: var(--text);
+  background-color: var(--background);
+}
+
+main {
+  margin: 2em;
+}
+
+a {
+  text-decoration: none;
+  padding-bottom: 0.1em;
+  border-bottom: 1px dashed;
+}
+
+a:link,
+a:visited {
+  color: var(--text);
+}

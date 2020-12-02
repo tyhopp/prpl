@@ -1,7 +1,7 @@
 window.addEventListener('popstate', () => {
   const url = window.location.href;
   try {
-    const html = localStorage.getItem(url);
+    const html = sessionStorage.getItem(`prpl-${url}`);
     const parser = new DOMParser();
     const currentMain = document.querySelector('main');
     const targetMain = parser.parseFromString(html, 'text/html').querySelector('main');
@@ -9,7 +9,7 @@ window.addEventListener('popstate', () => {
     dispatchEvent(new CustomEvent('prpl-render', { bubbles: true }));
   } catch (error) {
     window.location.assign(url);
-    console.error('Failed to get html from local storage.' , error);
+    console.error('Failed to get html from session storage.' , error);
   }
 });
 
