@@ -1,19 +1,21 @@
 # PRPL
-An experimental [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/) static site generator.
+An HTML-based static site generator implementing the [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/).
 
-## Gains
-- An API that fits on one line - `<prpl></prpl>`
+## Why
+- No JavaScript required
 - No bundlers or config files
-- Next.js/Gatsby speed without the kitchen sink
+- No underlying framework (e.g. React, Vue, Angular)
+- Standards based
+- Very, very fast
 
-## Usage
+## Install
 This is a bit more complicated than it will be temporarily.
 
 - `git clone https://github.com/tyhopp/prpl.git` to download the project
 - `cd prpl/prpl && npm i` to install prpl
 - `cd ../examples/basic && npm run start` to start the example app
 
-## API
+## Usage
 Use a `<prpl>` element to interpolate content in any HTML file.
 
 Given this HTML file,
