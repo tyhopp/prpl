@@ -12,6 +12,11 @@ if (fs.existsSync(dist)) {
 }
 ensure('dist');
 
+// Provide prefetch and router scripts
+['prefetch', 'router'].forEach(script => {
+  fs.writeFileSync(`${dist}/${script}.js`, fs.readFileSync(path.resolve(__dirname, `${script}.js`)));
+});
+
 /**
  * Recursively operates on a list of items in a file system directory.
  * @param {Array} items A list of objects describing items in a file system
