@@ -1,11 +1,59 @@
+// Store the index head for head resolution
+const serializer = new XMLSerializer();
+const head = serializer.serializeToString(document.querySelector('head'));
+sessionStorage.setItem('prpl-index-head', head);
+
 window.addEventListener('popstate', () => {
   const url = window.location.href;
+
   try {
     const html = sessionStorage.getItem(`prpl-${url}`);
     const parser = new DOMParser();
+    const target = parser.parseFromString(html, 'text/html');
+
+    // Swap main
     const currentMain = document.querySelector('main');
-    const targetMain = parser.parseFromString(html, 'text/html').querySelector('main');
+    const targetMain = target.querySelector('main');
     currentMain.replaceWith(targetMain);
+
+    // Resolve head
+    const indexHead = parser.parseFromString(sessionStorage.getItem('prpl-index-head'), 'text/html');
+    const currentHeadTags = Array.from(document.querySelector('head').children);
+    const targetHeadTags = Array.from(target.querySelector('head').children);
+
+    /**
+     * Helper function to extract a CSS attribute query.
+     * @param {HTMLElement} tag 
+     * @returns {string}
+     */
+    const extractQuery = tag => {
+      const name = tag.tagName.toLowerCase();
+      let attrQueries = '';
+      for (let i = 0; i < tag.attributes.length; i++) {
+        const { name: key, nodeValue: value } = tag.attributes[i];
+        attrQueries = attrQueries.concat(`[${key}="${value}"]`);
+      }
+      return `${name}${attrQueries}`;
+    }
+
+    // Remove current head tags not in index
+    currentHeadTags.forEach(tag => {
+      if (!indexHead.querySelector(extractQuery(tag))) {
+        tag.remove();
+      }
+    });
+
+    // Add/amend target head tags not in index
+    targetHeadTags.forEach(tag => {
+      if (tag.tagName.toLowerCase() === 'title') {
+        document.querySelector('title').textContent = tag.textContent;
+      }
+      if (!indexHead.querySelector(extractQuery(tag))) {
+        document.querySelector('head').appendChild(tag);
+      }
+    });
+
+    // Indicate render has finished
     dispatchEvent(new CustomEvent('prpl-render', { bubbles: true }));
   } catch (error) {
     window.location.assign(url);
