@@ -1,4 +1,5 @@
 const path = require('path');
+const fs = require('fs');
 const http = require('http');
 const handler = require('serve-handler');
 const WebSocket = require('faye-websocket');
@@ -10,6 +11,29 @@ let ws;
 
 // Serve the files on localhost
 const server = http.createServer();
+
+server.on('connection', () => {
+  const index = fs.readFileSync(path.resolve('./dist/index.html')).toString();
+  const socket = fs.readFileSync(path.resolve(__dirname, 'socket.js')).toString();
+
+  if (index.includes('<script dev>')) {
+    return;
+  }
+
+  const devIndex = index.replace(/<\/body>/, `<script dev>
+      ${socket}
+    </script>
+  </body>`);
+
+  fs.writeFileSync(path.resolve('./dist/index.html'), devIndex);
+});
+
+process.on('SIGINT', () => {
+  const index = fs.readFileSync(path.resolve('./dist/index.html')).toString();
+  const restoredIndex = index.replace(/<script dev>.*<\/body>/s, '</body>');
+  fs.writeFileSync(path.resolve('./dist/index.html'), restoredIndex);
+  process.exit(0);
+});
 
 server.on('request', (request, response) => {
   const config = {
