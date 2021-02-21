@@ -18,7 +18,7 @@ const interpolate = item => {
 
   // Add prefetch and router script tags to index
   if (item.path === index) {
-    template.src = template.src.replace(/<\/body>/, `<script src="./prefetch.js"></script>\n<script src="./router.js"></script>\n</body>`);
+    template.src = template.src.replace(/<\/head>/, `<script defer src="prefetch.js"></script>\n<script defer src="router.js"></script>\n</head>`);
     if (!/<prpl/.test(template.src)) {
       fs.writeFileSync(item.path.replace('src', 'dist'), template.src);
       return;

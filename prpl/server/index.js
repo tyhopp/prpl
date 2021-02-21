@@ -23,7 +23,7 @@ server.on('connection', () => {
   }
 
   const devIndex = index.replace(
-    /<\/body>/,
+    /<\/head>/,
     `<script dev>
       ${socket}
     </script>
@@ -35,7 +35,7 @@ server.on('connection', () => {
 
 process.on('SIGINT', () => {
   const index = fs.readFileSync(path.resolve('./dist/index.html')).toString();
-  const restoredIndex = index.replace(/<script dev>.*<\/body>/s, '</body>');
+  const restoredIndex = index.replace(/<script dev>.*<\/head>/s, '</head>');
   fs.writeFileSync(path.resolve('./dist/index.html'), restoredIndex);
   process.exit(0);
 });

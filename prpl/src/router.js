@@ -18,6 +18,22 @@ const extractQuery = (tag) => {
   return `${name}${attrQueries}`;
 };
 
+/**
+ * Helper function to determine if the script should be ignored.
+ * @param {HTMLElement} script
+ * @returns {boolean}
+ */
+const ignoreScript = (script) => {
+  if (script.tagName.toLowerCase() !== 'script') {
+    return;
+  }
+  return (
+    script.src.endsWith('/prefetch.js') ||
+    script.src.endsWith('/router.js') ||
+    script.getAttribute('dev') === ''
+  );
+};
+
 window.addEventListener('popstate', () => {
   const url = window.location.href;
 
@@ -40,7 +56,8 @@ window.addEventListener('popstate', () => {
       if (
         targetHeadTags.some((targetHeadTag) =>
           targetHeadTag.isEqualNode(currentHeadTag)
-        )
+        ) ||
+        ignoreScript(currentHeadTag)
       ) {
         return;
       }
@@ -59,34 +76,11 @@ window.addEventListener('popstate', () => {
       document.head.appendChild(targetHeadTag);
     });
 
-    const ignoredScript = (script) => {
-      return (
-        script.src === `${window.location.origin}/prefetch.js` ||
-        script.src === `${window.location.origin}/router.js` ||
-        script.getAttribute('dev') === ''
-      );
-    };
-
-    // Resolve scripts
-    const currentScripts = Array.from(
-      document.querySelectorAll('script')
-    ).filter((script) => !ignoredScript(script));
-    const targetScripts = Array.from(target.querySelectorAll('script')).filter(
-      (script) => {
-        return !ignoredScript(script);
-      }
-    );
-
-    currentScripts.forEach((script) => script.remove());
-    targetScripts.forEach((script) =>
-      document.querySelector('body').appendChild(script)
-    );
-
     // Indicate render has finished
     dispatchEvent(new CustomEvent('prpl-render', { bubbles: true }));
   } catch (error) {
     window.location.assign(url);
-    console.error('Failed to get html from session storage.', error);
+    console.error('Failed render, falling back to full page reload.', error);
   }
 });
 
