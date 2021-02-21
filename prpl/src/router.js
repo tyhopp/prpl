@@ -32,28 +32,31 @@ window.addEventListener('popstate', () => {
     currentMain.replaceWith(targetMain);
 
     // Resolve head
-    const indexHead = parser.parseFromString(
-      sessionStorage.getItem('prpl-index-head'),
-      'text/html'
-    );
     const currentHeadTags = Array.from(document.querySelector('head').children);
     const targetHeadTags = Array.from(target.querySelector('head').children);
 
-    // Remove current head tags not in index
-    currentHeadTags.forEach((tag) => {
-      if (!indexHead.querySelector(extractQuery(tag))) {
-        tag.remove();
+    // Remove head tags
+    currentHeadTags.forEach((currentHeadTag) => {
+      if (
+        targetHeadTags.some((targetHeadTag) =>
+          targetHeadTag.isEqualNode(currentHeadTag)
+        )
+      ) {
+        return;
       }
+      document.head.querySelector(extractQuery(currentHeadTag)).remove();
     });
 
-    // Add/amend target head tags not in index
-    targetHeadTags.forEach((tag) => {
-      if (tag.tagName.toLowerCase() === 'title') {
-        document.querySelector('title').textContent = tag.textContent;
+    // Add head tags
+    targetHeadTags.forEach((targetHeadTag) => {
+      if (
+        currentHeadTags.some((currentHeadTag) =>
+          currentHeadTag.isEqualNode(targetHeadTag)
+        )
+      ) {
+        return;
       }
-      if (!indexHead.querySelector(extractQuery(tag))) {
-        document.querySelector('head').appendChild(tag);
-      }
+      document.head.appendChild(targetHeadTag);
     });
 
     const ignoredScript = (script) => {
