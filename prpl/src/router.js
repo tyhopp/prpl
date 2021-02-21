@@ -1,8 +1,3 @@
-// Store the index head for head resolution
-const serializer = new XMLSerializer();
-const head = serializer.serializeToString(document.querySelector('head'));
-sessionStorage.setItem('prpl-index-head', head);
-
 /**
  * Helper function to extract a CSS attribute query.
  * @param {HTMLElement} tag
@@ -56,8 +51,7 @@ window.addEventListener('popstate', () => {
       if (
         targetHeadTags.some((targetHeadTag) =>
           targetHeadTag.isEqualNode(currentHeadTag)
-        ) ||
-        ignoreScript(currentHeadTag)
+        )
       ) {
         return;
       }
@@ -69,7 +63,7 @@ window.addEventListener('popstate', () => {
       if (
         currentHeadTags.some((currentHeadTag) =>
           currentHeadTag.isEqualNode(targetHeadTag)
-        )
+        ) || ignoreScript(targetHeadTag)
       ) {
         return;
       }
