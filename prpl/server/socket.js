@@ -10,7 +10,7 @@ if ('WebSocket' in window) {
 
     fetch(href)
       .then((response) => {
-        if (href === '/' || href.includes('html')) {
+        if (href === '/' || href.endsWith('.html')) {
           return response.text().then((html) => {
             const origin = window.location.origin;
 
@@ -26,12 +26,37 @@ if ('WebSocket' in window) {
             }
           });
         }
-        
-        const elements = document.querySelectorAll(`[href="${href.slice(1)}"]`);
-        if (!elements.length) {
-          return;
+
+        let relativeHref = href;
+        const hrefPath = href.split('/');
+        const currentPath = window.location.pathname.split('/');
+
+        if (hrefPath && currentPath.length) {
+          currentPath.forEach((path, index) => {
+            if (!path.length) {
+              return;
+            }
+            if (path === hrefPath[index]) {
+              relativeHref = relativeHref.replace(`/${hrefPath[index]}`, '');
+            }
+          });
         }
+
+        relativeHref =
+          relativeHref[0] === '/' ? relativeHref.slice(1) : relativeHref;
+
+        const elements = document.querySelectorAll(
+          `[href*="${relativeHref}"], [src*="${relativeHref}"]`
+        );
+
         elements.forEach((element) => {
+          if (element.tagName.toLowerCase() === 'script') {
+            const pseudoAnchor = document.createElement('a');
+            pseudoAnchor.href = window.location.href;
+            document.querySelector('main').appendChild(pseudoAnchor);
+            pseudoAnchor.click();
+            return;
+          }
           element.parentNode.replaceChild(element, element);
         });
       })

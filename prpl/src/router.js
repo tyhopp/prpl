@@ -63,8 +63,15 @@ window.addEventListener('popstate', () => {
       if (
         currentHeadTags.some((currentHeadTag) =>
           currentHeadTag.isEqualNode(targetHeadTag)
-        ) || ignoreScript(targetHeadTag)
+        ) ||
+        ignoreScript(targetHeadTag)
       ) {
+        return;
+      }
+      if (targetHeadTag.tagName.toLowerCase() === 'script') {
+        const clonedScript = document.createElement('script');
+        clonedScript.src = targetHeadTag.src;
+        document.head.appendChild(clonedScript);
         return;
       }
       document.head.appendChild(targetHeadTag);
