@@ -1,11 +1,15 @@
 {
   "name": "prpl",
-  "version": "1.0.0",
-  "description": "A PRPL pattern static site generator.",
+  "version": "0.0.8",
+  "description": "A PRPL pattern static site generator",
   "author": "Ty Hopp (https://tyhopp.com)",
   "scripts": {
-    "build": "node prpl/src/index.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "node ./src/index.js",
+    "serve": "node ./server/index.js"
+  },
+  "bin": {
+    "prpl-build": "./src/index.js",
+    "prpl-serve": "./server/index.js"
   },
   "keywords": [
     "static-site-generator",
@@ -13,13 +17,13 @@
     "prpl"
   ],
   "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {
+  "dependencies": {
     "chokidar": "^3.4.3",
     "directory-tree": "^2.2.5",
     "faye-websocket": "^0.11.3",
     "marked": "^1.2.5",
     "open": "^7.3.0",
     "serve-handler": "^6.1.3"
-  }
+  },
+  "devDependencies": {}
 }

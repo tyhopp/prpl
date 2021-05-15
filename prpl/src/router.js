@@ -51,7 +51,8 @@ window.addEventListener('popstate', () => {
       if (
         targetHeadTags.some((targetHeadTag) =>
           targetHeadTag.isEqualNode(currentHeadTag)
-        )
+        ) ||
+        ignoreScript(currentHeadTag)
       ) {
         return;
       }

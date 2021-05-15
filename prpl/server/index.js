@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 const path = require('path');
 const fs = require('fs');
 const http = require('http');
@@ -8,21 +10,24 @@ const open = require('open');
 const { interpolate } = require('../src/actions/interpolate');
 
 let ws;
+let socketInjectedPages = [];
 
-// Serve the files on localhost
-const server = http.createServer();
+/**
+ * Injects the socket on the page if it does not already have it.
+ * @param {string} page
+ */
+function injectSocketOptionally(page) {
+  const pageDOM = fs.readFileSync(path.resolve(page)).toString();
 
-server.on('connection', () => {
-  const index = fs.readFileSync(path.resolve('./dist/index.html')).toString();
+  if (pageDOM.includes('<script dev>')) {
+    return;
+  }
+
   const socket = fs
     .readFileSync(path.resolve(__dirname, 'socket.js'))
     .toString();
 
-  if (index.includes('<script dev>')) {
-    return;
-  }
-
-  const devIndex = index.replace(
+  const injectedPageDOM = pageDOM.replace(
     /<\/head>/,
     `<script dev>
       ${socket}
@@ -30,22 +35,46 @@ server.on('connection', () => {
   </body>`
   );
 
-  fs.writeFileSync(path.resolve('./dist/index.html'), devIndex);
+  socketInjectedPages.push(page);
+
+  fs.writeFileSync(path.resolve(page), injectedPageDOM);
+}
+
+// Serve the files on localhost
+const server = http.createServer();
+
+// Inject socket on index page
+server.on('connection', () => {
+  injectSocketOptionally('./dist/index.html');
 });
 
+// Clean up pages injected with socket
 process.on('SIGINT', () => {
-  const index = fs.readFileSync(path.resolve('./dist/index.html')).toString();
-  const restoredIndex = index.replace(/<script dev>.*<\/head>/s, '</head>');
-  fs.writeFileSync(path.resolve('./dist/index.html'), restoredIndex);
+  socketInjectedPages.forEach((page) => {
+    const injectedPageDOM = fs.readFileSync(path.resolve(page)).toString();
+    const restoredPageDOM = injectedPageDOM.replace(
+      /<script dev>.*<\/script>/s,
+      ''
+    );
+    fs.writeFileSync(path.resolve(page), restoredPageDOM);
+  });
+  socketInjectedPages = [];
   process.exit(0);
 });
 
 server.on('request', (request, response) => {
+  if (request.headers.accept.includes('text/html')) {
+    const url =
+      request.url === '/' ? './dist/index.html' : `./dist${request.url}.html`;
+    injectSocketOptionally(url);
+  }
+
   const config = {
     public: 'dist',
     cleanUrls: true,
     trailingSlash: false
   };
+
   return handler(request, response, config);
 });
 
@@ -69,31 +98,15 @@ watcher.on('change', (changedPath) => {
     type: 'file'
   };
   Promise.resolve()
-    .then(() => interpolate(item))
     .then(() => {
-      // If logged, a message was sent to the client
-      // ws.ping('Ping', () => {
-      //   console.log('Message sent');
-      // });
-
-      // Return value of ws.send is false if socket is closed
-      const socketOpen = ws.send(
-        relevantPath === '/index.html' ? '/' : relevantPath
-      );
-      // console.log('Socket still open: ', socketOpen);
-
+      interpolate(item);
+    })
+    .then(() => {
+      ws.send(relevantPath === '/index.html' ? '/' : relevantPath);
+    })
+    .then(() => {
       console.log(`[Server] Updated ${relevantPath}`);
     });
 });
-
-// Shows what files are actually watched
-// watcher.on('ready', () => {
-//   console.log(watcher.getWatched());
-// });
-
-// Shows raw event data
-// watcher.on('raw', (event, path, details) => {
-//   console.log('Raw event info:', event, path, details);
-// });
 
 open('http://localhost:8000');

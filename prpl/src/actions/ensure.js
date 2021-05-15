@@ -7,7 +7,7 @@ const path = require('path');
  */
 const ensure = dir => {
   if (!fs.existsSync(path.resolve(dir))) {
-    fs.mkdirSync(path.resolve(dir));
+    fs.mkdirSync(path.resolve(dir), { recursive: true });
   }
 }
 
