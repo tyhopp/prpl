@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 const { list } = require('./list');
-const { inject } = require('./inject');
+const { page } = require('./page');
 
 /**
  * Parses a template and interpolates target content.
@@ -21,6 +21,7 @@ const interpolate = (item) => {
     /<\/head>/,
     `<script defer src="${root}prefetch.js"></script>\n<script defer src="${root}router.js"></script>\n</head>`
   );
+
   if (!/<prpl/.test(template.src)) {
     fs.writeFileSync(item.path.replace('src', 'dist'), template.src);
     return;
@@ -28,12 +29,14 @@ const interpolate = (item) => {
 
   // Extract <prpl> attributes
   const attrs = /<prpl (.*?)>/.exec(template.src)[1];
+
   if (!attrs) {
     console.error(
       '[Error] - A <prpl> tag requires at least a src attribute. Exiting.'
     );
     process.exit();
   }
+
   const keys = Array.from(
     ` ${attrs}`.matchAll(/\s(.*?)=/g),
     (match) => match[1]
@@ -55,11 +58,11 @@ const interpolate = (item) => {
     case 'list':
       list({ contentFiles, contentSrc, template });
       break;
-    case 'inject':
-      inject({ contentFiles, contentSrc, template });
+    case 'page':
+      page({ contentFiles, contentSrc, template });
       break;
     default:
-      inject({ contentFiles, contentSrc, template });
+      page({ contentFiles, contentSrc, template });
   }
 };
 

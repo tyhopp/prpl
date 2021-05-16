@@ -14,31 +14,36 @@ const list = ({ contentFiles, contentSrc, template }) => {
   const targetDir = targetPath.replace(template.name, '');
   ensure(targetDir);
 
-  // Isolate list item template
+  // Isolate src prpl template
   const prplTag = /<prpl.*<\/prpl>/s.exec(template.src)[0];
-  const liTemplateStart = /<prpl.*>/.exec(prplTag)[0].length;
-  const liTemplateEnd = prplTag.length - 7;
-  const liTemplate = prplTag.substring(liTemplateStart, liTemplateEnd);
+  const prplTemplateStart = /<prpl.*>/.exec(prplTag)[0].length;
+  const prplTemplateEnd = prplTag.length - 7;
+  const prplTemplate = prplTag.substring(prplTemplateStart, prplTemplateEnd);
 
   // Fill metadata in list item template
   const list = contentFiles.reduce((fullList, file) => {
     const srcPath = `${contentSrc}/${file}`;
-    const { metadata } = parse(fs.readFileSync(srcPath).toString());
+    const parsedContent = parse(fs.readFileSync(srcPath).toString());
 
-    let liTemplateInstance = String(liTemplate);
-    for (const key in metadata) {
-      if (liTemplateInstance.includes(`[${key}]`)) {
-        liTemplateInstance = liTemplateInstance.replace(`[${key}]`, metadata[key]);
+    // Fill src prpl template with content
+    let prplTemplateInstance = String(prplTemplate);
+    for (const key in parsedContent) {
+      if (prplTemplateInstance.includes(`[${key}]`)) {
+        const regex = new RegExp(`\\[${key}\\]`, 'g');
+        prplTemplateInstance = prplTemplateInstance.replace(
+          regex,
+          parsedContent[key]
+        );
       }
     }
 
-    return `${fullList}${liTemplateInstance}`;
+    return `${fullList}${prplTemplateInstance}`;
   }, '');
 
   const templateWithList = template.src.replace(/<prpl.*<\/prpl>/s, list);
   fs.writeFileSync(targetPath, templateWithList);
-}
+};
 
 module.exports = {
   list
-}
+};

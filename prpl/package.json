@@ -1,6 +1,6 @@
 {
   "name": "prpl",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "A PRPL pattern static site generator",
   "author": "Ty Hopp (https://tyhopp.com)",
   "scripts": {

@@ -3,9 +3,9 @@
  * @param {string} src An HTML string
  * @returns {Object} Parsed HTML string and metadata object
  */
-const parse = src => {
+const parse = (src) => {
   let metadata;
-  let html;
+  let body;
 
   try {
     // Parse metadata
@@ -19,7 +19,7 @@ const parse = src => {
     }, {});
 
     // Parse html
-    html = /-->\n(.*?)$/s.exec(src)[1];
+    body = /-->\n(.*?)$/s.exec(src)[1];
   } catch (error) {
     console.error(`[Error] Unable to parse metadata. Metadata must be at the top of your file with at least a title and slug property:
     <!--
@@ -30,11 +30,11 @@ const parse = src => {
   }
 
   return {
-    metadata,
-    html
-  }
-}
+    ...metadata,
+    body
+  };
+};
 
 module.exports = {
   parse
-}
+};

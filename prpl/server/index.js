@@ -17,6 +17,10 @@ let socketInjectedPages = [];
  * @param {string} page
  */
 function injectSocketOptionally(page) {
+  if (!fs.existsSync(path.resolve(page))) {
+    return;
+  }
+
   const pageDOM = fs.readFileSync(path.resolve(page)).toString();
 
   if (pageDOM.includes('<script dev>')) {
