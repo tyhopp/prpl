@@ -1,10 +1,11 @@
 <!--
 title: Hello world!
 slug: /notes/my-first-note
-date: 2020-11-26
+date: 2020-11-25
 description: This is my first note
 categories: Misc
 -->
+
 # Hello world!
 
 This is my first note
