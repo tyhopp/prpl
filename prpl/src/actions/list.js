@@ -1,6 +1,7 @@
 const fs = require('fs');
 const { ensure } = require('./ensure');
 const { parse } = require('./parse');
+const { extract } = require('./extract');
 
 /**
  * Renders a list of content items in a single file.
@@ -10,6 +11,8 @@ const { parse } = require('./parse');
  * @param {Object} obj.template The template details
  */
 const list = ({ contentFiles, contentSrc, template }) => {
+  let files = contentFiles;
+
   const targetPath = template.path.replace('src', 'dist');
   const targetDir = targetPath.replace(template.name, '');
   ensure(targetDir);
@@ -21,7 +24,7 @@ const list = ({ contentFiles, contentSrc, template }) => {
   const prplTemplate = prplTag.substring(prplTemplateStart, prplTemplateEnd);
 
   // Fill metadata in list item template
-  const list = contentFiles.reduce((fullList, file) => {
+  let list = files.map((file) => {
     const srcPath = `${contentSrc}/${file}`;
     const parsedContent = parse(fs.readFileSync(srcPath).toString());
 
@@ -37,8 +40,64 @@ const list = ({ contentFiles, contentSrc, template }) => {
       }
     }
 
-    return `${fullList}${prplTemplateInstance}`;
-  }, '');
+    return {
+      parsedContent,
+      output: prplTemplateInstance
+    };
+  });
+
+  // Extract prpl attrs
+  const prplAttrs = extract(template.src);
+
+  if ('order-by' in prplAttrs) {
+    const sort = prplAttrs['order-by'];
+    let direction = 'asc';
+
+    if ('direction' in prplAttrs) {
+      direction = prplAttrs['direction'];
+    }
+
+    try {
+      list = list.sort((first, second) => {
+        let firstComparator = first.parsedContent[sort];
+        let secondComparator = second.parsedContent[sort];
+
+        if (sort.toLowerCase() === 'date' || sort.toLowerCase() === 'time') {
+          firstComparator = new Date(firstComparator).getTime();
+          secondComparator = new Date(secondComparator).getTime();
+
+          return direction === 'asc'
+            ? firstComparator - secondComparator
+            : secondComparator - firstComparator;
+        }
+
+        if (firstComparator === secondComparator) {
+          return 0;
+        }
+
+        return direction === 'asc'
+          ? firstComparator > secondComparator
+            ? 1
+            : -1
+          : secondComparator < firstComparator
+          ? -1
+          : 1;
+      });
+    } catch (error) {
+      console.error(`[Error] Failed to sort by ${sort}`);
+    }
+  }
+
+  if ('limit' in prplAttrs) {
+    const limit = prplAttrs['limit'];
+    try {
+      list = list.slice(0, limit);
+    } catch (error) {
+      console.error(`[Error] Failed to limit to ${limit}`);
+    }
+  }
+
+  list = list.map((item) => item.output).join('');
 
   const templateWithList = template.src.replace(/<prpl.*<\/prpl>/s, list);
   fs.writeFileSync(targetPath, templateWithList);
