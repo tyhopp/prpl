@@ -29,7 +29,7 @@ const ignoreScript = (script) => {
   );
 };
 
-window.addEventListener('popstate', () => {
+window.addEventListener('popstate', (event) => {
   const url = window.location.href;
 
   try {
@@ -83,6 +83,11 @@ window.addEventListener('popstate', () => {
       document.head.appendChild(targetHeadTag);
     });
 
+    // Scroll to top if user clicked a link, otherwise preserve scroll state
+    if (event.state && event.state.url && event.state.url === url) {
+      window.scrollTo({ top: 0 });
+    }
+
     // Indicate render has finished
     dispatchEvent(new CustomEvent('prpl-render', { bubbles: true }));
   } catch (error) {
@@ -97,7 +102,7 @@ document.addEventListener('click', (e) => {
     e.preventDefault();
 
     const url = anchor.href;
-    const state = anchor.state ? { url, ...JSON.parse(anchor.state) } : { url };
+    const state = { url };
 
     try {
       history.pushState(state, null, url);
