@@ -1,6 +1,6 @@
 # PRPL
 
-An HTML-based static site generator implementing the [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/).
+HTML-based static site generator implementing the [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/).
 
 ## Why
 

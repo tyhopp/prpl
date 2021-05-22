@@ -15,7 +15,7 @@ if (fs.existsSync(dist)) {
 ensure('dist');
 
 // Provide prefetch and router scripts
-['prefetch', 'router'].forEach((script) => {
+['prefetch', 'prefetch-worker', 'router'].forEach((script) => {
   fs.writeFileSync(
     `${dist}/${script}.js`,
     fs.readFileSync(path.resolve(__dirname, `${script}.js`))

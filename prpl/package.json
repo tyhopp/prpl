@@ -1,7 +1,7 @@
 {
   "name": "prpl",
-  "version": "0.0.14",
-  "description": "A PRPL pattern static site generator",
+  "version": "0.0.15",
+  "description": "HTML-based static site generator",
   "author": "Ty Hopp (https://tyhopp.com)",
   "scripts": {
     "build": "node ./src/index.js",

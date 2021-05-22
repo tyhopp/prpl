@@ -34,6 +34,11 @@ window.addEventListener('popstate', () => {
 
   try {
     const html = sessionStorage.getItem(`prpl-${url}`);
+
+    if (!html) {
+      throw 'No cached html, defaulting to native routing';
+    }
+
     const parser = new DOMParser();
     const target = parser.parseFromString(html, 'text/html');
 

@@ -1,40 +1,39 @@
-// TODO - Do this in a worker
-const prefetch = () => {
-  const relativeLinks = [
+// Utility function to calculate unique relative paths
+function getRelativePaths() {
+  const relativePaths = [
     ...Array.from(document.querySelectorAll('a'))
-      .filter(
-        (link) =>
-          link.href !== window.location.href &&
-          link.href.includes(window.location.origin)
-      )
+      .filter((link) => link.href.includes(window.location.origin))
       .map((link) => link.href)
   ];
-  const uniqueRelativeLinks = Array.from(new Set(relativeLinks));
+  return Array.from(new Set(relativePaths));
+}
 
-  const preloadLinkRequests = uniqueRelativeLinks.map((link) => {
-    return fetch(link)
-      .then((response) => response.text())
-      .then((html) => {
-        sessionStorage.setItem(`prpl-${link}`, html);
+if (window.Worker) {
+  // Instantiate prefetch worker
+  const prefetchWorker = new Worker('prefetch-worker.js');
 
-        const parser = new DOMParser();
-        const htmlDOM = parser.parseFromString(html, 'text/html');
-        const preloadResources = Array.from(
-          htmlDOM.querySelectorAll('[rel=preload]')
-        );
-        const uniquePreloadResources = Array.from(new Set(preloadResources));
-        const preloadResourceRequests = uniquePreloadResources.map((resource) =>
-          fetch(resource.href)
-        );
-        Promise.all(preloadResourceRequests);
-      })
-      .catch((error) => console.error('Failed to prefetch page.', error));
+  // Initial prefetch
+  prefetchWorker.postMessage(getRelativePaths());
+
+  // Listen for responses
+  prefetchWorker.onmessage = (event) => {
+    const prefetchedPages = event.data;
+    if (!prefetchedPages.length) {
+      return;
+    }
+    for (let i = 0; i < prefetchedPages.length; i++) {
+      sessionStorage.setItem(prefetchedPages[i].key, prefetchedPages[i].value);
+    }
+  };
+
+  // Subsequent prefetch
+  window.addEventListener('prpl-render', () => {
+    try {
+      prefetchWorker.postMessage(getRelativePaths());
+    } catch (error) {
+      console.error('Failed to prefetch on subsequent page route', error);
+    }
   });
-  Promise.all(preloadLinkRequests);
-};
-
-window.addEventListener('prpl-render', () => {
-  prefetch();
-});
-
-prefetch();
+} else {
+  console.error(`Your browser doesn't support web workers`);
+}
