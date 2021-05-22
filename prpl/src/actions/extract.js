@@ -4,7 +4,7 @@
  * @returns {Object}
  */
 function extract(page) {
-  const attrs = /<prpl (.*?)>/.exec(page)[1];
+  const attrs = /<prpl(.*?)>/s.exec(page)[1].trim();
 
   if (!attrs) {
     console.error(
@@ -13,20 +13,15 @@ function extract(page) {
     process.exit();
   }
 
-  const keys = Array.from(
-    ` ${attrs}`.matchAll(/\s(.*?)=/g),
-    (match) => match[1]
+  const attrObj = [...attrs.matchAll(/\s*((.*?)="(.*?)")/g)].reduce(
+    (acc, curr) => {
+      return {
+        ...acc,
+        [curr[2]]: curr[3]
+      };
+    },
+    {}
   );
-
-  const values = Array.from(
-    ` ${attrs}`.matchAll(/"(.*?)"/g),
-    (match) => match[1]
-  );
-
-  const attrObj = keys.reduce((prev, curr, index) => {
-    prev[curr] = values[index];
-    return prev;
-  }, {});
 
   return attrObj;
 }

@@ -18,10 +18,7 @@ const list = ({ contentFiles, contentSrc, template }) => {
   ensure(targetDir);
 
   // Isolate src prpl template
-  const prplTag = /<prpl.*<\/prpl>/s.exec(template.src)[0];
-  const prplTemplateStart = /<prpl.*>/.exec(prplTag)[0].length;
-  const prplTemplateEnd = prplTag.length - 7;
-  const prplTemplate = prplTag.substring(prplTemplateStart, prplTemplateEnd);
+  const prplTemplate = template.src.match(/(<prpl.*?>)(.*?)<\/prpl>/s)[2];
 
   // Fill metadata in list item template
   let list = files.map((file) => {
