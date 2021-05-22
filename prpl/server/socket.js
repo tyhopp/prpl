@@ -10,6 +10,7 @@ if ('WebSocket' in window) {
 
     fetch(href)
       .then((response) => {
+        // Handle HTML files
         if (href === '/' || href.endsWith('.html')) {
           return response.text().then((html) => {
             const origin = window.location.origin;
@@ -27,10 +28,20 @@ if ('WebSocket' in window) {
           });
         }
 
+        // TODO - Dependency tree awareness for atomic replacement
+        // Handle CSS
+        if (href.endsWith('.css')) {
+          const styleElements = document.querySelectorAll('[rel="stylesheet"]');
+          styleElements.forEach((styleElement) => {
+            styleElement.parentNode.replaceChild(styleElement, styleElement);
+          });
+          return;
+        }
+
+        // Resolve relative path
         let relativeHref = href;
         const hrefPath = href.split('/');
         const currentPath = window.location.pathname.split('/');
-
         if (hrefPath && currentPath.length) {
           currentPath.forEach((path, index) => {
             if (!path.length) {
@@ -41,14 +52,14 @@ if ('WebSocket' in window) {
             }
           });
         }
-
         relativeHref =
           relativeHref[0] === '/' ? relativeHref.slice(1) : relativeHref;
 
+        // TODO - Dependency tree awareness for atomic replacement
+        // Handle JS and other resources
         const elements = document.querySelectorAll(
           `[href*="${relativeHref}"], [src*="${relativeHref}"]`
         );
-
         elements.forEach((element) => {
           if (element.tagName.toLowerCase() === 'script') {
             const pseudoAnchor = document.createElement('a');
