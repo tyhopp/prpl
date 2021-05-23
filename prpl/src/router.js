@@ -90,6 +90,7 @@ window.addEventListener('popstate', (event) => {
 
     // Indicate render has finished
     dispatchEvent(new CustomEvent('prpl-render', { bubbles: true }));
+    performance.mark('prpl-render-end');
   } catch (error) {
     window.location.assign(url);
     console.error('Failed render, falling back to full page reload.', error);
@@ -97,6 +98,7 @@ window.addEventListener('popstate', (event) => {
 });
 
 document.addEventListener('click', (e) => {
+  performance.mark('prpl-render-start');
   const anchor = e.target.closest('a');
   if (anchor && anchor.target !== '_blank') {
     e.preventDefault();
