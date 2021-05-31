@@ -114,3 +114,9 @@ watcher.on('change', (changedPath) => {
 });
 
 open('http://localhost:8000');
+
+console.log(
+  '\x1b[35m',
+  '[PRPL] Server listening at http://localhost:8000',
+  '\x1b[0m'
+);

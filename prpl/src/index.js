@@ -45,3 +45,5 @@ const walk = (items) =>
 // Create and walk the source tree
 const tree = createTree(path.resolve('src'), { normalizePath: true }).children;
 walk(tree);
+
+console.log('\x1b[35m', '[PRPL] Build complete', '\x1b[0m');
