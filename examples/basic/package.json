@@ -1,16 +1,14 @@
 {
-  "name": "prpl-example-basic",
+  "name": "catch-the-road-runner",
   "version": "1.0.0",
-  "description": "Basic example site using PRPL.",
-  "author": "Ty Hopp (https://tyhopp.com)",
+  "description": "Catch the road runner",
+  "author": "Wile E. Coyote",
   "scripts": {
-    "start": "node ../../prpl/src/index.js && node ../../prpl/server/index.js",
-    "build": "node ../../prpl/src/index.js"
+    "prestart": "prpl-build",
+    "start": "prpl-serve",
+    "build": "prpl-build"
   },
-  "keywords": [
-    "static-site-generator",
-    "ssg",
-    "prpl"
-  ],
-  "license": "MIT"
+  "dependencies": {
+    "prpl": "0.0.22"
+  }
 }
