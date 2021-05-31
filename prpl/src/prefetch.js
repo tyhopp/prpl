@@ -1,7 +1,7 @@
 // Utility function to calculate unique relative paths
 function getRelativePaths() {
   const relativePaths = [
-    ...Array.from(document.querySelectorAll('a'))
+    ...Array.from(document.querySelectorAll('a:not([rel])'))
       .filter((link) => link.href.includes(window.location.origin))
       .map((link) => link.href)
   ];
