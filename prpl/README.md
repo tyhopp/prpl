@@ -59,15 +59,3 @@ the output is:
   </main>
 </body>
 ```
-
-## Project structure
-
-```
-prpl/
-  └─ examples/
-    └─ basic/
-      ├─ content/
-      ├─ src/
-      └─ dist/
-  └─ prpl/
-```
