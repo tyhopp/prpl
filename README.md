@@ -12,11 +12,7 @@ HTML-based static site generator implementing the [PRPL pattern](https://web.dev
 
 ## Install
 
-This is a bit more complicated than it will be temporarily.
-
-- `git clone https://github.com/tyhopp/prpl.git` to download the project
-- `cd prpl/prpl && npm i` to install prpl
-- `cd ../examples/basic && npm run start` to start the example app
+`npm init prpl`
 
 ## Usage
 
@@ -25,8 +21,8 @@ Use a `<prpl>` element to interpolate content in any HTML file.
 Given this HTML file,
 
 ```html
+<!DOCTYPE html>
 <prpl type="page" src="content/notes">
-  <!DOCTYPE html>
   <head></head>
   <body>
     <main>
