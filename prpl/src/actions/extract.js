@@ -4,16 +4,16 @@
  * @returns {Object}
  */
 function extract(page) {
-  const attrs = /<prpl(.*?)>/s.exec(page)[1].trim();
+  const prplAttrsRaw = /<prpl(.*?)>/s.exec(page)[1].trim();
 
-  if (!attrs) {
-    console.error(
-      '[Error] - A <prpl> tag requires at least a src attribute. Exiting.'
-    );
-    process.exit();
+  if (!prplAttrsRaw) {
+    return {
+      prplAttrs: {},
+      prplAttrsRaw
+    };
   }
 
-  const attrObj = [...attrs.matchAll(/\s*((.*?)="(.*?)")/g)].reduce(
+  const prplAttrs = [...prplAttrsRaw.matchAll(/\s*((.*?)="(.*?)")/g)].reduce(
     (acc, curr) => {
       return {
         ...acc,
@@ -23,7 +23,10 @@ function extract(page) {
     {}
   );
 
-  return attrObj;
+  return {
+    prplAttrs,
+    prplAttrsRaw
+  };
 }
 
 module.exports = {

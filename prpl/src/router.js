@@ -93,7 +93,10 @@ window.addEventListener('popstate', (event) => {
     performance.mark('prpl-render-end');
   } catch (error) {
     window.location.assign(url);
-    console.error('Failed render, falling back to full page reload.', error);
+    console.error(
+      '[PRPL] Failed render, falling back to full page reload.',
+      error
+    );
   }
 });
 

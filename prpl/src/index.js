@@ -7,6 +7,16 @@ const { ensure } = require(path.resolve(__dirname, 'actions/ensure'));
 const { copy } = require(path.resolve(__dirname, 'actions/copy'));
 const { interpolate } = require('./actions/interpolate');
 
+// Colorize console messages
+const builtInLog = console.log;
+const builtInError = console.error;
+console.log = function () {
+  builtInLog('\x1b[35m', '[PRPL]', ...arguments, '\x1b[0m');
+};
+console.error = function () {
+  builtInError('\x1b[35m', '[PRPL]', ...arguments, '\x1b[0m');
+};
+
 // Refresh dist
 const dist = path.resolve('dist');
 if (fs.existsSync(dist)) {
@@ -46,4 +56,4 @@ const walk = (items) =>
 const tree = createTree(path.resolve('src'), { normalizePath: true }).children;
 walk(tree);
 
-console.log('\x1b[35m', '[PRPL] Build complete', '\x1b[0m');
+console.log('Build complete');

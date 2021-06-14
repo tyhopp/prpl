@@ -72,7 +72,7 @@ if ('WebSocket' in window) {
         });
       })
       .catch((error) =>
-        console.warn(`[Server] Failed to refresh resource ${href}`, error)
+        console.warn(`[PRPL] Failed to refresh resource ${href}`, error)
       );
   };
 }

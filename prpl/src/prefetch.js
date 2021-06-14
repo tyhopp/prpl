@@ -31,9 +31,9 @@ if (window.Worker) {
     try {
       prefetchWorker.postMessage(getRelativePaths());
     } catch (error) {
-      console.error('Failed to prefetch on subsequent page route', error);
+      console.error('[PRPL] Failed to prefetch on subsequent page route', error);
     }
   });
 } else {
-  console.error(`Your browser doesn't support web workers`);
+  console.error(`[PRPL] Your browser doesn't support web workers`);
 }

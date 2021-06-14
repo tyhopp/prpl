@@ -8,12 +8,23 @@ const WebSocket = require('faye-websocket');
 const chokidar = require('chokidar');
 const open = require('open');
 const { interpolate } = require('../src/actions/interpolate');
+const { copy } = require('../src/actions/copy');
+
+// Colorize console messages
+const builtInLog = console.log;
+const builtInError = console.error;
+console.log = function () {
+  builtInLog('\x1b[35m', '[PRPL]', ...arguments, '\x1b[0m');
+};
+console.error = function () {
+  builtInError('\x1b[35m', '[PRPL]', ...arguments, '\x1b[0m');
+};
 
 let ws;
 let socketInjectedPages = [];
 
 /**
- * Injects the socket on the page if it does not already have it.
+ * Inject the socket on the page if it does not already have it.
  * @param {string} page
  */
 function injectSocketOptionally(page) {
@@ -89,9 +100,16 @@ server.on('upgrade', (request, socket, head) => {
 server.listen(8000);
 
 // Watch for file changes in the src directory
-const watcher = chokidar.watch(path.resolve('./src'));
+const watcher = chokidar.watch(path.resolve('./src'), {
+  ignoreInitial: true
+});
 
-watcher.on('change', (changedPath) => {
+/**
+ * Create new or update existing source code file.
+ * @param {string} changedPath
+ * @param {string} event
+ */
+function createOrUpdateFile(changedPath, event) {
   const { dir, base: name, ext: extension } = path.parse(changedPath);
   const relevantDir = dir.replace(path.resolve('.'), '');
   const relevantPath = `${relevantDir.replace('/src', '')}/${name}`;
@@ -101,22 +119,64 @@ watcher.on('change', (changedPath) => {
     extension,
     type: 'file'
   };
-  Promise.resolve()
-    .then(() => {
-      interpolate(item);
-    })
-    .then(() => {
-      ws.send(relevantPath === '/index.html' ? '/' : relevantPath);
-    })
-    .then(() => {
-      console.log(`[Server] Updated ${relevantPath}`);
-    });
-});
+
+  try {
+    Promise.resolve()
+      .then(() => {
+        if (extension === '.html') {
+          interpolate(item);
+          return;
+        }
+        copy(item);
+      })
+      .then(() => {
+        ws.send(relevantPath === '/index.html' ? '/' : relevantPath);
+      })
+      .then(() => {
+        console.log(
+          `${event === 'change' ? 'Updated' : 'Created'} ${relevantPath}`
+        );
+      });
+  } catch (error) {
+    console.error(
+      `Server failed to ${
+        event === 'change' ? 'update' : 'create'
+      } ${relevantPath}`
+    );
+  }
+}
+
+/**
+ * Remove source code file from dist.
+ * @param {string} changedPath
+ */
+function removeFile(changedPath) {
+  const { dir, base: name } = path.parse(changedPath);
+  const relevantDir = dir.replace(path.resolve('.'), '');
+  const relevantPath = `${relevantDir.replace('/src', '')}/${name}`;
+  const distPath = `${dir.replace('/src', '/dist')}/${name}`;
+
+  try {
+    if (fs.existsSync(distPath)) {
+      fs.rmSync(distPath);
+      console.log(`Removed ${relevantPath}`);
+    }
+  } catch (error) {
+    console.error(`Server failed to remove ${relevantPath}`);
+  }
+}
+
+watcher
+  .on('change', (changedPath) => {
+    createOrUpdateFile(changedPath, 'change');
+  })
+  .on('add', (changedPath) => {
+    createOrUpdateFile(changedPath, 'add');
+  })
+  .on('unlink', (changedPath) => {
+    removeFile(changedPath);
+  });
 
 open('http://localhost:8000');
 
-console.log(
-  '\x1b[35m',
-  '[PRPL] Server listening at http://localhost:8000',
-  '\x1b[0m'
-);
+console.log('Server listening at http://localhost:8000');

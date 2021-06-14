@@ -1,3 +1,4 @@
+const path = require('path');
 const fs = require('fs');
 const { ensure } = require('./ensure');
 const { parse } = require('./parse');
@@ -22,8 +23,34 @@ const list = ({ contentFiles, contentSrc, template }) => {
 
   // Fill metadata in list item template
   let list = files.map((file) => {
+    let parsedContent;
+
+    const { dir, base: name } = path.parse(file);
+    const relevantDir = dir.replace(path.resolve('.'), '');
+    const relevantPath = `${relevantDir.replace('/src', '')}/${name}`;
+
     const srcPath = `${contentSrc}/${file}`;
-    const parsedContent = parse(fs.readFileSync(srcPath).toString());
+
+    switch (path.extname(file)) {
+      case '.html':
+      case '.md':
+      case '.markdown':
+        parsedContent = parse(
+          fs.readFileSync(srcPath).toString(),
+          relevantPath
+        );
+        break;
+      default:
+        if (fs.existsSync(srcPath) && !fs.lstatSync(srcPath).isDirectory()) {
+          console.error(
+            `Unsupported file ${relevantPath} - supported file types include: .html, .md, .markdown`
+          );
+        }
+        return {
+          parsedContent: {},
+          output: ''
+        };
+    }
 
     // Fill src prpl template with content
     let prplTemplateInstance = String(prplTemplate);
@@ -43,11 +70,10 @@ const list = ({ contentFiles, contentSrc, template }) => {
     };
   });
 
-  // Extract prpl attrs
-  const prplAttrs = extract(template.src);
+  const { prplAttrs } = extract(template.src);
 
-  if ('order-by' in prplAttrs) {
-    const sort = prplAttrs['order-by'];
+  if ('sort-by' in prplAttrs) {
+    const sort = prplAttrs['sort-by'];
     let direction = 'asc';
 
     if ('direction' in prplAttrs) {
@@ -81,7 +107,7 @@ const list = ({ contentFiles, contentSrc, template }) => {
           : 1;
       });
     } catch (error) {
-      console.error(`[Error] Failed to sort by ${sort}`);
+      console.error(`Failed to sort by ${sort}`);
     }
   }
 
@@ -90,7 +116,7 @@ const list = ({ contentFiles, contentSrc, template }) => {
     try {
       list = list.slice(0, limit);
     } catch (error) {
-      console.error(`[Error] Failed to limit to ${limit}`);
+      console.error(`Failed to limit to ${limit}`);
     }
   }
 

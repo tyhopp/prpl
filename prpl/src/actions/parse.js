@@ -1,9 +1,10 @@
 /**
  * Parses metadata from an HTML string.
  * @param {string} src An HTML string
+ * @param {string} relevantPath
  * @returns {Object} Parsed HTML string and metadata object
  */
-const parse = (src) => {
+const parse = (src, relevantPath) => {
   let metadata;
   let body;
 
@@ -21,12 +22,13 @@ const parse = (src) => {
     // Parse html
     body = /-->\n(.*?)$/s.exec(src)[1];
   } catch (error) {
-    console.error(`[Error] Unable to parse metadata. Metadata must be at the top of your file with at least a title and slug property:
+    console.error(
+      `Unable to parse metadata in page ${relevantPath}. Metadata must be at the top of your file with at least a title and slug property:
     <!--
     title: Hello world!
     slug: hello-world
-    -->
-    `);
+    -->`
+    );
   }
 
   return {

@@ -13,14 +13,18 @@ onmessage = (event) => {
             value: html
           };
         })
-        .catch((error) => console.error('Failed to prefetch page.', error));
+        .catch((error) =>
+          console.error('[PRPL] Failed to prefetch page.', error)
+        );
     });
     Promise.all(preloadLinkRequests)
       .then((response) => {
         postMessage(response);
       })
-      .catch((error) => console.error('Failed to prefetch pages.', error));
+      .catch((error) =>
+        console.error('[PRPL] Failed to prefetch pages.', error)
+      );
   } catch (error) {
-    console.error('Failed to prefetch in worker', error);
+    console.error('[PRPL] Failed to prefetch in worker', error);
   }
 };

@@ -17,26 +17,34 @@ const page = ({ contentFiles, contentSrc, template }) => {
     .replace('src', 'dist');
   ensure(targetDir);
 
-  for (let i = 0; i < contentFiles.length; i++) {
+  pageLoop: for (let i = 0; i < contentFiles.length; i++) {
     let parsedContent;
+
+    const { dir, base: name } = path.parse(contentFiles[i]);
+    const relevantDir = dir.replace(path.resolve('.'), '');
+    const relevantPath = `${relevantDir.replace('/src', '')}/${name}`;
 
     const srcPath = `${contentSrc}/${contentFiles[i]}`;
     const targetPath = `${targetDir}${path.parse(contentFiles[i]).name}.html`;
 
     switch (path.extname(contentFiles[i])) {
       case '.html':
-        parsedContent = parse(fs.readFileSync(srcPath).toString());
+        parsedContent = parse(
+          fs.readFileSync(srcPath).toString(),
+          relevantPath
+        );
         break;
       case '.md':
       case '.markdown':
-        parsedContent = parse(markdown(srcPath));
+        parsedContent = parse(markdown(srcPath), relevantPath);
         break;
       default:
-        console.error(
-          `[LOG] Skipping file with unsupported extension ${path.extname(
-            srcPath
-          )}. Supported file extensions include: .html, .md, .markdown`
-        );
+        if (fs.existsSync(srcPath) && !fs.lstatSync(srcPath).isDirectory()) {
+          console.error(
+            `Unsupported file ${relevantPath} - supported file types include: .html, .md, .markdown`
+          );
+        }
+        continue pageLoop;
     }
 
     // Isolate src prpl template
