@@ -36,7 +36,7 @@ window.addEventListener('popstate', (event) => {
     const html = sessionStorage.getItem(`prpl-${url}`);
 
     if (!html) {
-      throw 'No cached html, defaulting to native routing';
+      throw '[PRPL] No cached html, defaulting to native routing';
     }
 
     const parser = new DOMParser();
@@ -94,7 +94,7 @@ window.addEventListener('popstate', (event) => {
   } catch (error) {
     window.location.assign(url);
     console.error(
-      '[PRPL] Failed render, falling back to full page reload.',
+      '[PRPL] Failed render, falling back to full page reload',
       error
     );
   }
@@ -102,7 +102,10 @@ window.addEventListener('popstate', (event) => {
 
 document.addEventListener('click', (e) => {
   performance.mark('prpl-render-start');
-  const anchor = e.target.closest('a');
+
+  // TODO - Define more granular definition of which anchor tags the PRPL router should try to act on
+  const anchor = e.target.closest('a:not([rel])');
+
   if (anchor && anchor.target !== '_blank') {
     e.preventDefault();
 

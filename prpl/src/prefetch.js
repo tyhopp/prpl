@@ -1,5 +1,6 @@
 // Utility function to calculate unique relative paths
 function getRelativePaths() {
+  // TODO - Define more granular definition of which anchor tags the PRPL prefetch worker should to try to fetch
   const relativePaths = [
     ...Array.from(document.querySelectorAll('a:not([rel])'))
       .filter((link) => link.href.includes(window.location.origin))
@@ -31,7 +32,10 @@ if (window.Worker) {
     try {
       prefetchWorker.postMessage(getRelativePaths());
     } catch (error) {
-      console.error('[PRPL] Failed to prefetch on subsequent page route', error);
+      console.error(
+        '[PRPL] Failed to prefetch on subsequent page route',
+        error
+      );
     }
   });
 } else {
