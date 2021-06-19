@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const fs = require('fs');
-const http = require('http');
-const handler = require('serve-handler');
-const WebSocket = require('faye-websocket');
-const chokidar = require('chokidar');
-const open = require('open');
-const { interpolate } = require('../src/actions/interpolate');
-const { copy } = require('../src/actions/copy');
+import path from 'path';
+import fs from 'fs';
+import http from 'http';
+import handler from 'serve-handler';
+import WebSocket from 'faye-websocket';
+import chokidar from 'chokidar';
+import open from 'open';
+import { interpolate } from '../build/actions/interpolate';
+import { copyFileToDist } from '../build/actions/copy-file-to-dist';
 
 // Colorize console messages
 const builtInLog = console.log;
@@ -127,7 +127,7 @@ function createOrUpdateFile(changedPath, event) {
           interpolate(item);
           return;
         }
-        copy(item);
+        copyFileToDist(item);
       })
       .then(() => {
         ws.send(relevantPath === '/index.html' ? '/' : relevantPath);

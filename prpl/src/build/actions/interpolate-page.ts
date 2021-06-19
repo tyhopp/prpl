@@ -1,45 +1,38 @@
-const path = require('path');
-const fs = require('fs');
-const { ensure } = require('./ensure');
-const { parse } = require('./parse');
-const { markdown } = require('../transforms/markdown');
+import { parse, resolve, extname } from 'path';
+import { existsSync, lstatSync, readFileSync, writeFileSync } from 'fs';
+import { ensureDirExists } from './ensure-dir-exists';
+import { parsePrplMetadata } from './parse-prpl-metadata';
+import { transformMarkdown } from '../transforms/transform-markdown';
 
-/**
- * Renders pages of content items in multiple files.
- * @param {Object} obj
- * @param {Array} obj.contentFiles The files to inject into the template
- * @param {string} obj.contentSrc The path to the directory containing the content files
- * @param {Object} obj.template The template details
- */
-const page = ({ contentFiles, contentSrc, template }) => {
+function interpolatePage({ contentFiles, contentSrc, template }) {
   const targetDir = template.path
     .replace(template.name, '')
     .replace('src', 'dist');
-  ensure(targetDir);
+  ensureDirExists(targetDir);
 
   pageLoop: for (let i = 0; i < contentFiles.length; i++) {
     let parsedContent;
 
-    const { dir, base: name } = path.parse(contentFiles[i]);
-    const relevantDir = dir.replace(path.resolve('.'), '');
+    const { dir, base: name } = parse(contentFiles[i]);
+    const relevantDir = dir.replace(resolve('.'), '');
     const relevantPath = `${relevantDir.replace('/src', '')}/${name}`;
 
     const srcPath = `${contentSrc}/${contentFiles[i]}`;
-    const targetPath = `${targetDir}${path.parse(contentFiles[i]).name}.html`;
+    const targetPath = `${targetDir}${parse(contentFiles[i]).name}.html`;
 
-    switch (path.extname(contentFiles[i])) {
+    switch (extname(contentFiles[i])) {
       case '.html':
-        parsedContent = parse(
-          fs.readFileSync(srcPath).toString(),
+        parsedContent = parsePrplMetadata(
+          readFileSync(srcPath).toString(),
           relevantPath
         );
         break;
       case '.md':
       case '.markdown':
-        parsedContent = parse(markdown(srcPath), relevantPath);
+        parsedContent = parsePrplMetadata(transformMarkdown(srcPath), relevantPath);
         break;
       default:
-        if (fs.existsSync(srcPath) && !fs.lstatSync(srcPath).isDirectory()) {
+        if (existsSync(srcPath) && !lstatSync(srcPath).isDirectory()) {
           console.error(
             `Unsupported file ${relevantPath} - supported file types include: .html, .md, .markdown`
           );
@@ -67,10 +60,8 @@ const page = ({ contentFiles, contentSrc, template }) => {
       /<prpl.*<\/prpl>/s,
       prplTemplateInstance
     );
-    fs.writeFileSync(targetPath, inerpolatedPage);
+    writeFileSync(targetPath, inerpolatedPage);
   }
 };
 
-module.exports = {
-  page
-};
+export { interpolatePage };

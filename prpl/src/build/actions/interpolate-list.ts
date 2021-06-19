@@ -1,22 +1,15 @@
-const path = require('path');
-const fs = require('fs');
-const { ensure } = require('./ensure');
-const { parse } = require('./parse');
-const { extract } = require('./extract');
+import { resolve, parse, extname } from 'path';
+import { existsSync, lstatSync, readFileSync, writeFileSync } from 'fs';
+import { ensureDirExists } from './ensure-dir-exists';
+import { parsePrplMetadata } from './parse-prpl-metadata';
+import { extractPrplAttrs } from './extract-prpl-attrs';
 
-/**
- * Renders a list of content items in a single file.
- * @param {Object} obj
- * @param {Array} obj.contentFiles The files to inject into the template
- * @param {string} obj.contentSrc The path to the directory containing the content files
- * @param {Object} obj.template The template details
- */
-const list = ({ contentFiles, contentSrc, template }) => {
+function interpolateList({ contentFiles, contentSrc, template }) {
   let files = contentFiles;
 
   const targetPath = template.path.replace('src', 'dist');
   const targetDir = targetPath.replace(template.name, '');
-  ensure(targetDir);
+  ensureDirExists(targetDir);
 
   // Isolate src prpl template
   const prplTemplate = template.src.match(/(<prpl.*?>)(.*?)<\/prpl>/s)[2];
@@ -25,23 +18,23 @@ const list = ({ contentFiles, contentSrc, template }) => {
   let list = files.map((file) => {
     let parsedContent;
 
-    const { dir, base: name } = path.parse(file);
-    const relevantDir = dir.replace(path.resolve('.'), '');
+    const { dir, base: name } = parse(file);
+    const relevantDir = dir.replace(resolve('.'), '');
     const relevantPath = `${relevantDir.replace('/src', '')}/${name}`;
 
     const srcPath = `${contentSrc}/${file}`;
 
-    switch (path.extname(file)) {
+    switch (extname(file)) {
       case '.html':
       case '.md':
       case '.markdown':
-        parsedContent = parse(
-          fs.readFileSync(srcPath).toString(),
+        parsedContent = parsePrplMetadata(
+          readFileSync(srcPath).toString(),
           relevantPath
         );
         break;
       default:
-        if (fs.existsSync(srcPath) && !fs.lstatSync(srcPath).isDirectory()) {
+        if (existsSync(srcPath) && !lstatSync(srcPath).isDirectory()) {
           console.error(
             `Unsupported file ${relevantPath} - supported file types include: .html, .md, .markdown`
           );
@@ -70,7 +63,7 @@ const list = ({ contentFiles, contentSrc, template }) => {
     };
   });
 
-  const { prplAttrs } = extract(template.src);
+  const { prplAttrs } = extractPrplAttrs(template.src);
 
   if ('sort-by' in prplAttrs) {
     const sort = prplAttrs['sort-by'];
@@ -123,9 +116,7 @@ const list = ({ contentFiles, contentSrc, template }) => {
   list = list.map((item) => item.output).join('');
 
   const templateWithList = template.src.replace(/<prpl.*<\/prpl>/s, list);
-  fs.writeFileSync(targetPath, templateWithList);
-};
+  writeFileSync(targetPath, templateWithList);
+}
 
-module.exports = {
-  list
-};
+export { interpolateList };

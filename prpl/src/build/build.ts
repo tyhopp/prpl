@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
-const path = require('path');
-const fs = require('fs');
-const createTree = require('directory-tree');
-const { ensure } = require(path.resolve(__dirname, 'actions/ensure'));
-const { copy } = require(path.resolve(__dirname, 'actions/copy'));
-const { interpolate } = require('./actions/interpolate');
+import { resolve } from 'path';
+import { existsSync, rmdirSync, readFileSync, writeFileSync } from 'fs';
+import createTree from 'directory-tree';
+import { ensureDirExists } from './actions/ensure-dir-exists';
+import { copyFileToDist } from './actions/copy-file-to-dist';
+import { interpolate } from './actions/interpolate';
 
 // Colorize console messages
 const builtInLog = console.log;
@@ -18,17 +18,17 @@ console.error = function () {
 };
 
 // Refresh dist
-const dist = path.resolve('dist');
-if (fs.existsSync(dist)) {
-  fs.rmdirSync(dist, { recursive: true });
+const dist = resolve('dist');
+if (existsSync(dist)) {
+  rmdirSync(dist, { recursive: true });
 }
-ensure('dist');
+ensureDirExists('dist');
 
 // Provide prefetch and router scripts
 ['prefetch', 'prefetch-worker', 'router'].forEach((script) => {
-  fs.writeFileSync(
+  writeFileSync(
     `${dist}/${script}.js`,
-    fs.readFileSync(path.resolve(__dirname, `${script}.js`))
+    readFileSync(resolve(import.meta.url, `${script}.js`))
   );
 });
 
@@ -44,7 +44,7 @@ const walk = (items) =>
           interpolate(item);
           break;
         }
-        copy(item);
+        copyFileToDist(item);
         break;
       case 'directory':
         walk(item.children);
@@ -53,7 +53,9 @@ const walk = (items) =>
   });
 
 // Create and walk the source tree
-const tree = createTree(path.resolve('src'), { normalizePath: true }).children;
+const tree = createTree(resolve('src'), { normalizePath: true }).children;
 walk(tree);
 
 console.log('Build complete');
+
+export {}

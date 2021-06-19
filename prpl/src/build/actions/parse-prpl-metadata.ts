@@ -1,10 +1,4 @@
-/**
- * Parses metadata from an HTML string.
- * @param {string} src An HTML string
- * @param {string} relevantPath
- * @returns {Object} Parsed HTML string and metadata object
- */
-const parse = (src, relevantPath) => {
+function parsePrplMetadata(src, relevantPath) {
   let metadata;
   let body;
 
@@ -37,6 +31,4 @@ const parse = (src, relevantPath) => {
   };
 };
 
-module.exports = {
-  parse
-};
+export { parsePrplMetadata };
