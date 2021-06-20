@@ -36,7 +36,10 @@ window.addEventListener('popstate', (event) => {
     const html = sessionStorage.getItem(`prpl-${url}`);
 
     if (!html) {
-      throw '[PRPL] No cached html, defaulting to native routing';
+      console.warn(
+        `[PRPL] No cached html for route ${url}, fall back to native routing`
+      );
+      return;
     }
 
     const parser = new DOMParser();
@@ -48,8 +51,12 @@ window.addEventListener('popstate', (event) => {
     currentMain.replaceWith(targetMain);
 
     // Resolve head
-    const currentHeadTags = Array.from(document.querySelector('head').children);
-    const targetHeadTags = Array.from(target.querySelector('head').children);
+    const currentHeadTags = Array.from(
+      document.querySelector('head').children
+    ) as HTMLHeadElement[];
+    const targetHeadTags = Array.from(
+      target.querySelector('head').children
+    ) as HTMLHeadElement[];
 
     // Remove head tags
     currentHeadTags.forEach((currentHeadTag) => {
@@ -76,7 +83,7 @@ window.addEventListener('popstate', (event) => {
       }
       if (targetHeadTag.tagName.toLowerCase() === 'script') {
         const clonedScript = document.createElement('script');
-        clonedScript.src = targetHeadTag.src;
+        clonedScript.src = (targetHeadTag as HTMLScriptElement)?.src;
         document.head.appendChild(clonedScript);
         return;
       }
@@ -104,7 +111,9 @@ document.addEventListener('click', (e) => {
   performance.mark('prpl-render-start');
 
   // TODO - Define more granular definition of which anchor tags the PRPL router should try to act on
-  const anchor = e.target.closest('a:not([rel])');
+  const anchor = (e?.target as HTMLElement)?.closest(
+    'a:not([rel])'
+  ) as HTMLAnchorElement;
 
   if (anchor && anchor.target !== '_blank') {
     e.preventDefault();

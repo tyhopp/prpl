@@ -1,0 +1,10 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "../../dist/client",
+    "lib": ["ESNext", "DOM", "WebWorker"],
+    "isolatedModules": false
+  },
+  "include": ["./"],
+  "exclude": []
+}

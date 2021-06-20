@@ -8,14 +8,17 @@
   },
   "type": "module",
   "bin": {
-    "prpl-build": "dist/build/build.js",
-    "prpl-serve": "dist/server/server.js"
+    "prpl": "./bin/prpl.js"
   },
-  "main": "dist/build/build.js",
-  "types": "dist/build/build.d.ts",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "scripts": {
-    "build": "tsc",
-    "prepublish": "tsc"
+    "dev": "npm run dev-base && npm run dev-client",
+    "dev-base": "tsc -w --incremental",
+    "dev-client": "tsc -w --incremental -p src/client",
+    "build": "npm run build-base && npm run build-client",
+    "build-base": "tsc",
+    "build-client": "tsc -p src/client"
   },
   "keywords": [
     "static-site-generator",

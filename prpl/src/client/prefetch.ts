@@ -3,8 +3,8 @@ function getRelativePaths() {
   // TODO - Define more granular definition of which anchor tags the PRPL prefetch worker should to try to fetch
   const relativePaths = [
     ...Array.from(document.querySelectorAll('a:not([rel])'))
-      .filter((link) => link.href.includes(window.location.origin))
-      .map((link) => link.href)
+      .filter((link) => (link as HTMLAnchorElement)?.href?.includes(window?.location?.origin))
+      .map((link) => (link as HTMLAnchorElement)?.href)
   ];
   return Array.from(new Set(relativePaths));
 }
