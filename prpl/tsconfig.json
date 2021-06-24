@@ -5,7 +5,6 @@
     "moduleResolution": "node",
     "isolatedModules": true,
     "esModuleInterop": true,
-    "skipLibCheck": true,
     "sourceMap": false,
     "noUnusedLocals": true,
     "noUnusedParameters": true,

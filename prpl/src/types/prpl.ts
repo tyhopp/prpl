@@ -1,3 +1,14 @@
+import { FileSystemTree } from '../lib/generate-fs-tree';
+
+export enum PRPLSourceFileExtension {
+  html = '.html'
+}
+
+export enum PRPLContentFileExtension {
+  html = '.html',
+  markdown = '.md'
+}
+
 export enum PRPLClientScript {
   prefetch = 'prefetch',
   prefetchWorker = 'prefetch-worker',
@@ -20,4 +31,16 @@ export enum PRPLTagAttribute {
 export enum PRPLDirectionAttributeValue {
   asc = 'asc',
   desc = 'desc'
+}
+
+export enum PRPLRequiredMetadata {
+  title = 'title',
+  slug = 'slug'
+}
+
+export interface PRPLSourceFileDTO extends FileSystemTree {
+  srcRelativeDir: string;
+  srcRelativeFilePath: string;
+  targetFilePath: string;
+  targetDir: string;
 }

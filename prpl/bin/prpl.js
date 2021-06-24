@@ -2,7 +2,7 @@
 
 import { interpolate } from '../dist/interpolate/interpolate.js';
 // import { serve } from '../dist/server/server.js';
-import { clearDist } from '../dist/utils/clear-dist.js';
+import { clearDist } from '../dist/lib/clear-dist.js';
 
 const commands = {
   build: true,

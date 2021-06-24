@@ -27,7 +27,6 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "directory-tree": "^2.2.9",
     "marked": "^2.1.0"
   },
   "devDependencies": {
