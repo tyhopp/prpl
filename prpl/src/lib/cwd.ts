@@ -1,7 +1,9 @@
 import { parse } from 'path';
 import { log } from './log.js';
 
-// Calculate the current working directory relative to the calling file
+/**
+ * Calculate the current working directory relative to the calling file.
+ */
 async function cwd(importMeta: ImportMeta): Promise<string> {
   try {
     const { pathname } = new URL(importMeta?.url);

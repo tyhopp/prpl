@@ -1,6 +1,9 @@
 import { stat, mkdir } from 'fs/promises';
 import { log } from './log.js';
 
+/**
+ * Ensure a directory exists given an absolute path.
+ */
 async function ensureDir(dir: string): Promise<void> {
   try {
     const fileInfo = await stat(dir);

@@ -9,6 +9,9 @@ interface PRPLContentCache {
   ) => Promise<void>;
 }
 
+/**
+ * In-memory cache for content file system trees.
+ */
 const ContentCache: PRPLContentCache = {
   content: {},
   async getContent(contentSrcDir) {

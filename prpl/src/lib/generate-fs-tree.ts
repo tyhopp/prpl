@@ -21,6 +21,9 @@ export interface FileSystemTree {
   children?: FileSystemTree[];
 }
 
+/**
+ * Generate a recursive file system tree.
+ */
 async function generateFileSystemTree(
   args: GenerateFileSystemTreeArgs
 ): Promise<FileSystemTree> {

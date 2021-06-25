@@ -6,6 +6,9 @@ interface Log {
   critical: (...data: any[]) => void;
 }
 
+/**
+ * Console wrapper providing context and color.
+ */
 const log: Log = {
   debug(...args) {
     console.debug('\x1b[35m', '[PRPL]', ...args, '\x1b[0m');

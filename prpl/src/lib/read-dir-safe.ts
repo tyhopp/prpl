@@ -1,6 +1,8 @@
 import { readdir } from 'fs/promises';
 
-// Read only directories that have access permission
+/**
+ * Read only directories that have access permission.
+ */
 async function readDirSafe(dirPath: string): Promise<string[]> {
   let dirData = null;
   try {

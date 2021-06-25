@@ -1,13 +1,8 @@
 import { resolve } from 'path';
 import { copyFile } from 'fs/promises';
 import { parsePRPLAttrs } from './parse-prpl-attrs.js';
-import {
-  PRPLContentFileExtension,
-  PRPLSourceFileDTO,
-  PRPLTagAttribute
-} from '../types/prpl.js';
-import { generateFileSystemTree } from '../lib/generate-fs-tree.js';
-import { ContentCache } from '../lib/content-cache.js';
+import { PRPLSourceFileDTO, PRPLTagAttribute } from '../types/prpl.js';
+import { generateContentFileSystemTree } from '../lib/generate-content-fs-tree.js';
 
 async function interpolateHTML(
   sourceFileDTO: PRPLSourceFileDTO
@@ -25,11 +20,11 @@ async function interpolateHTML(
   }
 
   // If there are PRPL tags, parse
-  const parsedPRPLAttrs = await parsePRPLAttrs(sourceFileDTO.src);
+  const parsedPRPLAttrs = await parsePRPLAttrs(sourceFileDTO?.src);
   const firstPRPLAttr = parsedPRPLAttrs?.[0];
 
   // Check if has PRPL page tag, if a PPRL page tag exists it should always be found first
-  // const isPRPLPage: boolean =
+  // const firstPRPLAttrIsPage: boolean =
   //   firstPRPLAttr?.parsedAttrs?.[PRPLTagAttribute?.type] === PRPLTag.page;
 
   // If there is a PRPL page tag, resolve the content tree
@@ -37,22 +32,7 @@ async function interpolateHTML(
     firstPRPLAttr?.parsedAttrs?.[PRPLTagAttribute?.src]
   );
 
-  let contentTree = null;
-
-  // Use cached content tree or generate a new one
-  const cachedContentTree = await ContentCache?.getContent(contentSrcDir);
-  if (cachedContentTree) {
-    contentTree = cachedContentTree;
-  } else {
-    const contentTreeReadFileRegExp = new RegExp(
-      `/${PRPLContentFileExtension.html}|${PRPLContentFileExtension.markdown}/`
-    );
-    contentTree = await generateFileSystemTree({
-      entityPath: contentSrcDir,
-      readFileRegExp: contentTreeReadFileRegExp
-    });
-    await ContentCache?.setContent(contentSrcDir, contentTree);
-  }
+  const contentTree = await generateContentFileSystemTree(contentSrcDir);
 
   // If no content files, log error and copy the source file to dist
   if (!contentTree?.children?.length) {

@@ -3,6 +3,9 @@ import { stat, writeFile } from 'fs/promises';
 import { ensureDir } from './ensure-dir';
 import { log } from './log.js';
 
+/**
+ * Ensure a file exists given an absolute path.
+ */
 async function ensureFile(filePath: string): Promise<void> {
   try {
     const stats = await stat(filePath);

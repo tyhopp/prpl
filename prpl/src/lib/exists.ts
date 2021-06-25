@@ -1,6 +1,9 @@
 import { stat } from 'fs/promises';
 import { log } from './log.js';
 
+/**
+ * Check whether an entity exists given an absolute path.
+ */
 async function exists(filePath: string): Promise<boolean> {
   try {
     await stat(filePath);

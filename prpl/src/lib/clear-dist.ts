@@ -4,6 +4,9 @@ import { log } from './log.js';
 import { exists } from './exists.js';
 import { ensureDir } from './ensure-dir.js';
 
+/**
+ * Recursively clear the dist directory.
+ */
 async function clearDist(): Promise<void> {
   try {
     const dist = resolve('dist');
