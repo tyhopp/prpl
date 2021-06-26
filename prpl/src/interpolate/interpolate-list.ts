@@ -1,128 +1,149 @@
-import { resolve, parse, extname } from 'path';
-import { existsSync, lstatSync, readFileSync, writeFileSync } from 'fs';
-import { ensureDir } from '../lib/ensure-dir.js';
+import { generateOrRetrieveFileSystemTree } from '../lib/generate-or-retrieve-fs-tree.js';
 import { parsePRPLMetadata } from './parse-prpl-metadata.js';
-import { parsePRPLAttrs } from './parse-prpl-attrs.js';
+import { parsePRPLAttributes } from './parse-prpl-attributes.js';
+import {
+  PRPLFileSystemTree,
+  PRPLContentFileExtension,
+  PRPLFileSystemTreeEntity,
+  PRPLTagAttribute,
+  PRPLDirectionAttributeValue,
+  PRPLMetadata,
+  PRPLCachePartitionKey
+} from '../types/prpl.js';
+import { log } from '../lib/log.js';
 
-async function interpolateList({
-  contentFiles,
-  contentSrc,
-  template
-}): Promise<void> {
-  let files = contentFiles;
+/**
+ * Interpolate content into an inline HTML fragment.
+ */
+async function interpolateList(
+  srcTree: PRPLFileSystemTree,
+  contentDir: string,
+  rawAttr: string
+): Promise<string> {
+  // Generate or retrieve content tree
+  const contentTreeReadFileRegExp = new RegExp(
+    `${PRPLContentFileExtension.html}|${PRPLContentFileExtension.markdown}`
+  );
+  const contentTree = await generateOrRetrieveFileSystemTree({
+    partitionKey: PRPLCachePartitionKey.content,
+    entityPath: contentDir,
+    readFileRegExp: contentTreeReadFileRegExp
+  });
+  const contentFiles = contentTree?.children || [];
 
-  const targetPath = template.path.replace('src', 'dist');
-  const targetDir = targetPath.replace(template.name, '');
-  await ensureDir(targetDir);
+  // Construct regex with pattern
+  const listRegex: RegExp = new RegExp(`(<prpl ${rawAttr}>)(.*?)<\/prpl>`, 's');
 
   // Isolate src prpl template
-  const prplTemplate = template.src.match(/(<prpl.*?>)(.*?)<\/prpl>/s)[2];
+  const PRPLListTemplate = srcTree?.src?.match(listRegex)?.[2];
 
-  // Fill metadata in list item template
-  let list = files.map((file) => {
-    let parsedContent;
+  // Create a list of parsed metadata and interpolated list fragment
+  let fragmentList: {
+    metadata: PRPLMetadata;
+    fragment: string;
+  }[] = [];
 
-    const { dir, base: name } = parse(file);
-    const relevantDir = dir.replace(resolve('.'), '');
-    const relevantPath = `${relevantDir.replace('/src', '')}/${name}`;
+  listLoop: for (let i = 0; i < contentFiles?.length; i++) {
+    // Skip child directories, interpolation is always shallow
+    if (contentFiles?.[i]?.entity === PRPLFileSystemTreeEntity.directory) {
+      continue listLoop;
+    }
 
-    const srcPath = `${contentSrc}/${file}`;
+    let metadata;
 
-    switch (extname(file)) {
-      case '.html':
-      case '.md':
-      case '.markdown':
-        parsedContent = parsePRPLMetadata(
-          readFileSync(srcPath).toString(),
-          relevantPath
-        );
+    switch (contentFiles?.[i]?.extension) {
+      case PRPLContentFileExtension.html:
+      case PRPLContentFileExtension.markdown:
+        metadata = await parsePRPLMetadata(contentFiles?.[i]);
         break;
       default:
-        if (existsSync(srcPath) && !lstatSync(srcPath).isDirectory()) {
-          console.error(
-            `Unsupported file ${relevantPath} - supported file types include: .html, .md, .markdown`
-          );
-        }
-        return {
-          parsedContent: {},
-          output: ''
-        };
+        log.error(
+          `Unsupported content file extension '${contentFiles?.[i]?.extension}' from '${contentFiles?.[i]?.srcRelativeFilePath}'. Supported content file extensions include: '.html' and '.md'.`
+        );
+        fragmentList?.push({
+          metadata: {},
+          fragment: ''
+        });
+        continue;
     }
 
     // Fill src prpl template with content
-    let prplTemplateInstance = String(prplTemplate);
-    for (const key in parsedContent) {
-      if (prplTemplateInstance.includes(`[${key}]`)) {
-        const regex = new RegExp(`\\[${key}\\]`, 'g');
-        prplTemplateInstance = prplTemplateInstance.replace(
-          regex,
-          parsedContent[key]
-        );
-      }
+    let prplTemplateInstance = String(PRPLListTemplate);
+
+    for (const key in metadata) {
+      const regex = new RegExp(`\\[${key}\\]`, 'g');
+      prplTemplateInstance = prplTemplateInstance?.replace(
+        regex,
+        metadata?.[key]
+      );
     }
 
-    return {
-      parsedContent,
-      output: prplTemplateInstance
-    };
-  });
+    fragmentList?.push({
+      metadata,
+      fragment: prplTemplateInstance
+    });
+  }
 
-  const parsedPRPLAttrs = await parsePRPLAttrs(template.src);
+  const PRPLAttrs = await parsePRPLAttributes(srcTree);
 
-  console.log('Parsed PRPL attrs:', parsedPRPLAttrs);
+  if (PRPLTagAttribute.sortBy in PRPLAttrs) {
+    const sort = PRPLAttrs?.[PRPLTagAttribute.sortBy];
+    let direction =
+      PRPLAttrs?.[PRPLTagAttribute.direction] ||
+      PRPLDirectionAttributeValue.asc;
 
-  // if ('sort-by' in prplAttrs) {
-  //   const sort = prplAttrs['sort-by'];
-  //   let direction = 'asc';
+    try {
+      fragmentList = fragmentList?.sort((first, second) => {
+        let firstComparator = Number(first?.metadata?.[sort]);
+        let secondComparator = Number(second?.metadata?.[sort]);
 
-  //   if ('direction' in prplAttrs) {
-  //     direction = prplAttrs['direction'];
-  //   }
+        // TODO - Create sorts enum
+        if (sort?.toLowerCase() === 'date' || sort?.toLowerCase() === 'time') {
+          firstComparator = new Date(firstComparator)?.getTime();
+          secondComparator = new Date(secondComparator)?.getTime();
 
-  //   try {
-  //     list = list.sort((first, second) => {
-  //       let firstComparator = first.parsedContent[sort];
-  //       let secondComparator = second.parsedContent[sort];
+          return direction === PRPLDirectionAttributeValue.asc
+            ? firstComparator - secondComparator
+            : secondComparator - firstComparator;
+        }
 
-  //       if (sort.toLowerCase() === 'date' || sort.toLowerCase() === 'time') {
-  //         firstComparator = new Date(firstComparator).getTime();
-  //         secondComparator = new Date(secondComparator).getTime();
+        if (firstComparator === secondComparator) {
+          return 0;
+        }
 
-  //         return direction === 'asc'
-  //           ? firstComparator - secondComparator
-  //           : secondComparator - firstComparator;
-  //       }
+        return direction === PRPLDirectionAttributeValue.asc
+          ? firstComparator > secondComparator
+            ? 1
+            : -1
+          : secondComparator < firstComparator
+          ? -1
+          : 1;
+      });
+    } catch (error) {
+      log.error(
+        `Failed to sort by '${sort}' in ${srcTree?.srcRelativeFilePath}. Error:`,
+        error?.message
+      );
+    }
+  }
 
-  //       if (firstComparator === secondComparator) {
-  //         return 0;
-  //       }
+  if (PRPLTagAttribute.limit in PRPLAttrs) {
+    const limit = PRPLAttrs?.[PRPLTagAttribute.limit];
+    try {
+      fragmentList = fragmentList?.slice(0, limit);
+    } catch (error) {
+      log.error(
+        `Failed to limit to '${limit}' in ${srcTree?.srcRelativeFilePath}. Error:`,
+        error?.message
+      );
+    }
+  }
 
-  //       return direction === 'asc'
-  //         ? firstComparator > secondComparator
-  //           ? 1
-  //           : -1
-  //         : secondComparator < firstComparator
-  //         ? -1
-  //         : 1;
-  //     });
-  //   } catch (error) {
-  //     console.error(`Failed to sort by ${sort}`);
-  //   }
-  // }
+  const joinedFragmentList = fragmentList
+    ?.map((item) => item?.fragment)
+    .join('');
 
-  // if ('limit' in prplAttrs) {
-  //   const limit = prplAttrs['limit'];
-  //   try {
-  //     list = list.slice(0, limit);
-  //   } catch (error) {
-  //     console.error(`Failed to limit to ${limit}`);
-  //   }
-  // }
-
-  list = list.map((item) => item.output).join('');
-
-  const templateWithList = template.src.replace(/<prpl.*<\/prpl>/s, list);
-  writeFileSync(targetPath, templateWithList);
+  return joinedFragmentList;
 }
 
 export { interpolateList };

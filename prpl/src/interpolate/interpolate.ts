@@ -1,14 +1,18 @@
-import { resolve, relative, parse } from 'path';
-import { copyFile, readFile } from 'fs/promises';
-import {
-  generateFileSystemTree,
-  FileSystemTree
-} from '../lib/generate-fs-tree.js';
+import { resolve } from 'path';
+import { copyFile } from 'fs/promises';
+import { generateOrRetrieveFileSystemTree } from '../lib/generate-or-retrieve-fs-tree.js';
 import { log } from '../lib/log.js';
 import { cwd } from '../lib/cwd.js';
-import { PRPLClientScript } from '../types/prpl.js';
+import {
+  PRPLClientScript,
+  PRPLSourceFileExtension,
+  PRPLFileSystemTree,
+  PRPLCacheManager,
+  PRPLCachePartitionKey
+} from '../types/prpl.js';
 import { ensureDir } from '../lib/ensure-dir.js';
 import { interpolateHTML } from './interpolate-html.js';
+import { PRPLCache } from '../lib/cache.js';
 
 const PRPLClientScripts: PRPLClientScript[] = [
   PRPLClientScript.prefetch,
@@ -16,7 +20,10 @@ const PRPLClientScripts: PRPLClientScript[] = [
   PRPLClientScript.router
 ];
 
-async function interpolate(): Promise<void> {
+/**
+ * Initialize recursive interpolation.
+ */
+async function interpolate(): Promise<PRPLCacheManager['cache']> {
   // Add PRPL client scripts to dist
   for (let s = 0; s < PRPLClientScripts.length; s++) {
     try {
@@ -26,70 +33,57 @@ async function interpolate(): Promise<void> {
       );
     } catch (error) {
       log.error(
-        `Failed to copy ${PRPLClientScripts[s]}.js to dist. Error:`,
+        `Failed to copy '${PRPLClientScripts[s]}.js' to dist. Error:`,
         error?.message
       );
     }
   }
 
   // Recursively walk the source tree depth first
-  async function walkSourceTree(items: FileSystemTree['children']) {
+  async function walkSourceTree(items: PRPLFileSystemTree['children']) {
     for (let i = 0; i < items.length; i++) {
-      const { type, extension, path, children } = items?.[i] || {};
-      const targetFilePath = path?.replace('src', 'dist');
-      const targetDir = parse(targetFilePath)?.dir;
-
-      switch (type) {
+      switch (items?.[i]?.entity) {
         case 'file':
-          await ensureDir(targetDir);
+          await ensureDir(items?.[i]?.targetDir);
 
-          if (extension === '.html') {
-            const { dir, base: name } = parse(path);
-
-            const srcFileBuffer = await readFile(items?.[i]?.path);
-            const src = srcFileBuffer?.toString();
-            const srcRelativeDir = dir?.replace(resolve('.'), '');
-            const srcRelativeFilePath = `${srcRelativeDir?.replace(
-              '/src',
-              ''
-            )}/${name}`;
-
-            await interpolateHTML({
-              ...items?.[i],
-              src,
-              srcRelativeDir,
-              srcRelativeFilePath,
-              targetDir,
-              targetFilePath
-            });
+          if (items?.[i]?.extension === PRPLSourceFileExtension.html) {
+            await interpolateHTML(items?.[i]);
             break;
           }
 
           try {
-            await copyFile(path, targetFilePath);
+            await copyFile(items?.[i]?.path, items?.[i]?.targetFilePath);
           } catch (error) {
             log.error(
-              `Failed to copy ${relative(resolve(), path)} to dist. Error:`,
+              `Failed to copy '${items?.[i]?.srcRelativeFilePath}' to dist. Error:`,
               error?.message
             );
           }
           break;
         case 'directory':
-          walkSourceTree(children);
+          walkSourceTree(items?.[i]?.children);
           break;
       }
     }
   }
 
+  const srcDir = resolve('src');
+  const srcTreeReadFileRegExp = new RegExp(PRPLSourceFileExtension.html);
+
   // Create source tree
-  const sourceTree: FileSystemTree = await generateFileSystemTree({
-    entityPath: resolve('src')
+  const srcTree: PRPLFileSystemTree = await generateOrRetrieveFileSystemTree({
+    partitionKey: PRPLCachePartitionKey.src,
+    entityPath: srcDir,
+    readFileRegExp: srcTreeReadFileRegExp
   });
 
   // Walk source tree
-  await walkSourceTree(sourceTree?.children || []);
+  await walkSourceTree(srcTree?.children || []);
 
   log.info('Build complete');
+
+  // Return cache as an artifact
+  return PRPLCache?.cache;
 }
 
 export { interpolate };

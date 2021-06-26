@@ -10,7 +10,7 @@ async function ensureFile(filePath: string): Promise<void> {
   try {
     const stats = await stat(filePath);
     if (!stats.isFile) {
-      log.error(`There is no file at path: ${filePath}`);
+      log.error(`There is no file at path '${filePath}'.`);
     }
   } catch (error) {
     if (error?.code === 'ENOENT') {
@@ -19,7 +19,7 @@ async function ensureFile(filePath: string): Promise<void> {
       return;
     }
 
-    log.error(`Failed to ensure ${filePath} exists. Error:\n`, error?.message);
+    log.error(`Failed to ensure '${filePath}' exists. Error:`, error?.message);
   }
 }
 

@@ -1,41 +1,28 @@
 import { readFile, stat } from 'fs/promises';
-import { basename, extname, join } from 'path';
+import { resolve, parse, basename, extname, join } from 'path';
 import { readDirSafe } from './read-dir-safe.js';
+import { PRPLFileSystemTree, PRPLFileSystemTreeEntity } from '../types/prpl.js';
 
-export enum FileSystemTreeEntity {
-  directory = 'directory',
-  file = 'file'
-}
-
-export interface GenerateFileSystemTreeArgs {
+export interface PRPLGenerateFileSystemTreeArgs {
   entityPath: string;
   readFileRegExp?: RegExp;
-}
-
-export interface FileSystemTree {
-  path: string;
-  name: string;
-  type: FileSystemTreeEntity;
-  extension?: string;
-  src?: string;
-  children?: FileSystemTree[];
 }
 
 /**
  * Generate a recursive file system tree.
  */
 async function generateFileSystemTree(
-  args: GenerateFileSystemTreeArgs
-): Promise<FileSystemTree> {
+  args: PRPLGenerateFileSystemTreeArgs
+): Promise<PRPLFileSystemTree> {
   const { entityPath, readFileRegExp } = args;
 
   const name = basename(entityPath);
   const path = entityPath?.replace(/\\/g, '/');
 
-  const item: FileSystemTree = {
+  const item: PRPLFileSystemTree = {
     path,
     name,
-    type: null
+    entity: null
   };
 
   let stats;
@@ -47,8 +34,19 @@ async function generateFileSystemTree(
   }
 
   if (stats?.isFile()) {
+    const { dir, base: name } = parse(path);
+
+    item.srcRelativeDir = dir?.replace(resolve('.'), '');
+    item.srcRelativeFilePath = `${item?.srcRelativeDir?.replace(
+      '/src',
+      ''
+    )}/${name}`;
+
+    item.targetFilePath = path?.replace('src', 'dist');
+    item.targetDir = parse(item?.targetFilePath)?.dir;
+
     item.extension = extname(path)?.toLowerCase();
-    item.type = FileSystemTreeEntity.file;
+    item.entity = PRPLFileSystemTreeEntity.file;
 
     try {
       if (
@@ -56,7 +54,9 @@ async function generateFileSystemTree(
         readFileRegExp?.constructor == RegExp
       ) {
         if (readFileRegExp?.test(item?.extension)) {
-          item.src = await readFile(item?.path)?.toString();
+          const srcBuffer = await readFile(item?.path);
+          const srcString = srcBuffer?.toString();
+          item.src = srcString;
         }
       }
       return item;
@@ -73,15 +73,14 @@ async function generateFileSystemTree(
     item.children = [];
 
     for (let i = 0; i < entitiesInDirectory?.length; i++) {
-      item?.children?.push(
-        await generateFileSystemTree({
-          entityPath: join(item?.path, entitiesInDirectory?.[i]),
-          readFileRegExp
-        })
-      );
+      const child = await generateFileSystemTree({
+        entityPath: join(item?.path, entitiesInDirectory?.[i]),
+        readFileRegExp
+      });
+      item?.children?.push(child);
     }
 
-    item.type = FileSystemTreeEntity.directory;
+    item.entity = PRPLFileSystemTreeEntity.directory;
 
     return item;
   }

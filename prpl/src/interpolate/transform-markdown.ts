@@ -1,4 +1,4 @@
-import { readFileSync } from 'fs';
+import { PRPLFileSystemTree } from '../types/prpl.js';
 import marked from 'marked';
 
 // Override code block rendering
@@ -10,9 +10,11 @@ const renderer = {
 
 marked.use({ renderer });
 
-async function transformMarkdown(filePath: string): Promise<string> {
-  const markdown = readFileSync(filePath).toString();
-  const html = marked(markdown);
+/**
+ * Transform content markdown to HTML.
+ */
+async function transformMarkdown(srcTree: PRPLFileSystemTree): Promise<string> {
+  const html = marked(srcTree?.src);
   return html;
 }
 

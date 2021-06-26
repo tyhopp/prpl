@@ -1,71 +1,117 @@
-import { parse, resolve, extname } from 'path';
-import { existsSync, lstatSync, readFileSync, writeFileSync } from 'fs';
-import { ensureDir } from '../lib/ensure-dir.js';
+import { writeFile } from 'fs/promises';
+import { generateOrRetrieveFileSystemTree } from '../lib/generate-or-retrieve-fs-tree.js';
 import { parsePRPLMetadata } from './parse-prpl-metadata.js';
 import { transformMarkdown } from './transform-markdown.js';
+import { interpolateList } from './interpolate-list.js';
+import {
+  PRPLFileSystemTree,
+  PRPLContentFileExtension,
+  PRPLAttributes,
+  PRPLCachePartitionKey,
+  PRPLFileSystemTreeEntity,
+  PRPLSourceFileExtension
+} from '../types/prpl.js';
+import { log } from '../lib/log.js';
 
-async function interpolatePage({
-  contentFiles,
-  contentSrc,
-  template
-}): Promise<void> {
-  const targetDir = template.path
-    .replace(template.name, '')
-    .replace('src', 'dist');
-  await ensureDir(targetDir);
+/**
+ * Create new pages using the source file template and content files.
+ */
+async function interpolatePage(
+  srcTree: PRPLFileSystemTree,
+  contentDir: string,
+  attrs: PRPLAttributes[]
+): Promise<void> {
+  // Generate or retrieve content tree
+  const contentTreeReadFileRegExp = new RegExp(
+    `${PRPLContentFileExtension.html}|${PRPLContentFileExtension.markdown}`
+  );
+  const contentTree = await generateOrRetrieveFileSystemTree({
+    partitionKey: PRPLCachePartitionKey.content,
+    entityPath: contentDir,
+    readFileRegExp: contentTreeReadFileRegExp
+  });
+  const contentFiles = contentTree?.children || [];
 
-  pageLoop: for (let i = 0; i < contentFiles.length; i++) {
-    let parsedContent;
+  const listAttrs = attrs?.slice(1);
 
-    const { dir, base: name } = parse(contentFiles[i]);
-    const relevantDir = dir.replace(resolve('.'), '');
-    const relevantPath = `${relevantDir.replace('/src', '')}/${name}`;
+  // Create list fragment map for replacement later
+  let listFragmentMap: Record<string, string> = {};
 
-    const srcPath = `${contentSrc}/${contentFiles[i]}`;
-    const targetPath = `${targetDir}${parse(contentFiles[i]).name}.html`;
+  for (let a = 0; a < listAttrs?.length; a++) {
+    const listFragment = await interpolateList(
+      srcTree,
+      attrs?.[a]?.raw,
+      listAttrs?.[a]?.raw
+    );
+    listFragmentMap[listAttrs?.[a]?.raw] = listFragment;
+  }
 
-    switch (extname(contentFiles[i])) {
-      case '.html':
-        parsedContent = await parsePRPLMetadata(
-          readFileSync(srcPath).toString(),
-          relevantPath
-        );
+  // Create pages
+  pageLoop: for (let p = 0; p < contentFiles?.length; p++) {
+    // Skip child directories, interpolation is always shallow
+    if (contentFiles?.[p]?.entity === PRPLFileSystemTreeEntity.directory) {
+      continue pageLoop;
+    }
+
+    // Create page instance from source and content tree
+    const page = {
+      ...srcTree,
+      name: contentFiles?.[p]?.name,
+      targetFilePath: srcTree?.targetFilePath?.replace(
+        srcTree?.name,
+        contentFiles?.[p]?.name
+      )
+    };
+
+    let metadata;
+
+    // Transform to HTML if markdown and extract metadata
+    switch (page?.extension) {
+      case PRPLContentFileExtension.html:
+        metadata = await parsePRPLMetadata(contentFiles?.[p]);
         break;
-      case '.md':
-      case '.markdown':
-        const html = await transformMarkdown(srcPath);
-        parsedContent = await parsePRPLMetadata(html, relevantPath);
+      case PRPLContentFileExtension.markdown:
+        page.src = await transformMarkdown(contentFiles?.[p]);
+        page.extension = PRPLSourceFileExtension.html;
+        metadata = await parsePRPLMetadata(contentFiles?.[p]);
         break;
       default:
-        if (existsSync(srcPath) && !lstatSync(srcPath).isDirectory()) {
-          console.error(
-            `Unsupported file ${relevantPath} - supported file types include: .html, .md, .markdown`
-          );
-        }
+        log.error(
+          `File '${contentFiles?.[p]?.srcRelativeFilePath}' has unsupported extension '${contentFiles?.[p]?.extension}'. Supported extensions include '.html' and '.md'.`
+        );
         continue pageLoop;
     }
 
-    // Isolate src prpl template
-    const prplTemplate = template.src.match(/(<prpl.*?>)(.*?)<\/prpl>/s)[2];
+    // Replace prior created list fragments
+    for (const rawListAttrs in listFragmentMap) {
+      const listRegex: RegExp = new RegExp(
+        `<prpl ${rawListAttrs}>.*<\/prpl>`,
+        's'
+      );
+      page.src = page?.src?.replace(listRegex, listFragmentMap?.[rawListAttrs]);
+    }
 
-    // Fill src prpl template with content
-    let prplTemplateInstance = String(prplTemplate);
-    for (const key in parsedContent) {
-      if (prplTemplateInstance.includes(`[${key}]`)) {
-        const regex = new RegExp(`\\[${key}\\]`, 'g');
-        prplTemplateInstance = prplTemplateInstance.replace(
-          regex,
-          parsedContent[key]
-        );
-      }
+    // Isolate <prpl> page tag inner HTML fragment
+    const pageFragment = page?.src?.match(/(<prpl.*?>)(.*?)<\/prpl>/s)?.[2];
+
+    // Interpolate the inner HTML fragment
+    let pageFragmentInstance = pageFragment;
+
+    for (const key in metadata) {
+      const metadataKeyRegex = new RegExp(`\\[${key}\\]`, 'g');
+      pageFragmentInstance = pageFragmentInstance?.replace(
+        metadataKeyRegex,
+        metadata?.[key]
+      );
     }
 
     // Write page to dist
-    const inerpolatedPage = template.src.replace(
+    const interpolatedPage = page?.src.replace(
       /<prpl.*<\/prpl>/s,
-      prplTemplateInstance
+      pageFragmentInstance
     );
-    writeFileSync(targetPath, inerpolatedPage);
+
+    await writeFile(page?.targetFilePath, interpolatedPage);
   }
 }
 

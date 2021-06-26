@@ -13,7 +13,7 @@ async function exists(filePath: string): Promise<boolean> {
       return false;
     }
 
-    log.error(`Failed to check ${filePath} exists. Error:`, error?.message);
+    log.error(`Failed to check '${filePath}' exists. Error:`, error?.message);
   }
 }
 

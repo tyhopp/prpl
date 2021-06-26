@@ -1,5 +1,3 @@
-import { FileSystemTree } from '../lib/generate-fs-tree';
-
 export enum PRPLSourceFileExtension {
   html = '.html'
 }
@@ -38,9 +36,54 @@ export enum PRPLRequiredMetadata {
   slug = 'slug'
 }
 
-export interface PRPLSourceFileDTO extends FileSystemTree {
-  srcRelativeDir: string;
-  srcRelativeFilePath: string;
-  targetFilePath: string;
-  targetDir: string;
+export type PRPLMetadata = Record<PRPLRequiredMetadata | string, string>;
+
+export enum PRPLFileSystemTreeEntity {
+  directory = 'directory',
+  file = 'file'
 }
+
+export interface PRPLFileSystemTree {
+  path: string;
+  name: string;
+  entity: PRPLFileSystemTreeEntity;
+  extension?: string;
+  src?: string;
+  children?: PRPLFileSystemTree[];
+  srcRelativeDir?: string;
+  srcRelativeFilePath?: string;
+  targetFilePath?: string;
+  targetDir?: string;
+}
+
+export enum PRPLCachePartitionKey {
+  src = 'src',
+  content = 'content'
+}
+
+export type PRPLCachePartition = Record<string, PRPLFileSystemTree>;
+
+export interface PRPLCacheManager {
+  cache: {
+    [PRPLCachePartitionKey.src]: PRPLCachePartition;
+    [PRPLCachePartitionKey.content]: PRPLCachePartition;
+  };
+  get: (
+    partitionKey: PRPLCachePartitionKey,
+    dirPath: string
+  ) => Promise<PRPLFileSystemTree>;
+  set: (
+    partitionKey: PRPLCachePartitionKey,
+    dirpath: string,
+    fileSystemTree: PRPLFileSystemTree
+  ) => Promise<void>;
+}
+
+export type PRPLAttributeMap = {
+  [key in PRPLTagAttribute]: string;
+};
+
+export type PRPLAttributes = {
+  raw: string;
+  parsed: PRPLAttributeMap[];
+};
