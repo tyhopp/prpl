@@ -8,7 +8,7 @@ import { PRPLClientStorageItem } from '../types/prpl.js';
  */
 const context: Worker = self as any;
 
-onmessage = (event: { data: string[] }) => {
+onmessage = (event: { data: string[] }): void => {
   try {
     const uniqueRelativeLinks: string[] = event?.data;
     const prefetchedItems: Promise<PRPLClientStorageItem | void>[] = uniqueRelativeLinks?.map(

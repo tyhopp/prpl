@@ -23,7 +23,9 @@ if (window.Worker) {
   prefetchWorker?.postMessage(getRelativePaths());
 
   // Listen for responses
-  prefetchWorker.onmessage = (event: { data: PRPLClientStorageItem[] }) => {
+  prefetchWorker.onmessage = (event: {
+    data: PRPLClientStorageItem[];
+  }): void => {
     const prefetchedPages = event?.data;
     for (let i = 0; i < prefetchedPages?.length; i++) {
       const { storageKey, storageValue } = prefetchedPages?.[i] || {};
