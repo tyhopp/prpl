@@ -1,131 +1,134 @@
-/**
- * Helper function to extract a CSS attribute query.
- * @param {HTMLElement} tag
- * @returns {string}
- */
-const extractQuery = (tag) => {
-  const name = tag.tagName.toLowerCase();
-  let attrQueries = '';
-  for (let i = 0; i < tag.attributes.length; i++) {
-    const { name: key, nodeValue: value } = tag.attributes[i];
-    attrQueries = attrQueries.concat(`[${key}="${value}"]`);
-  }
-  return `${name}${attrQueries}`;
-};
+import {
+  PRPLClientEvent,
+  PRPLClientScript,
+  PRPLClientPerformanceMark
+} from '../types/prpl.js';
 
 /**
- * Helper function to determine if the script should be ignored.
- * @param {HTMLElement} script
- * @returns {boolean}
+ * Helper function to extract a CSS attribute query.
  */
-const ignoreScript = (script) => {
-  if (script.tagName.toLowerCase() !== 'script') {
+function extractQuery(tag: HTMLElement): string {
+  const name = tag?.tagName?.toLowerCase();
+  let attrQueries = '';
+  for (let i = 0; i < tag?.attributes?.length; i++) {
+    const { name: key, nodeValue: value } = tag?.attributes?.[i] || {};
+    attrQueries = attrQueries?.concat(`[${key}="${value}"]`);
+  }
+  return `${name}${attrQueries}`;
+}
+
+/**
+ * Helper function to determine if the script should be ignored during diff.
+ */
+function ignoreScript(script: HTMLHeadElement): boolean {
+  if (script?.tagName?.toLowerCase() !== 'script') {
     return;
   }
   return (
-    script.src.endsWith('/prefetch.js') ||
-    script.src.endsWith('/router.js') ||
-    script.getAttribute('dev') === ''
+    (script as HTMLScriptElement)?.src?.endsWith(
+      `/${PRPLClientScript.prefetch}.js`
+    ) ||
+    (script as HTMLScriptElement)?.src?.endsWith(
+      `/${PRPLClientScript.router}.js`
+    ) ||
+    script?.getAttribute('dev') === ''
   );
-};
+}
 
-window.addEventListener('popstate', (event) => {
-  const url = window.location.href;
+window?.addEventListener('popstate', (event: PopStateEvent) => {
+  const url = window?.location?.href;
 
   try {
-    const html = sessionStorage.getItem(`prpl-${url}`);
+    const html = sessionStorage?.getItem(`prpl-${url}`);
 
     if (!html) {
-      console.warn(
-        `[PRPL] No cached html for route ${url}, fall back to native routing`
+      console.info(
+        `[PRPL] No cached html for route ${url}, route natively instead.`
       );
       return;
     }
 
     const parser = new DOMParser();
-    const target = parser.parseFromString(html, 'text/html');
+    const target = parser?.parseFromString(html, 'text/html');
 
     // Swap main
-    const currentMain = document.querySelector('main');
-    const targetMain = target.querySelector('main');
-    currentMain.replaceWith(targetMain);
+    const currentMain = document?.querySelector('main');
+    const targetMain = target?.querySelector('main');
+    currentMain?.replaceWith(targetMain);
 
-    // Resolve head
+    // Diff head
     const currentHeadTags = Array.from(
-      document.querySelector('head').children
+      document?.querySelector('head')?.children
     ) as HTMLHeadElement[];
     const targetHeadTags = Array.from(
-      target.querySelector('head').children
+      target?.querySelector('head')?.children
     ) as HTMLHeadElement[];
 
     // Remove head tags
-    currentHeadTags.forEach((currentHeadTag) => {
+    currentHeadTags?.forEach((currentHeadTag) => {
       if (
-        targetHeadTags.some((targetHeadTag) =>
-          targetHeadTag.isEqualNode(currentHeadTag)
+        targetHeadTags?.some((targetHeadTag) =>
+          targetHeadTag?.isEqualNode(currentHeadTag)
         ) ||
         ignoreScript(currentHeadTag)
       ) {
         return;
       }
-      document.head.querySelector(extractQuery(currentHeadTag)).remove();
+      document?.head?.querySelector(extractQuery(currentHeadTag))?.remove();
     });
 
     // Add head tags
-    targetHeadTags.forEach((targetHeadTag) => {
+    targetHeadTags?.forEach((targetHeadTag) => {
       if (
-        currentHeadTags.some((currentHeadTag) =>
-          currentHeadTag.isEqualNode(targetHeadTag)
+        currentHeadTags?.some((currentHeadTag) =>
+          currentHeadTag?.isEqualNode(targetHeadTag)
         ) ||
         ignoreScript(targetHeadTag)
       ) {
         return;
       }
-      if (targetHeadTag.tagName.toLowerCase() === 'script') {
-        const clonedScript = document.createElement('script');
+      if (targetHeadTag?.tagName?.toLowerCase() === 'script') {
+        const clonedScript = document?.createElement('script');
         clonedScript.src = (targetHeadTag as HTMLScriptElement)?.src;
-        document.head.appendChild(clonedScript);
+        document?.head?.appendChild(clonedScript);
         return;
       }
-      document.head.appendChild(targetHeadTag);
+      document?.head?.appendChild(targetHeadTag);
     });
 
     // Scroll to top if user clicked a link, otherwise preserve scroll state
-    if (event.state && event.state.url && event.state.url === url) {
-      window.scrollTo({ top: 0 });
+    if (event?.state?.url === url) {
+      window?.scrollTo({ top: 0 });
     }
 
     // Indicate render has finished
-    dispatchEvent(new CustomEvent('prpl-render', { bubbles: true }));
-    performance.mark('prpl-render-end');
+    dispatchEvent(new CustomEvent(PRPLClientEvent.render, { bubbles: true }));
+    performance.mark(PRPLClientPerformanceMark.renderEnd);
   } catch (error) {
-    window.location.assign(url);
-    console.error(
-      '[PRPL] Failed render, falling back to full page reload',
-      error
-    );
+    window?.location?.assign(url);
+    console.info('[PRPL] Failed render, route natively instead. Error:', error);
   }
 });
 
-document.addEventListener('click', (e) => {
-  performance.mark('prpl-render-start');
+document?.addEventListener('click', (event: MouseEvent) => {
+  performance.mark(PRPLClientPerformanceMark.renderStart);
 
   // TODO - Define more granular definition of which anchor tags the PRPL router should try to act on
-  const anchor = (e?.target as HTMLElement)?.closest(
+  const anchor = (event?.target as HTMLElement)?.closest(
     'a:not([rel])'
   ) as HTMLAnchorElement;
 
-  if (anchor && anchor.target !== '_blank') {
-    e.preventDefault();
+  if (anchor && anchor?.target !== '_blank') {
+    event?.preventDefault();
 
-    const url = anchor.href;
+    const url = anchor?.href;
     const state = { url };
 
     try {
-      history.pushState(state, null, url);
+      history?.pushState(state, null, url);
       dispatchEvent(new PopStateEvent('popstate', { state }));
-    } catch (e) {
-      window.location.assign(url);
+    } catch (error) {
+      window?.location?.assign(url);
     }
   }
 });

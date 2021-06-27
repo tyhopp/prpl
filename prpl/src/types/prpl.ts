@@ -87,3 +87,17 @@ export type PRPLAttributes = {
   raw: string;
   parsed: PRPLAttributeMap[];
 };
+
+export type PRPLClientStorageItem = {
+  storageKey: string;
+  storageValue: string;
+};
+
+export enum PRPLClientEvent {
+  render = 'prpl-render'
+}
+
+export enum PRPLClientPerformanceMark {
+  renderStart = 'prpl-render-start',
+  renderEnd = 'prpl-render-end'
+}

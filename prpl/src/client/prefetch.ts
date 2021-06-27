@@ -1,9 +1,15 @@
-// Utility function to calculate unique relative paths
-function getRelativePaths() {
+import { PRPLClientStorageItem, PRPLClientEvent } from '../types/prpl.js';
+
+/**
+ * Utility function to calculate unique relative paths to prefetch in a worker.
+ */
+function getRelativePaths(): string[] {
   // TODO - Define more granular definition of which anchor tags the PRPL prefetch worker should to try to fetch
-  const relativePaths = [
-    ...Array.from(document.querySelectorAll('a:not([rel])'))
-      .filter((link) => (link as HTMLAnchorElement)?.href?.includes(window?.location?.origin))
+  const relativePaths: string[] = [
+    ...Array.from(document?.querySelectorAll('a:not([rel])'))
+      .filter((link) =>
+        (link as HTMLAnchorElement)?.href?.includes(window?.location?.origin)
+      )
       .map((link) => (link as HTMLAnchorElement)?.href)
   ];
   return Array.from(new Set(relativePaths));
@@ -14,30 +20,31 @@ if (window.Worker) {
   const prefetchWorker = new Worker('prefetch-worker.js');
 
   // Initial prefetch
-  prefetchWorker.postMessage(getRelativePaths());
+  prefetchWorker?.postMessage(getRelativePaths());
 
   // Listen for responses
-  prefetchWorker.onmessage = (event) => {
-    const prefetchedPages = event.data;
-    if (!prefetchedPages.length) {
-      return;
-    }
-    for (let i = 0; i < prefetchedPages.length; i++) {
-      sessionStorage.setItem(prefetchedPages[i].key, prefetchedPages[i].value);
+  prefetchWorker.onmessage = (event: { data: PRPLClientStorageItem[] }) => {
+    const prefetchedPages = event?.data;
+    for (let i = 0; i < prefetchedPages?.length; i++) {
+      const { storageKey, storageValue } = prefetchedPages?.[i] || {};
+      if (!storageKey || !storageValue) {
+        return;
+      }
+      sessionStorage?.setItem(storageKey, storageValue);
     }
   };
 
   // Subsequent prefetch
-  window.addEventListener('prpl-render', () => {
+  window.addEventListener(PRPLClientEvent.render, () => {
     try {
-      prefetchWorker.postMessage(getRelativePaths());
+      prefetchWorker?.postMessage(getRelativePaths());
     } catch (error) {
-      console.error(
-        '[PRPL] Failed to prefetch on subsequent page route',
+      console.info(
+        '[PRPL] Failed to prefetch on subsequent page route. Error:',
         error
       );
     }
   });
 } else {
-  console.error(`[PRPL] Your browser doesn't support web workers`);
+  console.info(`[PRPL] Your browser doesn't support web workers.`);
 }
