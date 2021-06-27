@@ -16,7 +16,7 @@ async function interpolateHTML(srcTree: PRPLFileSystemTree): Promise<void> {
   // Add prefetch and router script tags
   srcTree.src = srcTree?.src?.replace(
     /<\/head>/,
-    `<script defer src="prefetch.js"></script>\n<script defer src="router.js"></script>\n</head>`
+    `<script type="module" src="prefetch.js"></script>\n<script type="module" src="router.js"></script>\n</head>`
   );
 
   // If no PRPL tags, write the file to dist

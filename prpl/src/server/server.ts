@@ -17,7 +17,101 @@ let ws;
 let socketInjectedPages: string[] = [];
 
 /**
- * Inject the socket on the page if it does not already have it.
+ * Start the local dev server.
+ */
+async function server(): Promise<void> {
+  // Serve the files on localhost
+  const server = http.createServer();
+
+  // Inject socket on index page
+  server.on(
+    'connection',
+    async (): Promise<void> => {
+      await injectSocketOptionally('./dist/index.html');
+    }
+  );
+
+  // Handle requests
+  server.on(
+    'request',
+    async (
+      request: IncomingMessage,
+      response: ServerResponse
+    ): Promise<void> => {
+      if (request?.headers?.accept?.includes('text/html')) {
+        const url =
+          request?.url === '/'
+            ? './dist/index.html'
+            : `./dist${request.url}.html`;
+        await injectSocketOptionally(url);
+      }
+
+      const config = {
+        public: 'dist',
+        cleanUrls: true,
+        trailingSlash: false
+      };
+
+      return handler(request, response, config);
+    }
+  );
+
+  // Upgrade connection to websocket
+  server.on(
+    'upgrade',
+    async (
+      request: IncomingMessage,
+      socket: Socket,
+      head: Buffer
+    ): Promise<void> => {
+      ws = new WebSocket(request, socket, head);
+    }
+  );
+
+  // Listen on port 8000
+  server.listen(8000);
+
+  // Watch for file changes in the src directory
+  const watcher = chokidar?.watch(resolve('./src'), {
+    ignoreInitial: true
+  });
+
+  watcher
+    .on('change', async (changedFilePath: string) => {
+      await createOrUpdateFile(changedFilePath, 'change');
+    })
+    .on('add', async (changedFilePath: string) => {
+      await createOrUpdateFile(changedFilePath, 'add');
+    })
+    .on('unlink', async (changedFilePath: string) => {
+      await removeFile(changedFilePath);
+    });
+
+  // Clean up pages injected with socket
+  process.on(
+    'SIGINT',
+    async (): Promise<void> => {
+      for (let i = 0; i < socketInjectedPages?.length; i++) {
+        const pageBuffer = await readFile(resolve(socketInjectedPages?.[i]));
+        const injectedPage = pageBuffer?.toString();
+        const restoredPage = injectedPage?.replace(
+          /<script dev>.*<\/script>/s,
+          ''
+        );
+        await writeFile(socketInjectedPages?.[i], restoredPage);
+      }
+      socketInjectedPages = [];
+      process.exit(0);
+    }
+  );
+
+  open('http://localhost:8000');
+
+  log.info('Server listening at http://localhost:8000');
+}
+
+/**
+ * Helper function to inject the socket on the page if it does not already have it.
  */
 async function injectSocketOptionally(filePath: string): Promise<void> {
   const socketExists = await exists(filePath);
@@ -50,79 +144,8 @@ async function injectSocketOptionally(filePath: string): Promise<void> {
   await writeFile(resolve(filePath), page);
 }
 
-// Serve the files on localhost
-const server = http.createServer();
-
-// Inject socket on index page
-server.on(
-  'connection',
-  async (): Promise<void> => {
-    await injectSocketOptionally('./dist/index.html');
-  }
-);
-
-// Clean up pages injected with socket
-process.on(
-  'SIGINT',
-  async (): Promise<void> => {
-    for (let i = 0; i < socketInjectedPages?.length; i++) {
-      const pageBuffer = await readFile(resolve(socketInjectedPages?.[i]));
-      const injectedPage = pageBuffer?.toString();
-      const restoredPage = injectedPage?.replace(
-        /<script dev>.*<\/script>/s,
-        ''
-      );
-      await writeFile(socketInjectedPages?.[i], restoredPage);
-    }
-    socketInjectedPages = [];
-    process.exit(0);
-  }
-);
-
-// Handle requests
-server.on(
-  'request',
-  async (request: IncomingMessage, response: ServerResponse): Promise<void> => {
-    if (request?.headers?.accept?.includes('text/html')) {
-      const url =
-        request?.url === '/'
-          ? './dist/index.html'
-          : `./dist${request.url}.html`;
-      await injectSocketOptionally(url);
-    }
-
-    const config = {
-      public: 'dist',
-      cleanUrls: true,
-      trailingSlash: false
-    };
-
-    return handler(request, response, config);
-  }
-);
-
-// Upgrade connection to websocket
-server.on(
-  'upgrade',
-  async (
-    request: IncomingMessage,
-    socket: Socket,
-    head: Buffer
-  ): Promise<void> => {
-    ws = new WebSocket(request, socket, head);
-  }
-);
-
-// Listen on port 8000
-server.listen(8000);
-
-// Watch for file changes in the src directory
-const watcher = chokidar?.watch(resolve('./src'), {
-  ignoreInitial: true
-});
-
 /**
- * Create new or update existing file in dist.
+ * Helper function to create a new or update an existing file in dist.
  */
 async function createOrUpdateFile(
   changedFilePath: string,
@@ -159,7 +182,7 @@ async function createOrUpdateFile(
 }
 
 /**
- * Remove file from dist.
+ * Helper function to remove a file from dist.
  */
 async function removeFile(removedFilePath: string) {
   const item: PRPLFileSystemTree = await generateFileSystemTree({
@@ -176,17 +199,4 @@ async function removeFile(removedFilePath: string) {
   }
 }
 
-watcher
-  .on('change', async (changedFilePath: string) => {
-    await createOrUpdateFile(changedFilePath, 'change');
-  })
-  .on('add', async (changedFilePath: string) => {
-    await createOrUpdateFile(changedFilePath, 'add');
-  })
-  .on('unlink', async (changedFilePath: string) => {
-    await removeFile(changedFilePath);
-  });
-
-open('http://localhost:8000');
-
-log.info('Server listening at http://localhost:8000');
+export { server };

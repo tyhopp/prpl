@@ -82,5 +82,3 @@ if ('WebSocket' in window) {
       );
   };
 }
-
-export {};

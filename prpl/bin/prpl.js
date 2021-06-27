@@ -1,8 +1,9 @@
 #!/usr/bin/env node
 
 import { interpolate } from '../dist/interpolate/interpolate.js';
-// import { serve } from '../dist/server/server.js';
+import { server } from '../dist/server/server.js';
 import { clearDist } from '../dist/lib/clear-dist.js';
+import { log } from '../dist/lib/log.js';
 
 const commands = {
   build: true,
@@ -24,16 +25,15 @@ switch (command) {
     break;
   case 'serve':
     await clearDist();
-    // await serve();
+    await interpolate();
+    await server();
     break;
   case 'clear':
     await clearDist();
     break;
   default:
-    console.error(
-      '\x1b[35m',
-      '[PRPL] Invalid command. Valid commands are:',
-      Object.keys(commands).join(', '),
-      '\x1b[0m'
+    log.error(
+      'Invalid command. Valid commands are:',
+      Object.keys(commands).join(', ')
     );
 }

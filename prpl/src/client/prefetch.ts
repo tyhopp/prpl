@@ -17,7 +17,7 @@ function getRelativePaths(): string[] {
 
 if (window.Worker) {
   // Instantiate prefetch worker
-  const prefetchWorker = new Worker('prefetch-worker.js');
+  const prefetchWorker = new Worker('prefetch-worker.js', { type: 'module' });
 
   // Initial prefetch
   prefetchWorker?.postMessage(getRelativePaths());

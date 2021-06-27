@@ -7,7 +7,7 @@ export enum PRPLContentFileExtension {
   markdown = '.md'
 }
 
-export enum PRPLClientScript {
+export const enum PRPLClientScript {
   prefetch = 'prefetch',
   prefetchWorker = 'prefetch-worker',
   router = 'router'
@@ -93,11 +93,11 @@ export type PRPLClientStorageItem = {
   storageValue: string;
 };
 
-export enum PRPLClientEvent {
+export const enum PRPLClientEvent {
   render = 'prpl-render'
 }
 
-export enum PRPLClientPerformanceMark {
+export const enum PRPLClientPerformanceMark {
   renderStart = 'prpl-render-start',
   renderEnd = 'prpl-render-end'
 }

@@ -13,12 +13,8 @@
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "scripts": {
-    "dev": "npm run dev-base && npm run dev-client",
-    "dev-base": "tsc -w --incremental",
-    "dev-client": "tsc -w --incremental -p src/client",
-    "build": "npm run build-base && npm run build-client",
-    "build-base": "tsc",
-    "build-client": "tsc -p src/client"
+    "dev": "tsc -w --incremental",
+    "build": "tsc"
   },
   "keywords": [
     "static-site-generator",
