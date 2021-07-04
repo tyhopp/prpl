@@ -58,24 +58,23 @@ export interface PRPLFileSystemTree {
 
 export enum PRPLCachePartitionKey {
   src = 'src',
-  content = 'content'
+  content = 'content',
+  dist = 'dist'
 }
 
 export type PRPLCachePartition = Record<string, PRPLFileSystemTree>;
 
 export interface PRPLCacheManager {
-  cache: {
-    [PRPLCachePartitionKey.src]: PRPLCachePartition;
-    [PRPLCachePartitionKey.content]: PRPLCachePartition;
-  };
+  cache: Record<PRPLCachePartitionKey | string, PRPLCachePartition | any>;
+  define: (partitionKey: string) => Promise<void>;
   get: (
-    partitionKey: PRPLCachePartitionKey,
+    partitionKey: PRPLCachePartitionKey | string,
     dirPath: string
-  ) => Promise<PRPLFileSystemTree>;
+  ) => Promise<PRPLFileSystemTree | any>;
   set: (
-    partitionKey: PRPLCachePartitionKey,
+    partitionKey: PRPLCachePartitionKey | string,
     dirpath: string,
-    fileSystemTree: PRPLFileSystemTree
+    item: PRPLFileSystemTree | any
   ) => Promise<void>;
 }
 

@@ -1,6 +1,6 @@
 {
   "name": "prpl",
-  "version": "0.0.47",
+  "version": "0.0.58",
   "description": "HTML-based static site generator",
   "author": "Ty Hopp (https://tyhopp.com)",
   "engines": {
@@ -14,7 +14,8 @@
   "types": "./dist/index.d.ts",
   "scripts": {
     "dev": "tsc -w --incremental",
-    "build": "tsc"
+    "build": "tsc",
+    "prepublishOnly": "tsc"
   },
   "keywords": [
     "static-site-generator",
@@ -23,14 +24,14 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "marked": "^2.1.0"
+    "chokidar": "^3.5.2",
+    "faye-websocket": "^0.11.4",
+    "marked": "^2.1.0",
+    "open": "^8.2.0",
+    "serve-handler": "^6.1.3"
   },
   "devDependencies": {
     "@types/node": "^15.12.2",
-    "chokidar": "^3.5.2",
-    "faye-websocket": "^0.11.4",
-    "open": "^8.2.0",
-    "serve-handler": "^6.1.3",
     "typescript": "^4.3.2"
   }
 }

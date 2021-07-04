@@ -1,3 +1,12 @@
 export * from './types/prpl.js';
 export { interpolate } from './interpolate/interpolate.js';
-export { server } from './server/server.js';
+export { PRPLCache } from './lib/cache.js';
+export { clearDist } from './lib/clear-dist.js';
+export { cwd } from './lib/cwd.js';
+export { ensureDir } from './lib/ensure-dir.js';
+export { ensureFile } from './lib/ensure-file.js';
+export { exists } from './lib/exists.js';
+export { generateFileSystemTree } from './lib/generate-fs-tree.js';
+export { generateOrRetrieveFileSystemTree } from './lib/generate-or-retrieve-fs-tree.js';
+export { log } from './lib/log.js';
+export { readDirSafe } from './lib/read-dir-safe.js';
