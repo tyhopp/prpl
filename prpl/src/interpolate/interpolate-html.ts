@@ -47,7 +47,7 @@ async function interpolateHTML(srcTree: PRPLFileSystemTree): Promise<void> {
         attrs?.[a]
       );
       const listRegex: RegExp = new RegExp(
-        `<prpl[\\s]+${attrs?.[a]?.raw}[\\s]+>.*<\/prpl>`,
+        `<prpl\\s+${attrs?.[a]?.raw}\\s?>.*<\/prpl>`,
         's'
       );
       page.src = page?.src?.replace(listRegex, listFragment);

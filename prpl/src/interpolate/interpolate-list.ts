@@ -33,7 +33,7 @@ async function interpolateList(
 
   // Construct regex with pattern
   const listRegex: RegExp = new RegExp(
-    `(<prpl[\\s]+${attrs?.raw}[\\s]+>)(.*?)<\/prpl>`,
+    `(<prpl\\s+${attrs?.raw}\\s?>)(.*?)<\/prpl>`,
     's'
   );
 

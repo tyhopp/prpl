@@ -96,7 +96,7 @@ async function interpolatePage(
     // Replace prior created list fragments
     for (const rawListAttrs in listFragmentMap) {
       const listRegex: RegExp = new RegExp(
-        `<prpl[\\s]+${rawListAttrs}[\\s]+>.*<\/prpl>`,
+        `<prpl\\s+${rawListAttrs}\\s?>.*?<\/prpl>`,
         's'
       );
       page.src = page?.src?.replace(listRegex, listFragmentMap?.[rawListAttrs]);
