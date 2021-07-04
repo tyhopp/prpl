@@ -26,7 +26,7 @@ async function interpolateHTML(srcTree: PRPLFileSystemTree): Promise<void> {
   }
 
   // If there are PRPL tags, parse
-  const attrs = await parsePRPLAttributes(srcTree);
+  const attrs = await parsePRPLAttributes(srcTree?.src);
   const firstAttr = attrs?.[0];
 
   // Check if has PRPL page tag, if a PPRL page tag exists it should always be found first
@@ -44,10 +44,10 @@ async function interpolateHTML(srcTree: PRPLFileSystemTree): Promise<void> {
       const listFragment = await interpolateList(
         srcTree,
         contentDir,
-        attrs?.[a]?.raw
+        attrs?.[a]
       );
       const listRegex: RegExp = new RegExp(
-        `<prpl ${attrs?.[a]?.raw}>.*<\/prpl>`,
+        `<prpl[\\s]+${attrs?.[a]?.raw}[\\s]+>.*<\/prpl>`,
         's'
       );
       page.src = page?.src?.replace(listRegex, listFragment);

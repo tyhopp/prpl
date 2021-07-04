@@ -20,12 +20,9 @@ const command = process.argv.reduce((selectedArg, arg) => {
 
 switch (command) {
   case 'build':
-    await clearDist();
     await interpolate();
     break;
   case 'serve':
-    await clearDist();
-    await interpolate();
     await server();
     break;
   case 'clear':

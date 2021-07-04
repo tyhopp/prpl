@@ -85,7 +85,7 @@ export type PRPLAttributeMap = {
 
 export type PRPLAttributes = {
   raw: string;
-  parsed: PRPLAttributeMap[];
+  parsed: PRPLAttributeMap;
 };
 
 export type PRPLClientStorageItem = {

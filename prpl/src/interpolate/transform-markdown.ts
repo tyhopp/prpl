@@ -1,4 +1,3 @@
-import { PRPLFileSystemTree } from '../types/prpl.js';
 import marked from 'marked';
 
 // Override code block rendering
@@ -13,8 +12,8 @@ marked.use({ renderer });
 /**
  * Transform content markdown to HTML.
  */
-async function transformMarkdown(srcTree: PRPLFileSystemTree): Promise<string> {
-  const html = marked(srcTree?.src);
+async function transformMarkdown(markdown: string): Promise<string> {
+  const html = marked(markdown);
   return html;
 }
 

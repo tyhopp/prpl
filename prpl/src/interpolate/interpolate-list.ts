@@ -1,6 +1,6 @@
 import { generateOrRetrieveFileSystemTree } from '../lib/generate-or-retrieve-fs-tree.js';
 import { parsePRPLMetadata } from './parse-prpl-metadata.js';
-import { parsePRPLAttributes } from './parse-prpl-attributes.js';
+import { PRPLAttributes } from '../types/prpl.js';
 import {
   PRPLFileSystemTree,
   PRPLContentFileExtension,
@@ -18,7 +18,7 @@ import { log } from '../lib/log.js';
 async function interpolateList(
   srcTree: PRPLFileSystemTree,
   contentDir: string,
-  rawAttr: string
+  attrs: PRPLAttributes
 ): Promise<string> {
   // Generate or retrieve content tree
   const contentTreeReadFileRegExp = new RegExp(
@@ -32,7 +32,10 @@ async function interpolateList(
   const contentFiles = contentTree?.children || [];
 
   // Construct regex with pattern
-  const listRegex: RegExp = new RegExp(`(<prpl ${rawAttr}>)(.*?)<\/prpl>`, 's');
+  const listRegex: RegExp = new RegExp(
+    `(<prpl[\\s]+${attrs?.raw}[\\s]+>)(.*?)<\/prpl>`,
+    's'
+  );
 
   // Isolate src prpl template
   const PRPLListTemplate = srcTree?.src?.match(listRegex)?.[2];
@@ -54,7 +57,10 @@ async function interpolateList(
     switch (contentFiles?.[i]?.extension) {
       case PRPLContentFileExtension.html:
       case PRPLContentFileExtension.markdown:
-        metadata = await parsePRPLMetadata(contentFiles?.[i]);
+        metadata = await parsePRPLMetadata(
+          contentFiles?.[i]?.src,
+          contentFiles?.[i]?.srcRelativeFilePath
+        );
         break;
       default:
         log.error(
@@ -84,18 +90,16 @@ async function interpolateList(
     });
   }
 
-  const PRPLAttrs = await parsePRPLAttributes(srcTree);
-
-  if (PRPLTagAttribute.sortBy in PRPLAttrs) {
-    const sort = PRPLAttrs?.[PRPLTagAttribute.sortBy];
+  if (PRPLTagAttribute.sortBy in attrs?.parsed) {
+    const sort = attrs?.parsed?.[PRPLTagAttribute.sortBy];
     let direction =
-      PRPLAttrs?.[PRPLTagAttribute.direction] ||
+      attrs?.parsed?.[PRPLTagAttribute.direction] ||
       PRPLDirectionAttributeValue.asc;
 
     try {
       fragmentList = fragmentList?.sort((first, second) => {
-        let firstComparator = Number(first?.metadata?.[sort]);
-        let secondComparator = Number(second?.metadata?.[sort]);
+        let firstComparator: string | number = first?.metadata?.[sort];
+        let secondComparator: string | number = second?.metadata?.[sort];
 
         // TODO - Create sorts enum
         if (sort?.toLowerCase() === 'date' || sort?.toLowerCase() === 'time') {
@@ -127,8 +131,8 @@ async function interpolateList(
     }
   }
 
-  if (PRPLTagAttribute.limit in PRPLAttrs) {
-    const limit = PRPLAttrs?.[PRPLTagAttribute.limit];
+  if (PRPLTagAttribute.limit in attrs?.parsed) {
+    const limit = Number(attrs?.parsed?.[PRPLTagAttribute.limit]);
     try {
       fragmentList = fragmentList?.slice(0, limit);
     } catch (error) {

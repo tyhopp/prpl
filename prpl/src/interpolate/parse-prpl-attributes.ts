@@ -1,12 +1,10 @@
-import { PRPLFileSystemTree, PRPLAttributes } from '../types/prpl.js';
+import { PRPLAttributes } from '../types/prpl.js';
 
 /**
  * Parse attributes from a <prpl> tag.
  */
-async function parsePRPLAttributes(
-  srcTree: PRPLFileSystemTree
-): Promise<PRPLAttributes[]> {
-  const prplAttrs = [...srcTree?.src?.matchAll(/<prpl(.*?)>/g)]
+async function parsePRPLAttributes(html: string): Promise<PRPLAttributes[]> {
+  const prplAttrs = [...html?.matchAll(/<prpl(.*?)>/gs)]
     .map((attrs) => attrs?.[1]?.trim())
     .reduce((attrsCollection, attrs) => {
       attrsCollection?.push({

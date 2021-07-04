@@ -19,7 +19,7 @@ import { log } from '../lib/log.js';
 async function interpolatePage(
   srcTree: PRPLFileSystemTree,
   contentDir: string,
-  attrs: PRPLAttributes[]
+  attrsList: PRPLAttributes[]
 ): Promise<void> {
   // Generate or retrieve content tree
   const contentTreeReadFileRegExp = new RegExp(
@@ -32,7 +32,7 @@ async function interpolatePage(
   });
   const contentFiles = contentTree?.children || [];
 
-  const listAttrs = attrs?.slice(1);
+  const listAttrs = attrsList?.slice(1);
 
   // Create list fragment map for replacement later
   let listFragmentMap: Record<string, string> = {};
@@ -40,8 +40,8 @@ async function interpolatePage(
   for (let a = 0; a < listAttrs?.length; a++) {
     const listFragment = await interpolateList(
       srcTree,
-      attrs?.[a]?.raw,
-      listAttrs?.[a]?.raw
+      contentDir,
+      listAttrs?.[a]
     );
     listFragmentMap[listAttrs?.[a]?.raw] = listFragment;
   }
@@ -57,6 +57,7 @@ async function interpolatePage(
     const page = {
       ...srcTree,
       name: contentFiles?.[p]?.name,
+      extension: contentFiles?.[p]?.extension,
       targetFilePath: srcTree?.targetFilePath?.replace(
         srcTree?.name,
         contentFiles?.[p]?.name
@@ -68,12 +69,22 @@ async function interpolatePage(
     // Transform to HTML if markdown and extract metadata
     switch (page?.extension) {
       case PRPLContentFileExtension.html:
-        metadata = await parsePRPLMetadata(contentFiles?.[p]);
+        metadata = await parsePRPLMetadata(
+          contentFiles?.[p]?.src,
+          contentFiles?.[p]?.srcRelativeFilePath
+        );
         break;
       case PRPLContentFileExtension.markdown:
-        page.src = await transformMarkdown(contentFiles?.[p]);
+        page.targetFilePath = page.targetFilePath?.replace(
+          page?.extension,
+          PRPLSourceFileExtension.html
+        );
         page.extension = PRPLSourceFileExtension.html;
-        metadata = await parsePRPLMetadata(contentFiles?.[p]);
+        metadata = await parsePRPLMetadata(
+          contentFiles?.[p]?.src,
+          contentFiles?.[p]?.srcRelativeFilePath
+        );
+        metadata.body = await transformMarkdown(metadata?.body);
         break;
       default:
         log.error(
@@ -85,7 +96,7 @@ async function interpolatePage(
     // Replace prior created list fragments
     for (const rawListAttrs in listFragmentMap) {
       const listRegex: RegExp = new RegExp(
-        `<prpl ${rawListAttrs}>.*<\/prpl>`,
+        `<prpl[\\s]+${rawListAttrs}[\\s]+>.*<\/prpl>`,
         's'
       );
       page.src = page?.src?.replace(listRegex, listFragmentMap?.[rawListAttrs]);
