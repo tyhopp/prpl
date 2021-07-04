@@ -42,10 +42,7 @@ window?.addEventListener('popstate', (event: PopStateEvent) => {
     const html = sessionStorage?.getItem(`prpl-${url}`);
 
     if (!html) {
-      console.info(
-        `[PRPL] No cached html for route ${url}, route natively instead.`
-      );
-      return;
+      throw new Error(`No cached html for route ${url}`);
     }
 
     const parser = new DOMParser();
@@ -106,7 +103,7 @@ window?.addEventListener('popstate', (event: PopStateEvent) => {
     performance.mark(PRPLClientPerformanceMark.renderEnd);
   } catch (error) {
     window?.location?.assign(url);
-    console.info('[PRPL] Failed render, route natively instead. Error:', error);
+    console.info('[PRPL] Routing natively. Reason:', error?.message);
   }
 });
 

@@ -20,7 +20,7 @@ if (window.Worker) {
   const prefetchWorker = new Worker('prefetch-worker.js', { type: 'module' });
 
   // Initial prefetch
-  prefetchWorker?.postMessage(getRelativePaths());
+  prefetchWorker?.postMessage([window?.location?.href, ...getRelativePaths()]);
 
   // Listen for responses
   prefetchWorker.onmessage = (event: {
