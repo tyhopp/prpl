@@ -1,7 +1,7 @@
 {
   "name": "create-prpl",
   "version": "0.0.14",
-  "description": "Initializer for prpl projects",
+  "description": "Initializer for PRPL projects",
   "author": "Ty Hopp (https://tyhopp.com)",
   "bin": "./index.js",
   "keywords": [
@@ -10,7 +10,5 @@
     "prpl",
     "initializer"
   ],
-  "license": "MIT",
-  "dependencies": {},
-  "devDependencies": {}
+  "license": "MIT"
 }

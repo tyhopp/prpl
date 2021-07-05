@@ -1,0 +1,37 @@
+{
+  "name": "@prpl/server",
+  "version": "0.0.1",
+  "description": "Development server for PRPL",
+  "author": "Ty Hopp (https://tyhopp.com)",
+  "engines": {
+    "node": ">=12"
+  },
+  "type": "module",
+  "bin": {
+    "prpl": "./bin/prpl.js"
+  },
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "scripts": {
+    "dev": "tsc -w --incremental",
+    "build": "tsc",
+    "prepublishOnly": "tsc"
+  },
+  "keywords": [
+    "static-site-generator",
+    "ssg",
+    "prpl",
+    "dev-server",
+    "server"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@prpl/core": "0.0.58"
+  },
+  "dependencies": {
+    "chokidar": "^3.5.2",
+    "faye-websocket": "^0.11.4",
+    "open": "^8.2.0",
+    "serve-handler": "^6.1.3"
+  }
+}
