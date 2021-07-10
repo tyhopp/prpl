@@ -24,6 +24,9 @@ const PRPLClientScripts: PRPLClientScript[] = [
  * Initialize recursive interpolation.
  */
 async function interpolate(): Promise<PRPLCacheManager['cache']> {
+  // Make sure dist exists
+  await ensureDir(resolve('dist'));
+
   // Add PRPL client scripts to dist
   for (let s = 0; s < PRPLClientScripts.length; s++) {
     try {
