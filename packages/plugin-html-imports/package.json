@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-html-imports",
-  "version": "0.0.7",
+  "version": "0.0.8",
   "description": "PRPL plugin that resolves HTML imports at build time",
   "author": "Ty Hopp (https://tyhopp.com)",
   "type": "module",
