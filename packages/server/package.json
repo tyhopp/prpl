@@ -5,12 +5,16 @@
   "author": "Ty Hopp (https://tyhopp.com)",
   "type": "module",
   "bin": {
-    "prpl-server": "bin/server.js"
+    "prpl-server": "bin/prpl-server.js"
   },
   "main": "dist/index.cjs.js",
   "umd": "dist/index.umd.js",
   "module": "dist/index.esm.js",
-  "types": "dist/index.d.ts",
+  "types": "dist/packages/server/src/index.d.ts",
+  "files": [
+    "src",
+    "dist"
+  ],
   "keywords": [
     "static-site-generator",
     "ssg",

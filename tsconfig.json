@@ -15,7 +15,7 @@
     "rootDir": ".",
     "outDir": "dist",
     "paths": {
-      "@prpl/*": ["packages/*/dist"]
+      "@prpl/*": ["packages/*/dist", "packages/*/src"]
     },
     "incremental": true
   },

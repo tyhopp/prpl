@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-const { interpolate } = require('../dist');
+import { interpolate } from '../dist/index.esm.js';
 
 interpolate();

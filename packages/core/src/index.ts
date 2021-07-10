@@ -1,5 +1,11 @@
 export * from './types/prpl.js';
 export { interpolate } from './interpolate/interpolate.js';
+export { interpolateHTML } from './interpolate/interpolate-html.js';
+export { interpolatePage } from './interpolate/interpolate-page.js';
+export { interpolateList } from './interpolate/interpolate-list.js';
+export { parsePRPLAttributes } from './interpolate/parse-prpl-attributes.js';
+export { parsePRPLMetadata } from './interpolate/parse-prpl-metadata.js';
+export { transformMarkdown } from './interpolate/transform-markdown.js';
 export { PRPLCache } from './lib/cache.js';
 export { clearDist } from './lib/clear-dist.js';
 export { cwd } from './lib/cwd.js';
