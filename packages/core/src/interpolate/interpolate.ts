@@ -28,7 +28,7 @@ async function interpolate(): Promise<PRPLCacheManager['cache']> {
   for (let s = 0; s < PRPLClientScripts.length; s++) {
     try {
       await copyFile(
-        resolve(await cwd(import.meta), `../client/${PRPLClientScripts[s]}.js`),
+        resolve(await cwd(import.meta), `client/${PRPLClientScripts[s]}.js`),
         resolve(`dist/${PRPLClientScripts[s]}.js`)
       );
     } catch (error) {
