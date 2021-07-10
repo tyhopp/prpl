@@ -6,6 +6,7 @@
   "bin": {
     "prpl-server": "bin/prpl-server.js"
   },
+  "type": "module",
   "main": "dist/index.cjs.js",
   "umd": "dist/index.umd.js",
   "module": "dist/index.esm.js",
