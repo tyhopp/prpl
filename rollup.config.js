@@ -40,19 +40,19 @@ async function bundle(cliArgs) {
           name,
           file: join(basePath, umd),
           format: 'umd',
-          sourcemap: true
+          sourcemap: false
         },
         {
           name,
-          file: join(basePath, main),
           format: 'cjs',
-          sourcemap: true,
-          exports: 'auto'
+          sourcemap: false,
+          dir: `${basePath}/dist`,
+          entryFileNames: '[name].cjs'
         },
         {
           name,
           format: 'es',
-          sourcemap: true,
+          sourcemap: false,
           dir: `${basePath}/dist`,
           entryFileNames: '[name].mjs'
         }
