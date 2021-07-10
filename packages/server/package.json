@@ -1,6 +1,6 @@
 {
   "name": "@prpl/server",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "Development server for PRPL",
   "author": "Ty Hopp (https://tyhopp.com)",
   "bin": {
