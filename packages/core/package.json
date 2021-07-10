@@ -1,5 +1,5 @@
 {
-  "name": "prpl",
+  "name": "@prpl/core",
   "version": "0.0.58",
   "description": "HTML-based static site generator",
   "author": "Ty Hopp (https://tyhopp.com)",
@@ -8,10 +8,12 @@
   },
   "type": "module",
   "bin": {
-    "prpl": "./bin/prpl.js"
+    "prpl": "bin/prpl.js"
   },
-  "main": "./dist/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.js",
+  "umd": "dist/index.umd.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "dev": "tsc -w --incremental",
     "build": "tsc",

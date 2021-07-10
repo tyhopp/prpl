@@ -7,7 +7,7 @@ import {
   PRPLCacheManager,
   PRPLCachePartitionKey,
   PRPLFileSystemTree
-} from 'prpl';
+} from '@prpl/core';
 
 enum PRPLPluginHTMLImportsExtension {
   html = '.html'

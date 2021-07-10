@@ -1,5 +1,3 @@
-#!/usr/bin/env node
-
 const path = require('path');
 const { execSync } = require('child_process');
 const fs = require('fs');
@@ -17,7 +15,7 @@ execSync(`git clone ${starter} --depth 1 --single-branch --quiet`, {
 fs.rmdirSync(path.resolve(repoPath, '.git'), { recursive: true });
 
 // Install dependency
-execSync('npm i --no-progress --no-fund --no-audit', {
+execSync('npm', {
   stdio: [0, 1, 2],
   cwd: repoPath
 });

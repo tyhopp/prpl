@@ -1,39 +1,32 @@
 import { relative, join } from 'path';
 import { getPackages } from '@lerna/project';
-import filterPackages from '@lerna/filter-packages';
-import batchPackages from '@lerna/batch-packages';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
 import resolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
-import sizes from '@atomico/rollup-plugin-sizes';
 import autoExternal from 'rollup-plugin-auto-external';
-
-async function getSortedPackages(scope, ignore) {
-  const packages = await getPackages(__dirname);
-  const filtered = filterPackages(packages, scope, ignore, false);
-
-  return batchPackages(filtered).reduce((arr, batch) => arr.concat(batch), []);
-}
+import { filterPackages } from '@lerna/filter-packages';
+import minimist from 'minimist';
 
 async function build(commandLineArgs) {
   const config = [];
-  const packages = await getSortedPackages();
+
+  const rawPackages = await getPackages(__dirname);
+
+  // Use package scope so packages are only passed through rollup once
+  const { scope, ignore } = minimist(process.argv.slice(2));
+  const packages = filterPackages(rawPackages, scope, ignore, false);
 
   // Prevent rollup warning
-  delete commandLineArgs.ci;
   delete commandLineArgs.scope;
   delete commandLineArgs.ignore;
 
-  packages.forEach((pkg) => {
+  for (const pkg of packages) {
     const basePath = relative(__dirname, pkg.location);
     const input = join(basePath, 'src/index.ts');
     const { name, main, umd, module } = pkg.toJSON();
 
-    const basePlugins = [sourcemaps(), resolve(), commonjs(), sizes()];
-
     config.push({
-      // perf: true,
       input,
       output: [
         {
@@ -60,21 +53,13 @@ async function build(commandLineArgs) {
         autoExternal({
           packagePath: join(basePath, 'package.json')
         }),
-        ...basePlugins,
-        typescript({
-          tsconfigOverride: {
-            compilerOptions: {
-              declaration: true,
-              paths: {
-                '@prpl/*': ['packages/*/src']
-              }
-            },
-            include: null
-          }
-        })
+        sourcemaps(),
+        resolve(),
+        commonjs(),
+        typescript()
       ]
     });
-  });
+  }
 
   return config;
 }
