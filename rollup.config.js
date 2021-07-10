@@ -31,17 +31,11 @@ async function bundle(cliArgs) {
   for (const pkg of packages) {
     const basePath = relative(__dirname, pkg.location);
     const input = join(basePath, 'src/index.ts');
-    const { name, main, umd, module } = pkg.toJSON();
+    const { name } = pkg.toJSON();
 
     config.push({
       input,
       output: [
-        {
-          name,
-          file: join(basePath, umd),
-          format: 'umd',
-          sourcemap: false
-        },
         {
           name,
           format: 'cjs',
