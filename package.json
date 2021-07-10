@@ -1,13 +1,16 @@
 {
   "private": "true",
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "init": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap",
     "clear": "rm -rf ./packages/*/dist",
     "build:changed": "npm run clear && lerna changed | while read package; do npx rollup -c --scope $package || exit 1; done",
     "build": "npm run clear && for dir in packages/*; do package=${dir#'packages/'}; if [[ $package = create-prpl ]]; then rollup -c --scope $package; else rollup -c --scope @prpl/$package; fi || exit 1; done",
     "release:changed": "npm run build:changed && lerna publish",
     "release": "npm run build && lerna publish",
-    "reset": "npm run clear && rm -rf ./**/.cache && rm -rf ./**/node_modules && rm -rf ./package.lock && npm install"
+    "reset": "npm run clear && rm -rf ./**/.cache && rm -rf ./**/node_modules && rm -rf ./package.lock && npm run bootstrap"
   },
   "devDependencies": {
     "@lerna/project": "^4.0.0",
