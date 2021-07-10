@@ -1,6 +1,6 @@
 {
   "name": "@prpl/server",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "Development server for PRPL",
   "author": "Ty Hopp (https://tyhopp.com)",
   "engines": {
