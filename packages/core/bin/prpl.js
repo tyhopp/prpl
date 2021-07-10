@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { interpolate } from '../dist/index.esm.js';
+import { interpolate } from '../dist/index.mjs';
 
 interpolate();

@@ -1,17 +1,18 @@
-import { resolve as resolvePath, relative, join } from 'path';
+import { resolve, relative, join } from 'path';
 import { getPackages } from '@lerna/project';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
-import resolve from '@rollup/plugin-node-resolve';
+import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import autoExternal from 'rollup-plugin-auto-external';
 import { filterPackages } from '@lerna/filter-packages';
 import minimist from 'minimist';
 
 const clientScripts = [
-  resolvePath('packages/core/src/client/prefetch-worker.ts'),
-  resolvePath('packages/core/src/client/prefetch.ts'),
-  resolvePath('packages/core/src/client/router.ts')
+  resolve('packages/core/src/client/prefetch-worker.ts'),
+  resolve('packages/core/src/client/prefetch.ts'),
+  resolve('packages/core/src/client/router.ts'),
+  resolve('packages/server/src/socket.ts')
 ];
 
 async function bundle(cliArgs) {
@@ -56,7 +57,7 @@ async function bundle(cliArgs) {
           packagePath: join(basePath, 'package.json')
         }),
         sourcemaps(),
-        resolve(),
+        nodeResolve(),
         commonjs(),
         typescript()
       ]

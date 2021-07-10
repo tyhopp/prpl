@@ -1,5 +1,5 @@
 #!/usr/bin/env node
 
-import { serve } from '../dist/index.esm.js';
+import { server } from '../dist/index.cjs';
 
-serve();
+server();
