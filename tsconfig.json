@@ -6,13 +6,17 @@
     "moduleResolution": "node",
     "isolatedModules": false,
     "esModuleInterop": true,
-    "sourceMap": false,
+    "importHelpers": true,
+    "sourceMap": true,
+    "declaration": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "baseUrl": ".",
-    "outDir": "dist",
-    "declaration": true,
+    "rootDir": ".",
+    "paths": {
+      "@prpl/*": ["packages/*/dist"]
+    },
     "incremental": true
   },
-  "include": ["src/**/*.ts"]
+  "exclude": ["**/node_modules", "**/dist"]
 }

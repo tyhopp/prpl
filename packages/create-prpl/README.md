@@ -1,6 +1,6 @@
 # Create PPRL
 
-Utility that enables `npm init prpl`.
+Utility that enables `npm init prpl` or `yarn init prpl`.
 
 It does three things:
 

@@ -6,12 +6,15 @@ import handler from 'serve-handler';
 import WebSocket from 'faye-websocket';
 import chokidar from 'chokidar';
 import open from 'open';
-import { interpolateHTML } from '../interpolate/interpolate-html.js';
-import { exists } from '../lib/exists.js';
-import { cwd } from '../lib/cwd.js';
-import { generateFileSystemTree } from '../lib/generate-fs-tree.js';
-import { PRPLFileSystemTree, PRPLSourceFileExtension } from '../types/prpl.js';
-import { log } from '../lib/log.js';
+import {
+  interpolateHTML,
+  generateFileSystemTree,
+  PRPLFileSystemTree,
+  PRPLSourceFileExtension,
+  exists,
+  cwd,
+  log
+} from '@prpl/core';
 
 let ws;
 let socketInjectedPages: string[] = [];

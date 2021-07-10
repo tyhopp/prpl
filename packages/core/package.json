@@ -1,0 +1,36 @@
+{
+  "name": "@prpl/core",
+  "version": "0.0.70",
+  "description": "HTML-based static site generator",
+  "author": "Ty Hopp (https://tyhopp.com)",
+  "bin": {
+    "prpl": "bin/prpl.js"
+  },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": [
+      {
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.mjs"
+      },
+      "./dist/index.cjs"
+    ]
+  },
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/packages/core/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "static-site-generator",
+    "ssg",
+    "prpl"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "marked": "^2.1.0"
+  },
+  "gitHead": "ce6b428767bad4727b4d89ac979c6b4a4867c720"
+}

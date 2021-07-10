@@ -12,7 +12,7 @@ HTML-based static site generator implementing the [PRPL pattern](https://web.dev
 
 ## Install
 
-`npm init prpl`
+`npm init prpl` or `yarn init prpl`
 
 ## Usage
 
