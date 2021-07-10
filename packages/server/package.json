@@ -3,7 +3,6 @@
   "version": "0.0.10",
   "description": "Development server for PRPL",
   "author": "Ty Hopp (https://tyhopp.com)",
-  "type": "module",
   "bin": {
     "prpl-server": "bin/prpl-server.js"
   },
