@@ -23,7 +23,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@prpl/core": "0.0.58"
+    "@prpl/core": "^0.0.60"
   },
   "dependencies": {
     "chokidar": "^3.5.2",
