@@ -7,9 +7,6 @@
     "node": ">=12"
   },
   "type": "module",
-  "bin": {
-    "prpl": "bin/prpl.js"
-  },
   "main": "dist/index.js",
   "umd": "dist/index.umd.js",
   "module": "dist/index.esm.js",
