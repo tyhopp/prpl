@@ -1,6 +1,6 @@
 {
   "name": "@prpl/server",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "Development server for PRPL",
   "author": "Ty Hopp (https://tyhopp.com)",
   "engines": {
@@ -14,11 +14,6 @@
   "umd": "dist/index.umd.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-    "dev": "tsc -w --incremental",
-    "build": "tsc",
-    "prepublishOnly": "tsc"
-  },
   "keywords": [
     "static-site-generator",
     "ssg",

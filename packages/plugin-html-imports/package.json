@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-html-imports",
-  "version": "0.0.6",
+  "version": "0.0.7",
   "description": "PRPL plugin that resolves HTML imports at build time",
   "author": "Ty Hopp (https://tyhopp.com)",
   "engines": {
@@ -11,11 +11,6 @@
   "umd": "dist/index.umd.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "scripts": {
-    "dev": "tsc -w --incremental",
-    "build": "tsc",
-    "prepublishOnly": "tsc"
-  },
   "keywords": [
     "static-site-generator",
     "ssg",
@@ -25,5 +20,6 @@
   "license": "MIT",
   "peerDependencies": {
     "@prpl/core": "0.0.58"
-  }
+  },
+  "gitHead": "ce6b428767bad4727b4d89ac979c6b4a4867c720"
 }
