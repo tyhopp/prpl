@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.64](https://github.com/tyhopp/prpl/compare/@prpl/core@0.0.63...@prpl/core@0.0.64) (2021-07-10)
+
+
+### Bug Fixes
+
+* Client script path resolution ([b83ac0d](https://github.com/tyhopp/prpl/commit/b83ac0df16d52c7f455f62081ee996a5746b7d11))
+
+
+
+
+
 ## [0.0.63](https://github.com/tyhopp/prpl/compare/@prpl/core@0.0.62...@prpl/core@0.0.63) (2021-07-10)
 
 **Note:** Version bump only for package @prpl/core
