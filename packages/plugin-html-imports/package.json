@@ -3,11 +3,8 @@
   "version": "0.0.7",
   "description": "PRPL plugin that resolves HTML imports at build time",
   "author": "Ty Hopp (https://tyhopp.com)",
-  "engines": {
-    "node": ">=12"
-  },
   "type": "module",
-  "main": "dist/index.js",
+  "main": "dist/index.cjs.js",
   "umd": "dist/index.umd.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
@@ -19,7 +16,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@prpl/core": "0.0.58"
+    "@prpl/core": "^0.0.58"
   },
   "gitHead": "ce6b428767bad4727b4d89ac979c6b4a4867c720"
 }
