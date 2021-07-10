@@ -12,7 +12,6 @@
   "module": "dist/index.esm.js",
   "types": "dist/packages/core/src/index.d.ts",
   "files": [
-    "src",
     "dist"
   ],
   "keywords": [

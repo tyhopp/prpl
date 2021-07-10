@@ -9,7 +9,6 @@
   "module": "dist/index.esm.js",
   "types": "dist/packages/create-prpl/src/index.d.ts",
   "files": [
-    "src",
     "dist"
   ],
   "keywords": [

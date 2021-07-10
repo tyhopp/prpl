@@ -9,7 +9,6 @@
   "module": "dist/index.esm.js",
   "types": "dist/packages/plugin-html-imports/src/index.d.ts",
   "files": [
-    "src",
     "dist"
   ],
   "keywords": [

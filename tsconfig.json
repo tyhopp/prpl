@@ -13,9 +13,8 @@
     "noUnusedParameters": true,
     "baseUrl": ".",
     "rootDir": ".",
-    "outDir": "dist",
     "paths": {
-      "@prpl/*": ["packages/*/dist", "packages/*/src"]
+      "@prpl/*": ["packages/*/dist"]
     },
     "incremental": true
   },
