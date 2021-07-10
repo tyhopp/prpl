@@ -3,6 +3,16 @@
   "version": "0.0.14",
   "description": "PRPL plugin that resolves HTML imports at build time",
   "author": "Ty Hopp (https://tyhopp.com)",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": [
+      {
+        "require": "./dist/index.cjs.js",
+        "import": "./dist/index.mjs"
+      },
+      "./dist/index.cjs.js"
+    ]
+  },
   "type": "module",
   "main": "dist/index.cjs.js",
   "umd": "dist/index.umd.js",

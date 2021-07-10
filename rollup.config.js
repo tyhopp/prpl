@@ -21,28 +21,6 @@ async function bundle(cliArgs) {
 
   const config = [];
 
-  // Bundle client scripts
-  for (const clientScript of clientScripts) {
-    config.push({
-      input: clientScript,
-      output: [
-        {
-          file: clientScript.replace('src', 'dist').replace('ts', 'js'),
-          format: 'es'
-        }
-      ],
-      plugins: [
-        typescript({
-          tsconfigOverride: {
-            compilerOptions: {
-              declaration: false
-            }
-          }
-        })
-      ]
-    });
-  }
-
   // Bundle packages
   const rawPackages = await getPackages(__dirname);
 
@@ -73,9 +51,10 @@ async function bundle(cliArgs) {
         },
         {
           name,
-          file: join(basePath, module),
           format: 'es',
-          sourcemap: true
+          sourcemap: true,
+          dir: `${basePath}/dist`,
+          entryFileNames: '[name].mjs'
         }
       ],
       plugins: [
@@ -86,6 +65,29 @@ async function bundle(cliArgs) {
         resolve(),
         commonjs(),
         typescript()
+      ]
+    });
+  }
+
+  // TODO - Figure out why this runs with each package above
+  // Bundle client scripts
+  for (const clientScript of clientScripts) {
+    config.push({
+      input: clientScript,
+      output: [
+        {
+          file: clientScript.replace('src', 'dist').replace('ts', 'js'),
+          format: 'es'
+        }
+      ],
+      plugins: [
+        typescript({
+          tsconfigOverride: {
+            compilerOptions: {
+              declaration: false
+            }
+          }
+        })
       ]
     });
   }

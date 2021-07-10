@@ -6,6 +6,16 @@
   "bin": {
     "prpl": "bin/prpl.js"
   },
+  "exports": {
+    "./package.json": "./package.json",
+    ".": [
+      {
+        "require": "./dist/index.cjs.js",
+        "import": "./dist/index.mjs"
+      },
+      "./dist/index.cjs.js"
+    ]
+  },
   "type": "module",
   "main": "dist/index.cjs.js",
   "umd": "dist/index.umd.js",
