@@ -1,3 +1,5 @@
+import { MarkedOptions } from 'marked';
+
 export enum PRPLSourceFileExtension {
   html = '.html'
 }
@@ -103,4 +105,5 @@ export const enum PRPLClientPerformanceMark {
 
 export interface PRPLInterpolateOptions {
   templateRegex?: RegExp;
+  markedOptions?: MarkedOptions;
 }

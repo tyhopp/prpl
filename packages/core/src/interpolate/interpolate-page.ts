@@ -76,10 +76,10 @@ async function interpolatePage(args: InterpolatePageArgs): Promise<void> {
     // Transform to HTML if markdown and extract metadata
     switch (page?.extension) {
       case PRPLContentFileExtension.html:
-        metadata = await parsePRPLMetadata(
-          contentFiles?.[p]?.src,
-          contentFiles?.[p]?.srcRelativeFilePath
-        );
+        metadata = await parsePRPLMetadata({
+          src: contentFiles?.[p]?.src,
+          srcRelativeFilePath: contentFiles?.[p]?.srcRelativeFilePath
+        });
         break;
       case PRPLContentFileExtension.markdown:
         page.targetFilePath = page.targetFilePath?.replace(
@@ -87,11 +87,14 @@ async function interpolatePage(args: InterpolatePageArgs): Promise<void> {
           PRPLSourceFileExtension.html
         );
         page.extension = PRPLSourceFileExtension.html;
-        metadata = await parsePRPLMetadata(
-          contentFiles?.[p]?.src,
-          contentFiles?.[p]?.srcRelativeFilePath
-        );
-        metadata.body = await transformMarkdown(metadata?.body);
+        metadata = await parsePRPLMetadata({
+          src: contentFiles?.[p]?.src,
+          srcRelativeFilePath: contentFiles?.[p]?.srcRelativeFilePath
+        });
+        metadata.body = await transformMarkdown({
+          markdown: metadata?.body,
+          options
+        });
         break;
       default:
         log.error(

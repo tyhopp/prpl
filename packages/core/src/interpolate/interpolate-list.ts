@@ -63,10 +63,10 @@ async function interpolateList(args: InterpolateListArgs): Promise<string> {
     switch (contentFiles?.[i]?.extension) {
       case PRPLContentFileExtension.html:
       case PRPLContentFileExtension.markdown:
-        metadata = await parsePRPLMetadata(
-          contentFiles?.[i]?.src,
-          contentFiles?.[i]?.srcRelativeFilePath
-        );
+        metadata = await parsePRPLMetadata({
+          src: contentFiles?.[i]?.src,
+          srcRelativeFilePath: contentFiles?.[i]?.srcRelativeFilePath
+        });
         break;
       default:
         log.error(

@@ -34,7 +34,7 @@ async function interpolateHTML(args: InterpolateHTMLArgs): Promise<void> {
   }
 
   // If there are PRPL tags, parse
-  const attrs = await parsePRPLAttributes(srcTree?.src);
+  const attrs = await parsePRPLAttributes({ html: srcTree?.src });
   const firstAttr = attrs?.[0];
 
   // Check if has PRPL page tag, if a PPRL page tag exists it should always be found first
