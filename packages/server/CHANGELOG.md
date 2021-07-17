@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.17](https://github.com/tyhopp/prpl/compare/@prpl/server@0.0.16...@prpl/server@0.0.17) (2021-07-17)
+
+
+### Bug Fixes
+
+* **server:** Update interpolate HTML args ([2da02fd](https://github.com/tyhopp/prpl/commit/2da02fd4abbfc51107314508449a00eeca40fc2c))
+
+
+
+
+
 ## [0.0.16](https://github.com/tyhopp/prpl/compare/@prpl/server@0.0.15...@prpl/server@0.0.16) (2021-07-10)
 
 **Note:** Version bump only for package @prpl/server
