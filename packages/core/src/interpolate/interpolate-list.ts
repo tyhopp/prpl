@@ -83,7 +83,10 @@ async function interpolateList(args: InterpolateListArgs): Promise<string> {
     let prplTemplateInstance = String(PRPLListTemplate);
 
     for (const key in metadata) {
-      const regex = options?.templateRegex || new RegExp(`\\[${key}\\]`, 'g');
+      const regex =
+        typeof options?.templateRegex === 'function'
+          ? options?.templateRegex(key)
+          : new RegExp(`\\[${key}\\]`, 'g');
       prplTemplateInstance = prplTemplateInstance?.replace(
         regex,
         metadata?.[key]

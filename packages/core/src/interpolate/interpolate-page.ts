@@ -120,7 +120,9 @@ async function interpolatePage(args: InterpolatePageArgs): Promise<void> {
 
     for (const key in metadata) {
       const metadataKeyRegex =
-        options?.templateRegex || new RegExp(`\\[${key}\\]`, 'g');
+        typeof options?.templateRegex === 'function'
+          ? options?.templateRegex(key)
+          : new RegExp(`\\[${key}\\]`, 'g');
       pageFragmentInstance = pageFragmentInstance?.replace(
         metadataKeyRegex,
         metadata?.[key]
