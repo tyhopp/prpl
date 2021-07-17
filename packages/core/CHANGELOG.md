@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.1.0](https://github.com/tyhopp/prpl/compare/@prpl/core@0.0.70...@prpl/core@0.1.0) (2021-07-17)
+
+
+### Features
+
+* **core:** Introduce interpolate options ([707eed6](https://github.com/tyhopp/prpl/commit/707eed654d301bbbf197e0d731a21f89bf8a90d9))
+* **core:** Introduce marked options ([91a8b51](https://github.com/tyhopp/prpl/commit/91a8b5151ef1bf9904593631986e5b9f9a5b0cb2))
+* **core:** Introduce no client JS option ([e8943fe](https://github.com/tyhopp/prpl/commit/e8943fef3cb813524d55e695e837c150fca670a7))
+
+
+
+
+
 ## [0.0.70](https://github.com/tyhopp/prpl/compare/@prpl/core@0.0.69...@prpl/core@0.0.70) (2021-07-10)
 
 **Note:** Version bump only for package @prpl/core
