@@ -160,7 +160,7 @@ async function createOrUpdateFile(
 
   try {
     if (item?.extension === PRPLSourceFileExtension.html) {
-      await interpolateHTML(item);
+      await interpolateHTML({ srcTree: item });
       return;
     }
     await copyFile(item?.path, item?.targetFilePath);
