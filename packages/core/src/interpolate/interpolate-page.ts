@@ -9,18 +9,24 @@ import {
   PRPLAttributes,
   PRPLCachePartitionKey,
   PRPLFileSystemTreeEntity,
-  PRPLSourceFileExtension
+  PRPLSourceFileExtension,
+  PRPLInterpolateOptions
 } from '../types/prpl.js';
 import { log } from '../lib/log.js';
+
+interface InterpolatePageArgs {
+  srcTree: PRPLFileSystemTree;
+  contentDir: string;
+  attrs: PRPLAttributes[];
+  options?: PRPLInterpolateOptions;
+}
 
 /**
  * Create new pages using the source file template and content files.
  */
-async function interpolatePage(
-  srcTree: PRPLFileSystemTree,
-  contentDir: string,
-  attrsList: PRPLAttributes[]
-): Promise<void> {
+async function interpolatePage(args: InterpolatePageArgs): Promise<void> {
+  const { srcTree, contentDir, attrs = [], options = {} } = args || {};
+
   // Generate or retrieve content tree
   const contentTreeReadFileRegExp = new RegExp(
     `${PRPLContentFileExtension.html}|${PRPLContentFileExtension.markdown}`
@@ -32,17 +38,18 @@ async function interpolatePage(
   });
   const contentFiles = contentTree?.children || [];
 
-  const listAttrs = attrsList?.slice(1);
+  const listAttrs = attrs?.slice(1);
 
   // Create list fragment map for replacement later
   let listFragmentMap: Record<string, string> = {};
 
   for (let a = 0; a < listAttrs?.length; a++) {
-    const listFragment = await interpolateList(
+    const listFragment = await interpolateList({
       srcTree,
       contentDir,
-      listAttrs?.[a]
-    );
+      attrs: listAttrs?.[a],
+      options
+    });
     listFragmentMap[listAttrs?.[a]?.raw] = listFragment;
   }
 
@@ -109,7 +116,8 @@ async function interpolatePage(
     let pageFragmentInstance = pageFragment;
 
     for (const key in metadata) {
-      const metadataKeyRegex = new RegExp(`\\[${key}\\]`, 'g');
+      const metadataKeyRegex =
+        options?.templateRegex || new RegExp(`\\[${key}\\]`, 'g');
       pageFragmentInstance = pageFragmentInstance?.replace(
         metadataKeyRegex,
         metadata?.[key]

@@ -4,15 +4,23 @@ import { parsePRPLAttributes } from './parse-prpl-attributes.js';
 import {
   PRPLFileSystemTree,
   PRPLTagAttribute,
-  PRPLTag
+  PRPLTag,
+  PRPLInterpolateOptions
 } from '../types/prpl.js';
 import { interpolatePage } from './interpolate-page.js';
 import { interpolateList } from './interpolate-list.js';
 
+interface InterpolateHTMLArgs {
+  srcTree: PRPLFileSystemTree;
+  options?: PRPLInterpolateOptions;
+}
+
 /**
  * Interpolate an HTML file.
  */
-async function interpolateHTML(srcTree: PRPLFileSystemTree): Promise<void> {
+async function interpolateHTML(args: InterpolateHTMLArgs): Promise<void> {
+  const { srcTree, options = {} } = args || {};
+
   // Add prefetch and router script tags
   srcTree.src = srcTree?.src?.replace(
     /<\/head>/,
@@ -41,11 +49,12 @@ async function interpolateHTML(srcTree: PRPLFileSystemTree): Promise<void> {
     // Replace list fragments
     for (let a = 0; a < attrs?.length; a++) {
       const contentDir = resolve(attrs?.[a]?.parsed?.[PRPLTagAttribute?.src]);
-      const listFragment = await interpolateList(
+      const listFragment = await interpolateList({
         srcTree,
         contentDir,
-        attrs?.[a]
-      );
+        attrs: attrs?.[a],
+        options
+      });
       const listRegex: RegExp = new RegExp(
         `<prpl\\s+${attrs?.[a]?.raw}\\s?>.*<\/prpl>`,
         's'
@@ -60,7 +69,12 @@ async function interpolateHTML(srcTree: PRPLFileSystemTree): Promise<void> {
 
   // Create and interpolate page
   const contentDir = resolve(firstAttr?.parsed?.[PRPLTagAttribute?.src]);
-  await interpolatePage(srcTree, contentDir, attrs);
+  await interpolatePage({
+    srcTree,
+    contentDir,
+    attrs,
+    options
+  });
 }
 
 export { interpolateHTML };

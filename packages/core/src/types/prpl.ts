@@ -100,3 +100,7 @@ export const enum PRPLClientPerformanceMark {
   renderStart = 'prpl-render-start',
   renderEnd = 'prpl-render-end'
 }
+
+export interface PRPLInterpolateOptions {
+  templateRegex?: RegExp;
+}

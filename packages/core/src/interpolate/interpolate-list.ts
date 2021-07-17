@@ -8,18 +8,24 @@ import {
   PRPLTagAttribute,
   PRPLDirectionAttributeValue,
   PRPLMetadata,
-  PRPLCachePartitionKey
+  PRPLCachePartitionKey,
+  PRPLInterpolateOptions
 } from '../types/prpl.js';
 import { log } from '../lib/log.js';
+
+interface InterpolateListArgs {
+  srcTree: PRPLFileSystemTree;
+  contentDir: string;
+  attrs: PRPLAttributes;
+  options?: PRPLInterpolateOptions;
+}
 
 /**
  * Interpolate content into an inline HTML fragment.
  */
-async function interpolateList(
-  srcTree: PRPLFileSystemTree,
-  contentDir: string,
-  attrs: PRPLAttributes
-): Promise<string> {
+async function interpolateList(args: InterpolateListArgs): Promise<string> {
+  const { srcTree, contentDir, attrs, options = {} } = args || {};
+
   // Generate or retrieve content tree
   const contentTreeReadFileRegExp = new RegExp(
     `${PRPLContentFileExtension.html}|${PRPLContentFileExtension.markdown}`
@@ -77,7 +83,7 @@ async function interpolateList(
     let prplTemplateInstance = String(PRPLListTemplate);
 
     for (const key in metadata) {
-      const regex = new RegExp(`\\[${key}\\]`, 'g');
+      const regex = options?.templateRegex || new RegExp(`\\[${key}\\]`, 'g');
       prplTemplateInstance = prplTemplateInstance?.replace(
         regex,
         metadata?.[key]
