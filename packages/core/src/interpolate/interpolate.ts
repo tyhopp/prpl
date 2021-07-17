@@ -8,7 +8,8 @@ import {
   PRPLSourceFileExtension,
   PRPLFileSystemTree,
   PRPLCacheManager,
-  PRPLCachePartitionKey
+  PRPLCachePartitionKey,
+  PRPLInterpolateOptions
 } from '../types/prpl.js';
 import { ensureDir } from '../lib/ensure-dir.js';
 import { interpolateHTML } from './interpolate-html.js';
@@ -20,25 +21,35 @@ const PRPLClientScripts: PRPLClientScript[] = [
   PRPLClientScript.router
 ];
 
+interface InterpolateArgs {
+  options?: PRPLInterpolateOptions;
+}
+
 /**
  * Initialize recursive interpolation.
  */
-async function interpolate(): Promise<PRPLCacheManager['cache']> {
+async function interpolate(
+  args: InterpolateArgs
+): Promise<PRPLCacheManager['cache']> {
+  const { options = {} } = args || {};
+
   // Make sure dist exists
   await ensureDir(resolve('dist'));
 
   // Add PRPL client scripts to dist
-  for (let s = 0; s < PRPLClientScripts.length; s++) {
-    try {
-      await copyFile(
-        resolve(await cwd(import.meta), `client/${PRPLClientScripts[s]}.js`),
-        resolve(`dist/${PRPLClientScripts[s]}.js`)
-      );
-    } catch (error) {
-      log.error(
-        `Failed to copy '${PRPLClientScripts[s]}.js' to dist. Error:`,
-        error?.message
-      );
+  if (!options?.noClientJS) {
+    for (let s = 0; s < PRPLClientScripts.length; s++) {
+      try {
+        await copyFile(
+          resolve(await cwd(import.meta), `client/${PRPLClientScripts[s]}.js`),
+          resolve(`dist/${PRPLClientScripts[s]}.js`)
+        );
+      } catch (error) {
+        log.error(
+          `Failed to copy '${PRPLClientScripts[s]}.js' to dist. Error:`,
+          error?.message
+        );
+      }
     }
   }
 
@@ -50,7 +61,7 @@ async function interpolate(): Promise<PRPLCacheManager['cache']> {
           await ensureDir(items?.[i]?.targetDir);
 
           if (items?.[i]?.extension === PRPLSourceFileExtension.html) {
-            await interpolateHTML(items?.[i]);
+            await interpolateHTML({ srcTree: items?.[i], options });
             break;
           }
 

@@ -1,3 +1,5 @@
+import { MarkedOptions } from 'marked';
+
 export enum PRPLSourceFileExtension {
   html = '.html'
 }
@@ -99,4 +101,10 @@ export const enum PRPLClientEvent {
 export const enum PRPLClientPerformanceMark {
   renderStart = 'prpl-render-start',
   renderEnd = 'prpl-render-end'
+}
+
+export interface PRPLInterpolateOptions {
+  noClientJS?: boolean;
+  templateRegex?: (key: string) => RegExp;
+  markedOptions?: MarkedOptions;
 }

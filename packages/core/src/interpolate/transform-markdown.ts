@@ -1,4 +1,5 @@
 import marked from 'marked';
+import { PRPLInterpolateOptions } from '../types/prpl';
 
 // Override code block rendering
 const renderer = {
@@ -9,11 +10,17 @@ const renderer = {
 
 marked.use({ renderer });
 
+interface TransformMarkdownArgs {
+  markdown: string;
+  options?: PRPLInterpolateOptions;
+}
+
 /**
  * Transform content markdown to HTML.
  */
-async function transformMarkdown(markdown: string): Promise<string> {
-  const html = marked(markdown);
+async function transformMarkdown(args: TransformMarkdownArgs): Promise<string> {
+  const { markdown, options = {} } = args || {};
+  const html = marked(markdown, options?.markedOptions);
   return html;
 }
 
