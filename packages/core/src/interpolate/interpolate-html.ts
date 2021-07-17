@@ -22,10 +22,12 @@ async function interpolateHTML(args: InterpolateHTMLArgs): Promise<void> {
   const { srcTree, options = {} } = args || {};
 
   // Add prefetch and router script tags
-  srcTree.src = srcTree?.src?.replace(
-    /<\/head>/,
-    `<script type="module" src="prefetch.js"></script>\n<script type="module" src="router.js"></script>\n</head>`
-  );
+  if (!options?.noClientJS) {
+    srcTree.src = srcTree?.src?.replace(
+      /<\/head>/,
+      `<script type="module" src="prefetch.js"></script>\n<script type="module" src="router.js"></script>\n</head>`
+    );
+  }
 
   // If no PRPL tags, write the file to dist
   if (!/<prpl/?.test(srcTree?.src)) {

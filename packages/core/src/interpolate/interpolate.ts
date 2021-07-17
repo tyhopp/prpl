@@ -22,30 +22,34 @@ const PRPLClientScripts: PRPLClientScript[] = [
 ];
 
 interface InterpolateArgs {
-  options?: PRPLInterpolateOptions
+  options?: PRPLInterpolateOptions;
 }
 
 /**
  * Initialize recursive interpolation.
  */
-async function interpolate(args: InterpolateArgs): Promise<PRPLCacheManager['cache']> {
+async function interpolate(
+  args: InterpolateArgs
+): Promise<PRPLCacheManager['cache']> {
   const { options = {} } = args || {};
 
   // Make sure dist exists
   await ensureDir(resolve('dist'));
 
   // Add PRPL client scripts to dist
-  for (let s = 0; s < PRPLClientScripts.length; s++) {
-    try {
-      await copyFile(
-        resolve(await cwd(import.meta), `client/${PRPLClientScripts[s]}.js`),
-        resolve(`dist/${PRPLClientScripts[s]}.js`)
-      );
-    } catch (error) {
-      log.error(
-        `Failed to copy '${PRPLClientScripts[s]}.js' to dist. Error:`,
-        error?.message
-      );
+  if (!options?.noClientJS) {
+    for (let s = 0; s < PRPLClientScripts.length; s++) {
+      try {
+        await copyFile(
+          resolve(await cwd(import.meta), `client/${PRPLClientScripts[s]}.js`),
+          resolve(`dist/${PRPLClientScripts[s]}.js`)
+        );
+      } catch (error) {
+        log.error(
+          `Failed to copy '${PRPLClientScripts[s]}.js' to dist. Error:`,
+          error?.message
+        );
+      }
     }
   }
 
