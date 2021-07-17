@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.1](https://github.com/tyhopp/prpl/compare/@prpl/core@0.1.0...@prpl/core@0.1.1) (2021-07-17)
+
+
+### Bug Fixes
+
+* **interpolate:** Make template regex option a func ([327fc26](https://github.com/tyhopp/prpl/commit/327fc26a46d8a8a36dfdfc7bfbd5e319e29e0905))
+
+
+
+
+
 # [0.1.0](https://github.com/tyhopp/prpl/compare/@prpl/core@0.0.70...@prpl/core@0.1.0) (2021-07-17)
 
 
