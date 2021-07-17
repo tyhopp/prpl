@@ -1,4 +1,4 @@
-import { resolve, relative, join } from 'path';
+import { relative, join } from 'path';
 import { getPackages } from '@lerna/project';
 import sourcemaps from 'rollup-plugin-sourcemaps';
 import typescript from 'rollup-plugin-typescript2';
@@ -8,13 +8,9 @@ import autoExternal from 'rollup-plugin-auto-external';
 import { filterPackages } from '@lerna/filter-packages';
 import minimist from 'minimist';
 
-const clientScripts = [
-  resolve('packages/core/src/client/prefetch-worker.ts'),
-  resolve('packages/core/src/client/prefetch.ts'),
-  resolve('packages/core/src/client/router.ts'),
-  resolve('packages/server/src/socket.ts')
-];
-
+/**
+ * Bundle packages.
+ */
 async function bundle(cliArgs) {
   // Prevent rollup warning
   delete cliArgs.scope;
@@ -52,6 +48,7 @@ async function bundle(cliArgs) {
           entryFileNames: '[name].mjs'
         }
       ],
+      external: ['fs/promises'],
       plugins: [
         autoExternal({
           packagePath: join(basePath, 'package.json')
@@ -60,29 +57,6 @@ async function bundle(cliArgs) {
         nodeResolve(),
         commonjs(),
         typescript()
-      ]
-    });
-  }
-
-  // TODO - Figure out why this runs with each package above
-  // Bundle client scripts
-  for (const clientScript of clientScripts) {
-    config.push({
-      input: clientScript,
-      output: [
-        {
-          file: clientScript.replace('src', 'dist').replace('ts', 'js'),
-          format: 'es'
-        }
-      ],
-      plugins: [
-        typescript({
-          tsconfigOverride: {
-            compilerOptions: {
-              declaration: false
-            }
-          }
-        })
       ]
     });
   }
