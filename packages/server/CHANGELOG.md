@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.0.18](https://github.com/tyhopp/prpl/compare/@prpl/server@0.0.17...@prpl/server@0.0.18) (2021-07-24)
+
+
+### Bug Fixes
+
+* **server:** File watch handlers ([2aae801](https://github.com/tyhopp/prpl/commit/2aae801bbd7dd5c77e5ebb01ac547b26566c49c1))
+
+
+
+
+
 ## [0.0.17](https://github.com/tyhopp/prpl/compare/@prpl/server@0.0.16...@prpl/server@0.0.17) (2021-07-17)
 
 
