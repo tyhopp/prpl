@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/tyhopp/prpl/compare/@prpl/core@0.1.3...@prpl/core@0.1.4) (2021-07-24)
+
+
+### Bug Fixes
+
+* **core:** Optional interpolate arg type ([885927f](https://github.com/tyhopp/prpl/commit/885927f232ae995fa4e9717ff3ca96c521baa15c))
+
+
+
+
+
 ## [0.1.3](https://github.com/tyhopp/prpl/compare/@prpl/core@0.1.2...@prpl/core@0.1.3) (2021-07-24)
 
 **Note:** Version bump only for package @prpl/core
