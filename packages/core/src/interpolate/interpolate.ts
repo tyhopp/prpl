@@ -24,7 +24,7 @@ const PRPLClientScripts: PRPLClientScript[] = [
 /**
  * Initialize recursive interpolation.
  */
-async function interpolate(args: { options?: PRPLInterpolateOptions }): Promise<PRPLCacheManager['cache']> {
+async function interpolate(args?: { options?: PRPLInterpolateOptions }): Promise<PRPLCacheManager['cache']> {
   const { options = {} } = args || {};
 
   // Make sure dist exists
