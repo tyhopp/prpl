@@ -6,6 +6,7 @@
   "scripts": {
     "bootstrap": "lerna bootstrap",
     "clear": "rm -rf ./packages/*/dist",
+    "dev": "npx rollup -w -c rollup-package.config.js --scope @prpl/$PACKAGE",
     "build:changed": "npm run clear && lerna changed | while read package; do npx rollup -c rollup-package.config.js --scope $package || exit 1; done && npx rollup -c rollup-client.config.js",
     "build:all": "npm run clear && for dir in packages/*; do package=${dir#'packages/'}; if [[ $package = create-prpl ]]; then rollup -c rollup-package.config.js --scope $package; else rollup -c rollup-package.config.js --scope @prpl/$package; fi || exit 1; done && npx rollup -c rollup-client.config.js",
     "release:changed": "npm run build:changed && lerna publish",

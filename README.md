@@ -6,7 +6,7 @@ HTML-based static site generator implementing the [PRPL pattern](https://web.dev
 
 - No JavaScript required
 - No bundlers or config files
-- No underlying framework (e.g. React, Vue, Angular)
+- No underlying framework (e.g., React, Vue, Angular)
 - Standards based
 - Very, very fast
 
@@ -23,7 +23,9 @@ Given this HTML file,
 ```html
 <!DOCTYPE html>
 <prpl type="page" src="content/notes">
-  <head></head>
+  <head>
+    <title>[title]</title>
+  </head>
   <body>
     <main>
       <h1>[title]</h1>
@@ -51,7 +53,9 @@ the output is:
 
 ```html
 <!DOCTYPE html>
-<head></head>
+<head>
+  <title>Hello World!</title>
+</head>
 <body>
   <main>
     <h1>Hello World!</h1>
