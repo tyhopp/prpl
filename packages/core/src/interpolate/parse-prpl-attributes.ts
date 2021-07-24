@@ -1,18 +1,12 @@
 import { PRPLAttributes } from '../types/prpl.js';
 
-interface ParsePRPLAttributesArgs {
-  html: string;
-}
-
 /**
  * Parse attributes from a <prpl> tag.
  */
-async function parsePRPLAttributes(
-  args: ParsePRPLAttributesArgs
-): Promise<PRPLAttributes[]> {
+async function parsePRPLAttributes(args: { html: string }): Promise<PRPLAttributes[]> {
   const { html } = args || {};
 
-  const prplAttrs = [...html?.matchAll(/<prpl(.*?)>/gs)]
+  return [...html?.matchAll(/<prpl(.*?)>/gs)]
     .map((attrs) => attrs?.[1]?.trim())
     .reduce((attrsCollection, attrs) => {
       attrsCollection?.push({
@@ -30,8 +24,6 @@ async function parsePRPLAttributes(
 
       return attrsCollection;
     }, []);
-
-  return prplAttrs;
 }
 
 export { parsePRPLAttributes };

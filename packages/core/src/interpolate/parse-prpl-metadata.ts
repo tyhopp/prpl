@@ -1,23 +1,19 @@
 import { PRPLMetadata } from '../types/prpl.js';
 
-interface ParsePRPLMetadataArgs {
-  src: string;
-  srcRelativeFilePath: string;
-}
-
 /**
  * Parse PRPL metadata at the top of content files.
  */
-async function parsePRPLMetadata(
-  args: ParsePRPLMetadataArgs
-): Promise<PRPLMetadata> {
+async function parsePRPLMetadata(args: {
+  src: string;
+  srcRelativeFilePath: string;
+}): Promise<PRPLMetadata> {
   const { src, srcRelativeFilePath } = args || {};
 
   let metadata;
   let body;
 
   try {
-    const metadataString = /<\!--(.*?)-->/s
+    const metadataString = /<!--(.*?)-->/s
       ?.exec(src)?.[1]
       ?.replace(/\n$/s, '');
     const metadataArray = metadataString?.split(/\n(.*?): /m)?.slice(1);

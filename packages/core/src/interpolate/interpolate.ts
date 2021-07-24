@@ -21,16 +21,10 @@ const PRPLClientScripts: PRPLClientScript[] = [
   PRPLClientScript.router
 ];
 
-interface InterpolateArgs {
-  options?: PRPLInterpolateOptions;
-}
-
 /**
  * Initialize recursive interpolation.
  */
-async function interpolate(
-  args: InterpolateArgs
-): Promise<PRPLCacheManager['cache']> {
+async function interpolate(args: { options?: PRPLInterpolateOptions }): Promise<PRPLCacheManager['cache']> {
   const { options = {} } = args || {};
 
   // Make sure dist exists
@@ -75,7 +69,7 @@ async function interpolate(
           }
           break;
         case 'directory':
-          walkSourceTree(items?.[i]?.children);
+          await walkSourceTree(items?.[i]?.children);
           break;
       }
     }
