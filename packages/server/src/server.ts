@@ -11,6 +11,7 @@ import {
   generateFileSystemTree,
   PRPLFileSystemTree,
   PRPLSourceFileExtension,
+  ensureDir,
   exists,
   cwd,
   log
@@ -108,7 +109,7 @@ async function server(): Promise<void> {
     }
   );
 
-  open('http://localhost:8000');
+  await open('http://localhost:8000');
 
   log.info('Server listening at http://localhost:8000');
 }
@@ -155,20 +156,31 @@ async function createOrUpdateFile(
   event: string
 ): Promise<void> {
   const item: PRPLFileSystemTree = await generateFileSystemTree({
-    entityPath: changedFilePath
+    entityPath: changedFilePath,
+    readFileRegExp: new RegExp(PRPLSourceFileExtension.html)
   });
+
+  await ensureDir(item?.targetDir);
 
   try {
     if (item?.extension === PRPLSourceFileExtension.html) {
       await interpolateHTML({ srcTree: item });
+      log.info(
+        `${event === 'change' ? 'Updated' : 'Created'} ${
+          item?.srcRelativeFilePath
+        }`
+      );
       return;
     }
+
     await copyFile(item?.path, item?.targetFilePath);
+
     ws?.send(
       item?.srcRelativeFilePath === '/index.html'
         ? '/'
         : item?.srcRelativeFilePath
     );
+
     log.info(
       `${event === 'change' ? 'Updated' : 'Created'} ${
         item?.srcRelativeFilePath
@@ -193,7 +205,7 @@ async function removeFile(removedFilePath: string) {
   });
 
   try {
-    if (await exists(item?.targetFilePath)) {
+    if (item?.targetFilePath && await exists(item?.targetFilePath)) {
       await rm(item?.targetFilePath);
       log.info(`Removed ${item?.srcRelativeFilePath}`);
     }
