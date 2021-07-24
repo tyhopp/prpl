@@ -1,30 +1,28 @@
 import { writeFile } from 'fs/promises';
 import { generateOrRetrieveFileSystemTree } from '../lib/generate-or-retrieve-fs-tree.js';
-import { parsePRPLMetadata } from './parse-prpl-metadata.js';
-import { transformMarkdown } from './transform-markdown.js';
-import { interpolateList } from './interpolate-list.js';
+import { log } from '../lib/log.js';
 import {
-  PRPLFileSystemTree,
-  PRPLContentFileExtension,
   PRPLAttributes,
   PRPLCachePartitionKey,
+  PRPLContentFileExtension,
+  PRPLFileSystemTree,
   PRPLFileSystemTreeEntity,
-  PRPLSourceFileExtension,
-  PRPLInterpolateOptions
+  PRPLInterpolateOptions,
+  PRPLSourceFileExtension
 } from '../types/prpl.js';
-import { log } from '../lib/log.js';
-
-interface InterpolatePageArgs {
-  srcTree: PRPLFileSystemTree;
-  contentDir: string;
-  attrs: PRPLAttributes[];
-  options?: PRPLInterpolateOptions;
-}
+import { interpolateList } from './interpolate-list.js';
+import { parsePRPLMetadata } from './parse-prpl-metadata.js';
+import { transformMarkdown } from './transform-markdown.js';
 
 /**
  * Create new pages using the source file template and content files.
  */
-async function interpolatePage(args: InterpolatePageArgs): Promise<void> {
+async function interpolatePage(args: {
+  srcTree: PRPLFileSystemTree;
+  contentDir: string;
+  attrs: PRPLAttributes[];
+  options?: PRPLInterpolateOptions;
+}): Promise<void> {
   const { srcTree, contentDir, attrs = [], options = {} } = args || {};
 
   // Generate or retrieve content tree
@@ -44,13 +42,12 @@ async function interpolatePage(args: InterpolatePageArgs): Promise<void> {
   let listFragmentMap: Record<string, string> = {};
 
   for (let a = 0; a < listAttrs?.length; a++) {
-    const listFragment = await interpolateList({
+    listFragmentMap[listAttrs?.[a]?.raw] = await interpolateList({
       srcTree,
       contentDir,
       attrs: listAttrs?.[a],
       options
     });
-    listFragmentMap[listAttrs?.[a]?.raw] = listFragment;
   }
 
   // Create pages
@@ -112,11 +109,8 @@ async function interpolatePage(args: InterpolatePageArgs): Promise<void> {
       page.src = page?.src?.replace(listRegex, listFragmentMap?.[rawListAttrs]);
     }
 
-    // Isolate <prpl> page tag inner HTML fragment
-    const pageFragment = page?.src?.match(/(<prpl.*?>)(.*?)<\/prpl>/s)?.[2];
-
     // Interpolate the inner HTML fragment
-    let pageFragmentInstance = pageFragment;
+    let pageFragmentInstance = page?.src?.match(/(<prpl.*?>)(.*?)<\/prpl>/s)?.[2];
 
     for (const key in metadata) {
       const metadataKeyRegex =

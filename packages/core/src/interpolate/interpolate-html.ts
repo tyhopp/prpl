@@ -10,15 +10,13 @@ import {
 import { interpolatePage } from './interpolate-page.js';
 import { interpolateList } from './interpolate-list.js';
 
-interface InterpolateHTMLArgs {
-  srcTree: PRPLFileSystemTree;
-  options?: PRPLInterpolateOptions;
-}
-
 /**
  * Interpolate an HTML file.
  */
-async function interpolateHTML(args: InterpolateHTMLArgs): Promise<void> {
+async function interpolateHTML(args: {
+  srcTree: PRPLFileSystemTree;
+  options?: PRPLInterpolateOptions;
+}): Promise<void> {
   const { srcTree, options = {} } = args || {};
 
   // Add prefetch and router script tags

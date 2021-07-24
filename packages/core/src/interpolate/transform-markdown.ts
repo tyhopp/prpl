@@ -3,25 +3,22 @@ import { PRPLInterpolateOptions } from '../types/prpl';
 
 // Override code block rendering
 const renderer = {
-  code(code, infostring) {
-    return `<pre class="language-${infostring}"><code class="language-${infostring}">${code}</code></pre>`;
+  code(code: string, lang: string) {
+    return `<pre class="language-${lang}"><code class="language-${lang}">${code}</code></pre>`;
   }
 };
 
 marked.use({ renderer });
 
-interface TransformMarkdownArgs {
-  markdown: string;
-  options?: PRPLInterpolateOptions;
-}
-
 /**
  * Transform content markdown to HTML.
  */
-async function transformMarkdown(args: TransformMarkdownArgs): Promise<string> {
+async function transformMarkdown(args: {
+  markdown: string;
+  options?: PRPLInterpolateOptions;
+}): Promise<string> {
   const { markdown, options = {} } = args || {};
-  const html = marked(markdown, options?.markedOptions);
-  return html;
+  return marked(markdown, options?.markedOptions);
 }
 
 export { transformMarkdown };
