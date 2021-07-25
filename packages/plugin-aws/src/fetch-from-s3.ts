@@ -1,6 +1,6 @@
 import { ensureDir, log } from '@prpl/core';
 import { writeFile } from 'fs/promises';
-import { resolve, dirname } from 'path';
+import { resolve, parse } from 'path';
 import { initS3 } from './lib/init-s3.js';
 import { PRPLPluginAWSKeys } from './index.js';
 
@@ -27,8 +27,8 @@ async function fetchFromS3(keys: PRPLPluginAWSKeys, targetDir?: string): Promise
       const getObjectResponse = await s3.getObject({ Bucket: AWSContentBucket, Key }).promise();
       const content = getObjectResponse.Body.toString();
 
-      const targetFilePath = resolve(`/${targetDir || 'content'}/${Key}.md`);
-      await ensureDir(dirname(targetFilePath));
+      const targetFilePath = resolve(`${targetDir || 'content'}/${Key}.md`);
+      await ensureDir(parse(targetFilePath)?.dir);
       await writeFile(targetFilePath, content);
     }
   } catch (error) {
