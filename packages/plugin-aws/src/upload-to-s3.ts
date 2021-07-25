@@ -34,6 +34,7 @@ async function uploadToS3(keys: PRPLPluginAWSKeys, files: PRPLPluginAWSUploadFil
       `Failed to upload content. Error:`,
       error?.message
     );
+    return;
   }
 
   log.info('Uploaded content');
