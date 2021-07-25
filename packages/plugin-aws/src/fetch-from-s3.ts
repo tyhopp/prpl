@@ -1,0 +1,47 @@
+import { ensureDir, log } from '@prpl/core';
+import { writeFile } from 'fs/promises';
+import { resolve } from 'path';
+import { initS3 } from './lib/init-s3.js';
+import { PRPLPluginAWSKeys } from './index.js';
+
+/**
+ * Fetch files from an S3 bucket and write to the local file system.
+ * @param {PRPLPluginAWSKeys} keys
+ * @param {string} targetDir
+ * @returns {Promise<void>}
+ */
+async function fetchFromS3(keys: PRPLPluginAWSKeys, targetDir?: string): Promise<void> {
+  const { AWSContentBucket } = keys || {};
+
+  const s3 = await initS3(keys);
+
+  try {
+    // Ensure target directory exists
+    await ensureDir(resolve(targetDir || 'content'));
+
+    // Get all object metadata in bucket
+    const getObjectsResponse = await s3.listObjectsV2({ Bucket: AWSContentBucket }).promise();
+    const items = getObjectsResponse.Contents || [];
+
+    // Get each object and write to local file system
+    for (const item of items) {
+      const { Key } = item || {};
+
+      const getObjectResponse = await s3.getObject({ Bucket: AWSContentBucket, Key }).promise();
+      const content = getObjectResponse.Body.toString();
+
+      await writeFile(resolve(`/${targetDir || 'content'}/${Key}.md`), content);
+    }
+  } catch (error) {
+    log.error(
+      `Failed to fetch remote content. Error:`,
+      error?.message
+    );
+  }
+
+  log.info('Fetched remote content');
+}
+
+export {
+  fetchFromS3
+}
