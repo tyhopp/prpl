@@ -39,5 +39,6 @@
     "faye-websocket": "^0.11.4",
     "open": "^8.2.0",
     "serve-handler": "^6.1.3"
-  }
+  },
+  "gitHead": "b9ea4fa6f4663a853fe6d764c75938bcacf239bb"
 }
