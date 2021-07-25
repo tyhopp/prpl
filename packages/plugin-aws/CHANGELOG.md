@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.1...@prpl/plugin-aws@0.1.2) (2021-07-25)
+
+
+### Bug Fixes
+
+* **plugin-aws:** Ensure dir slash ([c43ba59](https://github.com/tyhopp/prpl/commit/c43ba59151266927f9d9aa3301d0698b8a3494c2))
+
+
+
+
+
 ## [0.1.1](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.0...@prpl/plugin-aws@0.1.1) (2021-07-25)
 
 
