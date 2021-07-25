@@ -28,7 +28,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@prpl/core": ">=0.0.69"
+    "@prpl/core": ">=0.1.6"
   },
   "gitHead": "b9ea4fa6f4663a853fe6d764c75938bcacf239bb"
 }
