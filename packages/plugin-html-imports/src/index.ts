@@ -100,7 +100,7 @@ async function resolveHTMLImports(): Promise<PRPLCacheManager['cache']> {
           }
           break;
         case 'directory':
-          walkDistTree(items?.[i]?.children);
+          await walkDistTree(items?.[i]?.children);
           break;
       }
     }
