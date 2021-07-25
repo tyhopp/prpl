@@ -4,7 +4,7 @@
     "packages/*"
   ],
   "scripts": {
-    "bootstrap": "lerna bootstrap",
+    "bootstrap": "lerna bootstrap && lerna exec npm install",
     "clear": "rm -rf ./packages/*/dist",
     "dev": "npx rollup -w -c rollup-package.config.js --scope @prpl/$PACKAGE",
     "build:changed": "npm run clear && lerna changed | while read package; do npx rollup -c rollup-package.config.js --scope $package || exit 1; done && npx rollup -c rollup-client.config.js",
