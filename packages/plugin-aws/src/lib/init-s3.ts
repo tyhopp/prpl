@@ -1,6 +1,5 @@
 import { log } from '@prpl/core';
-import S3 from 'aws-sdk/clients/s3.js';
-import AWS from 'aws-sdk/global.js';
+import AWS from 'aws-sdk';
 import { PRPLPluginAWSKeys } from '../index.js';
 
 /**
@@ -8,7 +7,7 @@ import { PRPLPluginAWSKeys } from '../index.js';
  * @param {PRPLPluginAWSKeys} keys
  * @returns {Promise<S3>}
  */
-async function initS3(keys: PRPLPluginAWSKeys): Promise<S3> {
+async function initS3(keys: PRPLPluginAWSKeys): Promise<AWS.S3> {
   const { AWSAccessKey, AWSSecretAccessKey, AWSContentBucketRegion } = keys || {};
 
   let s3;
@@ -22,7 +21,7 @@ async function initS3(keys: PRPLPluginAWSKeys): Promise<S3> {
     });
 
     // Initialize S3
-    s3 = new S3();
+    s3 = new AWS.S3();
   } catch (error) {
     log.error(
       `Failed to initialize S3. Error:`,

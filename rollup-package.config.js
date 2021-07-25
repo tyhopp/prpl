@@ -5,6 +5,7 @@ import typescript from 'rollup-plugin-typescript2';
 import nodeResolve from '@rollup/plugin-node-resolve';
 import commonjs from '@rollup/plugin-commonjs';
 import autoExternal from 'rollup-plugin-auto-external';
+import analyze from 'rollup-plugin-analyzer';
 import { filterPackages } from '@lerna/filter-packages';
 import minimist from 'minimist';
 
@@ -24,6 +25,9 @@ async function bundle(cliArgs) {
   // Use package scope so packages are only passed through rollup once
   const { scope, ignore } = minimist(process.argv.slice(2));
   const packages = filterPackages(rawPackages, scope, ignore, false);
+
+  // Track iterations over output files so the analyze plugin only runs once
+  let analyzePluginIterations = 0;
 
   for (const pkg of packages) {
     const basePath = relative(__dirname, pkg.location);
@@ -56,7 +60,16 @@ async function bundle(cliArgs) {
         sourcemaps(),
         nodeResolve(),
         commonjs(),
-        typescript()
+        typescript(),
+        analyze({
+          summaryOnly: true,
+          onAnalysis: () => {
+            if (analyzePluginIterations > 0) {
+              throw '';
+            }
+            analyzePluginIterations++;
+          }
+        })
       ]
     });
   }

@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import typescript from 'rollup-plugin-typescript2';
+import analyze from 'rollup-plugin-analyzer';
 
 const clientScripts = [
   resolve('packages/core/src/client/prefetch-worker.ts'),
@@ -30,6 +31,9 @@ async function bundle() {
               declaration: false
             }
           }
+        }),
+        analyze({
+          summaryOnly: true,
         })
       ]
     });

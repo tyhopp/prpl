@@ -14,17 +14,18 @@
     "reset": "npm run clear && rm -rf ./**/.cache && rm -rf ./**/node_modules && rm -rf ./package.lock && npm run bootstrap"
   },
   "devDependencies": {
+    "@lerna/filter-packages": "^4.0.0",
     "@lerna/project": "^4.0.0",
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@types/node": "^16.0.0",
     "lerna": "^4.0.0",
+    "minimist": "^1.2.5",
     "rollup": "^2.52.7",
+    "rollup-plugin-analyzer": "^4.0.0",
     "rollup-plugin-auto-external": "^2.0.0",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.30.0",
-    "typescript": "^4.3.5",
-    "minimist": "^1.2.5",
-    "@lerna/filter-packages": "^4.0.0"
+    "typescript": "^4.3.5"
   }
 }
