@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <prpl type="page" src="content/docs">
+    <head>
+      <meta charset="utf-8" />
+      <base href="/" />
+      <title>[title]</title>
+      <meta name="title" content="[title]" />
+      <meta name="description" content="[description]" />
+      <meta
+        name="keywords"
+        content="HTML, static site generator, SSG, PRPL, PRPL pattern"
+      />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="[title]" />
+      <meta property="og:description" content="[description]." />
+      <meta property="og:url" content="https://prpl.dev[slug]" />
+
+      <!-- TODO - Open graph -->
+      <meta property="og:image" content="" />
+      <meta property="og:image:width" content="2400" />
+      <meta property="og:image:height" content="1200" />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:creator" content="@doestyhopp" />
+      <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+      <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
+      />
+
+      <!-- TODO - Favicons -->
+      <link rel="apple-touch-icon-precomposed" sizes="180x180" href="" />
+      <link rel="apple-touch-icon" sizes="180x180" href="" />
+      <link rel="icon" type="image/png" sizes="48x48" href="" />
+      <link rel="icon" type="image/png" sizes="32x32" href="" />
+      <link rel="icon" type="image/png" sizes="16x16" href="" />
+      <link rel="icon" href="" />
+
+      <link href="styles/main.css" rel="stylesheet" />
+    </head>
+    <body>
+      <main class="doc">
+        <ul>
+          <prpl type="list" src="content/docs">
+            <li>
+              <a href="[slug]">[title]</a>
+            </li>
+          </prpl>
+        </ul>
+        <div>[body]</div>
+      </main>
+      <footer>
+        <p>⏱ Rendered in <span data-stats="render">?</span> milliseconds</p>
+        <p>
+          💜 Built with
+          <a
+            href="https://github.com/tyhopp/prpl"
+            target="_blank"
+            rel="noopener noreferrer"
+            >PRPL</a
+          >
+        </p>
+        <p>🚫 No cookies</p>
+      </footer>
+      <script defer>
+        document.body.setAttribute('data-path', window.location.pathname);
+        window.addEventListener('popstate', () => {
+          document.body.setAttribute('data-path', window.location.pathname);
+        });
+        window.addEventListener('load', () => {
+          document.querySelector(
+            '[data-stats="render"]'
+          ).textContent = Math.round(
+            performance.timing.domComplete - performance.timing.domLoading
+          );
+        });
+        const performanceObserver = new PerformanceObserver((entries) => {
+          const renderStart = entries.getEntriesByName('prpl-render-start');
+          const renderEnd = entries.getEntriesByName('prpl-render-end');
+          if (renderStart.length && renderEnd.length) {
+            document.querySelector(
+              '[data-stats="render"]'
+            ).textContent = Math.round(
+              renderEnd[0].startTime - renderStart[0].startTime
+            );
+            performance.clearMarks();
+          }
+        });
+        performanceObserver.observe({ entryTypes: ['mark'] });
+      </script>
+    </body>
+  </prpl>
+</html>

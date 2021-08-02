@@ -1,0 +1,17 @@
+.index {
+  display: block;
+  margin: 0 auto;
+  padding: 2em 1em;
+  max-width: 500px;
+}
+
+@media (max-width: 350px) {
+  .index {
+    padding: 0 0.5em;
+  }
+}
+
+.index-title {
+  text-align: center;
+  margin: 0 0 1em 0;
+}
