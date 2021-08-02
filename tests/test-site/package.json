@@ -1,0 +1,15 @@
+{
+  "name": "prpl-starter-commonjs",
+  "version": "0.0.1",
+  "description": "Starter site using PRPL in a CommonJS module",
+  "scripts": {
+    "dev": "rm -rf dist && node scripts/build.js && prpl-server",
+    "build": "rm -rf dist && node scripts/build.js"
+  },
+  "dependencies": {
+    "@prpl/core": "^0.1.7"
+  },
+  "devDependencies": {
+    "@prpl/server": "^0.0.23"
+  }
+}
