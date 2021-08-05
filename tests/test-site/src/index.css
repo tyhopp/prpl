@@ -1,9 +1,13 @@
 .index {
   margin: 0 auto;
-  text-align: center;
   width: 500px;
 }
 
-p {
-  margin: 2em;
+h1 {
+  text-align: center;
+}
+
+.routes-list {
+  display: flex;
+  justify-content: center;
 }
