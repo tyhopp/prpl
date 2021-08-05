@@ -38,8 +38,7 @@ async function interpolateHTML(args: {
   const firstAttr = attrs?.[0];
 
   // Check if has PRPL page tag, if a PPRL page tag exists it should always be found first
-  const firstPRPLAttrIsPage: boolean =
-    firstAttr?.parsed?.[PRPLTagAttribute?.type] === PRPLTag.page;
+  const firstPRPLAttrIsPage: boolean = firstAttr?.parsed?.[PRPLTagAttribute?.type] === PRPLTag.page;
 
   // If there is not a PRPL page tag, interpolate any list tags and write file
   if (firstAttr && !firstPRPLAttrIsPage) {
@@ -55,10 +54,7 @@ async function interpolateHTML(args: {
         attrs: attrs?.[a],
         options
       });
-      const listRegex: RegExp = new RegExp(
-        `<prpl\\s+${attrs?.[a]?.raw}\\s?>.*<\/prpl>`,
-        's'
-      );
+      const listRegex: RegExp = new RegExp(`<prpl\\s+${attrs?.[a]?.raw}\\s?>.*<\/prpl>`, 's');
       page.src = page?.src?.replace(listRegex, listFragment);
     }
 

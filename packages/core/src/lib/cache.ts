@@ -14,10 +14,7 @@ const PRPLCache: PRPLCacheManager = {
     try {
       PRPLCache.cache[partitionKey] = {};
     } catch (error) {
-      log.error(
-        `Failed to define a new partition '${partitionKey}'. Error:`,
-        error?.message
-      );
+      log.error(`Failed to define a new partition '${partitionKey}'. Error:`, error?.message);
     }
   },
   async get(partitionKey, dirPath) {

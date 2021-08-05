@@ -8,7 +8,10 @@ import { PRPLPluginAWSKeys, PRPLPluginAWSUploadFile } from './index.js';
  * @param {PRPLPluginAWSUploadFile[]} files
  * @returns {Promise<void>}
  */
-async function uploadToS3(keys: PRPLPluginAWSKeys, files: PRPLPluginAWSUploadFile[]): Promise<void> {
+async function uploadToS3(
+  keys: PRPLPluginAWSKeys,
+  files: PRPLPluginAWSUploadFile[]
+): Promise<void> {
   const { AWSContentBucket } = keys || {};
 
   const s3 = await initS3(keys);
@@ -25,21 +28,16 @@ async function uploadToS3(keys: PRPLPluginAWSKeys, files: PRPLPluginAWSUploadFil
         .putObject({
           Bucket: AWSContentBucket,
           Key: slug,
-          Body: body,
+          Body: body
         })
         .promise();
     }
   } catch (error) {
-    log.error(
-      `Failed to upload content. Error:`,
-      error?.message
-    );
+    log.error(`Failed to upload content. Error:`, error?.message);
     return;
   }
 
   log.info('Uploaded content');
 }
 
-export {
-  uploadToS3
-}
+export { uploadToS3 };

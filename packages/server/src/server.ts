@@ -28,25 +28,16 @@ async function server(): Promise<void> {
   const server = http.createServer();
 
   // Inject socket on index page
-  server.on(
-    'connection',
-    async (): Promise<void> => {
-      await injectSocketOptionally('./dist/index.html');
-    }
-  );
+  server.on('connection', async (): Promise<void> => {
+    await injectSocketOptionally('./dist/index.html');
+  });
 
   // Handle requests
   server.on(
     'request',
-    async (
-      request: IncomingMessage,
-      response: ServerResponse
-    ): Promise<void> => {
+    async (request: IncomingMessage, response: ServerResponse): Promise<void> => {
       if (request?.headers?.accept?.includes('text/html')) {
-        const url =
-          request?.url === '/'
-            ? './dist/index.html'
-            : `./dist${request.url}.html`;
+        const url = request?.url === '/' ? './dist/index.html' : `./dist${request.url}.html`;
         await injectSocketOptionally(url);
       }
 
@@ -63,11 +54,7 @@ async function server(): Promise<void> {
   // Upgrade connection to websocket
   server.on(
     'upgrade',
-    async (
-      request: IncomingMessage,
-      socket: Socket,
-      head: Buffer
-    ): Promise<void> => {
+    async (request: IncomingMessage, socket: Socket, head: Buffer): Promise<void> => {
       ws = new WebSocket(request, socket, head);
     }
   );
@@ -92,22 +79,16 @@ async function server(): Promise<void> {
     });
 
   // Clean up pages injected with socket
-  process.on(
-    'SIGINT',
-    async (): Promise<void> => {
-      for (let i = 0; i < socketInjectedPages?.length; i++) {
-        const pageBuffer = await readFile(resolve(socketInjectedPages?.[i]));
-        const injectedPage = pageBuffer?.toString();
-        const restoredPage = injectedPage?.replace(
-          /<script dev>.*<\/script>/s,
-          ''
-        );
-        await writeFile(socketInjectedPages?.[i], restoredPage);
-      }
-      socketInjectedPages = [];
-      process.exit(0);
+  process.on('SIGINT', async (): Promise<void> => {
+    for (let i = 0; i < socketInjectedPages?.length; i++) {
+      const pageBuffer = await readFile(resolve(socketInjectedPages?.[i]));
+      const injectedPage = pageBuffer?.toString();
+      const restoredPage = injectedPage?.replace(/<script dev>.*<\/script>/s, '');
+      await writeFile(socketInjectedPages?.[i], restoredPage);
     }
-  );
+    socketInjectedPages = [];
+    process.exit(0);
+  });
 
   await open('http://localhost:8000');
 
@@ -130,9 +111,7 @@ async function injectSocketOptionally(filePath: string): Promise<void> {
     return;
   }
 
-  const socketBuffer = await readFile(
-    resolve(await cwd(import.meta), 'socket.js')
-  );
+  const socketBuffer = await readFile(resolve(await cwd(import.meta), 'socket.js'));
   const socket = socketBuffer?.toString();
 
   page = page?.replace(
@@ -151,10 +130,7 @@ async function injectSocketOptionally(filePath: string): Promise<void> {
 /**
  * Helper function to create a new or update an existing file in dist.
  */
-async function createOrUpdateFile(
-  changedFilePath: string,
-  event: string
-): Promise<void> {
+async function createOrUpdateFile(changedFilePath: string, event: string): Promise<void> {
   const item: PRPLFileSystemTree = await generateFileSystemTree({
     entityPath: changedFilePath,
     readFileRegExp: new RegExp(PRPLSourceFileExtension.html)
@@ -165,27 +141,15 @@ async function createOrUpdateFile(
   try {
     if (item?.extension === PRPLSourceFileExtension.html) {
       await interpolateHTML({ srcTree: item });
-      log.info(
-        `${event === 'change' ? 'Updated' : 'Created'} ${
-          item?.srcRelativeFilePath
-        }`
-      );
+      log.info(`${event === 'change' ? 'Updated' : 'Created'} ${item?.srcRelativeFilePath}`);
       return;
     }
 
     await copyFile(item?.path, item?.targetFilePath);
 
-    ws?.send(
-      item?.srcRelativeFilePath === '/index.html'
-        ? '/'
-        : item?.srcRelativeFilePath
-    );
+    ws?.send(item?.srcRelativeFilePath === '/index.html' ? '/' : item?.srcRelativeFilePath);
 
-    log.info(
-      `${event === 'change' ? 'Updated' : 'Created'} ${
-        item?.srcRelativeFilePath
-      }`
-    );
+    log.info(`${event === 'change' ? 'Updated' : 'Created'} ${item?.srcRelativeFilePath}`);
   } catch (error) {
     log.error(
       `Server failed to ${event === 'change' ? 'update' : 'create'} '${
@@ -205,7 +169,7 @@ async function removeFile(removedFilePath: string) {
   });
 
   try {
-    if (item?.targetFilePath && await exists(item?.targetFilePath)) {
+    if (item?.targetFilePath && (await exists(item?.targetFilePath))) {
       await rm(item?.targetFilePath);
       log.info(`Removed ${item?.srcRelativeFilePath}`);
     }

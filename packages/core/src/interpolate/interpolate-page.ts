@@ -62,10 +62,7 @@ async function interpolatePage(args: {
       ...srcTree,
       name: contentFiles?.[p]?.name,
       extension: contentFiles?.[p]?.extension,
-      targetFilePath: srcTree?.targetFilePath?.replace(
-        srcTree?.name,
-        contentFiles?.[p]?.name
-      )
+      targetFilePath: srcTree?.targetFilePath?.replace(srcTree?.name, contentFiles?.[p]?.name)
     };
 
     let metadata;
@@ -102,10 +99,7 @@ async function interpolatePage(args: {
 
     // Replace prior created list fragments
     for (const rawListAttrs in listFragmentMap) {
-      const listRegex: RegExp = new RegExp(
-        `<prpl\\s+${rawListAttrs}\\s?>.*?<\/prpl>`,
-        's'
-      );
+      const listRegex: RegExp = new RegExp(`<prpl\\s+${rawListAttrs}\\s?>.*?<\/prpl>`, 's');
       page.src = page?.src?.replace(listRegex, listFragmentMap?.[rawListAttrs]);
     }
 
@@ -117,17 +111,11 @@ async function interpolatePage(args: {
         typeof options?.templateRegex === 'function'
           ? options?.templateRegex(key)
           : new RegExp(`\\[${key}\\]`, 'g');
-      pageFragmentInstance = pageFragmentInstance?.replace(
-        metadataKeyRegex,
-        metadata?.[key]
-      );
+      pageFragmentInstance = pageFragmentInstance?.replace(metadataKeyRegex, metadata?.[key]);
     }
 
     // Write page to dist
-    const interpolatedPage = page?.src.replace(
-      /<prpl.*<\/prpl>/s,
-      pageFragmentInstance
-    );
+    const interpolatedPage = page?.src.replace(/<prpl.*<\/prpl>/s, pageFragmentInstance);
 
     await writeFile(page?.targetFilePath, interpolatedPage);
   }

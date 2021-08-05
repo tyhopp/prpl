@@ -1,3 +1,5 @@
+// noinspection JSUnusedGlobalSymbols
+
 import { resolve } from 'path';
 import { readFile, writeFile } from 'fs/promises';
 import {
@@ -31,9 +33,7 @@ async function resolveHTMLImports(): Promise<PRPLCacheManager['cache']> {
     readFileRegExp: new RegExp(PRPLPluginHTMLImportsExtension.html)
   });
 
-  const HTMLImportRegex = new RegExp(
-    /<link\s+rel="import"\s+href="(.*?)"\s?\/>/s
-  );
+  const HTMLImportRegex = new RegExp(/<link\s+rel="import"\s+href="(.*?)"\s?\/>/s);
 
   // Recursively resolve or retrieve cached HTML import fragments
   async function resolveImports(
@@ -57,9 +57,7 @@ async function resolveHTMLImports(): Promise<PRPLCacheManager['cache']> {
     );
 
     if (!fragment) {
-      const fragmentFileBuffer = await readFile(
-        resolve('dist/', firstImport?.[1])
-      );
+      const fragmentFileBuffer = await readFile(resolve('dist/', firstImport?.[1]));
       fragment = fragmentFileBuffer?.toString();
       await PRPLCache?.set(
         PRPLPluginHTMLImportsCachePartitionKey.htmlImport,
@@ -81,10 +79,10 @@ async function resolveHTMLImports(): Promise<PRPLCacheManager['cache']> {
         case 'file':
           try {
             if (items?.[i]?.extension === PRPLPluginHTMLImportsExtension.html) {
-              const {
-                html: resolvedHTMLFile,
-                resolutions
-              } = await resolveImports(items?.[i]?.src, 0);
+              const { html: resolvedHTMLFile, resolutions } = await resolveImports(
+                items?.[i]?.src,
+                0
+              );
 
               if (!resolutions) {
                 break;

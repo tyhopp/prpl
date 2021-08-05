@@ -11,15 +11,12 @@ async function parsePRPLAttributes(args: { html: string }): Promise<PRPLAttribut
     .reduce((attrsCollection, attrs) => {
       attrsCollection?.push({
         raw: attrs,
-        parsed: [...attrs?.matchAll(/\s*((.*?)="(.*?)")/g)]?.reduce(
-          (acc, curr) => {
-            return {
-              ...acc,
-              [curr?.[2]]: curr?.[3]
-            };
-          },
-          {}
-        )
+        parsed: [...attrs?.matchAll(/\s*((.*?)="(.*?)")/g)]?.reduce((acc, curr) => {
+          return {
+            ...acc,
+            [curr?.[2]]: curr?.[3]
+          };
+        }, {})
       });
 
       return attrsCollection;

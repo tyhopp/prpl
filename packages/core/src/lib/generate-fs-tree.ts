@@ -1,7 +1,7 @@
 import { readFile, stat } from 'fs/promises';
-import { resolve, parse, basename, extname, join } from 'path';
-import { readDirSafe } from './read-dir-safe.js';
+import { basename, extname, join, parse, resolve } from 'path';
 import { PRPLFileSystemTree, PRPLFileSystemTreeEntity } from '../types/prpl.js';
+import { readDirSafe } from './read-dir-safe.js';
 
 export interface PRPLGenerateFileSystemTreeArgs {
   entityPath: string;
@@ -37,10 +37,7 @@ async function generateFileSystemTree(
     const { dir, base: name } = parse(path);
 
     item.srcRelativeDir = dir?.replace(resolve('.'), '');
-    item.srcRelativeFilePath = `${item?.srcRelativeDir?.replace(
-      '/src',
-      ''
-    )}/${name}`;
+    item.srcRelativeFilePath = `${item?.srcRelativeDir?.replace('/src', '')}/${name}`;
 
     item.targetFilePath = path?.replace('src', 'dist');
     item.targetDir = parse(item?.targetFilePath)?.dir;
@@ -49,14 +46,10 @@ async function generateFileSystemTree(
     item.entity = PRPLFileSystemTreeEntity.file;
 
     try {
-      if (
-        typeof readFileRegExp === 'object' &&
-        readFileRegExp?.constructor == RegExp
-      ) {
+      if (typeof readFileRegExp === 'object' && readFileRegExp?.constructor == RegExp) {
         if (readFileRegExp?.test(item?.extension)) {
           const srcBuffer = await readFile(item?.path);
-          const srcString = srcBuffer?.toString();
-          item.src = srcString;
+          item.src = srcBuffer?.toString();
         }
       }
       return item;

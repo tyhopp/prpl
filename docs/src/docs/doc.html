@@ -7,10 +7,7 @@
       <title>[title]</title>
       <meta name="title" content="[title]" />
       <meta name="description" content="[description]" />
-      <meta
-        name="keywords"
-        content="HTML, static site generator, SSG, PRPL, PRPL pattern"
-      />
+      <meta name="keywords" content="HTML, static site generator, SSG, PRPL, PRPL pattern" />
       <meta property="og:type" content="website" />
       <meta property="og:title" content="[title]" />
       <meta property="og:description" content="[description]." />
@@ -23,10 +20,7 @@
       <meta name="twitter:card" content="summary" />
       <meta name="twitter:creator" content="@doestyhopp" />
       <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-      <meta
-        name="viewport"
-        content="width=device-width, initial-scale=1.0, viewport-fit=cover"
-      />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
       <!-- TODO - Favicons -->
       <link rel="apple-touch-icon-precomposed" sizes="180x180" href="" />
@@ -53,10 +47,7 @@
         <p>⏱ Rendered in <span data-stats="render">?</span> milliseconds</p>
         <p>
           💜 Built with
-          <a
-            href="https://github.com/tyhopp/prpl"
-            target="_blank"
-            rel="noopener noreferrer"
+          <a href="https://github.com/tyhopp/prpl" target="_blank" rel="noopener noreferrer"
             >PRPL</a
           >
         </p>
@@ -68,9 +59,7 @@
           document.body.setAttribute('data-path', window.location.pathname);
         });
         window.addEventListener('load', () => {
-          document.querySelector(
-            '[data-stats="render"]'
-          ).textContent = Math.round(
+          document.querySelector('[data-stats="render"]').textContent = Math.round(
             performance.timing.domComplete - performance.timing.domLoading
           );
         });
@@ -78,9 +67,7 @@
           const renderStart = entries.getEntriesByName('prpl-render-start');
           const renderEnd = entries.getEntriesByName('prpl-render-end');
           if (renderStart.length && renderEnd.length) {
-            document.querySelector(
-              '[data-stats="render"]'
-            ).textContent = Math.round(
+            document.querySelector('[data-stats="render"]').textContent = Math.round(
               renderEnd[0].startTime - renderStart[0].startTime
             );
             performance.clearMarks();

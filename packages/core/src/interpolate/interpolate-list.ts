@@ -36,10 +36,7 @@ async function interpolateList(args: {
   const contentFiles = contentTree?.children || [];
 
   // Construct regex with pattern
-  const listRegex: RegExp = new RegExp(
-    `(<prpl\\s+${attrs?.raw}\\s?>)(.*?)<\/prpl>`,
-    's'
-  );
+  const listRegex: RegExp = new RegExp(`(<prpl\\s+${attrs?.raw}\\s?>)(.*?)<\/prpl>`, 's');
 
   // Isolate src prpl template
   const PRPLListTemplate = srcTree?.src?.match(listRegex)?.[2];
@@ -85,10 +82,7 @@ async function interpolateList(args: {
         typeof options?.templateRegex === 'function'
           ? options?.templateRegex(key)
           : new RegExp(`\\[${key}\\]`, 'g');
-      prplTemplateInstance = prplTemplateInstance?.replace(
-        regex,
-        metadata?.[key]
-      );
+      prplTemplateInstance = prplTemplateInstance?.replace(regex, metadata?.[key]);
     }
 
     fragmentList?.push({
@@ -99,9 +93,7 @@ async function interpolateList(args: {
 
   if (PRPLTagAttribute.sortBy in attrs?.parsed) {
     const sort = attrs?.parsed?.[PRPLTagAttribute.sortBy];
-    let direction =
-      attrs?.parsed?.[PRPLTagAttribute.direction] ||
-      PRPLDirectionAttributeValue.asc;
+    let direction = attrs?.parsed?.[PRPLTagAttribute.direction] || PRPLDirectionAttributeValue.asc;
 
     try {
       fragmentList = fragmentList?.sort((first, second) => {
@@ -150,9 +142,7 @@ async function interpolateList(args: {
     }
   }
 
-  return fragmentList
-    ?.map((item) => item?.fragment)
-    .join('');
+  return fragmentList?.map((item) => item?.fragment).join('');
 }
 
 export { interpolateList };

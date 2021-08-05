@@ -32,9 +32,7 @@ if ('WebSocket' in window) {
         // TODO - Dependency tree awareness for atomic replacement
         // Handle CSS
         if (href?.endsWith('.css')) {
-          const styleElements = document?.querySelectorAll(
-            '[rel="stylesheet"]'
-          );
+          const styleElements = document?.querySelectorAll('[rel="stylesheet"]');
           styleElements?.forEach((styleElement) => {
             styleElement?.parentNode?.replaceChild(styleElement, styleElement);
           });
@@ -55,8 +53,7 @@ if ('WebSocket' in window) {
             }
           });
         }
-        relativeHref =
-          relativeHref?.[0] === '/' ? relativeHref?.slice(1) : relativeHref;
+        relativeHref = relativeHref?.[0] === '/' ? relativeHref?.slice(1) : relativeHref;
 
         // TODO - Dependency tree awareness for atomic replacement
         // Handle JS and other resources
@@ -74,11 +71,6 @@ if ('WebSocket' in window) {
           element?.parentNode?.replaceChild(element, element);
         });
       })
-      .catch((error) =>
-        console.warn(
-          `[PRPL] Failed to refresh resource '${href}'. Error:`,
-          error
-        )
-      );
+      .catch((error) => console.warn(`[PRPL] Failed to refresh resource '${href}'. Error:`, error));
   };
 }

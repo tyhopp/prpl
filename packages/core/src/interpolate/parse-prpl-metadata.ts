@@ -13,9 +13,7 @@ async function parsePRPLMetadata(args: {
   let body;
 
   try {
-    const metadataString = /<!--(.*?)-->/s
-      ?.exec(src)?.[1]
-      ?.replace(/\n$/s, '');
+    const metadataString = /<!--(.*?)-->/s?.exec(src)?.[1]?.replace(/\n$/s, '');
     const metadataArray = metadataString?.split(/\n(.*?): /m)?.slice(1);
     metadata = metadataArray?.reduce((acc, curr, index) => {
       if (!(index % 2)) {

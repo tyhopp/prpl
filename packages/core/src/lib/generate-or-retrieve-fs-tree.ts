@@ -1,13 +1,9 @@
-import {
-  generateFileSystemTree,
-  PRPLGenerateFileSystemTreeArgs
-} from './generate-fs-tree.js';
+import { generateFileSystemTree, PRPLGenerateFileSystemTreeArgs } from './generate-fs-tree.js';
 import { PRPLCache } from './cache.js';
 import { log } from './log.js';
 import { PRPLFileSystemTree, PRPLCachePartitionKey } from '../types/prpl.js';
 
-interface PRPLRetrieveOrGenerateFileSystemTreeArgs
-  extends PRPLGenerateFileSystemTreeArgs {
+interface PRPLRetrieveOrGenerateFileSystemTreeArgs extends PRPLGenerateFileSystemTreeArgs {
   partitionKey: PRPLCachePartitionKey;
 }
 
@@ -32,10 +28,7 @@ async function generateOrRetrieveFileSystemTree(
 
     return fileSystemTree;
   } catch (error) {
-    log.error(
-      `Failed generate file system tree from '${entityPath}'. Error:`,
-      error?.message
-    );
+    log.error(`Failed generate file system tree from '${entityPath}'. Error:`, error?.message);
   }
 }
 

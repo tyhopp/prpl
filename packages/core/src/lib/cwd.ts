@@ -10,10 +10,7 @@ async function cwd(importMeta: ImportMeta): Promise<string> {
     const { base } = parse(pathname);
     return pathname?.replace(base, '');
   } catch (error) {
-    log.error(
-      'Failed to get current working directory. Error:',
-      error?.message
-    );
+    log.error('Failed to get current working directory. Error:', error?.message);
   }
 }
 

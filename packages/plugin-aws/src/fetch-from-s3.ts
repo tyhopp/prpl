@@ -32,16 +32,11 @@ async function fetchFromS3(keys: PRPLPluginAWSKeys, targetDir?: string): Promise
       await writeFile(targetFilePath, content);
     }
   } catch (error) {
-    log.error(
-      `Failed to fetch remote content. Error:`,
-      error?.message
-    );
+    log.error(`Failed to fetch remote content. Error:`, error?.message);
     return;
   }
 
   log.info('Fetched remote content');
 }
 
-export {
-  fetchFromS3
-}
+export { fetchFromS3 };

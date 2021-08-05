@@ -1,8 +1,4 @@
-import {
-  PRPLClientEvent,
-  PRPLClientScript,
-  PRPLClientPerformanceMark
-} from '../types/prpl.js';
+import { PRPLClientEvent, PRPLClientScript, PRPLClientPerformanceMark } from '../types/prpl.js';
 
 /**
  * Helper function to extract a CSS attribute query.
@@ -25,12 +21,8 @@ function ignoreScript(script: HTMLHeadElement): boolean {
     return;
   }
   return (
-    (script as HTMLScriptElement)?.src?.endsWith(
-      `/${PRPLClientScript.prefetch}.js`
-    ) ||
-    (script as HTMLScriptElement)?.src?.endsWith(
-      `/${PRPLClientScript.router}.js`
-    ) ||
+    (script as HTMLScriptElement)?.src?.endsWith(`/${PRPLClientScript.prefetch}.js`) ||
+    (script as HTMLScriptElement)?.src?.endsWith(`/${PRPLClientScript.router}.js`) ||
     script?.getAttribute('dev') === ''
   );
 }
@@ -42,7 +34,8 @@ window?.addEventListener('popstate', (event: PopStateEvent) => {
     const html = sessionStorage?.getItem(`prpl-${url}`);
 
     if (!html) {
-      throw new Error(`No cached html for route ${url}`);
+      window?.location?.assign(url);
+      console.info('[PRPL] Routing natively. Reason:', `No cached html for route ${url}`);
     }
 
     const parser = new DOMParser();
@@ -57,16 +50,12 @@ window?.addEventListener('popstate', (event: PopStateEvent) => {
     const currentHeadTags = Array.from(
       document?.querySelector('head')?.children
     ) as HTMLHeadElement[];
-    const targetHeadTags = Array.from(
-      target?.querySelector('head')?.children
-    ) as HTMLHeadElement[];
+    const targetHeadTags = Array.from(target?.querySelector('head')?.children) as HTMLHeadElement[];
 
     // Remove head tags
     currentHeadTags?.forEach((currentHeadTag) => {
       if (
-        targetHeadTags?.some((targetHeadTag) =>
-          targetHeadTag?.isEqualNode(currentHeadTag)
-        ) ||
+        targetHeadTags?.some((targetHeadTag) => targetHeadTag?.isEqualNode(currentHeadTag)) ||
         ignoreScript(currentHeadTag)
       ) {
         return;
@@ -77,9 +66,7 @@ window?.addEventListener('popstate', (event: PopStateEvent) => {
     // Add head tags
     targetHeadTags?.forEach((targetHeadTag) => {
       if (
-        currentHeadTags?.some((currentHeadTag) =>
-          currentHeadTag?.isEqualNode(targetHeadTag)
-        ) ||
+        currentHeadTags?.some((currentHeadTag) => currentHeadTag?.isEqualNode(targetHeadTag)) ||
         ignoreScript(targetHeadTag)
       ) {
         return;
@@ -111,9 +98,7 @@ document?.addEventListener('click', (event: MouseEvent) => {
   performance.mark(PRPLClientPerformanceMark.renderStart);
 
   // TODO - Define more granular definition of which anchor tags the PRPL router should try to act on
-  const anchor = (event?.target as HTMLElement)?.closest(
-    'a:not([rel])'
-  ) as HTMLAnchorElement;
+  const anchor = (event?.target as HTMLElement)?.closest('a:not([rel])') as HTMLAnchorElement;
 
   if (anchor && anchor?.target !== '_blank') {
     event?.preventDefault();

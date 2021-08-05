@@ -24,7 +24,9 @@ const PRPLClientScripts: PRPLClientScript[] = [
 /**
  * Initialize recursive interpolation.
  */
-async function interpolate(args?: { options?: PRPLInterpolateOptions }): Promise<PRPLCacheManager['cache']> {
+async function interpolate(args?: {
+  options?: PRPLInterpolateOptions;
+}): Promise<PRPLCacheManager['cache']> {
   const { options = {} } = args || {};
 
   // Make sure dist exists
@@ -39,10 +41,7 @@ async function interpolate(args?: { options?: PRPLInterpolateOptions }): Promise
           resolve(`dist/${PRPLClientScripts[s]}.js`)
         );
       } catch (error) {
-        log.error(
-          `Failed to copy '${PRPLClientScripts[s]}.js' to dist. Error:`,
-          error?.message
-        );
+        log.error(`Failed to copy '${PRPLClientScripts[s]}.js' to dist. Error:`, error?.message);
       }
     }
   }

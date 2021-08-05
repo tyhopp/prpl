@@ -7,9 +7,7 @@ function getRelativePaths(): string[] {
   // TODO - Define more granular definition of which anchor tags the PRPL prefetch worker should to try to fetch
   const relativePaths: string[] = [
     ...Array.from(document?.querySelectorAll('a:not([rel])'))
-      .filter((link) =>
-        (link as HTMLAnchorElement)?.href?.includes(window?.location?.origin)
-      )
+      .filter((link) => (link as HTMLAnchorElement)?.href?.includes(window?.location?.origin))
       .map((link) => (link as HTMLAnchorElement)?.href)
   ];
   return Array.from(new Set(relativePaths));
@@ -23,9 +21,7 @@ if (window.Worker) {
   prefetchWorker?.postMessage([window?.location?.href, ...getRelativePaths()]);
 
   // Listen for responses
-  prefetchWorker.onmessage = (event: {
-    data: PRPLClientStorageItem[];
-  }): void => {
+  prefetchWorker.onmessage = (event: { data: PRPLClientStorageItem[] }): void => {
     const prefetchedPages = event?.data;
     for (let i = 0; i < prefetchedPages?.length; i++) {
       const { storageKey, storageValue } = prefetchedPages?.[i] || {};
@@ -41,10 +37,7 @@ if (window.Worker) {
     try {
       prefetchWorker?.postMessage(getRelativePaths());
     } catch (error) {
-      console.info(
-        '[PRPL] Failed to prefetch on subsequent page route. Error:',
-        error
-      );
+      console.info('[PRPL] Failed to prefetch on subsequent page route. Error:', error);
     }
   });
 } else {

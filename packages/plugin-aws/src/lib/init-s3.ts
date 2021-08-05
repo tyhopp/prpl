@@ -17,21 +17,16 @@ async function initS3(keys: PRPLPluginAWSKeys): Promise<AWS.S3> {
     AWS.config.update({
       accessKeyId: AWSAccessKey,
       secretAccessKey: AWSSecretAccessKey,
-      region: AWSContentBucketRegion,
+      region: AWSContentBucketRegion
     });
 
     // Initialize S3
     s3 = new AWS.S3();
   } catch (error) {
-    log.error(
-      `Failed to initialize S3. Error:`,
-      error?.message
-    );
+    log.error(`Failed to initialize S3. Error:`, error?.message);
   }
 
   return s3;
 }
 
-export {
-  initS3
-}
+export { initS3 };
