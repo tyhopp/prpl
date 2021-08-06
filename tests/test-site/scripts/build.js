@@ -1,4 +1,5 @@
 const { interpolate } = require('@prpl/core');
+const { resolveHTMLImports } = require('@prpl/plugin-html-imports');
 
 // Default options
 const options = {
@@ -9,6 +10,7 @@ const options = {
 
 async function build() {
   await interpolate({ options });
+  await resolveHTMLImports();
 }
 
 build();

@@ -102,11 +102,3 @@ describe('PRPL pages', () => {
     cy.get('[data-cy=page-other]').should('have.text', misc.other);
   });
 });
-
-describe('PRPL prefetch system', () => {
-  // TODO - Implement
-});
-
-describe('PRPL routing system', () => {
-  // TODO - Implement
-});

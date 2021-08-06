@@ -38,3 +38,7 @@ a:link,
 a:visited {
   color: var(--text);
 }
+
+h1 {
+  line-height: 1.25em;
+}
