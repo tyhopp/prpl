@@ -22,14 +22,23 @@ enum PRPLPluginHTMLImportsCachePartitionKey {
 /**
  * Resolve HTML import statements at build time.
  */
-async function resolveHTMLImports(): Promise<PRPLCacheManager['cache']> {
+async function resolveHTMLImports({
+  cachePartitionKey
+}: {
+  cachePartitionKey?: string;
+}): Promise<PRPLCacheManager['cache']> {
   // Define a new cache partition for HTML fragments
-  await PRPLCache?.define(PRPLPluginHTMLImportsCachePartitionKey.htmlImport);
+  if (!cachePartitionKey) {
+    await PRPLCache?.define(PRPLPluginHTMLImportsCachePartitionKey.htmlImport);
+  }
+
+  // Resolve cache partition key
+  const partitionKey = cachePartitionKey || PRPLPluginHTMLImportsCachePartitionKey.htmlImport;
 
   // Generate or retrieve dist file system tree
   const distTree = await generateOrRetrieveFileSystemTree({
     entityPath: resolve('dist'),
-    partitionKey: PRPLCachePartitionKey.dist,
+    partitionKey,
     readFileRegExp: new RegExp(PRPLPluginHTMLImportsExtension.html)
   });
 
@@ -51,19 +60,12 @@ async function resolveHTMLImports(): Promise<PRPLCacheManager['cache']> {
 
     const firstImportTargetFilePath = resolve('dist/', firstImport?.[1]);
 
-    let fragment = await PRPLCache?.get(
-      PRPLPluginHTMLImportsCachePartitionKey.htmlImport,
-      firstImportTargetFilePath
-    );
+    let fragment = await PRPLCache?.get(partitionKey, firstImportTargetFilePath);
 
     if (!fragment) {
       const fragmentFileBuffer = await readFile(resolve('dist/', firstImport?.[1]));
       fragment = fragmentFileBuffer?.toString();
-      await PRPLCache?.set(
-        PRPLPluginHTMLImportsCachePartitionKey.htmlImport,
-        firstImportTargetFilePath,
-        fragment
-      );
+      await PRPLCache?.set(partitionKey, firstImportTargetFilePath, fragment);
     }
 
     html = html?.replace(firstImport?.[0], fragment);
