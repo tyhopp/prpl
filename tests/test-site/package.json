@@ -4,13 +4,18 @@
   "description": "Starter site using PRPL in a CommonJS module",
   "scripts": {
     "dev": "rm -rf dist && node scripts/build.js && prpl-server",
-    "build": "rm -rf dist && node scripts/build.js"
+    "build": "rm -rf dist && node scripts/build.js",
+    "test:open": "cypress open --project ..",
+    "test": "cypress run --project .."
   },
   "dependencies": {
-    "@prpl/core": "^0.1.7",
-    "@prpl/plugin-html-imports": "^0.0.21"
+    "@prpl/core": "^0.1.12",
+    "@prpl/plugin-cache": "^0.1.1",
+    "@prpl/plugin-css-imports": "^0.1.2",
+    "@prpl/plugin-html-imports": "^0.1.2"
   },
   "devDependencies": {
-    "@prpl/server": "^0.0.23"
+    "@prpl/server": "^0.0.23",
+    "cypress": "^8.2.0"
   }
 }

@@ -11,9 +11,7 @@
     "build:changed": "npm run clear && lerna changed | while read package; do npx rollup -c rollup-package.config.js --scope $package || exit 1; done && npx rollup -c rollup-client.config.js",
     "release:changed": "npm run build:changed && lerna publish",
     "release:all": "npm run build:all && lerna publish",
-    "reset": "npm run clear && rm -rf ./**/.cache && rm -rf ./**/node_modules && rm -rf ./package.lock && npm run bootstrap",
-    "test:open": "cypress open --project tests",
-    "test": "cypress run --project tests"
+    "reset": "npm run clear && rm -rf ./**/.cache && rm -rf ./**/node_modules && rm -rf ./package.lock && npm run bootstrap"
   },
   "devDependencies": {
     "@lerna/filter-packages": "^4.0.0",
@@ -21,7 +19,6 @@
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@types/node": "^16.0.0",
-    "cypress": "^8.1.0",
     "lerna": "^4.0.0",
     "minimist": "^1.2.5",
     "prettier": "^2.3.2",

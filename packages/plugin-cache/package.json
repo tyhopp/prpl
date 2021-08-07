@@ -1,7 +1,7 @@
 {
-  "name": "@prpl/plugin-html-imports",
-  "version": "0.1.2",
-  "description": "PRPL plugin that resolves HTML imports at build time",
+  "name": "@prpl/plugin-cache",
+  "version": "0.1.1",
+  "description": "PRPL plugin for cache manipulation",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
     "./package.json": "./package.json",
@@ -16,7 +16,7 @@
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": "dist/packages/plugin-html-imports/src/index.d.ts",
+  "types": "dist/packages/plugin-cache/src/index.d.ts",
   "files": [
     "dist"
   ],

@@ -10,67 +10,69 @@ import {
   PRPLFileSystemTree
 } from '@prpl/core';
 
-enum PRPLPluginHTMLImportsExtension {
-  html = '.html'
+enum PRPLPluginCSSImportsExtension {
+  css = '.css'
 }
 
-enum PRPLPluginHTMLImportsCachePartitionKey {
-  htmlImport = 'html-import'
+enum PRPLPluginCSSImportsCachePartitionKey {
+  cssImport = 'css-import'
 }
 
 /**
- * Resolve HTML import statements at build time.
+ * Resolve CSS import statements at build time.
  */
-async function resolveHTMLImports({
+async function resolveCSSImports({
   cachePartitionKey
 }: {
   cachePartitionKey?: string;
 }): Promise<PRPLCacheManager['cache']> {
   // Define a new cache partition for HTML fragments
   if (!cachePartitionKey) {
-    await PRPLCache?.define(PRPLPluginHTMLImportsCachePartitionKey.htmlImport);
+    await PRPLCache?.define(PRPLPluginCSSImportsCachePartitionKey.cssImport);
   }
 
   // Resolve cache partition key
-  const partitionKey = cachePartitionKey || PRPLPluginHTMLImportsCachePartitionKey.htmlImport;
+  const partitionKey = cachePartitionKey || PRPLPluginCSSImportsCachePartitionKey.cssImport;
 
   // Generate or retrieve dist file system tree
   const distTree = await generateOrRetrieveFileSystemTree({
     entityPath: resolve('dist'),
     partitionKey,
-    readFileRegExp: new RegExp(PRPLPluginHTMLImportsExtension.html)
+    readFileRegExp: new RegExp(PRPLPluginCSSImportsExtension.css)
   });
 
-  const HTMLImportRegex = new RegExp(/<link\s+rel="import"\s+href="(.*?)"\s?\/>/s);
+  const CSSImportRegex = new RegExp(/@import\s['"](.*?)['"];/);
 
-  // Recursively resolve or retrieve cached HTML import fragments
+  // Recursively resolve CSS imports
   async function resolveImports(
-    html: string,
-    resolutions: number
-  ): Promise<{ html: string; resolutions: number }> {
-    const firstImport = html?.match(HTMLImportRegex);
+    css: string,
+    resolutions: number,
+    dir: string
+  ): Promise<{ css: string; resolutions: number; dir: string }> {
+    const firstImport = css?.match(CSSImportRegex);
 
     if (!firstImport) {
       return {
-        html,
-        resolutions
+        css,
+        resolutions,
+        dir
       };
     }
 
-    const firstImportTargetFilePath = resolve('dist/', firstImport?.[1]);
+    const firstImportTargetFilePath = resolve(dir, firstImport?.[1]);
 
     let fragment = await PRPLCache?.get(partitionKey, firstImportTargetFilePath);
 
     if (!fragment) {
-      const fragmentFileBuffer = await readFile(resolve('dist/', firstImport?.[1]));
+      const fragmentFileBuffer = await readFile(resolve(dir, firstImport?.[1]));
       fragment = fragmentFileBuffer?.toString();
       await PRPLCache?.set(partitionKey, firstImportTargetFilePath, fragment);
     }
 
-    html = html?.replace(firstImport?.[0], fragment);
+    css = css?.replace(firstImport?.[0], fragment);
     resolutions++;
 
-    return await resolveImports(html, resolutions);
+    return await resolveImports(css, resolutions, dir);
   }
 
   // Recursively walk the dist tree depth first
@@ -79,21 +81,22 @@ async function resolveHTMLImports({
       switch (items?.[i]?.entity) {
         case 'file':
           try {
-            if (items?.[i]?.extension === PRPLPluginHTMLImportsExtension.html) {
-              const { html: resolvedHTMLFile, resolutions } = await resolveImports(
+            if (items?.[i]?.extension === PRPLPluginCSSImportsExtension.css) {
+              const { css: resolvedCSSFile, resolutions } = await resolveImports(
                 items?.[i]?.src,
-                0
+                0,
+                items?.[i]?.srcRelativeDir?.slice(1)
               );
 
               if (!resolutions) {
                 break;
               }
 
-              await writeFile(items?.[i]?.targetFilePath, resolvedHTMLFile);
+              await writeFile(items?.[i]?.targetFilePath, resolvedCSSFile);
             }
           } catch (error) {
             log.error(
-              `Failed to resolve any HTML imports from file '${items?.[i]?.srcRelativeFilePath}'. Error:`,
+              `Failed to resolve any CSS imports from file '${items?.[i]?.srcRelativeFilePath}'. Error:`,
               error?.message
             );
           }
@@ -108,10 +111,10 @@ async function resolveHTMLImports({
   // Walk dist tree
   await walkDistTree(distTree?.children || []);
 
-  log.info('Resolved HTML imports');
+  log.info('Resolved CSS imports');
 
   // Return cache as an artifact
   return PRPLCache?.cache;
 }
 
-export { resolveHTMLImports };
+export { resolveCSSImports };

@@ -1,7 +1,7 @@
 {
-  "name": "@prpl/plugin-html-imports",
+  "name": "@prpl/plugin-css-imports",
   "version": "0.1.2",
-  "description": "PRPL plugin that resolves HTML imports at build time",
+  "description": "PRPL plugin that resolves CSS imports at build time",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
     "./package.json": "./package.json",
@@ -16,7 +16,7 @@
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": "dist/packages/plugin-html-imports/src/index.d.ts",
+  "types": "dist/packages/plugin-css-imports/src/index.d.ts",
   "files": [
     "dist"
   ],
