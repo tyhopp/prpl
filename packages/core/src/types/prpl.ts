@@ -105,6 +105,6 @@ export const enum PRPLClientPerformanceMark {
 
 export interface PRPLInterpolateOptions {
   noClientJS?: boolean;
-  templateRegex?: RegExp | ((key: string) => RegExp);
+  templateRegex?: RegExp | ((key: string) => RegExp | any);
   markedOptions?: MarkedOptions;
 }

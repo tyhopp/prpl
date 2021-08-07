@@ -10,7 +10,7 @@ async function createCachePartition({
 }: {
   entityPath: string;
   partitionKey: string;
-  readFileRegExp: RegExp;
+  readFileRegExp: RegExp | any;
 }): Promise<PRPLCacheManager['cache']> {
   // Define a new cache partition
   await PRPLCache?.define(partitionKey);

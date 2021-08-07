@@ -1,7 +1,7 @@
 {
-  "name": "prpl-starter-commonjs",
+  "name": "prpl-test-site",
   "version": "0.0.1",
-  "description": "Starter site using PRPL in a CommonJS module",
+  "description": "PRPL site to run tests against",
   "scripts": {
     "dev": "rm -rf dist && node scripts/build.js && prpl-server",
     "build": "rm -rf dist && node scripts/build.js",
@@ -9,10 +9,10 @@
     "test": "cypress run --project .."
   },
   "dependencies": {
-    "@prpl/core": "^0.1.12",
-    "@prpl/plugin-cache": "^0.1.1",
-    "@prpl/plugin-css-imports": "^0.1.2",
-    "@prpl/plugin-html-imports": "^0.1.2"
+    "@prpl/core": "^0.1.13",
+    "@prpl/plugin-cache": "^0.1.2",
+    "@prpl/plugin-css-imports": "^0.1.3",
+    "@prpl/plugin-html-imports": "^0.1.3"
   },
   "devDependencies": {
     "@prpl/server": "^0.0.23",
