@@ -15,18 +15,18 @@ enum PRPLPluginCSSImportsExtension {
 }
 
 enum PRPLPluginCSSImportsCachePartitionKey {
-  cssImport = 'css-import'
+  cssImport = 'plugin-css-imports'
 }
 
 /**
  * Resolve CSS import statements at build time.
  */
-async function resolveCSSImports({
-  cachePartitionKey
-}: {
+async function resolveCSSImports(args?: {
   cachePartitionKey?: string;
 }): Promise<PRPLCacheManager['cache']> {
-  // Define a new cache partition for HTML fragments
+  const { cachePartitionKey } = args || {};
+
+  // Define a new cache partition
   if (!cachePartitionKey) {
     await PRPLCache?.define(PRPLPluginCSSImportsCachePartitionKey.cssImport);
   }

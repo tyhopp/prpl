@@ -15,17 +15,17 @@ enum PRPLPluginHTMLImportsExtension {
 }
 
 enum PRPLPluginHTMLImportsCachePartitionKey {
-  htmlImport = 'html-import'
+  htmlImport = 'plugin-html-imports'
 }
 
 /**
  * Resolve HTML import statements at build time.
  */
-async function resolveHTMLImports({
-  cachePartitionKey
-}: {
+async function resolveHTMLImports(args?: {
   cachePartitionKey?: string;
 }): Promise<PRPLCacheManager['cache']> {
+  const { cachePartitionKey } = args || {};
+
   // Define a new cache partition for HTML fragments
   if (!cachePartitionKey) {
     await PRPLCache?.define(PRPLPluginHTMLImportsCachePartitionKey.htmlImport);
