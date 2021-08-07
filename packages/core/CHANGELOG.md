@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.8](https://github.com/tyhopp/prpl/compare/@prpl/core@0.1.7...@prpl/core@0.1.8) (2021-08-07)
+
+**Note:** Version bump only for package @prpl/core
+
+
+
+
+
 ## [0.1.7](https://github.com/tyhopp/prpl/compare/@prpl/core@0.1.6...@prpl/core@0.1.7) (2021-07-25)
 
 **Note:** Version bump only for package @prpl/core

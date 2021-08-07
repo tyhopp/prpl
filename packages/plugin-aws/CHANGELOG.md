@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.3](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.2...@prpl/plugin-aws@0.1.3) (2021-08-07)
+
+**Note:** Version bump only for package @prpl/plugin-aws
+
+
+
+
+
 ## [0.1.2](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.1...@prpl/plugin-aws@0.1.2) (2021-07-25)
 
 
