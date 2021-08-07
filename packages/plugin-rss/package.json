@@ -1,0 +1,34 @@
+{
+  "name": "@prpl/plugin-rss",
+  "version": "0.0.1",
+  "description": "PRPL plugin that generates an Atom RSS feed",
+  "author": "Ty Hopp (https://tyhopp.com)",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": [
+      {
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.mjs"
+      },
+      "./dist/index.cjs.js"
+    ]
+  },
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/packages/plugin-rss/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "static-site-generator",
+    "ssg",
+    "prpl",
+    "plugin"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@prpl/core": ">=0.1.14"
+  },
+  "gitHead": "57646bee5e16c078b43aa2de487372464594de1c"
+}
