@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-css-imports",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "PRPL plugin that resolves CSS imports at build time",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
