@@ -7,7 +7,6 @@ import {
   log,
   PRPLCache,
   PRPLCacheManager,
-  PRPLCachePartitionKey,
   PRPLFileSystemTree
 } from '@prpl/core';
 
