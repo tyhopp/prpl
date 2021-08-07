@@ -16,5 +16,5 @@ jobs:
         with:
           working-directory: tests/test-site
           start: npm run dev
-          project: tests/cypress
+          project: tests
           config-file: tests/cypress.json

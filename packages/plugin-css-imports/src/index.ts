@@ -22,14 +22,23 @@ enum PRPLPluginCSSImportsCachePartitionKey {
 /**
  * Resolve CSS import statements at build time.
  */
-async function resolveCSSImports(): Promise<PRPLCacheManager['cache']> {
-  // Define a new cache partition
-  await PRPLCache?.define(PRPLPluginCSSImportsCachePartitionKey.cssImport);
+async function resolveCSSImports({
+  cachePartitionKey
+}: {
+  cachePartitionKey?: string;
+}): Promise<PRPLCacheManager['cache']> {
+  // Define a new cache partition for HTML fragments
+  if (!cachePartitionKey) {
+    await PRPLCache?.define(PRPLPluginCSSImportsCachePartitionKey.cssImport);
+  }
+
+  // Resolve cache partition key
+  const partitionKey = cachePartitionKey || PRPLPluginCSSImportsCachePartitionKey.cssImport;
 
   // Generate or retrieve dist file system tree
   const distTree = await generateOrRetrieveFileSystemTree({
     entityPath: resolve('dist'),
-    partitionKey: PRPLCachePartitionKey.dist,
+    partitionKey,
     readFileRegExp: new RegExp(PRPLPluginCSSImportsExtension.css)
   });
 
@@ -53,19 +62,12 @@ async function resolveCSSImports(): Promise<PRPLCacheManager['cache']> {
 
     const firstImportTargetFilePath = resolve(dir, firstImport?.[1]);
 
-    let fragment = await PRPLCache?.get(
-      PRPLPluginCSSImportsCachePartitionKey.cssImport,
-      firstImportTargetFilePath
-    );
+    let fragment = await PRPLCache?.get(partitionKey, firstImportTargetFilePath);
 
     if (!fragment) {
       const fragmentFileBuffer = await readFile(resolve(dir, firstImport?.[1]));
       fragment = fragmentFileBuffer?.toString();
-      await PRPLCache?.set(
-        PRPLPluginCSSImportsCachePartitionKey.cssImport,
-        firstImportTargetFilePath,
-        fragment
-      );
+      await PRPLCache?.set(partitionKey, firstImportTargetFilePath, fragment);
     }
 
     css = css?.replace(firstImport?.[0], fragment);

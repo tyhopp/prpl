@@ -4,7 +4,7 @@ import { log } from './log.js';
 import { PRPLFileSystemTree, PRPLCachePartitionKey } from '../types/prpl.js';
 
 interface PRPLRetrieveOrGenerateFileSystemTreeArgs extends PRPLGenerateFileSystemTreeArgs {
-  partitionKey: PRPLCachePartitionKey;
+  partitionKey: PRPLCachePartitionKey | string;
 }
 
 /**
