@@ -1,0 +1,33 @@
+{
+  "name": "@prpl/plugin-css-imports",
+  "version": "0.0.1",
+  "description": "PRPL plugin that resolves CSS imports at build time",
+  "author": "Ty Hopp (https://tyhopp.com)",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": [
+      {
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.mjs"
+      },
+      "./dist/index.cjs.js"
+    ]
+  },
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/packages/plugin-css-imports/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "static-site-generator",
+    "ssg",
+    "prpl",
+    "plugin"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@prpl/core": ">=0.1.7"
+  }
+}

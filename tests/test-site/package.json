@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@prpl/core": "^0.1.7",
+    "@prpl/plugin-css-imports": "^0.0.1",
     "@prpl/plugin-html-imports": "^0.0.21"
   },
   "devDependencies": {
