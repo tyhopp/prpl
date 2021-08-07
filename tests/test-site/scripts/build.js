@@ -1,4 +1,6 @@
-const { interpolate } = require('@prpl/core');
+const { resolve } = require('path');
+const { interpolate, PRPLCachePartitionKey } = require('@prpl/core');
+const { createCachePartition } = require('@prpl/plugin-cache');
 const { resolveHTMLImports } = require('@prpl/plugin-html-imports');
 const { resolveCSSImports } = require('@prpl/plugin-css-imports');
 
@@ -11,8 +13,21 @@ const options = {
 
 async function build() {
   await interpolate({ options });
-  await resolveHTMLImports();
-  await resolveCSSImports();
+
+  // Pre-define dist partition and use for subsequent plugins
+  await createCachePartition({
+    entityPath: resolve('dist'),
+    partitionKey: PRPLCachePartitionKey.dist,
+    readFileRegExp: new RegExp(`.html|.css`)
+  });
+
+  await resolveHTMLImports({
+    cachePartitionKey: PRPLCachePartitionKey.dist
+  });
+
+  await resolveCSSImports({
+    cachePartitionKey: PRPLCachePartitionKey.dist
+  });
 }
 
 build();
