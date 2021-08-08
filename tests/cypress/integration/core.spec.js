@@ -1,5 +1,3 @@
-// noinspection DuplicatedCode
-
 const pages = {
   index: {
     route: '/',
