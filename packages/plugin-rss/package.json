@@ -1,11 +1,8 @@
 {
-  "name": "@prpl/core",
-  "version": "0.1.15",
-  "description": "HTML-based static site generator",
+  "name": "@prpl/plugin-rss",
+  "version": "0.1.0",
+  "description": "PRPL plugin that generates an Atom RSS feed",
   "author": "Ty Hopp (https://tyhopp.com)",
-  "bin": {
-    "prpl": "bin/prpl.js"
-  },
   "exports": {
     "./package.json": "./package.json",
     ".": [
@@ -13,25 +10,25 @@
         "require": "./dist/index.cjs",
         "import": "./dist/index.mjs"
       },
-      "./dist/index.cjs"
+      "./dist/index.cjs.js"
     ]
   },
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": "dist/packages/core/src/index.d.ts",
+  "types": "dist/packages/plugin-rss/src/index.d.ts",
   "files": [
     "dist"
   ],
   "keywords": [
     "static-site-generator",
     "ssg",
-    "prpl"
+    "prpl",
+    "plugin"
   ],
   "license": "MIT",
-  "dependencies": {
-    "@types/marked": "^2.0.4",
-    "marked": "^2.1.0"
+  "peerDependencies": {
+    "@prpl/core": ">=0.1.14"
   },
   "gitHead": "57646bee5e16c078b43aa2de487372464594de1c"
 }

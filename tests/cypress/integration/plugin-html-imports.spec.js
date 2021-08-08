@@ -1,5 +1,3 @@
-// noinspection DuplicatedCode
-
 const pages = {
   testHTMLImports: {
     route: 'plugin-html-imports',

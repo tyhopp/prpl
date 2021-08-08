@@ -3,6 +3,7 @@ const { interpolate, PRPLCachePartitionKey } = require('@prpl/core');
 const { createCachePartition } = require('@prpl/plugin-cache');
 const { resolveHTMLImports } = require('@prpl/plugin-html-imports');
 const { resolveCSSImports } = require('@prpl/plugin-css-imports');
+const { generateRSSFeed } = require('@prpl/plugin-rss');
 
 // Default options
 const options = {
@@ -27,6 +28,13 @@ async function build() {
 
   await resolveCSSImports({
     cachePartitionKey: PRPLCachePartitionKey.dist
+  });
+
+  await generateRSSFeed({
+    dir: 'content/notes',
+    feedTitle: 'Test feed',
+    author: 'Ty Hopp',
+    origin: 'http://localhost:8000'
   });
 }
 
