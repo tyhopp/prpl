@@ -1,4 +1,10 @@
-import { generateOrRetrieveFileSystemTree, log, PRPLCache, PRPLCacheManager } from '@prpl/core';
+import {
+  generateOrRetrieveFileSystemTree,
+  log,
+  PRPLCache,
+  PRPLCacheManager,
+  PRPLCachePartitionKey
+} from '@prpl/core';
 
 /**
  * Create a new cache partition.
@@ -9,7 +15,7 @@ async function createCachePartition({
   readFileRegExp
 }: {
   entityPath: string;
-  partitionKey: string;
+  partitionKey: PRPLCachePartitionKey | string;
   readFileRegExp: RegExp | any;
 }): Promise<PRPLCacheManager['cache']> {
   // Define a new cache partition

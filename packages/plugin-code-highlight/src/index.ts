@@ -7,10 +7,9 @@ import {
   log,
   PRPLCache,
   PRPLCacheManager,
+  PRPLCachePartitionKey,
   PRPLFileSystemTree
 } from '@prpl/core';
-// import prism from 'prismjs';
-// import loadLanguages from 'prismjs/components';
 
 /**
  * Prism does not support ES module import syntax.
@@ -30,8 +29,8 @@ enum PRPLPluginCodeHighlightCachePartitionKey {
 /**
  * Highlight code blocks with Prism.
  */
-async function highlightCode(args: {
-  cachePartitionKey?: string;
+async function highlightCode(args?: {
+  cachePartitionKey?: PRPLCachePartitionKey | string;
 }): Promise<PRPLCacheManager['cache']> {
   const { cachePartitionKey } = args || {};
 
@@ -86,10 +85,10 @@ async function highlightCode(args: {
 
               // Replace block in original html
               items[i].src = items?.[i]?.src?.replace(block, reconstructedBlock);
-
-              // Write file
-              await writeFile(items?.[i]?.targetFilePath, items?.[i]?.src);
             }
+
+            // Write file
+            await writeFile(items?.[i]?.targetFilePath, items?.[i]?.src);
           } catch (error) {
             log.error(
               `Failed to highlight code block in file '${items?.[i]?.srcRelativeFilePath}'. Error:`,

@@ -7,6 +7,7 @@ import {
   log,
   PRPLCache,
   PRPLCacheManager,
+  PRPLCachePartitionKey,
   PRPLFileSystemTree
 } from '@prpl/core';
 
@@ -22,7 +23,7 @@ enum PRPLPluginHTMLImportsCachePartitionKey {
  * Resolve HTML import statements at build time.
  */
 async function resolveHTMLImports(args?: {
-  cachePartitionKey?: string;
+  cachePartitionKey?: PRPLCachePartitionKey | string;
 }): Promise<PRPLCacheManager['cache']> {
   const { cachePartitionKey } = args || {};
 
