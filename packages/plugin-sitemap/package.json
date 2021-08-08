@@ -1,0 +1,33 @@
+{
+  "name": "@prpl/plugin-sitemap",
+  "version": "0.0.1",
+  "description": "PRPL plugin that generates a sitemap",
+  "author": "Ty Hopp (https://tyhopp.com)",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": [
+      {
+        "require": "./dist/index.cjs",
+        "import": "./dist/index.mjs"
+      },
+      "./dist/index.cjs.js"
+    ]
+  },
+  "type": "module",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/packages/plugin-sitemap/src/index.d.ts",
+  "files": [
+    "dist"
+  ],
+  "keywords": [
+    "static-site-generator",
+    "ssg",
+    "prpl",
+    "plugin"
+  ],
+  "license": "MIT",
+  "peerDependencies": {
+    "@prpl/core": ">=0.1.14"
+  }
+}
