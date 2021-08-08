@@ -1,11 +1,8 @@
 {
-  "name": "@prpl/server",
+  "name": "@prpl/plugin-sitemap",
   "version": "0.1.0",
-  "description": "Development server for PRPL",
+  "description": "PRPL plugin that generates a sitemap",
   "author": "Ty Hopp (https://tyhopp.com)",
-  "bin": {
-    "prpl-server": "bin/prpl-server.js"
-  },
   "exports": {
     "./package.json": "./package.json",
     ".": [
@@ -13,13 +10,13 @@
         "require": "./dist/index.cjs",
         "import": "./dist/index.mjs"
       },
-      "./dist/index.cjs"
+      "./dist/index.cjs.js"
     ]
   },
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
-  "types": "dist/packages/server/src/index.d.ts",
+  "types": "dist/packages/plugin-sitemap/src/index.d.ts",
   "files": [
     "dist"
   ],
@@ -27,18 +24,10 @@
     "static-site-generator",
     "ssg",
     "prpl",
-    "dev-server",
-    "server"
+    "plugin"
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@prpl/core": ">=0.1.11"
-  },
-  "dependencies": {
-    "chokidar": "^3.5.2",
-    "faye-websocket": "^0.11.4",
-    "open": "^8.2.0",
-    "serve-handler": "^6.1.3"
-  },
-  "gitHead": "57646bee5e16c078b43aa2de487372464594de1c"
+    "@prpl/core": ">=0.1.14"
+  }
 }

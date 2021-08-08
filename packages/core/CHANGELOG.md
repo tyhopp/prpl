@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.2.0](https://github.com/tyhopp/prpl/compare/@prpl/core@0.1.15...@prpl/core@0.2.0) (2021-08-08)
+
+
+### Features
+
+* **plugin-sitemap:** Introduce sitemap plugin ([ad28f8f](https://github.com/tyhopp/prpl/commit/ad28f8fa2ad7882fd328a41fcc2757b70599a565))
+
+
+
+
+
 ## [0.1.15](https://github.com/tyhopp/prpl/compare/@prpl/core@0.1.14...@prpl/core@0.1.15) (2021-08-07)
 
 **Note:** Version bump only for package @prpl/core

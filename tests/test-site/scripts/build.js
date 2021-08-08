@@ -4,6 +4,7 @@ const { createCachePartition } = require('@prpl/plugin-cache');
 const { resolveHTMLImports } = require('@prpl/plugin-html-imports');
 const { resolveCSSImports } = require('@prpl/plugin-css-imports');
 const { generateRSSFeed } = require('@prpl/plugin-rss');
+const { generateSitemap } = require('@prpl/plugin-sitemap');
 
 // Default options
 const options = {
@@ -30,11 +31,19 @@ async function build() {
     cachePartitionKey: PRPLCachePartitionKey.dist
   });
 
+  const origin = 'http://localhost:8000';
+
   await generateRSSFeed({
     dir: 'content/notes',
     feedTitle: 'Test feed',
     author: 'Ty Hopp',
-    origin: 'http://localhost:8000'
+    origin
+  });
+
+  await generateSitemap({
+    origin,
+    ignoreDirRegex: new RegExp('dist/fragments'),
+    cachePartitionKey: PRPLCachePartitionKey.dist
   });
 }
 
