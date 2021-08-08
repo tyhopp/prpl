@@ -3,6 +3,7 @@ const { interpolate, PRPLCachePartitionKey } = require('@prpl/core');
 const { createCachePartition } = require('@prpl/plugin-cache');
 const { resolveHTMLImports } = require('@prpl/plugin-html-imports');
 const { resolveCSSImports } = require('@prpl/plugin-css-imports');
+const { highlightCode } = require('@prpl/plugin-code-highlight');
 const { generateRSSFeed } = require('@prpl/plugin-rss');
 const { generateSitemap } = require('@prpl/plugin-sitemap');
 
@@ -30,6 +31,8 @@ async function build() {
   await resolveCSSImports({
     cachePartitionKey: PRPLCachePartitionKey.dist
   });
+
+  await highlightCode();
 
   const origin = 'http://localhost:8000';
 

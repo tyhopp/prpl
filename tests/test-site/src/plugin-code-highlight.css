@@ -1,0 +1,155 @@
+.plugin-code-highlight {
+  margin: 0 auto;
+  width: 520px;
+}
+
+pre,
+code {
+  --code-text: var(--text);
+  --code-comment: slategray;
+  --code-punctuation: #999;
+  --code-property: #9d60ce;
+  --code-operator: #e299ff;
+  --code-keyword: rgb(16, 163, 207);
+  --code-function: #e94b6b;
+  --code-variable: #e90;
+  --code-single-line: rgb(16, 163, 207);
+  --code-background: rgb(248, 248, 250);
+}
+
+@media (prefers-color-scheme: dark) {
+  pre,
+  code {
+    --code-text: var(--text);
+    --code-comment: slategray;
+    --code-punctuation: #999;
+    --code-property: #9d60ce;
+    --code-operator: #e299ff;
+    --code-keyword: rgb(16, 163, 207);
+    --code-function: #e94b6b;
+    --code-variable: #e90;
+    --code-single-line: rgb(16, 163, 207);
+    --code-background: rgb(12, 12, 26);
+  }
+}
+
+pre,
+code {
+  color: var(--code-text);
+  background-color: var(--code-background);
+  font-family: monospace;
+  font-size: 14px;
+  text-align: left;
+  white-space: pre;
+  line-height: 1.5;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  border-radius: 0.3em;
+
+  -moz-tab-size: 2;
+  -o-tab-size: 2;
+  tab-size: 2;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+
+code::-moz-selection {
+  text-shadow: none;
+}
+
+code::selection {
+  text-shadow: none;
+}
+
+@media print {
+  code {
+    text-shadow: none;
+  }
+}
+
+pre {
+  padding: 1em;
+  margin: 0.5em 0;
+  overflow: auto;
+}
+
+:not(pre) > code {
+  color: var(--code-single-line);
+  white-space: normal;
+  padding: 0.25em;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  color: var(--code-comment);
+}
+
+.token.punctuation {
+  color: var(--code-punctuation);
+}
+
+.namespace {
+  opacity: 0.7;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  color: var(--code-property);
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  color: var(--code-comment);
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  color: var(--code-operator);
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  color: var(--code-keyword);
+}
+
+.token.function,
+.token.class-name {
+  color: var(--code-function);
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  color: var(--code-variable);
+}
+
+.token.important,
+.token.bold {
+  font-weight: bold;
+}
+.token.italic {
+  font-style: italic;
+}
+
+.token.entity {
+  cursor: help;
+}
