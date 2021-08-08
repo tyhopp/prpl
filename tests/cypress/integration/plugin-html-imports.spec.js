@@ -1,7 +1,6 @@
 const pages = {
   testHTMLImports: {
-    route: 'plugin-html-imports',
-    title: 'Test HTML imports plugin'
+    route: 'plugin-html-imports'
   }
 };
 

@@ -7,6 +7,7 @@ import {
   log,
   PRPLCache,
   PRPLCacheManager,
+  PRPLCachePartitionKey,
   PRPLFileSystemTree
 } from '@prpl/core';
 
@@ -24,7 +25,7 @@ enum PRPLPluginSitemapCachePartitionKey {
 async function generateSitemap(args: {
   origin: string;
   ignoreDirRegex?: RegExp;
-  cachePartitionKey?: string;
+  cachePartitionKey?: PRPLCachePartitionKey | string;
 }): Promise<PRPLCacheManager['cache']> {
   const { origin, ignoreDirRegex, cachePartitionKey } = args || {};
 

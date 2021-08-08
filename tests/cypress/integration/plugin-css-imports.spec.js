@@ -1,7 +1,6 @@
 const pages = {
   testCSSImports: {
     route: 'plugin-css-imports',
-    title: 'Test CSS imports plugin',
     CSSFileName: 'plugin-css-imports.css'
   }
 };

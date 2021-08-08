@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/tyhopp/prpl/compare/@prpl/plugin-html-imports@0.2.1...@prpl/plugin-html-imports@0.2.2) (2021-08-08)
+
+**Note:** Version bump only for package @prpl/plugin-html-imports
+
+
+
+
+
+## [0.2.1](https://github.com/tyhopp/prpl/compare/@prpl/plugin-html-imports@0.2.0...@prpl/plugin-html-imports@0.2.1) (2021-08-08)
+
+**Note:** Version bump only for package @prpl/plugin-html-imports
+
+
+
+
+
 # [0.2.0](https://github.com/tyhopp/prpl/compare/@prpl/plugin-html-imports@0.1.4...@prpl/plugin-html-imports@0.2.0) (2021-08-08)
 
 
