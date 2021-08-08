@@ -10,14 +10,14 @@
   },
   "dependencies": {
     "@prpl/core": "^0.2.0",
-    "@prpl/plugin-cache": "^0.2.0",
-    "@prpl/plugin-css-imports": "^0.2.0",
-    "@prpl/plugin-html-imports": "^0.2.0",
-    "@prpl/plugin-rss": "^0.2.0",
-    "@prpl/plugin-sitemap": "^0.1.0"
+    "@prpl/plugin-cache": "^0.2.1",
+    "@prpl/plugin-css-imports": "^0.2.1",
+    "@prpl/plugin-html-imports": "^0.2.1",
+    "@prpl/plugin-rss": "^0.2.1",
+    "@prpl/plugin-sitemap": "^0.1.1"
   },
   "devDependencies": {
-    "@prpl/server": "^0.1.0",
+    "@prpl/server": "^0.1.1",
     "cypress": "^8.2.0"
   }
 }

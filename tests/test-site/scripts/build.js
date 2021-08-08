@@ -32,7 +32,9 @@ async function build() {
     cachePartitionKey: PRPLCachePartitionKey.dist
   });
 
-  await highlightCode();
+  await highlightCode({
+    cachePartitionKey: PRPLCachePartitionKey.dist
+  });
 
   const origin = 'http://localhost:8000';
 
