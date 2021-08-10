@@ -8,12 +8,9 @@ code {
   --code-text: var(--text);
   --code-comment: slategray;
   --code-punctuation: #999;
-  --code-property: #9d60ce;
-  --code-operator: #e299ff;
-  --code-keyword: rgb(16, 163, 207);
-  --code-function: #e94b6b;
-  --code-variable: #e90;
-  --code-single-line: rgb(16, 163, 207);
+  --code-keyword: #8a47f5;
+  --code-title: rgb(16, 163, 207);
+  --code-variable: #34c982;
   --code-background: rgb(248, 248, 250);
 }
 
@@ -23,12 +20,9 @@ code {
     --code-text: var(--text);
     --code-comment: slategray;
     --code-punctuation: #999;
-    --code-property: #9d60ce;
-    --code-operator: #e299ff;
-    --code-keyword: rgb(16, 163, 207);
-    --code-function: #e94b6b;
-    --code-variable: #e90;
-    --code-single-line: rgb(16, 163, 207);
+    --code-keyword: #9166ff;
+    --code-title: #24c1f0;
+    --code-variable: #5fe3b9;
     --code-background: rgb(12, 12, 26);
   }
 }
@@ -78,78 +72,45 @@ pre {
 }
 
 :not(pre) > code {
-  color: var(--code-single-line);
   white-space: normal;
   padding: 0.25em;
 }
 
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
+.hljs-comment,
+.hljs-string {
   color: var(--code-comment);
 }
 
-.token.punctuation {
+.hljs-tag,
+.hljs-punctuation {
   color: var(--code-punctuation);
 }
 
-.namespace {
-  opacity: 0.7;
-}
-
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
+.hljs-type,
+.hljs-number,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion {
   color: var(--code-property);
 }
 
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: var(--code-comment);
+.hljs-title {
+  color: var(--code-title);
 }
 
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  color: var(--code-operator);
-}
-
-.token.atrule,
-.token.attr-value,
-.token.keyword {
+.hljs-keyword {
   color: var(--code-keyword);
 }
 
-.token.function,
-.token.class-name {
-  color: var(--code-function);
-}
-
-.token.regex,
-.token.important,
-.token.variable {
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-operator,
+.hljs-selector-pseudo {
   color: var(--code-variable);
-}
-
-.token.important,
-.token.bold {
-  font-weight: bold;
-}
-.token.italic {
-  font-style: italic;
-}
-
-.token.entity {
-  cursor: help;
 }
