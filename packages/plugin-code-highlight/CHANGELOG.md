@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.1](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.2.0...@prpl/plugin-code-highlight@0.2.1) (2021-08-11)
+
+
+### Bug Fixes
+
+* **plugin-code-highlight:** Hljs lang path resolution ([2b744fa](https://github.com/tyhopp/prpl/commit/2b744fa9e542d52cbb5aadb14efdad0d207bfffe))
+
+
+
+
+
 # [0.2.0](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.1.1...@prpl/plugin-code-highlight@0.2.0) (2021-08-11)
 
 
