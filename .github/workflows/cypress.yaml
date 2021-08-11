@@ -18,6 +18,9 @@ jobs:
           start: npm run dev:cjs
           project: ..
 
+      - name: Cleanup
+        run: sudo kill -9 `sudo lsof -t -i:8000`
+
       - name: Test ESM Interface
         uses: cypress-io/github-action@v2
         with:
