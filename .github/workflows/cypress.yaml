@@ -11,9 +11,16 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Cypress run
+      - name: Test CommonJS Interface
         uses: cypress-io/github-action@v2
         with:
           working-directory: tests/test-site
-          start: npm run dev
+          start: npm run dev:cjs
+          project: ..
+
+      - name: Test ESM Interface
+        uses: cypress-io/github-action@v2
+        with:
+          working-directory: tests/test-site
+          start: npm run dev:mjs
           project: ..
