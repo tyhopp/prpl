@@ -13,7 +13,7 @@
   "dependencies": {
     "@prpl/core": "^0.2.2",
     "@prpl/plugin-cache": "^0.2.3",
-    "@prpl/plugin-code-highlight": "^0.2.0",
+    "@prpl/plugin-code-highlight": "^0.2.2",
     "@prpl/plugin-css-imports": "^0.2.3",
     "@prpl/plugin-html-imports": "^0.2.3",
     "@prpl/plugin-rss": "^0.2.2",
