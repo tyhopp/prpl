@@ -10,13 +10,7 @@ import {
   PRPLCachePartitionKey,
   PRPLFileSystemTree
 } from '@prpl/core';
-
-/**
- * Prism does not support ES module import syntax.
- * @see {@link https://github.com/PrismJS/prism/issues/2155}
- */
-const prism = require('prismjs');
-const loadLanguages = require('prismjs/components/');
+import hljs from 'highlight.js/lib/core';
 
 enum PRPLPluginCodeHighlightExtension {
   html = '.html'
@@ -49,9 +43,6 @@ async function highlightCode(args?: {
     readFileRegExp: new RegExp(PRPLPluginCodeHighlightExtension.html)
   });
 
-  // Collection of loaded languages
-  let loadedLanguages = [];
-
   // Recursively walk the dist tree depth first
   async function walkDistTree(items: PRPLFileSystemTree['children']) {
     for (let i = 0; i < items?.length; i++) {
@@ -71,14 +62,23 @@ async function highlightCode(args?: {
             }
 
             for (const [block, language, code] of codeBlocks) {
-              // Load language in prism if it is not already
-              if (!loadedLanguages?.includes(language)) {
-                loadLanguages(language);
-                loadedLanguages?.push(language);
+              const languagePath = `highlight.js/lib/languages/${language}`;
+              const languageRegistered = Boolean(hljs?.getLanguage(language));
+
+              // Register language if it is not already
+              if (!languageRegistered) {
+                const { default: languageGrammar } = await import(languagePath);
+
+                if (typeof languageGrammar !== 'function') {
+                  log.error(`Failed to load language grammar for ${language}`);
+                  return;
+                }
+
+                hljs?.registerLanguage(language, languageGrammar);
               }
 
               // Highlight code
-              const highlightedCode = prism?.highlight(code, prism?.languages[language], language);
+              const highlightedCode = hljs?.highlight(code, { language })?.value;
 
               // Reconstruct block
               const reconstructedBlock = `<code class="language-${language}">${highlightedCode}</code>`;

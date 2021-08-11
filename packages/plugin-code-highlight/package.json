@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-code-highlight",
-  "version": "0.1.1",
+  "version": "0.2.2",
   "description": "PRPL plugin that highlights code with Prism",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
@@ -31,6 +31,6 @@
     "@prpl/core": ">=0.2.0"
   },
   "dependencies": {
-    "prismjs": "^1.24.1"
+    "highlight.js": "^11.2.0"
   }
 }
