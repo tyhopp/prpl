@@ -62,7 +62,7 @@ async function highlightCode(args?: {
             }
 
             for (const [block, language, code] of codeBlocks) {
-              const languagePath = `highlight.js/lib/languages/${language}.js`;
+              const languagePath = `highlight.js/lib/languages/${language}`;
               const languageRegistered = Boolean(hljs?.getLanguage(language));
 
               // Register language if it is not already
