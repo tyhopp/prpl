@@ -4,8 +4,6 @@ import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
 import {
   generateOrRetrieveFileSystemTree,
-  cwd,
-  exists,
   log,
   PRPLCache,
   PRPLCacheManager,
@@ -64,17 +62,11 @@ async function highlightCode(args?: {
             }
 
             for (const [block, language, code] of codeBlocks) {
-              const currentDir = await cwd(import.meta);
-              const languagePath = resolve(
-                currentDir,
-                '..',
-                `node_modules/highlight.js/lib/languages/${language}.js`
-              );
-              const languageExists = await exists(languagePath);
+              const languagePath = `highlight.js/lib/languages/${language}.js`;
               const languageRegistered = Boolean(hljs?.getLanguage(language));
 
               // Register language if it is not already
-              if (!languageRegistered && languageExists) {
+              if (!languageRegistered) {
                 const { default: languageGrammar } = await import(languagePath);
 
                 if (typeof languageGrammar !== 'function') {
