@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.2](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.2.1...@prpl/plugin-code-highlight@0.2.2) (2021-08-11)
+
+
+### Bug Fixes
+
+* **plugin-code-highlight:** Import lang without file extension ([c71abe9](https://github.com/tyhopp/prpl/commit/c71abe9158b6f7bba2ee5170770aab7e8e9b442a))
+
+
+
+
+
 ## [0.2.1](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.2.0...@prpl/plugin-code-highlight@0.2.1) (2021-08-11)
 
 
