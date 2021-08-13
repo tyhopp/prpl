@@ -18,7 +18,7 @@ async function uploadToS3(
 
   try {
     for (const { src, srcRelativeFilePath } of files) {
-      const { slug, body } = await parsePRPLMetadata({
+      const { slug } = await parsePRPLMetadata({
         src,
         srcRelativeFilePath
       });
@@ -28,7 +28,7 @@ async function uploadToS3(
         .putObject({
           Bucket: AWSContentBucket,
           Key: slug,
-          Body: body
+          Body: src
         })
         .promise();
     }
