@@ -7,8 +7,8 @@ you would rather have your content files stored in S3 instead of checked in unde
 
 | Name | Description |
 | --- | --- |
-| [fetchFromS3](src/fetch-from-s3.ts) | Fetch file(s) from an S3 bucket and write to the local file system |
-| [uploadToS3](src/upload-to-s3.ts) | Upload file(s) to an S3 bucket from the local file system |
+| [`fetchFromS3`](src/fetch-from-s3.ts) | Fetch file(s) from an S3 bucket and write to the local file system |
+| [`uploadToS3`](src/upload-to-s3.ts) | Upload file(s) to an S3 bucket from the local file system |
 
 Click the function names above to see the TypeScript interfaces.
 

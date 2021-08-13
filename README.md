@@ -62,17 +62,17 @@ the output is:
 
 PRPL is structured as a library that consists of these modules:
 
-| Module  | Description |
+| Module | Description |
 | --- | --- |
-| [@prpl/core](packages/core/README.md) | Core functions for content interpolation |
-| [@prpl/server](packages/server/README.md) | Development server |
-| [@prpl/plugin-aws](packages/plugin-aws/README.md) | Plugin for working with AWS S3 |
-| [@prpl/plugin-cache](packages/plugin-cache/README.md) | Plugin for cache manipulation |
-| [@prpl/plugin-code-highlight](packages/plugin-code-highlight/README.md) | Plugin for highlighting code blocks |
-| [@prpl/plugin-css-imports](packages/plugin-css-imports/README.md) | Plugin for resolving CSS imports |
-| [@prpl/plugin-html-imports](packages/plugin-html-imports/README.md) | Plugin for resolving HTML imports |
-| [@prpl/plugin-rss](packages/plugin-rss/README.md) | Plugin for generating RSS feeds |
-| [@prpl/plugin-sitemap](packages/plugin-sitemap/README.md) | Plugin for generating a sitemap |
+| [`@prpl/core`](packages/core/README.md) | Core functions for content interpolation |
+| [`@prpl/server`](packages/server/README.md) | Development server |
+| [`@prpl/plugin-aws`](packages/plugin-aws/README.md) | Plugin for working with AWS S3 |
+| [`@prpl/plugin-cache`](packages/plugin-cache/README.md) | Plugin for cache manipulation |
+| [`@prpl/plugin-code-highlight`](packages/plugin-code-highlight/README.md) | Plugin for highlighting code blocks |
+| [`@prpl/plugin-css-imports`](packages/plugin-css-imports/README.md) | Plugin for resolving CSS imports |
+| [`@prpl/plugin-html-imports`](packages/plugin-html-imports/README.md) | Plugin for resolving HTML imports |
+| [`@prpl/plugin-rss`](packages/plugin-rss/README.md) | Plugin for generating RSS feeds |
+| [`@prpl/plugin-sitemap`](packages/plugin-sitemap/README.md) | Plugin for generating a sitemap |
 
 - `@prpl/core` is the only required module for a site to interpolate content into HTML, others are optional
 - `@prpl/server` is easily replaced with other local development servers, you're not married to it if you use PRPL
