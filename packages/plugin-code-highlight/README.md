@@ -2,6 +2,12 @@
 
 A plugin for [PRPL](https://github.com/tyhopp/prpl) that highlights code blocks with [Highlight.js](https://github.com/highlightjs/highlight.js).
 
+### Dependencies
+
+`@prpl/plugin-code-highlight` has one dependency, [highlight.js](https://github.com/highlightjs/highlight.js).
+
+### Usage
+
 This plugin **does not include any CSS**. It processes code blocks given the specified syntax (e.g., JavaScript, 
 Python) and outputs DOM structures in place that are possible to style with CSS.
 
