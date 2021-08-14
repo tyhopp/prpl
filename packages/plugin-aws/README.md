@@ -3,6 +3,10 @@
 A plugin for [PRPL](https://github.com/tyhopp/prpl) for working with [AWS S3](https://aws.amazon.com/s3/). Useful if 
 you would rather have your content files stored in S3 instead of checked in under version control.
 
+## Dependencies
+
+`@prpl/plugin-aws` relies on one dependency, [`aws-sdk`](https://github.com/aws/aws-sdk-js).
+
 ## Functions
 
 | Name | Description |
