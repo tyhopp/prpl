@@ -7,6 +7,10 @@ subsequent plugins may access.
 
 `@prpl/plugin-cache` has zero dependencies.
 
+### Functions
+
+[`createCachePartition`](src/index.ts) is the only export. See [the source code](src/index.ts) for its signature.
+
 ### Usage
 
 For example, you may want to pre-define a partition that reads all HTML and CSS files in `dist` so that those files 

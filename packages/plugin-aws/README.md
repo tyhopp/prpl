@@ -14,9 +14,8 @@ you would rather have your content files stored in S3 instead of checked in unde
 | [`fetchFromS3`](src/fetch-from-s3.ts) | Fetch file(s) from an S3 bucket and write to the local file system |
 | [`uploadToS3`](src/upload-to-s3.ts) | Upload file(s) to an S3 bucket from the local file system |
 
-Click the function names above to see the TypeScript interfaces.
-
 ## Requirements
+
 For this plugin to work, you must have:
 
 - [An active AWS account](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
@@ -24,18 +23,12 @@ For this plugin to work, you must have:
 - [Generated access keys](https://aws.amazon.com/premiumsupport/knowledge-center/create-access-key/)
 
 ## Usage
-Like all plugins, this plugin must be used via the Node interface. Both ECMAScript and CommonJS modules are 
-supported.
 
 Security recommendations:
 - Do not hardcode secrets passed into this plugin's exports
 - Do not check in any file (e.g., `.env`) containing secrets under version control
 
 ### Fetch from S3
-Example implementation using CommonJS modules.
-
-You can optionally define which directory to work with, but at present 
-PRPL core assumes your content is in a `content` directory at the root of your project. This is one area for improvement.
 
 ```javascript
 const dotenv = require('dotenv');
@@ -78,7 +71,6 @@ build();
 ```
 
 ### Upload to S3
-Example implementation using CommonJS modules.
 
 This function accepts an array of files, so you can upload one or many files as needed for your use case.
 
