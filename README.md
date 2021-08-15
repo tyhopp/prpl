@@ -1,6 +1,23 @@
 # PRPL
 
-A smaller, more focused static site generator. Simpler than the [simpler static site generator](https://github.com/11ty/eleventy). Transforms a file system of content into HTML via `<prpl>` tags:
+PPRL is a **modular** static site generator built for **longevity**. It lets you interpolate HTML without the kitchen sink.
+
+## Why?
+
+All the static site generators I have tried have one or more of these problems:
+
+- Built on an underlying framework like React, Vue, etc.
+- Relies on complex build tools like Webpack, Babel, etc.
+- Depends on a massive tree of modules that force constant maintenance
+- Has interfaces, source code and documentation that cannot be understood in one sitting
+- Requires that your site source be organized in a way that looks nothing like your output
+- Forces a huge leap from hello world to a real world implementation
+
+PRPL is my answer to these gripes.
+
+## Usage
+
+PRPL transforms a directory of content into HTML via `<prpl>` tags:
 
 Given this source HTML file:
 
@@ -52,8 +69,8 @@ the output is:
 
 - HTML-based API compliant with web standards
 - Command line, CommonJS and ECMAScript module interfaces
-- Source code that is fully typed, explicitly commented and readable in one sitting 
-- Library architecture that allows for modular adoption
+- Source code that is fully typed, explicitly commented and readable in one sitting
+- Library architecture for modular adoption
 - Minimally invasive, removable in seconds
 - Opt-out of client side JavaScript entirely
 - Define your own template syntax
@@ -83,12 +100,12 @@ PRPL is structured as a library that consists of these modules:
 Commands for developing PRPL modules.
 
 - `npm run boostrap` to install local module dependencies
-- `PACKAGE=[PACKAGE-NAME] npm run dev` from the project root to run an individual package in watch mode, e.g. 
+- `PACKAGE=[PACKAGE-NAME] npm run dev` from the project root to run an individual package in watch mode, e.g.
   `PACKAGE=core npm run dev` to run the core module
 - `npm link` from the package root to symlink the local module globally
-- `npm link @prpl/[PACKAGE-NAME]` from your project root to symlink to the globally linked module, e.g. `npm link 
+- `npm link @prpl/[PACKAGE-NAME]` from your project root to symlink to the globally linked module, e.g. `npm link
   @prpl/core` to link core
-- `npm unlink @prpl/[PACKAGE-NAME]` from your project root to undo the global symlink, e.g. `npm unlink @prpl/core` 
+- `npm unlink @prpl/[PACKAGE-NAME]` from your project root to undo the global symlink, e.g. `npm unlink @prpl/core`
   to unlink core
 - `npm unlink -g` from the package root to unlink the package
 - `npm ls -g --depth=0 --link=true` to list all linked modules
@@ -98,7 +115,7 @@ Commands for developing PRPL modules.
 Tooling, CI and commands for testing PRPL modules.
 
 - All modules are tested with [Cypress](https://www.cypress.io)
-- Tests run in continuous integration via [GitHub Actions](https://github.com/features/actions) when new PRs are 
+- Tests run in continuous integration via [GitHub Actions](https://github.com/features/actions) when new PRs are
   opened or changes are made to the branch the PR is opened from
 - All modules are tested using both the CommonJS and ESM interfaces
 
