@@ -1,65 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <base href="/" />
-    <title>PRPL</title>
-    <meta name="title" content="PRPL" />
-    <meta
-      name="description"
-      content="HTML-based static site generator implementing the PRPL pattern."
-    />
-    <meta name="keywords" content="HTML, static site generator, SSG, PRPL, PRPL pattern" />
-    <meta property="og:type" content="website" />
-    <meta property="og:title" content="PRPL" />
-    <meta
-      property="og:description"
-      content="HTML-based static site generator implementing the PRPL pattern."
-    />
-    <meta property="og:url" content="https://prpl.dev" />
-    <link rel="import" href="fragments/open-graph.html" />
-    <link rel="import" href="fragments/favicon.html" />
-    <link href="styles/main.css" rel="stylesheet" />
-  </head>
-  <body>
-    <main class="index">
-      <h1 class="index-title">PRPL</h1>
-      <p class="index-description">
-        HTML-based static site generator implementing the
-        <a href="https://web.dev/apply-instant-loading-with-prpl/" target="_blank">PRPL pattern</a>.
-      </p>
-      <hr />
-      <p>Start developing in one command:</p>
-      <pre class="language-shell"><code class="language-shell">npm init prpl</code></pre>
-      <p>
-        or head over to the
-        <a href="docs/getting-started">Getting started</a> guide.
-      </p>
-      <hr />
-      <h3>Why PRPL?</h3>
-      <h4>🚰 No kitchen sink</h4>
-      <p>
-        Chances are you have tried other static site generators and thought they were
-        overkill. PPRL can be used just to interpolate your content into HTML.
-      </p>
-      <h4>🎛 No bundlers, configuration or underlying frameworks</h4>
-      <p>
-        The worst kind of technical debt comes from tooling and dependency trees. PRPL stays small
-        and gets out of your way.
-      </p>
-      <h4>🚪 Easy to remove</h4>
-      <p>
-        The second doc after
-        <a href="docs/getting-started">Getting started</a> is
-        <a href="docs/getting-started">Removing PRPL</a>. PRPL shows you the door before you invest.
-      </p>
-      <h4>⚡️ Very, very fast</h4>
-      <p>
-        Using the namesake pattern this project is built with, PRPL uses modern prefetching and
-        routing systems to help your site achieve max speed.
-      </p>
-    </main>
-    <link rel="import" href="fragments/footer.html" />
-    <link rel="import" href="fragments/performance-marks.html" />
-  </body>
+  <prpl type="page" src="content">
+    <head>
+      <link rel="import" href="fragments/meta.html" />
+      <title>[title]</title>
+      <meta name="title" content="[title]" />
+      <meta name="description" content="[description]" />
+      <meta name="keywords" content="HTML, static site generator, SSG, PRPL, PRPL pattern" />
+      <meta property="og:type" content="website" />
+      <meta property="og:title" content="[title]" />
+      <meta property="og:description" content="[description]." />
+      <meta property="og:url" content="https://prpl.dev[slug]" />
+      <link rel="import" href="fragments/favicon.html" />
+      <link rel="import" href="fragments/open-graph.html" />
+      <link href="styles/main.css" rel="stylesheet" />
+      <link href="index.css" rel="stylesheet" />
+    </head>
+    <body>
+      <div class="nav-toggle button">Menu</div>
+      <ul class="nav nav-mobile-invisible">
+        <prpl type="list" src="content" sort-by="order">
+          <li data-slug="[slug]">
+            <a href="[slug]">[title]</a>
+          </li>
+        </prpl>
+      </ul>
+      <main class="main">
+        <article class="content">[body]</article>
+      </main>
+      <link rel="import" href="fragments/info.html" />
+      <link rel="import" href="fragments/nav.html" />
+      <link rel="import" href="fragments/performance-marks.html" />
+    </body>
+  </prpl>
 </html>

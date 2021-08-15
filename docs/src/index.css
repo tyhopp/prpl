@@ -1,17 +1,103 @@
-.index {
-  display: block;
-  margin: 0 auto;
-  padding: 2em 1em;
-  max-width: 500px;
+body {
+  display: flex;
+  flex-direction: column;
 }
 
-@media (max-width: 350px) {
-  .index {
-    padding: 0 0.5em;
+.main {
+  flex: 1;
+}
+
+.nav {
+  position: absolute;
+  top: 0;
+  left: 0;
+  background: var(--background);
+  width: 260px;
+  height: 100vh;
+  padding-inline-start: 0;
+  padding: 1em 2em 2em 2em;
+  margin: 0;
+}
+
+.nav-mobile-invisible {
+  display: none;
+}
+
+.nav > li {
+  list-style: none;
+  margin-bottom: 0.5em;
+}
+
+.nav > li > a {
+  font-weight: 500;
+  border-bottom: none;
+}
+
+.info {
+  padding: 1em;
+  text-align: center;
+  font-size: small;
+}
+
+.info > hr {
+  margin-bottom: 1em;
+}
+
+.info > p {
+  margin: 0 0 0.5em 0;
+}
+
+.content {
+  padding: 0 1em;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+@media (min-width: 600px) {
+  body {
+    flex-direction: row;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-mobile-invisible {
+    display: block;
+  }
+
+  .nav {
+    position: initial;
+    width: 200px;
+    height: initial;
   }
 }
 
-.index-title {
-  text-align: center;
-  margin: 0 0 1em 0;
+@media (min-width: 600px) {
+  .info {
+    display: none;
+  }
+}
+
+@media (min-width: 1100px) {
+  .info {
+    display: block;
+    width: 200px;
+    text-align: right;
+  }
+
+  .info > hr {
+    display: none;
+  }
+}
+
+.nav > .nav-active::before {
+  content: "\2022";
+  color: var(--accent);
+  font-size: 1.25em;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  position: absolute;
+  left: 0.6em;
 }

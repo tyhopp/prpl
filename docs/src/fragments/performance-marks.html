@@ -1,8 +1,4 @@
 <script defer>
-  document.body.setAttribute('data-path', window.location.pathname);
-  window.addEventListener('popstate', () => {
-    document.body.setAttribute('data-path', window.location.pathname);
-  });
   window.addEventListener('load', () => {
     document.querySelector('[data-stats="render"]').textContent = Math.round(
       performance.timing.domComplete - performance.timing.domLoading

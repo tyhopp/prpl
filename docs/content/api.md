@@ -1,6 +1,7 @@
 <!--
 title: API reference
-slug: /docs/api
+slug: /api
+order: 3
 -->
 
 This is the API reference page

@@ -6,7 +6,7 @@
 :root {
   --text: #000;
   --background: #fff;
-  --highlight: lavender;
+  --highlight: paleturquoise;
   --accent: rgb(136, 105, 246);
   --line: #e8e3f1;
 }
@@ -15,7 +15,7 @@
   :root {
     --text: #fff;
     --background: #000;
-    --highlight: rgb(91, 70, 167);
+    --highlight: darkturquoise;
     --accent: rgb(136, 105, 246);
     --line: #424464;
   }
@@ -90,20 +90,25 @@ footer > p {
 }
 
 .button {
-  display: block;
-  letter-spacing: 0.75px;
-  line-height: 20px;
+  border: 1px solid var(--line);
   width: fit-content;
-  align-self: center;
-  color: var(--text);
-  text-decoration: none;
-  text-align: center;
-  padding: 0.75em 1.5em;
+  padding: 0.25em 1em;
+  margin: 1em 1em 0.5em 1em;
   cursor: pointer;
-  user-select: none;
-  margin: 0.3em;
 }
 
 .button:hover {
   filter: brightness(110%) saturate(110%);
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary {
+  outline: none;
+}
+
+.hidden {
+  display: none;
 }

@@ -62,7 +62,7 @@ the output is:
 </body>
 ```
 
-- Run `npm init prpl` to clone the minimal starter and run it locally
+- Run `npx -y create-prpl@latest` to clone the minimal starter and run it locally
 - See [prpl.dev](https://prpl.dev) (WIP, not deployed yet) for full documentation, guides and design decisions
 
 ## Features
