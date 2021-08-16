@@ -84,7 +84,6 @@ PRPL is structured as a library that consists of these modules:
 | [`@prpl/core`](packages/core/README.md) | Core functions for content interpolation |
 | [`@prpl/server`](packages/server/README.md) | Development server |
 | [`@prpl/plugin-aws`](packages/plugin-aws/README.md) | Plugin for working with AWS S3 |
-| [`@prpl/plugin-cache`](packages/plugin-cache/README.md) | Plugin for cache manipulation |
 | [`@prpl/plugin-code-highlight`](packages/plugin-code-highlight/README.md) | Plugin for highlighting code blocks |
 | [`@prpl/plugin-css-imports`](packages/plugin-css-imports/README.md) | Plugin for resolving CSS imports |
 | [`@prpl/plugin-html-imports`](packages/plugin-html-imports/README.md) | Plugin for resolving HTML imports |

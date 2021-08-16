@@ -1,4 +1,6 @@
-# @prpl/plugin-cache
+# @prpl/plugin-cache (WIP)
+
+**NOTE - This plugin is experimental. It may change significantly in the future. Not recommended for use at present.**
 
 A plugin for [PRPL](https://github.com/tyhopp/prpl) for cache manipulation. Useful for defining cache partitions that 
 subsequent plugins may access.
