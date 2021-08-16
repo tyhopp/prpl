@@ -38,7 +38,7 @@ If you're writing in markdown you can write your blocks like this:
 
 ````
 ```javascript
-<code class="language-javascript">console.log('Hello world!');</code>
+console.log('Hello world!');
 ```
 ````
 
