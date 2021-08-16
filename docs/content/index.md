@@ -16,7 +16,7 @@ Start developing in one command:
 npx -y create-prpl@latest
 ```
 
-or head over to [Getting started](getting-started).
+or head over to [getting started](getting-started).
 
 ---
 
@@ -33,3 +33,7 @@ The worst kind of technical debt comes from tooling and dependency trees. PRPL s
 #### ⚡️ Very, very fast
 Using this project's namesake pattern, PRPL uses modern client-side prefetching and routing systems to help your site 
 achieve max speed.
+
+---
+
+If you would like to dig deeper into the thinking behind PRPL, have a look at [design decisions](design-decisions).

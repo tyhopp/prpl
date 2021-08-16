@@ -29,6 +29,12 @@
   background-color: var(--highlight);
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
 body {
   position: relative;
   font-family: 'system-ui', sans-serif;
@@ -41,7 +47,6 @@ body {
   overflow-x: hidden;
   overflow-y: scroll;
   -webkit-text-size-adjust: none;
-  margin: 0;
 }
 
 a {

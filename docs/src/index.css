@@ -5,17 +5,19 @@ body {
 
 .main {
   flex: 1;
+  margin-bottom: 2em;
 }
 
 .nav {
   position: absolute;
+  box-sizing: border-box;
   top: 0;
   left: 0;
   background: var(--background);
   width: 260px;
   height: 100vh;
   padding-inline-start: 0;
-  padding: 1em 2em 2em 2em;
+  padding: 1em 1em 1em 2em;
   margin: 0;
 }
 
@@ -67,9 +69,9 @@ body {
   }
 
   .nav {
-    position: initial;
+    position: sticky;
     width: 200px;
-    height: initial;
+    height: 100vh;
   }
 }
 
@@ -80,9 +82,17 @@ body {
 }
 
 @media (min-width: 1100px) {
+  .nav {
+    width: 240px;
+  }
+
   .info {
     display: block;
-    width: 200px;
+    position: sticky;
+    top: 0;
+    box-sizing: border-box;
+    width: 240px;
+    height: 100vh;
     text-align: right;
   }
 
