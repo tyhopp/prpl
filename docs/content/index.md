@@ -1,7 +1,7 @@
 <!--
 title: PRPL
 slug: /
-order: 1
+order: 01
 -->
 
 # PRPL
@@ -36,4 +36,4 @@ achieve max speed.
 
 ---
 
-If you would like to dig deeper into the thinking behind PRPL, have a look at [design decisions](design-decisions).
+See [getting started](/getting-started) next, or you would like to dig into the thinking behind PRPL jump to [design decisions](design-decisions).

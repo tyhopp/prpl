@@ -1,7 +1,7 @@
 <!--
 title: Design decisions
 slug: /design-decisions
-order: 4
+order: 07
 -->
 
 # Design decisions
@@ -53,11 +53,15 @@ into each exported function instead. This constraint forces:
 ## Web APIs, not framework APIs
 
 Wherever possible, PRPL leverages native web platform APIs over custom framework APIs. This is the ultimate move to 
-support the goal of longevity: if the W3C and associates agree on a specification and the major browsers implement 
-it, there is very little chance of that API going away for a long time.
+support the goal of longevity: if the W3C and friends agree on a specification and the major browsers implement 
+it, there is very little chance of that API going away.
 
 By betting on web APIs, you:
 
-- Do not have to waste time learning tool-specific concepts
-- Can be confident the code you write today will still run 5 or 10 years from now
-- Will be working with the languages and concepts that all other web developers already know how to work with
+- Do not have to waste time learning framework-specific concepts
+- Can be fairly confident the code you write today will still run in 5 or 10 years
+- Use the lingua franca of the web, providing the greatest opportunity for collaboration
+
+---
+
+See [platform APIs](/platform-apis) next.

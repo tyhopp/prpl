@@ -1,7 +1,7 @@
 <!--
 title: API reference
 slug: /api
-order: 3
+order: 03
 -->
 
 # API Reference

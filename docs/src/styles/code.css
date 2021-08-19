@@ -75,7 +75,13 @@ pre {
 :not(pre) > code {
   color: var(--code-single-line);
   white-space: normal;
-  padding: 0.25em;
+  margin: 0 -1px;
+  padding: 0.25em 0.4em;
+  border: 1px solid transparent;
+}
+
+a:not(pre) > code:hover {
+  border: 1px dotted var(--accent)
 }
 
 .token.comment,

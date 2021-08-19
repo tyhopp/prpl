@@ -6,8 +6,9 @@
 :root {
   --text: #000;
   --background: #fff;
-  --highlight: paleturquoise;
-  --accent: rgb(136, 105, 246);
+  --selection: #e6e6fa;
+  --mark: #e6e6fa;
+  --accent: #8869f6;
   --line: #e8e3f1;
 }
 
@@ -15,18 +16,19 @@
   :root {
     --text: #fff;
     --background: #000;
-    --highlight: darkturquoise;
-    --accent: rgb(136, 105, 246);
+    --selection: #9494e3;
+    --mark: #34216e;
+    --accent: #8869f6;
     --line: #424464;
   }
 }
 
 ::selection {
-  background-color: var(--highlight);
+  background-color: var(--selection);
 }
 
 ::-moz-selection {
-  background-color: var(--highlight);
+  background-color: var(--selection);
 }
 
 html,
@@ -112,6 +114,22 @@ details > summary::-webkit-details-marker {
 
 details > summary {
   outline: none;
+}
+
+table, th, td {
+  border: 1px solid var(--line);
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.25em 0.5em;
+}
+
+mark {
+  color: inherit;
+  background-color: var(--mark);
+  padding: 0.2em;
+  border-radius: 0.1em;
 }
 
 .hidden {

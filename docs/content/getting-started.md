@@ -1,7 +1,7 @@
 <!--
 title: Getting started
 slug: /getting-started
-order: 2
+order: 02
 -->
 
 # Getting started
