@@ -7,7 +7,6 @@ export { parsePRPLAttributes } from './interpolate/parse-prpl-attributes.js';
 export { parsePRPLMetadata } from './interpolate/parse-prpl-metadata.js';
 export { transformMarkdown } from './interpolate/transform-markdown.js';
 export { PRPLCache } from './lib/cache.js';
-export { clearDist } from './lib/clear-dist.js';
 export { cwd } from './lib/cwd.js';
 export { ensureDir } from './lib/ensure-dir.js';
 export { ensureFile } from './lib/ensure-file.js';
