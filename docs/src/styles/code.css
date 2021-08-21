@@ -1,14 +1,12 @@
+
 pre,
 code {
   --code-text: var(--text);
-  --code-comment: slategray;
-  --code-punctuation: #999;
-  --code-property: #9d60ce;
-  --code-operator: #e299ff;
-  --code-keyword: var(--accent);
-  --code-function: #e94b6b;
-  --code-variable: #e90;
-  --code-single-line: var(--accent);
+  --code-slate-gray: slategray;
+  --code-gray: #999;
+  --code-purple: #8a47f5;
+  --code-blue: rgb(16, 163, 207);
+  --code-green: #34c982;
   --code-background: rgb(248, 248, 250);
 }
 
@@ -16,14 +14,11 @@ code {
   pre,
   code {
     --code-text: var(--text);
-    --code-comment: slategray;
-    --code-punctuation: #999;
-    --code-property: #9d60ce;
-    --code-operator: #e299ff;
-    --code-keyword: var(--accent);
-    --code-function: #e94b6b;
-    --code-variable: #e90;
-    --code-single-line: var(--accent);
+    --code-slate-gray: slategray;
+    --code-gray: #999;
+    --code-purple: #9166ff;
+    --code-blue: #24c1f0;
+    --code-green: #5fe3b9;
     --code-background: rgb(12, 12, 26);
   }
 }
@@ -73,7 +68,7 @@ pre {
 }
 
 :not(pre) > code {
-  color: var(--code-single-line);
+  color: var(--code-purple);
   white-space: normal;
   margin: 0 -1px;
   padding: 0.25em 0.4em;
@@ -84,73 +79,40 @@ a:not(pre) > code:hover {
   border: 1px dotted var(--accent)
 }
 
-.token.comment,
-.token.prolog,
-.token.doctype,
-.token.cdata {
-  color: var(--code-comment);
+.hljs-comment,
+.hljs-string {
+  color: var(--code-slate-gray);
 }
 
-.token.punctuation {
-  color: var(--code-punctuation);
+.hljs-tag,
+.hljs-punctuation {
+  color: var(--code-gray);
 }
 
-.namespace {
-  opacity: 0.7;
+.hljs-title {
+  color: var(--code-blue);
 }
 
-.token.property,
-.token.tag,
-.token.boolean,
-.token.number,
-.token.constant,
-.token.symbol,
-.token.deleted {
-  color: var(--code-property);
+.hljs-name,
+.hljs-keyword {
+  color: var(--code-purple);
 }
 
-.token.selector,
-.token.attr-name,
-.token.string,
-.token.char,
-.token.builtin,
-.token.inserted {
-  color: var(--code-comment);
+.hljs-attr {
+  color: var(--code-blue);
 }
 
-.token.operator,
-.token.entity,
-.token.url,
-.language-css .token.string,
-.style .token.string {
-  color: var(--code-operator);
+.hljs-tag > .hljs-string {
+  color: var(--code-green);
 }
 
-.token.atrule,
-.token.attr-value,
-.token.keyword {
-  color: var(--code-keyword);
-}
-
-.token.function,
-.token.class-name {
-  color: var(--code-function);
-}
-
-.token.regex,
-.token.important,
-.token.variable {
-  color: var(--code-variable);
-}
-
-.token.important,
-.token.bold {
-  font-weight: bold;
-}
-.token.italic {
-  font-style: italic;
-}
-
-.token.entity {
-  cursor: help;
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-operator,
+.hljs-selector-pseudo {
+  color: var(--code-green);
 }

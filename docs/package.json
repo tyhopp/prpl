@@ -18,7 +18,6 @@
   "dependencies": {
     "@prpl/core": "^0.2.3",
     "@prpl/plugin-cache": "^0.2.4",
-    "@prpl/plugin-code-highlight": "^0.2.3",
     "@prpl/plugin-css-imports": "^0.2.4",
     "@prpl/plugin-html-imports": "^0.2.4",
     "@prpl/plugin-sitemap": "^0.1.4"
