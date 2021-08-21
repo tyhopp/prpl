@@ -60,7 +60,7 @@ By betting on web APIs, you:
 
 - Do not have to waste time learning framework-specific concepts
 - Can be fairly confident the code you write today will still run in 5 or 10 years
-- Use the lingua franca of the web, providing the greatest opportunity for collaboration
+- Use the *lingua franca* of the web, providing the greatest opportunity for collaboration
 
 ---
 

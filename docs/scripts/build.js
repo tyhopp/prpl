@@ -10,5 +10,5 @@ await resolveCSSImports();
 await highlightCode();
 await generateSitemap({
   origin: 'https://prpl.dev',
-  ignoreDirRegex: new RegExp('dist/fragments')
+  ignoreDirRegex: new RegExp('dist/components|dist/scripts')
 });

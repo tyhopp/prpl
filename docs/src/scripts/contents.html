@@ -1,0 +1,25 @@
+<script defer>
+  function generateContents() {
+    const contentsElement = document.querySelector('.side-menu-contents');
+
+    while (contentsElement.firstChild) {
+      contentsElement.removeChild(contentsElement.lastChild);
+    }
+
+    const contents = document.querySelectorAll('h2[id]');
+    const fragment = document.createDocumentFragment();
+
+    contents.forEach(content => {
+      const listItem = document.createElement('li');
+      const item = document.createElement('a');
+      item.textContent = content.textContent;
+      item.setAttribute('href', `${window.location.pathname}#${content.getAttribute('id')}`);
+      listItem.appendChild(item);
+      fragment.appendChild(listItem);
+    });
+
+    contentsElement.appendChild(fragment);
+  }
+  window.addEventListener('load', generateContents);
+  window.addEventListener('prpl-render', generateContents);
+</script>

@@ -6,7 +6,7 @@ order: 02
 
 # Getting started
 
-If would like to run a PRPL site immediately, run the initializer in your terminal:
+The recommended way to get started with PRPL is to run the initializer in your terminal:
 
 ```shell
 npx -y create-prpl@latest
@@ -21,11 +21,10 @@ The initializer ([`create-prpl`](https://github.com/tyhopp/create-prpl/blob/mast
 
 ## Write your website
 
-From here you can rename `prpl-starter-minimal` to whatever you want your project to be named and adjust the project 
-files to your liking. The structure of a PRPL site looks like this:
+From here you can adapt your project to your liking. The structure of a PRPL site looks like this:
 
 ```asciidoc
-our-lovely-repo
+prpl-starter-minimal
   └─ content
   └─ dist
   └─ src
@@ -35,7 +34,7 @@ our-lovely-repo
 - `dist` is the output directory that PRPL clears and writes to when you run the build command
 - `src` is where you keep your source code files written in HTML, CSS and JavaScript
 
-The reason for this opinionated project structure is to achieve [source-output alignment](/docs/source-output-alignment), a topic discussed in greater detail later.
+The reason for this opinionated project structure is to achieve [source-output alignment](design-decisions#source-output-alignment).
 
 ## CLI commands
 

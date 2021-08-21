@@ -7,7 +7,8 @@ order: 03
 # API Reference
 
 PRPL has a deliberately small API surface area to minimize the gap between a hello world and real world 
-implementation. There are just two interfaces that can be used in HTML source files: `page` and `list`.
+implementation. There are just two interfaces that can be used in HTML source files: [`page`](/api#page-tags) and 
+[`list`](/api#list-tags).
 
 ## Page tags
 
@@ -218,14 +219,14 @@ async function build() {
 build();
 ```
 
-- `noClientJS` will output zero client-side JavaScript. Your site will not take advantage of the prefetch and router 
-  systems PRPL offers, but some scenarios may call for that
+- `noClientJS` will output zero client-side JavaScript. Your site will no longer take advantage of the prefetch and 
+  router systems PRPL offers and will use the browser's native routing and caching systems instead
 - `templateRegex` lets you define the how you want PRPL to look for things to replace during interpolation. The 
   default is `[my-metadata-key]`, but you can define `{my-metadata-key}` or `{{ my-metadata-key }}` or whatever suits 
   your preference
 - `markedOptions` are options you can pass to [`marked`](https://marked.js.org/using_advanced#options), the only 
   dependency of `@prpl/core`
-- 
+
 ---
 
 See [plugins](/plugins) next.

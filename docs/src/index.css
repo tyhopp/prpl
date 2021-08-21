@@ -35,17 +35,20 @@ body {
   border-bottom: none;
 }
 
-.info {
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   padding: 1em;
   text-align: center;
   font-size: small;
 }
 
-.info > hr {
+.side-menu hr {
   margin-bottom: 1em;
 }
 
-.info > p {
+.side-menu p {
   margin: 0 0 0.5em 0;
 }
 
@@ -76,7 +79,7 @@ body {
 }
 
 @media (min-width: 600px) {
-  .info {
+  .side-menu {
     display: none;
   }
 }
@@ -86,7 +89,7 @@ body {
     width: 240px;
   }
 
-  .info {
+  .side-menu {
     display: block;
     position: sticky;
     top: 0;
@@ -96,7 +99,7 @@ body {
     text-align: right;
   }
 
-  .info > hr {
+  .side-menu hr {
     display: none;
   }
 }
