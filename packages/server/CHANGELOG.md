@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.4](https://github.com/tyhopp/prpl/compare/@prpl/server@0.1.3...@prpl/server@0.1.4) (2021-08-21)
+
+**Note:** Version bump only for package @prpl/server
+
+
+
+
+
 ## [0.1.3](https://github.com/tyhopp/prpl/compare/@prpl/server@0.1.2...@prpl/server@0.1.3) (2021-08-13)
 
 **Note:** Version bump only for package @prpl/server

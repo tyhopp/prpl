@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.4](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.3...@prpl/core@0.2.4) (2021-08-21)
+
+
+### Bug Fixes
+
+* **core:** Remove clear dist export ([ebf8685](https://github.com/tyhopp/prpl/commit/ebf8685852e8ca193026f445e14d83ffbdda125c))
+
+
+
+
+
 ## [0.2.3](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.2...@prpl/core@0.2.3) (2021-08-13)
 
 **Note:** Version bump only for package @prpl/core
