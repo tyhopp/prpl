@@ -1,5 +1,3 @@
-// noinspection JSUnusedGlobalSymbols
-
 import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
 import {
@@ -11,6 +9,7 @@ import {
   PRPLFileSystemTree
 } from '@prpl/core';
 import hljs from 'highlight.js/lib/core';
+import { escape } from 'html-escaper';
 
 enum PRPLPluginCodeHighlightExtension {
   html = '.html'
@@ -61,7 +60,17 @@ async function highlightCode(args?: {
               break;
             }
 
-            for (const [block, language, code] of codeBlocks) {
+            const mappedAliases = {
+              html: 'xml'
+            };
+
+            const escapedLanguages = {
+              xml: true
+            };
+
+            for (let [block, language, code] of codeBlocks) {
+              language = mappedAliases?.[language] ?? language;
+
               const languagePath = `highlight.js/lib/languages/${language}`;
               const languageRegistered = Boolean(hljs?.getLanguage(language));
 
@@ -76,6 +85,8 @@ async function highlightCode(args?: {
 
                 hljs?.registerLanguage(language, languageGrammar);
               }
+
+              code = escapedLanguages?.[code] ? escape(code) : code;
 
               // Highlight code
               const highlightedCode = hljs?.highlight(code, { language })?.value;
