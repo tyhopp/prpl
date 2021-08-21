@@ -153,7 +153,7 @@ Additional notes:
 
 See the [source code handling list tags in @prpl/core](https://github.com/tyhopp/prpl/blob/master/packages/core/src/interpolate/interpolate-list.ts).
 
-### Content metadata
+## Content metadata
 
 Every content file must have metadata or "frontmatter" at the top of the file with required keys `title` and `slug`:
 
@@ -166,14 +166,14 @@ slug: /hello-world
 
 You can define as many keys as you like and consume them within `page` and `list` tags.
 
-### Serve and build CLI commands
+## Serve and build CLI commands
 
 PRPL can be used from the command line with these commands:
 
 - `prpl` to interpolate your site. `@prpl/core` must be installed to run this command
 - `prpl-server` to run the dev server locally. `@prpl/server` must be installed to run this command
 
-### CommonJS node interface
+## CommonJS node interface
 
 PRPL can also be used within Node via CommonJS modules. A build script might look like:
 
@@ -187,7 +187,7 @@ async function build() {
 build();
 ```
 
-### ESM node interface
+## ESM node interface
 
 PRPL can also be used within Node via ECMAScript modules. A build script might look like:
 
@@ -197,7 +197,7 @@ import { interpolate } from '@prpl/core';
 await interpolate();
 ```
 
-### Options
+## Options
 
 PRPL has no configuration files, but there are a few options that can be passed to the core `interpolate` function:
 
@@ -225,3 +225,7 @@ build();
   your preference
 - `markedOptions` are options you can pass to [`marked`](https://marked.js.org/using_advanced#options), the only 
   dependency of `@prpl/core`
+- 
+---
+
+See [plugins](/plugins) next.

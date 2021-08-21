@@ -19,7 +19,7 @@ The initializer ([`create-prpl`](https://github.com/tyhopp/create-prpl/blob/mast
 - Install [`@prpl/core`](https://github.com/tyhopp/prpl/blob/master/packages/core/README.md) and [`@prpl/server`](https://github.com/tyhopp/prpl/blob/master/packages/server/README.md)
 - Run the server locally at http://localhost:8000
 
-### Write your website
+## Write your website
 
 From here you can rename `prpl-starter-minimal` to whatever you want your project to be named and adjust the project 
 files to your liking. The structure of a PRPL site looks like this:
@@ -37,7 +37,7 @@ our-lovely-repo
 
 The reason for this opinionated project structure is to achieve [source-output alignment](/docs/source-output-alignment), a topic discussed in greater detail later.
 
-### Commands
+## CLI commands
 
 The basic bin commands used by PRPL are:
 
@@ -51,7 +51,7 @@ commands are mapped to npm scripts:
 - `npm run build`
 - `npm run dev`
 
-### Deploy your website
+## Deploy your website
 
 PRPL outputs static HTML files, so you can host your site wherever you like easily. A recommended solution is 
 [Netlify](https://www.netlify.com).

@@ -36,4 +36,4 @@ achieve max speed.
 
 ---
 
-See [getting started](/getting-started) next, or you would like to dig into the thinking behind PRPL jump to [design decisions](design-decisions).
+See [getting started](/getting-started) next, or to dig into the thinking behind PRPL jump to [design decisions](design-decisions).
