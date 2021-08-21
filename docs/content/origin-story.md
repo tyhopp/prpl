@@ -1,7 +1,7 @@
 <!--
 title: Origin Story
 slug: /origin-story
-order: 11
+order: 10
 -->
 
 # Origin Story

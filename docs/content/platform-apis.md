@@ -52,4 +52,4 @@ These decisions will ease the process of supporting Deno. Some other notes:
 
 ---
 
-See [miscellaneous](/misc) next.
+See the [FAQ](/faq) next.

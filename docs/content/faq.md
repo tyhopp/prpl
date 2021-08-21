@@ -1,10 +1,12 @@
 <!--
 title: FAQ
 slug: /faq
-order: 10
+order: 09
 -->
 
-# Frequently Asked Questions
+# FAQ
+
+A home for some frequently asked questions.
 
 ## Does PRPL work with X templating engine?
 
@@ -38,3 +40,7 @@ There are a few reasons for this:
 - PRPL's API is tiny with just two HTML elements
 - Using an AST approach involves adding another dependency
 - Given the small size of PRPL's source code, any regex edge cases not covered can be easily updated
+
+---
+
+See [origin story](/origin-story) next.
