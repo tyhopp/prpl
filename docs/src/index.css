@@ -3,6 +3,13 @@ body {
   flex-direction: column;
 }
 
+@media (min-width: 1700px) {
+  body {
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+}
+
 .main {
   flex: 1;
   margin-bottom: 2em;
@@ -86,7 +93,7 @@ body {
 
 @media (min-width: 1100px) {
   .nav {
-    width: 240px;
+    width: 260px;
   }
 
   .side-menu {
@@ -94,7 +101,7 @@ body {
     position: sticky;
     top: 0;
     box-sizing: border-box;
-    width: 240px;
+    width: 260px;
     height: 100vh;
     text-align: right;
     padding: 1em 2em 1em 1em;
