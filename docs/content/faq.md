@@ -1,7 +1,7 @@
 <!--
 title: FAQ
 slug: /faq
-order: 09
+order: 08
 -->
 
 # FAQ
@@ -15,7 +15,7 @@ standards for longevity.
 
 You can however define your own template syntax via the [`templateRegex`](/api#options) option.
 
-## Why does diffing happen in the main tag instead of the body tag?
+## Why does diffing happen in main instead of body?
 
 Diffing within `<main>` instead of `<body>` allows part of the DOM to be persisted between page renders. 
 This is useful if you want to persist elements like `<script>` or `<nav>`.
@@ -28,7 +28,7 @@ rerendering.
 
 At present, markdown and HTML content files are supported.
 
-## Why is the metadata format like that?
+## Why this metadata format?
 
 The metadata format uses the HTML comment syntax (e.g. `<!-- Comment -->`) because it is web standard. It is also 
 convenient that HTML can be written alongside markdown in markdown files.

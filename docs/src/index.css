@@ -118,6 +118,7 @@ body {
 }
 
 .side-menu-contents > li {
+  position: relative;
   list-style: none;
   margin-bottom: 0.5em;
 }
@@ -130,5 +131,5 @@ body {
   display: inline-block;
   width: 1em;
   position: absolute;
-  right: 0.6em;
+  top: 0;
 }

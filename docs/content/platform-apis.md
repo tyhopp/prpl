@@ -1,7 +1,7 @@
 <!--
 title: Platform APIs
 slug: /platform-apis
-order: 08
+order: 07
 -->
 
 # Platform APIs

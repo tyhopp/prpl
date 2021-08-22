@@ -1,7 +1,7 @@
 <!--
 title: Design decisions
 slug: /design-decisions
-order: 07
+order: 06
 -->
 
 # Design decisions

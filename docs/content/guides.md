@@ -203,4 +203,4 @@ because of PRPL's focus on [functions, not configuration](/design-decisions#func
 
 ---
 
-See [systems](/systems) next.
+See [design decisions](/design-decisions) next.
