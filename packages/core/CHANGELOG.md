@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.5](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.4...@prpl/core@0.2.5) (2021-08-22)
+
+
+### Bug Fixes
+
+* **core:** Router hash state changes ([0977d56](https://github.com/tyhopp/prpl/commit/0977d5675f3589d4e04fd0eb3a23c7491d64675b))
+
+
+
+
+
 ## [0.2.4](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.3...@prpl/core@0.2.4) (2021-08-21)
 
 
