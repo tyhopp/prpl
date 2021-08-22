@@ -6,7 +6,7 @@ order: 01
 
 # PRPL
 
-PPRL is a **modular** static site generator built for **longevity**. It lets you interpolate HTML with a single HTML 
+PPRL is a **modular** static site generator built for **longevity**. It lets you interpolate content with a single HTML 
 element.
 
 ---

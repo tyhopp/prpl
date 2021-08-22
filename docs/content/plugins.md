@@ -10,12 +10,12 @@ PRPL has a library of official plugins offering common build time functionality 
 
 | Module | Description |
 | --- | --- |
-| [`@prpl/plugin-aws`](#aws) | Plugin for working with AWS S3 |
-| [`@prpl/plugin-code-highlight`](#code-highlighting) | Plugin for highlighting code blocks |
-| [`@prpl/plugin-css-imports`](#css-imports) | Plugin for resolving CSS imports |
-| [`@prpl/plugin-html-imports`](#html-imports) | Plugin for resolving HTML imports |
-| [`@prpl/plugin-rss`](#rss) | Plugin for generating RSS feeds |
-| [`@prpl/plugin-sitemap`](#sitemap) | Plugin for generating a sitemap |
+| [`@prpl/plugin-aws`](/plugins#aws) | Plugin for working with AWS S3 |
+| [`@prpl/plugin-code-highlight`](/plugins#code-highlighting) | Plugin for highlighting code blocks |
+| [`@prpl/plugin-css-imports`](/plugins#css-imports) | Plugin for resolving CSS imports |
+| [`@prpl/plugin-html-imports`](/plugins#html-imports) | Plugin for resolving HTML imports |
+| [`@prpl/plugin-rss`](/plugins#rss) | Plugin for generating RSS feeds |
+| [`@prpl/plugin-sitemap`](/plugins#sitemap) | Plugin for generating a sitemap |
 
 This page contains links to each plugin's source code, a brief description, as well as notes on dependencies (if any) 
 and exported functions.
