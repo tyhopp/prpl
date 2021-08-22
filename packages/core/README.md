@@ -40,7 +40,6 @@ A mix of extended builtin functions and PRPL-specific functions.
 | Function | Description |
 | --- | --- |
 | [`cache`](src/lib/cache.ts) | In-memory cache that supports user-defined partitions |
-| [`clearDist`](src/lib/clear-dist.ts) | Clears the `dist` directory |
 | [`cwd`](src/lib/cwd.ts) | Calculates current working directory relative to the calling file |
 | [`ensureDir`](src/lib/ensure-dir.ts) | Ensure a directory exists given an absolute path |
 | [`ensureFile`](src/lib/ensure-file.ts) | Ensure a file exists given an absolute path |

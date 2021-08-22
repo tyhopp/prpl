@@ -1,17 +1,135 @@
-.index {
-  display: block;
-  margin: 0 auto;
-  padding: 2em 1em;
-  max-width: 500px;
+body {
+  display: flex;
+  flex-direction: column;
 }
 
-@media (max-width: 350px) {
-  .index {
-    padding: 0 0.5em;
+.main {
+  flex: 1;
+  margin-bottom: 2em;
+}
+
+.nav {
+  position: absolute;
+  box-sizing: border-box;
+  top: 0;
+  left: 0;
+  background: var(--background);
+  width: 260px;
+  height: 100vh;
+  padding-inline-start: 0;
+  padding: 1em 1em 1em 2em;
+  margin: 0;
+}
+
+.nav-mobile-invisible {
+  display: none;
+}
+
+.nav > li {
+  list-style: none;
+  margin-bottom: 0.5em;
+}
+
+.nav > li > a {
+  font-weight: 500;
+  border-bottom: none;
+}
+
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1em;
+  text-align: center;
+  font-size: small;
+}
+
+.side-menu-contents {
+  display: none;
+}
+
+.side-menu p {
+  margin: 0 0 0.5em 0;
+}
+
+.content {
+  padding: 0 1em;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+@media (min-width: 600px) {
+  body {
+    flex-direction: row;
+  }
+
+  .nav-toggle {
+    display: none;
+  }
+
+  .nav-mobile-invisible {
+    display: block;
+  }
+
+  .nav {
+    position: sticky;
+    width: 200px;
+    height: 100vh;
   }
 }
 
-.index-title {
-  text-align: center;
-  margin: 0 0 1em 0;
+@media (min-width: 600px) {
+  .side-menu {
+    display: none;
+  }
+}
+
+@media (min-width: 1100px) {
+  .nav {
+    width: 240px;
+  }
+
+  .side-menu {
+    display: flex;
+    position: sticky;
+    top: 0;
+    box-sizing: border-box;
+    width: 240px;
+    height: 100vh;
+    text-align: right;
+    padding: 1em 2em 1em 1em;
+    margin: 0;
+  }
+
+  .side-menu-contents {
+    display: block;
+  }
+}
+
+.nav > .nav-active::before {
+  content: "\2022";
+  color: var(--accent);
+  font-size: 1.25em;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  position: absolute;
+  left: 0.6em;
+}
+
+.side-menu-contents > li {
+  position: relative;
+  list-style: none;
+  margin-bottom: 0.5em;
+}
+
+.side-menu-contents > .content-active::after {
+  content: "\2022";
+  color: var(--accent);
+  font-size: 1.25em;
+  font-weight: bold;
+  display: inline-block;
+  width: 1em;
+  position: absolute;
+  top: 0;
 }

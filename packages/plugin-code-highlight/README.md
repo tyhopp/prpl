@@ -4,7 +4,8 @@ A plugin for [PRPL](https://github.com/tyhopp/prpl) that highlights code blocks 
 
 ### Dependencies
 
-`@prpl/plugin-code-highlight` has one dependency, [highlight.js](https://github.com/highlightjs/highlight.js).
+`@prpl/plugin-code-highlight` has two dependencies, [highlight.js](https://github.com/highlightjs/highlight.js) and 
+[html-escaper](https://github.com/WebReflection/html-escaper).
 
 ### Functions
 
@@ -38,7 +39,7 @@ If you're writing in markdown you can write your blocks like this:
 
 ````
 ```javascript
-<code class="language-javascript">console.log('Hello world!');</code>
+console.log('Hello world!');
 ```
 ````
 

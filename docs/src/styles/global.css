@@ -6,8 +6,9 @@
 :root {
   --text: #000;
   --background: #fff;
-  --highlight: lavender;
-  --accent: rgb(136, 105, 246);
+  --selection: #e6e6fa;
+  --mark: #e6e6fa;
+  --accent: #8869f6;
   --line: #e8e3f1;
 }
 
@@ -15,18 +16,38 @@
   :root {
     --text: #fff;
     --background: #000;
-    --highlight: rgb(91, 70, 167);
-    --accent: rgb(136, 105, 246);
+    --selection: #9494e3;
+    --mark: #34216e;
+    --accent: #8869f6;
     --line: #424464;
   }
 }
 
 ::selection {
-  background-color: var(--highlight);
+  background-color: var(--selection);
 }
 
 ::-moz-selection {
-  background-color: var(--highlight);
+  background-color: var(--selection);
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
 }
 
 body {
@@ -39,9 +60,11 @@ body {
   color: var(--text);
   background-color: var(--background);
   overflow-x: hidden;
-  overflow-y: scroll;
   -webkit-text-size-adjust: none;
-  margin: 0;
+}
+
+article > h1 {
+  font-size: 2em;
 }
 
 a {
@@ -90,20 +113,41 @@ footer > p {
 }
 
 .button {
-  display: block;
-  letter-spacing: 0.75px;
-  line-height: 20px;
+  border: 1px solid var(--line);
   width: fit-content;
-  align-self: center;
-  color: var(--text);
-  text-decoration: none;
-  text-align: center;
-  padding: 0.75em 1.5em;
+  padding: 0.25em 1em;
+  margin: 1em 1em 0.5em 1em;
   cursor: pointer;
-  user-select: none;
-  margin: 0.3em;
 }
 
 .button:hover {
   filter: brightness(110%) saturate(110%);
+}
+
+details > summary::-webkit-details-marker {
+  display: none;
+}
+
+details > summary {
+  outline: none;
+}
+
+table, th, td {
+  border: 1px solid var(--line);
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 0.25em 0.5em;
+}
+
+mark {
+  color: inherit;
+  background-color: var(--mark);
+  padding: 0.2em;
+  border-radius: 0.1em;
+}
+
+.hidden {
+  display: none;
 }

@@ -62,7 +62,7 @@ the output is:
 </body>
 ```
 
-- Run `npm init prpl` to clone the minimal starter and run it locally
+- Run `npx -y create-prpl@latest` to clone the minimal starter and run it locally
 - See [prpl.dev](https://prpl.dev) (WIP, not deployed yet) for full documentation, guides and design decisions
 
 ## Features
@@ -84,7 +84,6 @@ PRPL is structured as a library that consists of these modules:
 | [`@prpl/core`](packages/core/README.md) | Core functions for content interpolation |
 | [`@prpl/server`](packages/server/README.md) | Development server |
 | [`@prpl/plugin-aws`](packages/plugin-aws/README.md) | Plugin for working with AWS S3 |
-| [`@prpl/plugin-cache`](packages/plugin-cache/README.md) | Plugin for cache manipulation |
 | [`@prpl/plugin-code-highlight`](packages/plugin-code-highlight/README.md) | Plugin for highlighting code blocks |
 | [`@prpl/plugin-css-imports`](packages/plugin-css-imports/README.md) | Plugin for resolving CSS imports |
 | [`@prpl/plugin-html-imports`](packages/plugin-html-imports/README.md) | Plugin for resolving HTML imports |
@@ -100,8 +99,9 @@ PRPL is structured as a library that consists of these modules:
 Commands for developing PRPL modules.
 
 - `npm run boostrap` to install local module dependencies
-- `PACKAGE=[PACKAGE-NAME] npm run dev` from the project root to run an individual package in watch mode, e.g.
+- `PACKAGE=[PACKAGE-NAME] npm run dev:package` from the project root to run an individual package in watch mode, e.g.
   `PACKAGE=core npm run dev` to run the core module
+- `npm run dev:client` from the project root to run client scripts in watch mode
 - `npm link` from the package root to symlink the local module globally
 - `npm link @prpl/[PACKAGE-NAME]` from your project root to symlink to the globally linked module, e.g. `npm link
   @prpl/core` to link core

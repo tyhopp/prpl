@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.2.3...@prpl/plugin-code-highlight@0.3.0) (2021-08-21)
+
+
+### Features
+
+* **plugin-code-highlight:** Support HTML ([6a90439](https://github.com/tyhopp/prpl/commit/6a90439935782eee655c43e319ed881dc9b32c4c))
+
+
+
+
+
 ## [0.2.3](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.2.2...@prpl/plugin-code-highlight@0.2.3) (2021-08-13)
 
 **Note:** Version bump only for package @prpl/plugin-code-highlight
