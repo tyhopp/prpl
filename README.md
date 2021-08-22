@@ -1,6 +1,7 @@
 # PRPL
 
-PPRL is a **modular** static site generator built for **longevity**. It lets you interpolate HTML without the kitchen sink.
+PRPL is a **modular** static site generator built for **longevity**. It lets you interpolate content with a single HTML
+element.
 
 ## Why?
 
