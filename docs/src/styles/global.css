@@ -31,6 +31,19 @@
   background-color: var(--selection);
 }
 
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--line);
+  border-radius: 2px;
+}
+
 html,
 body {
   margin: 0;
@@ -47,7 +60,6 @@ body {
   color: var(--text);
   background-color: var(--background);
   overflow-x: hidden;
-  overflow-y: scroll;
   -webkit-text-size-adjust: none;
 }
 
