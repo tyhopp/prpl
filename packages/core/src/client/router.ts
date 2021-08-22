@@ -28,7 +28,8 @@ function ignoreScript(script: HTMLHeadElement): boolean {
 }
 
 window?.addEventListener('popstate', (event: PopStateEvent) => {
-  const url = window?.location?.href;
+  const [url, hash] = window?.location?.href?.split('#');
+  const [targetUrl] = event?.state?.url?.split('#');
 
   try {
     const html = sessionStorage?.getItem(`prpl-${url}`);
@@ -80,8 +81,13 @@ window?.addEventListener('popstate', (event: PopStateEvent) => {
       document?.head?.appendChild(targetHeadTag);
     });
 
+    // Scroll to hash if one exists in the url
+    if (hash) {
+      document.getElementById(hash)?.scrollIntoView();
+    }
+
     // Scroll to top if user clicked a link, otherwise preserve scroll state
-    if (event?.state?.url === url) {
+    if (!hash && url === targetUrl) {
       window?.scrollTo({ top: 0 });
     }
 
