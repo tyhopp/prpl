@@ -62,8 +62,9 @@ the output is:
 </body>
 ```
 
+- PRPL supports [Node](https://nodejs.org/en/) [current and LTS versions](https://nodejs.org/en/about/releases/)
 - Run `npx -y create-prpl@latest` to clone the minimal starter and run it locally
-- See [prpl.dev](https://prpl.dev) (WIP, not deployed yet) for full documentation, guides and design decisions
+- See [prpl.dev](https://prpl.dev) for full documentation, guides and design decisions
 
 ## Features
 

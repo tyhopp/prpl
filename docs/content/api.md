@@ -227,6 +227,46 @@ build();
 - `markedOptions` are options you can pass to [`marked`](https://marked.js.org/using_advanced#options), the only 
   dependency of `@prpl/core`
 
+## Events
+
+PRPL's routing system [dispatches](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent) a 
+[CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent), `prpl-render`, which fires at the end of 
+HTML diffing during a page navigation.
+
+It can be listened for like any regular event. For example, you can listen for `prpl-render` and dynamically build a 
+table of contents at runtime:
+
+```javascript
+function generateContents() {
+  const contentsElement = document.querySelector('.table-of-contents');
+
+  while (contentsElement.firstChild) {
+    contentsElement.removeChild(contentsElement.lastChild);
+  }
+
+  const contents = document.querySelectorAll('h2[id]');
+  const fragment = document.createDocumentFragment();
+
+  contents.forEach((content) => {
+    const listItem = document.createElement('li');
+    const item = document.createElement('a');
+    const slug = `${window.location.pathname}#${content.getAttribute('id')}`;
+    item.textContent = content.textContent;
+    item.setAttribute('href', slug);
+    listItem.appendChild(item);
+    fragment.appendChild(listItem);
+  });
+
+  contentsElement.appendChild(fragment);
+}
+
+window.addEventListener('load', generateContents);
+window.addEventListener('prpl-render', generateContents);
+```
+
+Do note that if you are listening for `prpl-render`, you probably also want to listen to `load` in case the page is 
+refreshed or the routing system gracefully degrades to native router browsing.
+
 ---
 
 See [plugins](/plugins) next.

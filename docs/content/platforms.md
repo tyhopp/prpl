@@ -1,13 +1,13 @@
 <!--
-title: Platform APIs
-slug: /platform-apis
+title: Platforms
+slug: /platforms
 order: 07
 -->
 
-# Platform APIs
+# Platforms
 
-PRPL is built on [Node](https://nodejs.org/en/) and **supports Node version 10.0.0 or greater**. Support for 
-[Deno](https://deno.land) is on the [roadmap](/roadmap).
+PRPL supports [Node](https://nodejs.org/en/) [current and LTS versions](https://nodejs.org/en/about/releases/). 
+Support for [Deno](https://deno.land) is on the [roadmap](/roadmap#deno-support).
 
 ## Node
 

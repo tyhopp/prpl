@@ -159,7 +159,7 @@ to interpolate with PRPL to the `src` or `content` directories prior to running 
 If you want to process files further after running [`interpolate`](https://github.com/tyhopp/prpl/blob/master/packages/core/src/interpolate/interpolate.ts)
 , you can access the `dist` directory where PRPL outputs interpolated files.
 
-PRPL's orientation around the file system avoids introducing concepts that are less familiar and ubiquitous, while 
+PRPL's orientation around the file system avoids introducing concepts that are less familiar and less ubiquitous, while 
 also aligning with the browser and providing a high degree of predictability. In short, PRPL relies heavily on the 
 file system, which you might consider the original CMS.
 

@@ -58,7 +58,7 @@ HTML if it exists, otherwise gracefully degrades to the browser's native routing
 
 The client-side experiment turned out fairly well and I turned my gaze to basic static site generation. If there is 
 no prerendered HTML, the client-size systems could not work. I knew from experience that many static site generators 
-have an extensive API that creates a large gap between hello world and a real world implementation. I to avoid 
+have an extensive API that creates a large gap between hello world and a real world implementation. I tried to avoid 
 that pitfall and have PRPL do just two things, abstractly speaking:
 
 - Interpolate content into a template to output new pages
@@ -99,7 +99,7 @@ issues with things like the dev server and have to stop writing content to go fi
 part of the process.
 
 If you made it this far, thank you for reading! I'm not sure where "origin" stops and the "roadmap" begins, but I 
-suppose that's what they call the present.
+suppose that's the present.
 
 ---
 

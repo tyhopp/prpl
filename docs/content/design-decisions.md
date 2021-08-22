@@ -64,4 +64,4 @@ By betting on web APIs, you:
 
 ---
 
-See [platform APIs](/platform-apis) next.
+See [platform APIs](/platforms) next.

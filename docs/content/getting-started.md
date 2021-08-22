@@ -6,6 +6,8 @@ order: 02
 
 # Getting started
 
+PRPL requires a [current or LTS version](https://nodejs.org/en/about/releases/) of [Node](https://nodejs.org/en/).
+
 The recommended way to get started with PRPL is to run the initializer in your terminal:
 
 ```shell
@@ -18,6 +20,9 @@ The initializer ([`create-prpl`](https://github.com/tyhopp/create-prpl/blob/mast
 - Remove the git history from `prpl-starter-minimal`
 - Install [`@prpl/core`](https://github.com/tyhopp/prpl/blob/master/packages/core/README.md) and [`@prpl/server`](https://github.com/tyhopp/prpl/blob/master/packages/server/README.md)
 - Run the server locally at http://localhost:8000
+
+If you prefer not to run the initializer, feel free to either clone the [minimal starter repo](https://github.com/tyhopp/prpl-starter-minimal)
+or review it and start your own project by following the structure.
 
 ## Write your website
 
