@@ -16,7 +16,7 @@
     "build": "rm -rf dist && node scripts/build.js"
   },
   "dependencies": {
-    "@prpl/core": "^0.2.6",
+    "@prpl/core": "^0.2.7",
     "@prpl/plugin-code-highlight": "^0.3.1",
     "@prpl/plugin-css-imports": "^0.2.6",
     "@prpl/plugin-html-imports": "^0.2.6",
