@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.6](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.5...@prpl/core@0.2.6) (2021-10-29)
+
+
+### Bug Fixes
+
+* **core:** Client router error control flow ([f39ce42](https://github.com/tyhopp/prpl/commit/f39ce421be9bb60f7ac8df66b55f859d0349c1c0))
+
+
+
+
+
 ## [0.2.5](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.4...@prpl/core@0.2.5) (2021-08-22)
 
 
