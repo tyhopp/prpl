@@ -35,8 +35,7 @@ window?.addEventListener('popstate', (event: PopStateEvent) => {
     const html = sessionStorage?.getItem(`prpl-${url}`);
 
     if (!html) {
-      window?.location?.assign(url);
-      console.info('[PRPL] Routing natively. Reason:', `No cached html for route ${url}`);
+      throw new Error(`No cached html for route ${url}`);
     }
 
     const parser = new DOMParser();
