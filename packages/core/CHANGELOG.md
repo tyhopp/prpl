@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.7](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.6...@prpl/core@0.2.7) (2021-10-29)
+
+
+### Bug Fixes
+
+* **core:** Router array destructuring ([5f1ce20](https://github.com/tyhopp/prpl/commit/5f1ce208155e4a5b70ee369f37c68e7ededeace2))
+
+
+
+
+
 ## [0.2.6](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.5...@prpl/core@0.2.6) (2021-10-29)
 
 
