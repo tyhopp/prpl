@@ -28,10 +28,10 @@ function ignoreScript(script: HTMLHeadElement): boolean {
 }
 
 window?.addEventListener('popstate', (event: PopStateEvent) => {
-  const [url, hash] = window?.location?.href?.split('#');
-  const [targetUrl] = event?.state?.url?.split('#');
+  const [url, hash] = window?.location?.href?.split('#') || [];
 
   try {
+    const [targetUrl] = event?.state?.url?.split('#') || [];
     const html = sessionStorage?.getItem(`prpl-${url}`);
 
     if (!html) {
