@@ -1,5 +1,6 @@
 <!--
 title: Guides
+description: Guides for PRPL, a modular static site generator built for longevity.
 slug: /guides
 order: 05
 -->

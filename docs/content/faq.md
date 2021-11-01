@@ -1,5 +1,6 @@
 <!--
 title: FAQ
+description: Frequently asked questions about PRPL, a modular static site generator built for longevity.
 slug: /faq
 order: 08
 -->

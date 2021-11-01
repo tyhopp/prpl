@@ -1,5 +1,6 @@
 <!--
 title: Getting started
+description: How to get started with PRPL, a modular static site generator built for longevity.
 slug: /getting-started
 order: 02
 -->

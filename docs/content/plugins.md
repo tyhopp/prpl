@@ -1,5 +1,6 @@
 <!--
 title: Plugins
+description: Plugin library reference of PRPL, a modular static site generator built for longevity.
 slug: /plugins
 order: 04
 -->

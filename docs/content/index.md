@@ -1,5 +1,6 @@
 <!--
 title: PRPL
+description: PRPL is a modular static site generator built for longevity. It lets you interpolate content with a single HTML element.
 slug: /
 order: 01
 -->

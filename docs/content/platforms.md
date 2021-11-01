@@ -1,5 +1,6 @@
 <!--
 title: Platforms
+description: Platform support and APIs used by PRPL, a modular static site generator built for longevity.
 slug: /platforms
 order: 07
 -->

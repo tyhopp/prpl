@@ -1,5 +1,6 @@
 <!--
 title: Design decisions
+description: Design decisions made in the development of PRPL, a modular static site generator built for longevity.
 slug: /design-decisions
 order: 06
 -->

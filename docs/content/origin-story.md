@@ -1,5 +1,6 @@
 <!--
 title: Origin Story
+description: The origin story of PRPL, a modular static site generator built for longevity.
 slug: /origin-story
 order: 09
 -->
