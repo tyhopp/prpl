@@ -1,5 +1,6 @@
 <!--
 title: API reference
+description: API reference for PRPL, a modular static site generator built for longevity.
 slug: /api
 order: 03
 -->

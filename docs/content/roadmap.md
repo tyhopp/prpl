@@ -1,5 +1,6 @@
 <!--
 title: Roadmap
+description: The roadmap for PRPL, a modular static site generator built for longevity.
 slug: /roadmap
 order: 10
 -->
