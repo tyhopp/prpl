@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-cache",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "PRPL plugin for cache manipulation",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {

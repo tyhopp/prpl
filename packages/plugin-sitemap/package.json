@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-sitemap",
-  "version": "0.1.6",
+  "version": "0.1.7",
   "description": "PRPL plugin that generates a sitemap",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {

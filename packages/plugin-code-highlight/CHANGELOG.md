@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.2](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.3.1...@prpl/plugin-code-highlight@0.3.2) (2021-11-03)
+
+
+### Bug Fixes
+
+* **plugin-code-highlight:** Lock hljs to exact version ([e8c78ed](https://github.com/tyhopp/prpl/commit/e8c78ed0dfe706db6df69395f2ff4100912db848))
+
+
+
+
+
 ## [0.3.1](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.3.0...@prpl/plugin-code-highlight@0.3.1) (2021-10-29)
 
 **Note:** Version bump only for package @prpl/plugin-code-highlight
