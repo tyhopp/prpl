@@ -58,7 +58,7 @@ HTML if it exists, otherwise gracefully degrades to the browser's native routing
 ## Static site generator functionality
 
 The client-side experiment turned out fairly well and I turned my gaze to basic static site generation. If there is 
-no prerendered HTML, the client-size systems could not work. I knew from experience that many static site generators 
+no prerendered HTML, the client-side systems could not work. I knew from experience that many static site generators 
 have an extensive API that creates a large gap between hello world and a real world implementation. I tried to avoid 
 that pitfall and have PRPL do just two things, abstractly speaking:
 
