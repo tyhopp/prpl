@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
+import { performance } from 'perf_hooks';
 import {
   generateOrRetrieveFileSystemTree,
   log,
@@ -26,6 +27,9 @@ async function highlightCode(args?: {
   cachePartitionKey?: PRPLCachePartitionKey | string;
 }): Promise<PRPLCacheManager['cache']> {
   const { cachePartitionKey } = args || {};
+
+  // Start execution time stopwatch
+  const start = performance.now();
 
   // Define a new cache partition if one is not provided
   if (!cachePartitionKey) {
@@ -117,7 +121,13 @@ async function highlightCode(args?: {
   // Walk dist tree to generate sitemap urls
   await walkDistTree(distTree?.children || []);
 
-  log.info('Highlighted code');
+  // End execution time stopwatch
+  const end = performance.now();
+
+  // Calculate execution time
+  const executionTime = (end - start)?.toFixed(2) || '?';
+
+  log.info(`Code highlighted ~ ${executionTime} ms`);
 
   // Return cache as an artifact
   return PRPLCache?.cache;
