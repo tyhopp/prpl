@@ -1,5 +1,6 @@
 import { resolve } from 'path';
 import { copyFile } from 'fs/promises';
+import { performance } from 'perf_hooks';
 import { generateOrRetrieveFileSystemTree } from '../lib/generate-or-retrieve-fs-tree.js';
 import { log } from '../lib/log.js';
 import { cwd } from '../lib/cwd.js';
@@ -28,6 +29,9 @@ async function interpolate(args?: {
   options?: PRPLInterpolateOptions;
 }): Promise<PRPLCacheManager['cache']> {
   const { options = {} } = args || {};
+
+  // Start execution time stopwatch
+  const start = performance.now();
 
   // Make sure dist exists
   await ensureDir(resolve('dist'));
@@ -87,7 +91,13 @@ async function interpolate(args?: {
   // Walk source tree
   await walkSourceTree(srcTree?.children || []);
 
-  log.info('Build complete');
+  // End execution time stopwatch
+  const end = performance.now();
+
+  // Calculate execution time
+  const executionTime = (end - start)?.toFixed(2) || '?';
+
+  log.info(`Build complete ~ ${executionTime} ms`);
 
   // Return cache as an artifact
   return PRPLCache?.cache;
