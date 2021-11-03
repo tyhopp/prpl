@@ -6,3 +6,4 @@ dist
 *.local
 .idea
 .vscode
+tests/perf/content

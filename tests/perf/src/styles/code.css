@@ -1,0 +1,116 @@
+pre,
+code {
+    --code-text: var(--text);
+    --code-comment: slategray;
+    --code-punctuation: #999;
+    --code-keyword: #8a47f5;
+    --code-title: rgb(16, 163, 207);
+    --code-variable: #34c982;
+    --code-background: rgb(248, 248, 250);
+}
+
+@media (prefers-color-scheme: dark) {
+    pre,
+    code {
+        --code-text: var(--text);
+        --code-comment: slategray;
+        --code-punctuation: #999;
+        --code-keyword: #9166ff;
+        --code-title: #24c1f0;
+        --code-variable: #5fe3b9;
+        --code-background: rgb(12, 12, 26);
+    }
+}
+
+pre,
+code {
+    color: var(--code-text);
+    background-color: var(--code-background);
+    font-family: monospace;
+    font-size: 14px;
+    text-align: left;
+    white-space: pre;
+    line-height: 1.5;
+    word-spacing: normal;
+    word-break: normal;
+    word-wrap: normal;
+    border-radius: 0.3em;
+
+    -moz-tab-size: 2;
+    -o-tab-size: 2;
+    tab-size: 2;
+
+    -webkit-hyphens: none;
+    -moz-hyphens: none;
+    -ms-hyphens: none;
+    hyphens: none;
+}
+
+code::-moz-selection {
+    text-shadow: none;
+}
+
+code::selection {
+    text-shadow: none;
+}
+
+@media print {
+    code {
+        text-shadow: none;
+    }
+}
+
+pre {
+    padding: 1em;
+    margin: 0.5em 0;
+    overflow: auto;
+}
+
+:not(pre) > code {
+    white-space: normal;
+    padding: 0.25em;
+}
+
+.hljs-comment,
+.hljs-string {
+    color: var(--code-comment);
+}
+
+.hljs-tag,
+.hljs-punctuation {
+    color: var(--code-punctuation);
+}
+
+.hljs-type,
+.hljs-number,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-quote,
+.hljs-template-tag,
+.hljs-deletion {
+    color: var(--code-keyword);
+}
+
+.hljs-property {
+    color: var(--code-variable)
+}
+
+.hljs-title {
+    color: var(--code-title);
+}
+
+.hljs-keyword,
+.hljs-built_in {
+    color: var(--code-keyword);
+}
+
+.hljs-regexp,
+.hljs-symbol,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-link,
+.hljs-selector-attr,
+.hljs-operator,
+.hljs-selector-pseudo {
+    color: var(--code-variable);
+}

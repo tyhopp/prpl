@@ -1,0 +1,18 @@
+{
+  "name": "prpl-perf",
+  "version": "0.0.1",
+  "description": "PRPL large site performance test",
+  "private": true,
+  "scripts": {
+    "seed": "node scripts/seed.js",
+    "dev": "rm -rf dist && npm run build && prpl-server",
+    "build": "rm -rf dist && node scripts/build.js"
+  },
+  "dependencies": {
+    "@prpl/core": "^0.2.8",
+    "@prpl/plugin-code-highlight": "^0.3.2"
+  },
+  "devDependencies": {
+    "@prpl/server": "^0.1.6"
+  }
+}
