@@ -52,3 +52,7 @@ h1 {
   color: mediumslateblue;
 }
 ```
+
+### Notes
+
+This plugin should be disabled when using the PRPL dev server. The dev server is not yet aware of the graph of resources in your site and will not be able to detect changes in imported CSS files. There should be no difference in behavior given the [CSS at-rule](https://caniuse.com/?search=css%20import) is supported in all modern browsers.
