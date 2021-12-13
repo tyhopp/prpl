@@ -3,6 +3,8 @@
 A plugin for [PRPL](https://github.com/tyhopp/prpl) that resolves CSS import statements at build time. Useful to 
 avoid extra requests at runtime for imported CSS files.
 
+This plugin should be disabled when using the PRPL dev server. The dev server is not yet aware of the graph of resources in your site and will not be able to detect changes in imported CSS files. There should be no difference in behavior given the [CSS at-rule](https://caniuse.com/?search=css%20import) is supported in all modern browsers.
+
 ### Dependencies
 
 `@prpl/plugin-css-imports` has zero dependencies.
@@ -52,7 +54,3 @@ h1 {
   color: mediumslateblue;
 }
 ```
-
-### Notes
-
-This plugin should be disabled when using the PRPL dev server. The dev server is not yet aware of the graph of resources in your site and will not be able to detect changes in imported CSS files. There should be no difference in behavior given the [CSS at-rule](https://caniuse.com/?search=css%20import) is supported in all modern browsers.
