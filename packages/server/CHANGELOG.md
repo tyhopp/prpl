@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.7](https://github.com/tyhopp/prpl/compare/@prpl/server@0.1.6...@prpl/server@0.1.7) (2021-12-13)
+
+
+### Bug Fixes
+
+* **server:** HTML reload fails to send ws message to client ([b01a2d9](https://github.com/tyhopp/prpl/commit/b01a2d92f9603bca33046f27ba7a599e5fa65ee0))
+
+
+
+
+
 ## [0.1.6](https://github.com/tyhopp/prpl/compare/@prpl/server@0.1.5...@prpl/server@0.1.6) (2021-11-03)
 
 **Note:** Version bump only for package @prpl/server
