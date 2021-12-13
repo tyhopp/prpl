@@ -100,7 +100,7 @@ PRPL is structured as a library that consists of these modules:
 
 Commands for developing PRPL modules.
 
-- `npm run boostrap` to install local module dependencies
+- `npm run bootstrap` to install local module dependencies
 - `PACKAGE=[PACKAGE-NAME] npm run dev:package` from the project root to run an individual package in watch mode, e.g.
   `PACKAGE=core npm run dev` to run the core module
 - `npm run dev:client` from the project root to run client scripts in watch mode

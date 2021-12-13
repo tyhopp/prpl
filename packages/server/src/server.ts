@@ -119,7 +119,7 @@ async function injectSocketOptionally(filePath: string): Promise<void> {
     `<script dev>
       ${socket}
     </script>
-  </body>`
+  </head>`
   );
 
   socketInjectedPages?.push(filePath);
@@ -141,11 +141,9 @@ async function createOrUpdateFile(changedFilePath: string, event: string): Promi
   try {
     if (item?.extension === PRPLSourceFileExtension.html) {
       await interpolateHTML({ srcTree: item });
-      log.info(`${event === 'change' ? 'Updated' : 'Created'} ${item?.srcRelativeFilePath}`);
-      return;
+    } else {
+      await copyFile(item?.path, item?.targetFilePath);
     }
-
-    await copyFile(item?.path, item?.targetFilePath);
 
     ws?.send(item?.srcRelativeFilePath === '/index.html' ? '/' : item?.srcRelativeFilePath);
 
