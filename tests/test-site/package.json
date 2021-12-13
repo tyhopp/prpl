@@ -11,15 +11,15 @@
     "test": "cypress run --project .."
   },
   "dependencies": {
-    "@prpl/core": "^0.2.8",
-    "@prpl/plugin-code-highlight": "^0.3.2",
-    "@prpl/plugin-css-imports": "^0.2.7",
-    "@prpl/plugin-html-imports": "^0.2.7",
-    "@prpl/plugin-rss": "^0.2.6",
-    "@prpl/plugin-sitemap": "^0.1.7"
+    "@prpl/core": "^0.2.9",
+    "@prpl/plugin-code-highlight": "^0.3.3",
+    "@prpl/plugin-css-imports": "^0.2.8",
+    "@prpl/plugin-html-imports": "^0.2.8",
+    "@prpl/plugin-rss": "^0.2.7",
+    "@prpl/plugin-sitemap": "^0.1.8"
   },
   "devDependencies": {
-    "@prpl/server": "^0.1.6",
+    "@prpl/server": "^0.1.7",
     "cypress": "^8.2.0"
   }
 }

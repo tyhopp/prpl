@@ -1,6 +1,8 @@
 # @prpl/plugin-html-imports
 
-A plugin for [PRPL](https://github.com/tyhopp/prpl) that resolves HTML import statements at build time. Not recommended for use with any HTML you need live reloads of during development (see notes below).
+A plugin for [PRPL](https://github.com/tyhopp/prpl) that resolves HTML import statements at build time.
+
+The PRPL dev server is not yet aware of the graph of resources in your site and will not be able to detect changes in imported HTML files. Given that [HTML imports](https://caniuse.com/?search=html%20import) is a deprecated specification, it's recommended to only use this plugin for fragments of HTML that you do not need live reloads of during development (for example, meta tags).
 
 ### Dependencies
 
@@ -64,7 +66,3 @@ and [`resolveHTMLImports`](src/index.ts) is called, the output of HTML file `hel
   </body>
 </html>
 ```
-
-### Notes
-
-The PRPL dev server is not yet aware of the graph of resources in your site and will not be able to detect changes in imported HTML files. Given that [HTML imports](https://caniuse.com/?search=html%20import) is a deprecated specification, it's recommended to only use this plugin for fragments of HTML that you do not need live reloads of during development (for example, meta tags).
