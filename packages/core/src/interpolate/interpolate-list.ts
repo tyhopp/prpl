@@ -82,7 +82,7 @@ async function interpolateList(args: {
         typeof options?.templateRegex === 'function'
           ? options?.templateRegex(key)
           : new RegExp(`\\[${key}\\]`, 'g');
-      prplTemplateInstance = prplTemplateInstance?.replace(regex, metadata?.[key]);
+      prplTemplateInstance = `<p>Breaking deliberately, ${regex}</p>`;
     }
 
     fragmentList?.push({
