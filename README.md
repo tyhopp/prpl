@@ -100,17 +100,15 @@ PRPL is structured as a library that consists of these modules:
 
 Commands for developing PRPL modules.
 
+In this repo root:
+
 - `npm run bootstrap` to install local module dependencies
-- `PACKAGE=[PACKAGE-NAME] npm run dev:package` from the project root to run an individual package in watch mode, e.g.
-  `PACKAGE=core npm run dev` to run the core module
-- `npm run dev:client` from the project root to run client scripts in watch mode
-- `npm link` from the package root to symlink the local module globally
-- `npm link @prpl/[PACKAGE-NAME]` from your project root to symlink to the globally linked module, e.g. `npm link
-  @prpl/core` to link core
-- `npm unlink @prpl/[PACKAGE-NAME]` from your project root to undo the global symlink, e.g. `npm unlink @prpl/core`
-  to unlink core
-- `npm unlink -g` from the package root to unlink the package
-- `npm ls -g --depth=0 --link=true` to list all linked modules
+- `npm run dev -- [PKG]` to bundle a package in watch mode, e.g. `npm run dev -- core` to bundle core. One exception is client scripts in core, run `npm run dev -- client` instead
+
+In your project root:
+
+- `npm link @prpl/[PKG]` from your project root to symlink to the globally linked module, e.g. `npm link @prpl/core` to link core
+- `npm unlink -g @prpl/[PKG]` to unlink when you're done
 
 ## Testing
 
