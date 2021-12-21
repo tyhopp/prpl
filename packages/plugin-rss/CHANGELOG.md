@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.2.8](https://github.com/tyhopp/prpl/compare/@prpl/plugin-rss@0.2.7...@prpl/plugin-rss@0.2.8) (2021-12-21)
+
+
+### Bug Fixes
+
+* **plugin-rss:** Sort by date ([b303896](https://github.com/tyhopp/prpl/commit/b30389651a61bc8f35d103452812eea90263d256))
+
+
+
+
+
 ## [0.2.7](https://github.com/tyhopp/prpl/compare/@prpl/plugin-rss@0.2.6...@prpl/plugin-rss@0.2.7) (2021-12-13)
 
 **Note:** Version bump only for package @prpl/plugin-rss

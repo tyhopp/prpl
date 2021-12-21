@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.4](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.3.3...@prpl/plugin-code-highlight@0.3.4) (2021-12-21)
+
+**Note:** Version bump only for package @prpl/plugin-code-highlight
+
+
+
+
+
 ## [0.3.3](https://github.com/tyhopp/prpl/compare/@prpl/plugin-code-highlight@0.3.2...@prpl/plugin-code-highlight@0.3.3) (2021-12-13)
 
 **Note:** Version bump only for package @prpl/plugin-code-highlight
