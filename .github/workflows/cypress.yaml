@@ -20,7 +20,6 @@ jobs:
       - name: Test CommonJS interface
         uses: cypress-io/github-action@v2
         with:
-          install: false
           working-directory: tests/test-site
           start: npm run dev:cjs
           project: ..
@@ -31,7 +30,6 @@ jobs:
       - name: Test ESM interface
         uses: cypress-io/github-action@v2
         with:
-          install: false
           working-directory: tests/test-site
           start: npm run dev:mjs
           project: ..
