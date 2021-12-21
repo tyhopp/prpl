@@ -7,8 +7,8 @@ order: 03
 
 # API Reference
 
-PRPL has a deliberately small API surface area to minimize the gap between a hello world and real world 
-implementation. There are just two interfaces that can be used in HTML source files: [`page`](/api#page-tags) and 
+PRPL has a deliberately small API surface area to minimize the gap between a hello world and real world
+implementation. There are just two interfaces that can be used in HTML source files: [`page`](/api#page-tags) and
 [`list`](/api#list-tags).
 
 ## Page tags
@@ -19,7 +19,7 @@ A PRPL page tag looks like this, with required `type` and `src` attributes:
 <prpl type="page" src="content"></prpl>
 ```
 
-PRPL page tags are used when you have an HTML source file or "template", and you want to render many pages using 
+PRPL page tags are used when you have an HTML source file or "template", and you want to render many pages using
 that template but with different content. For example:
 
 Given this source HTML file in `src/index.html`:
@@ -69,18 +69,18 @@ the output is this file in `dist/hello-world.html`:
 - An output file will be generated for each file in the content directory
 - The location in the file system of the source file determines the location of the output files
 
-See the [source code handling page tags in @prpl/core](https://github.com/tyhopp/prpl/blob/master/packages/core/src/interpolate/interpolate-page.ts).
+See the [source code handling page tags in @prpl/core](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/interpolate-page.ts).
 
 ## List tags
 
-A PRPL list tag looks like this, with required attributes `type` and `src` and optional attributes `sort-by`, 
+A PRPL list tag looks like this, with required attributes `type` and `src` and optional attributes `sort-by`,
 `direction` and `limit`:
 
 ```html
 <prpl type="list" src="content"></prpl>
 ```
 
-PRPL list tags are used when you have an HTML source file or "template", and you want to render a list within that 
+PRPL list tags are used when you have an HTML source file or "template", and you want to render a list within that
 same template using content files. For example:
 
 Given this source HTML file in `src/index.html`:
@@ -115,7 +115,6 @@ This is my first note
 ```
 
 the output is this file in `dist/index.html`:
-
 
 ```html
 <!DOCTYPE html>
@@ -153,7 +152,7 @@ Additional notes:
 - `sort-by` uses the [`Array.prototype.sort()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/sort) web API
 - The only special cases handled at present are dates, if the metadata key is `date` or `time`
 
-See the [source code handling list tags in @prpl/core](https://github.com/tyhopp/prpl/blob/master/packages/core/src/interpolate/interpolate-list.ts).
+See the [source code handling list tags in @prpl/core](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/interpolate-list.ts).
 
 ## Content metadata
 
@@ -220,21 +219,21 @@ async function build() {
 build();
 ```
 
-- `noClientJS` will output zero client-side JavaScript. Your site will no longer take advantage of the prefetch and 
+- `noClientJS` will output zero client-side JavaScript. Your site will no longer take advantage of the prefetch and
   router systems PRPL offers and will use the browser's native routing and caching systems instead
-- `templateRegex` lets you define the how you want PRPL to look for things to replace during interpolation. The 
-  default is `[my-metadata-key]`, but you can define `{my-metadata-key}` or `{{ my-metadata-key }}` or whatever suits 
+- `templateRegex` lets you define the how you want PRPL to look for things to replace during interpolation. The
+  default is `[my-metadata-key]`, but you can define `{my-metadata-key}` or `{{ my-metadata-key }}` or whatever suits
   your preference
-- `markedOptions` are options you can pass to [`marked`](https://marked.js.org/using_advanced#options), the only 
+- `markedOptions` are options you can pass to [`marked`](https://marked.js.org/using_advanced#options), the only
   dependency of `@prpl/core`
 
 ## Events
 
-PRPL's routing system [dispatches](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent) a 
-[CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent), `prpl-render`, which fires at the end of 
+PRPL's routing system [dispatches](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/dispatchEvent) a
+[CustomEvent](https://developer.mozilla.org/en-US/docs/Web/API/CustomEvent), `prpl-render`, which fires at the end of
 HTML diffing during a page navigation.
 
-It can be listened for like any regular event. For example, you can listen for `prpl-render` and dynamically build a 
+It can be listened for like any regular event. For example, you can listen for `prpl-render` and dynamically build a
 table of contents at runtime:
 
 ```javascript
@@ -265,7 +264,7 @@ window.addEventListener('load', generateContents);
 window.addEventListener('prpl-render', generateContents);
 ```
 
-Do note that if you are listening for `prpl-render`, you probably also want to listen to `load` in case the page is 
+Do note that if you are listening for `prpl-render`, you probably also want to listen to `load` in case the page is
 refreshed or the routing system gracefully degrades to native router browsing.
 
 ---
