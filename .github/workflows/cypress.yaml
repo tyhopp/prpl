@@ -5,23 +5,29 @@ on:
     types: [opened, synchronize]
 
 jobs:
-  cypress-run:
+  test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Test CommonJS Interface
+      - name: Install monorepo tools
+        run: npm i
+
+      - name: Build PRPL modules
+        run: npm run bootstrap && npm run build:all
+
+      - name: Test CommonJS interface
         uses: cypress-io/github-action@v2
         with:
           working-directory: tests/test-site
           start: npm run dev:cjs
           project: ..
 
-      - name: Cleanup
+      - name: Kill dev server
         run: sudo kill -9 `sudo lsof -t -i:8000`
 
-      - name: Test ESM Interface
+      - name: Test ESM interface
         uses: cypress-io/github-action@v2
         with:
           working-directory: tests/test-site
