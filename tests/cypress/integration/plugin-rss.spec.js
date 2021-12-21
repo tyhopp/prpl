@@ -57,15 +57,18 @@ describe('RSS plugin', () => {
     expect(feed.querySelectorAll('feed > entry').length).to.equal(2);
   });
 
+  // All queries for entries should yield entry B before A given entry B's date is more recent.
+  // This is tested implicitly in the below tests.
+
   it('should output entry ids', () => {
-    const [entryA, entryB] = feed.querySelectorAll('feed > entry');
+    const [entryB, entryA] = feed.querySelectorAll('feed > entry');
 
     expect(entryA.querySelector('id').textContent).to.equal(`${origin}/${a.slug}`);
     expect(entryB.querySelector('id').textContent).to.equal(`${origin}/${b.slug}`);
   });
 
   it('should output entry published timestamps', () => {
-    const [entryA, entryB] = feed.querySelectorAll('feed > entry');
+    const [entryB, entryA] = feed.querySelectorAll('feed > entry');
 
     const dateA = new Date(a.date);
     const isoDateA = dateA?.toISOString();
@@ -78,7 +81,7 @@ describe('RSS plugin', () => {
   });
 
   it('should output entry updated timestamps', () => {
-    const [entryA, entryB] = feed.querySelectorAll('feed > entry');
+    const [entryB, entryA] = feed.querySelectorAll('feed > entry');
 
     const dateA = new Date(a.date);
     const isoDateA = dateA?.toISOString();
@@ -91,35 +94,35 @@ describe('RSS plugin', () => {
   });
 
   it('should output entry titles', () => {
-    const [entryA, entryB] = feed.querySelectorAll('feed > entry');
+    const [entryB, entryA] = feed.querySelectorAll('feed > entry');
 
     expect(entryA.querySelector('title').textContent).to.equal(a.title);
     expect(entryB.querySelector('title').textContent).to.equal(b.title);
   });
 
   it('should output entry alternate links', () => {
-    const [entryA, entryB] = feed.querySelectorAll('feed > entry');
+    const [entryB, entryA] = feed.querySelectorAll('feed > entry');
 
     expect(entryA.querySelector('link').getAttribute('href')).to.equal(`${origin}/${a.slug}`);
     expect(entryB.querySelector('link').getAttribute('href')).to.equal(`${origin}/${b.slug}`);
   });
 
   it('should output entry authors', () => {
-    const [entryA, entryB] = feed.querySelectorAll('feed > entry');
+    const [entryB, entryA] = feed.querySelectorAll('feed > entry');
 
     expect(entryA.querySelector('author > name').textContent).to.equal(author);
     expect(entryB.querySelector('author > name').textContent).to.equal(author);
   });
 
   it('should output entry summaries', () => {
-    const [entryA, entryB] = feed.querySelectorAll('feed > entry');
+    const [entryB, entryA] = feed.querySelectorAll('feed > entry');
 
     expect(entryA.querySelector('summary').textContent).to.equal(a.description);
     expect(entryB.querySelector('summary').textContent).to.equal(b.description);
   });
 
   it('should output entry content links', () => {
-    const [entryA, entryB] = feed.querySelectorAll('feed > entry');
+    const [entryB, entryA] = feed.querySelectorAll('feed > entry');
 
     expect(entryA.querySelector('content').getAttribute('src')).to.equal(`${origin}/${a.slug}`);
     expect(entryB.querySelector('content').getAttribute('src')).to.equal(`${origin}/${b.slug}`);

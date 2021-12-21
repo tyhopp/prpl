@@ -52,16 +52,30 @@ async function generateRSSFeed(args: {
     )
   });
 
-  // Iterate over tree items
-  for (let i = 0; i < contentTree?.children?.length; i++) {
-    const { src, srcRelativeFilePath } = contentTree?.children?.[i];
+  let files = [];
 
+  // Extract metadata out of files
+  for (const { src, srcRelativeFilePath } of contentTree?.children) {
     const metadata = await parsePRPLMetadata({
       src,
       srcRelativeFilePath
     });
 
-    const { title, slug, date, description } = metadata || {};
+    files.push(metadata);
+  }
+
+  // Sort files by date if there is one
+  let sortedFiles = files?.sort((a, b) => {
+    if (a?.date && b?.date) {
+      return new Date(b?.date)?.getTime() - new Date(a?.date)?.getTime();
+    } else {
+      return 0;
+    }
+  });
+
+  // Construct entries from files
+  for (const file of sortedFiles) {
+    const { title, slug, date, description } = file || {};
 
     const rawDate = new Date(date);
     const isoDate = rawDate?.toISOString();
