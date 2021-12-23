@@ -15,14 +15,14 @@ The recommended way to get started with PRPL is to run the initializer in your t
 npx -y create-prpl@latest
 ```
 
-The initializer ([`create-prpl`](https://github.com/tyhopp/create-prpl/blob/main/index.js)) does the following things:
+The initializer ([`create-prpl`](https://github.com/tyhopp/prpl/tree/main/packages/create-prpl)) does the following things:
 
-- Clone the [`prpl-starter-minimal`](https://github.com/tyhopp/prpl-starter-minimal) repo
-- Remove the git history from `prpl-starter-minimal`
+- Clone the [basic example site](https://github.com/tyhopp/prpl/tree/main/examples/basic) repo
+- Remove the git history from the basic example site
 - Install [`@prpl/core`](https://github.com/tyhopp/prpl/blob/main/packages/core/README.md) and [`@prpl/server`](https://github.com/tyhopp/prpl/blob/main/packages/server/README.md)
 - Run the server locally at http://localhost:8000
 
-If you prefer not to run the initializer, feel free to either clone the [minimal starter repo](https://github.com/tyhopp/prpl-starter-minimal)
+If you prefer not to run the initializer, feel free to either clone the [basic example](https://github.com/tyhopp/prpl/tree/main/examples/basic)
 or review it and start your own project by following the structure.
 
 ## Write your website
@@ -30,7 +30,7 @@ or review it and start your own project by following the structure.
 From here you can adapt your project to your liking. The structure of a PRPL site looks like this:
 
 ```asciidoc
-prpl-starter-minimal
+prpl-example-basic
   └─ content
   └─ dist
   └─ src
