@@ -16,7 +16,7 @@ function sh(cmd: string, args = {}): void {
 }
 
 // Clone basic starter via sparse checkout, GitHub since Git v2.19
-sh(`git clone ${repo} -b chore-examples --depth 1 --single-branch --quiet --sparse`);
+sh(`git clone ${repo} --depth 1 --single-branch --quiet --sparse`);
 sh(`git sparse-checkout set examples/${example}`, { cwd: path.resolve('prpl') });
 
 // Collapse and rename example
