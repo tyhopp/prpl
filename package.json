@@ -5,13 +5,13 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap && lerna exec npm install",
-    "clear": "rm -rf ./packages/*/dist",
-    "dev": "bash ./scripts/dev.sh",
-    "build:all": "npm run clear && for dir in packages/*; do package=${dir#'packages/'}; rollup -c rollup-package.config.js --scope @prpl/$package || exit 1; done && npx rollup -c rollup-client.config.js",
-    "build:changed": "npm run clear && lerna changed | while read package; do npx rollup -c rollup-package.config.js --scope $package || exit 1; done && npx rollup -c rollup-client.config.js",
+    "clear": "rm -rf packages/*/dist",
+    "dev": "bash scripts/dev.sh",
+    "build:all": "bash scripts/build-all.sh",
+    "build:changed": "bash scripts/build-changed.sh",
     "release:changed": "npm run build:changed && lerna publish",
     "release:all": "npm run build:all && lerna publish",
-    "reset": "npm run clear && rm -rf ./**/.cache && rm -rf ./**/node_modules && rm -rf ./package.lock && npm run bootstrap",
+    "reset": "bash scripts/reset.sh",
     "update:sites": "bash ./scripts/update-sites.sh"
   },
   "devDependencies": {
