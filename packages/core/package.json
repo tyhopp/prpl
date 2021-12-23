@@ -1,6 +1,6 @@
 {
   "name": "@prpl/core",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "HTML-based static site generator",
   "author": "Ty Hopp (https://tyhopp.com)",
   "bin": {

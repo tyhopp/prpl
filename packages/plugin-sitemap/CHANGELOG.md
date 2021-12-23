@@ -3,6 +3,14 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.10](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.9...@prpl/plugin-sitemap@0.1.10) (2021-12-23)
+
+**Note:** Version bump only for package @prpl/plugin-sitemap
+
+
+
+
+
 ## [0.1.9](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.8...@prpl/plugin-sitemap@0.1.9) (2021-12-21)
 
 **Note:** Version bump only for package @prpl/plugin-sitemap
