@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <base href="/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>Notes</title>
+    <link href="styles/global.css" rel="stylesheet" />
+    <link href="/notes.css" rel="stylesheet" />
+  </head>
+  <body>
+    <main class="notes">
+      <h1 class="notes-title">Notes</h1>
+      <prpl type="list" sort-by="date" direction="desc" src="content/notes">
+        <article>
+          <a href="[slug]">
+            <h3>[title]</h3>
+          </a>
+          <p>[description]</p>
+          <time>[date]</time>
+          <span>[categories]</span>
+        </article>
+      </prpl>
+    </main>
+  </body>
+</html>

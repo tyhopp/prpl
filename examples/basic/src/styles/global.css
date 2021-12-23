@@ -1,0 +1,40 @@
+* {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+:root {
+  --text: #000;
+  --background: #fff;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --text: #fff;
+    --background: #000;
+  }
+}
+
+body {
+  font-family: 'system-ui', sans-serif;
+  font-size: 16px;
+  line-height: 26px;
+  letter-spacing: 0.2px;
+  color: var(--text);
+  background-color: var(--background);
+}
+
+main {
+  margin: 2em;
+}
+
+a {
+  text-decoration: none;
+  padding-bottom: 0.1em;
+  border-bottom: 1px dashed;
+}
+
+a:link,
+a:visited {
+  color: var(--text);
+}

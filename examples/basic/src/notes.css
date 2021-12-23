@@ -1,0 +1,24 @@
+.notes {
+  margin: 0 auto;
+  width: 300px;
+}
+
+.notes-title {
+  text-align: center;
+}
+
+article {
+  margin: 2em 0;
+}
+
+article > * {
+  margin: 0 0 0.5em 0;
+}
+
+h3 {
+  margin: 0 0 0.5em 0;
+}
+
+time {
+  display: block;
+}
