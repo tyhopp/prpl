@@ -33,6 +33,9 @@ async function bundle(cliArgs) {
     const basePath = relative(__dirname, pkg.location);
     const input = join(basePath, 'src/index.ts');
     const { name } = pkg.toJSON();
+    
+    const initializer = pkg.name === 'create-prpl';
+    const banner = initializer ? '#!/usr/bin/env node\n' : '';
 
     config.push({
       input,
@@ -42,14 +45,16 @@ async function bundle(cliArgs) {
           format: 'cjs',
           sourcemap: false,
           dir: `${basePath}/dist`,
-          entryFileNames: '[name].cjs'
+          entryFileNames: '[name].cjs',
+          banner
         },
         {
           name,
           format: 'es',
           sourcemap: false,
           dir: `${basePath}/dist`,
-          entryFileNames: '[name].mjs'
+          entryFileNames: '[name].mjs',
+          banner
         }
       ],
       external: ['fs/promises'],
@@ -60,7 +65,11 @@ async function bundle(cliArgs) {
         sourcemaps(),
         nodeResolve(),
         commonjs(),
-        typescript(),
+        typescript({
+          tsconfigOverride: {
+            include: [join(basePath, '**/*')]
+          }
+        }),
         analyze({
           summaryOnly: true,
           onAnalysis: () => {
