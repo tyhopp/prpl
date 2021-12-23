@@ -10,7 +10,7 @@
     "build:all": "bash scripts/build-all.sh",
     "build:changed": "bash scripts/build-changed.sh",
     "release:changed": "npm run build:changed && lerna publish",
-    "release:all": "npm run build:all && lerna publish",
+    "release:all": "npm run build:all && lerna publish --force-publish",
     "reset": "bash scripts/reset.sh",
     "update:sites": "bash ./scripts/update-sites.sh"
   },
