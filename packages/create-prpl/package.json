@@ -1,6 +1,6 @@
 {
   "name": "create-prpl",
-  "version": "0.0.30",
+  "version": "0.0.31",
   "description": "Initializer for PRPL projects",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
