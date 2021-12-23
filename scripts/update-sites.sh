@@ -5,7 +5,7 @@ cd docs
 npm i @prpl/core@latest @prpl/plugin-code-highlight@latest @prpl/plugin-css-imports@latest @prpl/plugin-html-imports@latest @prpl/plugin-sitemap@latest && npm i -D @prpl/server@latest
 cd ..
 git add .
-git commit -m "docs: Update PRPL deps"
+git commit -m "chore(docs): Update PRPL deps"
 
 # Example sites --------------------------------------------------
 
