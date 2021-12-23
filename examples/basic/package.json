@@ -7,9 +7,9 @@
     "build": "rm -rf dist && prpl"
   },
   "dependencies": {
-    "@prpl/core": "^0.2.10"
+    "@prpl/core": "^0.2.11"
   },
   "devDependencies": {
-    "@prpl/server": "^0.1.8"
+    "@prpl/server": "^0.1.9"
   }
 }
