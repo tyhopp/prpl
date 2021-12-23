@@ -1,0 +1,15 @@
+{
+  "name": "prpl-example-basic",
+  "version": "0.0.1",
+  "description": "Basic PRPL example site",
+  "scripts": {
+    "dev": "rm -rf dist && prpl && prpl-server",
+    "build": "rm -rf dist && prpl"
+  },
+  "dependencies": {
+    "@prpl/core": "^0.2.10"
+  },
+  "devDependencies": {
+    "@prpl/server": "^0.1.8"
+  }
+}

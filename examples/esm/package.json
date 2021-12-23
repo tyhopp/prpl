@@ -1,0 +1,17 @@
+{
+  "name": "prpl-example-esm",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Example site using PRPL in an ECMAScript module",
+  "type": "module",
+  "scripts": {
+    "dev": "rm -rf dist && node scripts/build.js && prpl-server",
+    "build": "rm -rf dist && node scripts/build.js"
+  },
+  "dependencies": {
+    "@prpl/core": "^0.2.10"
+  },
+  "devDependencies": {
+    "@prpl/server": "^0.1.8"
+  }
+}
