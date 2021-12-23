@@ -16,13 +16,13 @@
     "build": "rm -rf dist && node scripts/build.js"
   },
   "dependencies": {
-    "@prpl/core": "^0.2.10",
-    "@prpl/plugin-code-highlight": "^0.3.4",
-    "@prpl/plugin-css-imports": "^0.2.9",
-    "@prpl/plugin-html-imports": "^0.2.9",
-    "@prpl/plugin-sitemap": "^0.1.9"
+    "@prpl/core": "^0.2.11",
+    "@prpl/plugin-code-highlight": "^0.3.5",
+    "@prpl/plugin-css-imports": "^0.2.10",
+    "@prpl/plugin-html-imports": "^0.2.10",
+    "@prpl/plugin-sitemap": "^0.1.10"
   },
   "devDependencies": {
-    "@prpl/server": "^0.1.8"
+    "@prpl/server": "^0.1.9"
   }
 }
