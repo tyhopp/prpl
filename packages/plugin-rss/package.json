@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-rss",
-  "version": "0.2.9",
+  "version": "0.2.10",
   "description": "PRPL plugin that generates an Atom RSS feed",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
