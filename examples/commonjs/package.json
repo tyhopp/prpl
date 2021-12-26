@@ -7,9 +7,9 @@
     "build": "rm -rf dist && node scripts/build.js"
   },
   "dependencies": {
-    "@prpl/core": "^0.2.11"
+    "@prpl/core": "^0.2.12"
   },
   "devDependencies": {
-    "@prpl/server": "^0.1.9"
+    "@prpl/server": "^0.1.10"
   }
 }
