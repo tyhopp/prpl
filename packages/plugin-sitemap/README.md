@@ -8,7 +8,7 @@ A plugin for [PRPL](https://github.com/tyhopp/prpl) that generates a sitemap.
 
 ### Functions
 
-[`generateSitemap`](src/index.ts) is the only export. See [the source code](src/index.ts) for its signature.
+[`generateSitemap`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-sitemap/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-sitemap/src/index.ts) for its signature.
 
 ### Usage
 

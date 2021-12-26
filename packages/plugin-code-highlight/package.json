@@ -1,7 +1,7 @@
 {
   "name": "@prpl/plugin-code-highlight",
   "version": "0.3.5",
-  "description": "PRPL plugin that highlights code with Prism",
+  "description": "PRPL plugin that highlights code blocks with Highlight.js",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
     "./package.json": "./package.json",

@@ -11,7 +11,7 @@ This plugin should be disabled when using the PRPL dev server. The dev server is
 
 ### Functions
 
-[`resolveCSSImports`](src/index.ts) is the only export. See [the source code](src/index.ts) for its signature.
+[`resolveCSSImports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-css-imports/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-css-imports/src/index.ts) for its signature.
 
 ### Usage
 
@@ -43,7 +43,7 @@ p {
 }
 ```
 
-and [`resolveCSSImports`](src/index.ts) is called, the output of CSS file `a.css` will be:
+and [`resolveCSSImports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-css-imports/src/index.ts) is called, the output of CSS file `a.css` will be:
 
 ```css
 p {

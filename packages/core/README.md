@@ -25,13 +25,13 @@ browser. All functions have types and explicit comments in the source files so f
 
 | Function | Description |
 | --- | --- |
-| [`interpolate`](src/interpolate/interpolate.ts) | Entry point that recursively walks the source file system tree |
-| [`interpolateHTML`](src/interpolate/interpolate-html.ts) | Interpolates an HTML file found in [`interpolate`](src/interpolate/interpolate.ts) |
-| [`interpolateList`](src/interpolate/interpolate-list.ts) | Interpolates a `<prpl>` tag of type `list` |
-| [`interpolatePage`](src/interpolate/interpolate-page.ts) | Interpolates a `<prpl>` tag of type `page` |
-| [`parsePRPLAttributes`](src/interpolate/parse-prpl-attributes.ts) | Parses attributes of a `<prpl>` tag |
-| [`parsePRPLMetadata`](src/interpolate/parse-prpl-metadata.ts) | Parses metadata at the top of each content file |
-| [`transformMarkdown`](src/interpolate/transform-markdown.ts) | Transforms markdown into HTML |
+| [`interpolate`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/interpolate.ts) | Entry point that recursively walks the source file system tree |
+| [`interpolateHTML`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/interpolate-html.ts) | Interpolates an HTML file found in [`interpolate`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/interpolate.ts) |
+| [`interpolateList`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/interpolate-list.ts) | Interpolates a `<prpl>` tag of type `list` |
+| [`interpolatePage`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/interpolate-page.ts) | Interpolates a `<prpl>` tag of type `page` |
+| [`parsePRPLAttributes`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/parse-prpl-attributes.ts) | Parses attributes of a `<prpl>` tag |
+| [`parsePRPLMetadata`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/parse-prpl-metadata.ts) | Parses metadata at the top of each content file |
+| [`transformMarkdown`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/transform-markdown.ts) | Transforms markdown into HTML |
 
 ### Library functions
 
@@ -39,29 +39,29 @@ A mix of extended builtin functions and PRPL-specific functions.
 
 | Function | Description |
 | --- | --- |
-| [`cache`](src/lib/cache.ts) | In-memory cache that supports user-defined partitions |
-| [`cwd`](src/lib/cwd.ts) | Calculates current working directory relative to the calling file |
-| [`ensureDir`](src/lib/ensure-dir.ts) | Ensure a directory exists given an absolute path |
-| [`ensureFile`](src/lib/ensure-file.ts) | Ensure a file exists given an absolute path |
-| [`exists`](src/lib/exists.ts) | Check whether an entity exists given an absolute path |
-| [`generateFileSystemTree`](src/lib/generate-fs-tree.ts) | Generates an object that represents a file system |
-| [`generateOrRetrieveFileSystemTree`](src/lib/generate-or-retrieve-fs-tree.ts) | Retrieve a cached file system tree or generate and cache a new one |
-| [`log`](src/lib/log.ts) | Console wrapper providing context and color |
-| [`readDirSafe`](src/lib/read-dir-safe.ts) | Read only directories that have access permission |
+| [`cache`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/cache.ts) | In-memory cache that supports user-defined partitions |
+| [`cwd`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/cwd.ts) | Calculates current working directory relative to the calling file |
+| [`ensureDir`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/ensure-dir.ts) | Ensure a directory exists given an absolute path |
+| [`ensureFile`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/ensure-file.ts) | Ensure a file exists given an absolute path |
+| [`exists`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/exists.ts) | Check whether an entity exists given an absolute path |
+| [`generateFileSystemTree`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/generate-fs-tree.ts) | Generates an object that represents a file system |
+| [`generateOrRetrieveFileSystemTree`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/generate-or-retrieve-fs-tree.ts) | Retrieve a cached file system tree or generate and cache a new one |
+| [`log`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/log.ts) | Console wrapper providing context and color |
+| [`readDirSafe`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/read-dir-safe.ts) | Read only directories that have access permission |
 
 ### Client-side JavaScript files
 
-Unless the user opts-out via the options argument in [`interpolate`](src/interpolate/interpolate.ts), this module 
+Unless the user opts-out via the options argument in [`interpolate`](https://github.com/tyhopp/prpl/blob/main/packages/core/src/interpolate/interpolate.ts), this module 
 will include 3 small JavaScript files in the site to enable [the PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/) at runtime.
 
 | File | Description |
 | --- | --- |
-| [`prefetch`](src/client/prefetch.ts) | Schedule prefetch requests for links found in the current page |
-| [`prefetchWorker`](src/client/prefetch-worker.ts) | Worker that executes prefetch requests off the main thread |
-| [`router`](src/client/router.ts) | Router that serves prefetched HTML or gracefully degrades to browser-native routing |
+| [`prefetch`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/client/prefetch.ts) | Schedule prefetch requests for links found in the current page |
+| [`prefetchWorker`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/client/prefetch-worker.ts) | Worker that executes prefetch requests off the main thread |
+| [`router`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/client/router.ts) | Router that serves prefetched HTML or gracefully degrades to browser-native routing |
 
 ### Types
 
 TypeScript types that are used in all PRPL modules.
 
-See [PRPL types](src/types/prpl.ts).
+See [PRPL types](https://github.com/tyhopp/prpl/tree/main/packages/core/src/types/prpl.ts).

@@ -10,7 +10,7 @@ The PRPL dev server is not yet aware of the graph of resources in your site and 
 
 ### Functions
 
-[`resolveHTMLImports`](src/index.ts) is the only export. See [the source code](src/index.ts) for its signature.
+[`resolveHTMLImports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-html-imports/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-html-imports/src/index.ts) for its signature.
 
 ### Usage
 
@@ -49,7 +49,7 @@ and an HTML fragment `meta.html`:
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 ```
 
-and [`resolveHTMLImports`](src/index.ts) is called, the output of HTML file `hello-world.html` will be:
+and [`resolveHTMLImports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-html-imports/src/index.ts) is called, the output of HTML file `hello-world.html` will be:
 
 ```html
 <html lang="en">

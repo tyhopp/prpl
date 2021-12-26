@@ -83,14 +83,14 @@ PRPL is structured as a library that consists of these modules:
 
 | Module | Description |
 | --- | --- |
-| [`@prpl/core`](packages/core/README.md) | Core functions for content interpolation |
-| [`@prpl/server`](packages/server/README.md) | Development server |
-| [`@prpl/plugin-aws`](packages/plugin-aws/README.md) | Plugin for working with AWS S3 |
-| [`@prpl/plugin-code-highlight`](packages/plugin-code-highlight/README.md) | Plugin for highlighting code blocks |
-| [`@prpl/plugin-css-imports`](packages/plugin-css-imports/README.md) | Plugin for resolving CSS imports |
-| [`@prpl/plugin-html-imports`](packages/plugin-html-imports/README.md) | Plugin for resolving HTML imports |
-| [`@prpl/plugin-rss`](packages/plugin-rss/README.md) | Plugin for generating RSS feeds |
-| [`@prpl/plugin-sitemap`](packages/plugin-sitemap/README.md) | Plugin for generating a sitemap |
+| [`@prpl/core`](https://github.com/tyhopp/prpl/tree/main/packages/core) | Core functions for content interpolation |
+| [`@prpl/server`](https://github.com/tyhopp/prpl/tree/main/packages/server) | Development server |
+| [`@prpl/plugin-aws`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-aws) | Plugin for working with AWS S3 |
+| [`@prpl/plugin-code-highlight`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-code-highlight) | Plugin for highlighting code blocks |
+| [`@prpl/plugin-css-imports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-css-imports) | Plugin for resolving CSS imports |
+| [`@prpl/plugin-html-imports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-html-imports) | Plugin for resolving HTML imports |
+| [`@prpl/plugin-rss`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-rss) | Plugin for generating RSS feeds |
+| [`@prpl/plugin-sitemap`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-sitemap) | Plugin for generating a sitemap |
 
 - `@prpl/core` is the only required module for a site to interpolate content into HTML, others are optional
 - `@prpl/server` is easily replaced with other local development servers, you're not married to it if you use PRPL

@@ -5,7 +5,7 @@ is optional.
 
 ### Dependencies
 
-[`@prpl/server`](src/server.ts) is the only module with more than one dependency:
+[`@prpl/server`](https://github.com/tyhopp/prpl/tree/main/packages/server/src/server.ts) is the only module with more than one dependency:
 
 - [chokidar](https://github.com/paulmillr/chokidar) for watching file system changes
 - [faye-websocket](https://github.com/faye/faye-websocket-node) as a websocket interface on the client and server

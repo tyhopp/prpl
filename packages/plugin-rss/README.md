@@ -9,7 +9,7 @@ A plugin for [PRPL](https://github.com/tyhopp/prpl) that generates [Atom feeds](
 
 ### Functions
 
-[`generateRSSFeed`](src/index.ts) is the only export. See [the source code](src/index.ts) for its signature.
+[`generateRSSFeed`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-rss/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-rss/src/index.ts) for its signature.
 
 ### Usage
 
