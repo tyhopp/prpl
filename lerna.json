@@ -8,7 +8,7 @@
   "command": {
     "publish": {
        "conventionalCommits": true,
-       "ignoreChanges": ["**/*.md", "**/package-lock.json"]
+       "ignoreChanges": ["**/package-lock.json"]
     }
   }
 }
