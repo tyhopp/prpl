@@ -9,7 +9,7 @@ git commit -m "chore(docs): Update PRPL deps"
 
 # Example sites --------------------------------------------------
 
-examples=("basic" "esm" "commonjs")
+examples=("basic" "esm" "commonjs" "deno")
 
 for example in ${examples[@]}; do
   cd "examples/${example}"
