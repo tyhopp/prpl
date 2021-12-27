@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "dev": "rm -rf dist && node scripts/build.js && prpl-server",
-    "build": "deno run --unstable --compat --allow-read --allow-write --allow-net --import-map=@prpl/core/deno-import-map.json scripts/build.js"
+    "build": "deno run --unstable --compat --allow-read --allow-write --allow-net --import-map=node_modules/@prpl/core/deno-import-map.json scripts/build.js"
   },
   "dependencies": {
     "@prpl/core": "^0.3.0"
