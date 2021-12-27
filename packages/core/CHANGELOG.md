@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.3.1](https://github.com/tyhopp/prpl/compare/@prpl/core@0.3.0...@prpl/core@0.3.1) (2021-12-27)
+
+
+### Bug Fixes
+
+* Remove unnecessary stat lib func ([0652c5a](https://github.com/tyhopp/prpl/commit/0652c5a49bbdaaf39329ff8bd4b2f6214960af84))
+
+
+
+
+
 # [0.3.0](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.12...@prpl/core@0.3.0) (2021-12-27)
 
 
