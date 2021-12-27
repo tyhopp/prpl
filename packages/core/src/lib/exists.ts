@@ -1,4 +1,4 @@
-import { stat } from './stat.js';
+import { stat } from 'fs/promises';
 import { log } from './log.js';
 
 /**

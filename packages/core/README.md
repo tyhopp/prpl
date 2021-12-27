@@ -48,7 +48,6 @@ A mix of extended builtin functions and PRPL-specific functions.
 | [`generateOrRetrieveFileSystemTree`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/generate-or-retrieve-fs-tree.ts) | Retrieve a cached file system tree or generate and cache a new one |
 | [`log`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/log.ts) | Console wrapper providing context and color |
 | [`readDirSafe`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/read-dir-safe.ts) | Read only directories that have access permission |
-| [`stat`](https://github.com/tyhopp/prpl/tree/main/packages/core/src/lib/stat.ts) | Wrapper around Node `stat` for Deno compatibility |
 
 ### Client-side JavaScript files
 
