@@ -1,4 +1,5 @@
-import { readFile, stat } from 'fs/promises';
+import { readFile } from 'fs/promises';
+import { stat } from './stat.js';
 import { basename, extname, join, parse, resolve } from 'path';
 import { PRPLFileSystemTree, PRPLFileSystemTreeEntity } from '../types/prpl.js';
 import { readDirSafe } from './read-dir-safe.js';
@@ -33,7 +34,7 @@ async function generateFileSystemTree(
     return null;
   }
 
-  if (stats?.isFile()) {
+  if (stats?.isFile) {
     const { dir, base: name } = parse(path);
 
     item.srcRelativeDir = dir?.replace(resolve('.'), '');
@@ -56,7 +57,7 @@ async function generateFileSystemTree(
     } catch (_) {}
   }
 
-  if (stats?.isDirectory()) {
+  if (stats?.isDirectory) {
     let entitiesInDirectory = await readDirSafe(item?.path);
 
     if (entitiesInDirectory === null) {

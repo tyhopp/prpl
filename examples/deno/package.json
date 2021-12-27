@@ -1,0 +1,17 @@
+{
+  "name": "prpl-example-deno",
+  "private": true,
+  "version": "0.0.1",
+  "description": "Example site using PRPL with Deno",
+  "type": "module",
+  "scripts": {
+    "dev": "rm -rf dist && node scripts/build.js && prpl-server",
+    "build": "deno run --unstable --compat --allow-read --allow-write --allow-net --import-map=@prpl/core/deno-import-map.json scripts/build.js"
+  },
+  "dependencies": {
+    "@prpl/core": "^0.2.12"
+  },
+  "devDependencies": {
+    "@prpl/server": "^0.1.10"
+  }
+}

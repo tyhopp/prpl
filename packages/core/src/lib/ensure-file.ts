@@ -1,5 +1,6 @@
 import { dirname } from 'path';
-import { stat, writeFile } from 'fs/promises';
+import { writeFile } from 'fs/promises';
+import { stat } from './stat.js';
 import { ensureDir } from './ensure-dir.js';
 import { log } from './log.js';
 

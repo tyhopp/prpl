@@ -14,14 +14,16 @@
         "import": "./dist/index.mjs"
       },
       "./dist/index.cjs"
-    ]
+    ],
+    "./deno-import-map.json": "./deno-import-map.json"
   },
   "type": "module",
   "main": "dist/index.cjs",
   "module": "dist/index.mjs",
   "types": "dist/packages/core/src/index.d.ts",
   "files": [
-    "dist"
+    "dist",
+    "deno-import-map.json"
   ],
   "keywords": [
     "static-site-generator",

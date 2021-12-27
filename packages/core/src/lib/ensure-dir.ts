@@ -1,4 +1,5 @@
-import { stat, mkdir } from 'fs/promises';
+import { mkdir } from 'fs/promises';
+import { stat } from './stat.js';
 import { log } from './log.js';
 
 /**
