@@ -1,5 +1,5 @@
 import { readFile } from 'fs/promises';
-import { stat } from '../platform/stat.js';
+import { stat } from './stat.js';
 import { basename, extname, join, parse, resolve } from 'path';
 import { PRPLFileSystemTree, PRPLFileSystemTreeEntity } from '../types/prpl.js';
 import { readDirSafe } from './read-dir-safe.js';

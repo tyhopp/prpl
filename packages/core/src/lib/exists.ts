@@ -1,4 +1,4 @@
-import { stat } from '../platform/stat.js';
+import { stat } from './stat.js';
 import { log } from './log.js';
 
 /**

@@ -3,8 +3,6 @@ import { stat as nodeStat } from 'fs/promises';
 
 /**
  * Proxy Node stat property accessors to match Deno stat behavior.
- * @param filePath string
- * @returns
  */
 async function stat(filePath: string): Promise<Stats> {
   const stats = await nodeStat(filePath);
