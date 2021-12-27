@@ -3,6 +3,22 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.3.0](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.12...@prpl/core@0.3.0) (2021-12-27)
+
+
+### Bug Fixes
+
+* Stat lib func default case ([87f97a5](https://github.com/tyhopp/prpl/commit/87f97a57dfecfa6cef6881d06278fccf38d5c256))
+
+
+### Features
+
+* Deno support via import map ([66af07b](https://github.com/tyhopp/prpl/commit/66af07b1c1ccf7ac663aa06db4d1c800fb39840f))
+
+
+
+
+
 ## [0.2.12](https://github.com/tyhopp/prpl/compare/@prpl/core@0.2.11...@prpl/core@0.2.12) (2021-12-26)
 
 **Note:** Version bump only for package @prpl/core
