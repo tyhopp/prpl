@@ -1,0 +1,5 @@
+{
+  "imports": {
+    "marked": "https://unpkg.com/marked@2.1.0/lib/marked.esm.js"
+  }
+}
