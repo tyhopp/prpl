@@ -14,6 +14,8 @@ async function stat(filePath: string): Promise<Stats> {
           return target.isFile();
         case 'isDirectory':
           return target.isDirectory();
+        default:
+          return target[property];
       }
     }
   });
