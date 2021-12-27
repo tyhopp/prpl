@@ -1,6 +1,5 @@
 import { dirname } from 'path';
-import { writeFile } from 'fs/promises';
-import { stat } from './stat.js';
+import { writeFile, stat } from 'fs/promises';
 import { ensureDir } from './ensure-dir.js';
 import { log } from './log.js';
 
@@ -10,7 +9,7 @@ import { log } from './log.js';
 async function ensureFile(filePath: string): Promise<void> {
   try {
     const stats = await stat(filePath);
-    if (!stats.isFile) {
+    if (!stats.isFile()) {
       log.error(`There is no file at path '${filePath}'.`);
     }
   } catch (error) {

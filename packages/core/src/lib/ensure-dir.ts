@@ -1,5 +1,4 @@
-import { mkdir } from 'fs/promises';
-import { stat } from './stat.js';
+import { mkdir, stat } from 'fs/promises';
 import { log } from './log.js';
 
 /**
@@ -8,7 +7,7 @@ import { log } from './log.js';
 async function ensureDir(dir: string): Promise<void> {
   try {
     const fileInfo = await stat(dir);
-    if (!fileInfo.isDirectory) {
+    if (!fileInfo.isDirectory()) {
       log.error(`There is no directory at path '${dir}'.`);
     }
   } catch (error) {
