@@ -33,7 +33,7 @@
   "license": "MIT",
   "dependencies": {
     "@types/marked": "^2.0.4",
-    "marked": "^2.1.0"
+    "marked": "^4.0.10"
   },
   "gitHead": "57646bee5e16c078b43aa2de487372464594de1c"
 }
