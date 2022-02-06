@@ -10,7 +10,7 @@
     "build": "deno run --unstable --compat --allow-read --allow-write --allow-net --import-map=https://raw.githubusercontent.com/tyhopp/prpl/main/packages/core/deno-import-map.json scripts/build.js"
   },
   "dependencies": {
-    "@prpl/core": "^0.3.3"
+    "@prpl/core": "^0.3.4"
   },
   "devDependencies": {
     "@prpl/server": "^0.1.10"
