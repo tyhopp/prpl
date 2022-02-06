@@ -1,4 +1,4 @@
-import marked from 'marked';
+import { marked } from 'marked';
 import { PRPLInterpolateOptions } from '../types/prpl';
 
 // Override code block rendering
