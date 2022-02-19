@@ -89,11 +89,6 @@ export type PRPLAttributes = {
   parsed: PRPLAttributeMap;
 };
 
-export type PRPLClientStorageItem = {
-  storageKey: string;
-  storageValue: string;
-};
-
 export const enum PRPLClientEvent {
   render = 'prpl-render'
 }

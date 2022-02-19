@@ -1,6 +1,7 @@
 import { resolve } from 'path';
 import typescript from 'rollup-plugin-typescript2';
 import analyze from 'rollup-plugin-analyzer';
+import nodeResolve from '@rollup/plugin-node-resolve';
 
 const clientScripts = [
   resolve('packages/core/src/client/prefetch-worker.ts'),
@@ -25,6 +26,7 @@ async function bundle() {
         }
       ],
       plugins: [
+        nodeResolve(),
         typescript({
           tsconfigOverride: {
             compilerOptions: {
