@@ -1,4 +1,4 @@
-import { entries, setMany } from 'idb-keyval';
+import { clear, get, set, entries, setMany } from 'idb-keyval';
 
 /**
  * Web worker that receives a set of page paths to prefetch data for if the paths are not yet cached.
@@ -10,6 +10,14 @@ import { entries, setMany } from 'idb-keyval';
  * declaration at the end of this file. Since modules in web workers are not supported in all browsers, this would break.
  * @see {@link https://github.com/microsoft/TypeScript/issues/41567}
  */
+
+async function handleCacheInvalidation(buildId: string) {
+  const currentBuildId = await get('prpl-build-id');
+  if (!currentBuildId || currentBuildId !== buildId) {
+    await clear();
+    await set('prpl-build-id', buildId);
+  }
+}
 
 async function identifyUncachedPaths(paths: string[]): Promise<string[]> {
   const cachedEntries = await entries();
@@ -25,9 +33,6 @@ async function identifyUncachedPaths(paths: string[]): Promise<string[]> {
   return newEntries;
 }
 
-/**
- * Construct prefetch calls that return an indexed db key value pair.
- */
 async function createPrefetch(link: string): Promise<[IDBValidKey, string]> {
   try {
     const response = await fetch(link);
@@ -38,10 +43,16 @@ async function createPrefetch(link: string): Promise<[IDBValidKey, string]> {
   }
 }
 
-// Handler executed when postMessage is called on a constructed prefetch worker
-onmessage = async function (event: { data: string[] }): Promise<void> {
+interface Message {
+  paths: string[];
+  buildId: string;
+}
+
+onmessage = async function (event: MessageEvent<Message>): Promise<void> {
   try {
-    const paths: string[] = event?.data;
+    const { paths, buildId } = event?.data;
+
+    await handleCacheInvalidation(buildId);
 
     // Identify which paths are not in the cache yet
     const uncachedPaths = await identifyUncachedPaths(paths);
