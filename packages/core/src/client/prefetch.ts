@@ -1,7 +1,7 @@
-import { PRPLClientStorageItem, PRPLClientEvent } from '../types/prpl.js';
+import { PRPLClientEvent } from '../types/prpl.js';
 
 /**
- * Utility function to calculate unique relative paths to prefetch in a worker.
+ * Collect unique relative anchor hrefs on the current page.
  */
 function getRelativePaths(): string[] {
   // TODO - Define more granular definition of which anchor tags the PRPL prefetch worker should to try to fetch
@@ -17,25 +17,13 @@ if (window.Worker) {
   // Instantiate prefetch worker
   const prefetchWorker = new Worker('prefetch-worker.js', { type: 'module' });
 
-  // Initial prefetch
+  // Initial optional prefetch of on page links
   prefetchWorker?.postMessage([window?.location?.href, ...getRelativePaths()]);
 
-  // Listen for responses
-  prefetchWorker.onmessage = (event: { data: PRPLClientStorageItem[] }): void => {
-    const prefetchedPages = event?.data;
-    for (let i = 0; i < prefetchedPages?.length; i++) {
-      const { storageKey, storageValue } = prefetchedPages?.[i] || {};
-      if (!storageKey || !storageValue) {
-        return;
-      }
-      sessionStorage?.setItem(storageKey, storageValue);
-    }
-  };
-
-  // Subsequent prefetch
+  // Subsequent prefetches on page render
   window.addEventListener(PRPLClientEvent.render, () => {
     try {
-      prefetchWorker?.postMessage(getRelativePaths());
+      prefetchWorker?.postMessage([window?.location?.href, ...getRelativePaths()]);
     } catch (error) {
       console.info('[PRPL] Failed to prefetch on subsequent page route. Error:', error);
     }
