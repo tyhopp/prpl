@@ -32,9 +32,11 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@types/marked": "^4.0.2",
     "idb-keyval": "^6.1.0",
     "marked": "^4.0.12"
   },
-  "gitHead": "57646bee5e16c078b43aa2de487372464594de1c"
+  "gitHead": "57646bee5e16c078b43aa2de487372464594de1c",
+  "devDependencies": {
+    "@types/marked": "^4.0.2"
+  }
 }
