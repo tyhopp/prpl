@@ -1,4 +1,4 @@
-name: Cypress Tests
+name: Integration tests
 
 on:
   pull_request:
@@ -11,25 +11,32 @@ jobs:
       - name: Checkout repo
         uses: actions/checkout@v2
 
-      - name: Install monorepo tools
+      - name: Install monorepo dependencies
         run: npm i
 
       - name: Build PRPL modules
         run: npm run bootstrap && npm run build:all
 
-      - name: Test CommonJS interface
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: tests/test-site
-          start: npm run dev:cjs
-          project: ..
+      - name: Install integration test dependencies
+        working-directory: tests/integration
+        run: npm i
 
-      - name: Kill dev server
-        run: sudo kill -9 `sudo lsof -t -i:8000`
+      - name: Install test site dependencies
+        working-directory: tests/test-site
+        run: npm i
 
-      - name: Test ESM interface
-        uses: cypress-io/github-action@v2
-        with:
-          working-directory: tests/test-site
-          start: npm run dev:mjs
-          project: ..
+      - name: Build CJS test site
+        working-directory: tests/test-site
+        run: npm run build:cjs
+
+      - name: Run CJS integration tests
+        working-directory: tests/integration
+        run: npm run test
+
+      - name: Build ESM test site
+        working-directory: tests/test-site
+        run: npm run build:mjs
+
+      - name: Run ESM integration tests
+        working-directory: tests/integration
+        run: npm run test

@@ -6,4 +6,3 @@ dist
 *.local
 .idea
 .vscode
-tests/cypress/videos/

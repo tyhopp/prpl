@@ -11,4 +11,3 @@ lerna.json
 CHANGELOG.md
 README.md
 *.config.js
-tests/cypress.json

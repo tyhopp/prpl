@@ -1,14 +1,12 @@
 {
-  "name": "prpl-test-site",
+  "name": "test-site",
   "version": "0.0.1",
   "description": "PRPL site to run tests against",
   "scripts": {
     "dev:cjs": "rm -rf dist && node scripts/build.cjs && prpl-server",
     "build:cjs": "rm -rf dist && node scripts/build.cjs",
     "dev:mjs": "rm -rf dist && node scripts/build.mjs && prpl-server",
-    "build:mjs": "rm -rf dist && node scripts/build.mjs",
-    "test:open": "cypress open --project ..",
-    "test": "cypress run --project .."
+    "build:mjs": "rm -rf dist && node scripts/build.mjs"
   },
   "dependencies": {
     "@prpl/core": "file:../../packages/core",
@@ -19,7 +17,6 @@
     "@prpl/plugin-sitemap": "file:../../packages/plugin-sitemap"
   },
   "devDependencies": {
-    "@prpl/server": "file:../../packages/server",
-    "cypress": "^8.2.0"
+    "@prpl/server": "file:../../packages/server"
   }
 }
