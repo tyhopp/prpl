@@ -23,9 +23,7 @@ async function interpolateHTML(args: {
   if (!options?.noClientJS) {
     srcTree.src = srcTree?.src?.replace(
       /<\/head>/,
-      `<meta name="prpl-build-id" content="${
-        options?.buildId ?? Date.now()
-      }"></meta>\n<script defer type="module" src="prefetch.js"></script>\n<script defer type="module" src="router.js"></script>\n</head>`
+      `<meta name="prpl-build-id" content="${options?.buildId}"></meta>\n<script defer type="module" src="prefetch.js"></script>\n<script defer type="module" src="router.js"></script>\n</head>`
     );
   }
 

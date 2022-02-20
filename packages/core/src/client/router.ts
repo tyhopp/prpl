@@ -122,5 +122,5 @@ function onClick(event: MouseEvent): void {
   }
 }
 
-document?.addEventListener('click', onClick);
-window?.addEventListener('popstate', onPopState);
+document?.addEventListener('click', (event: MouseEvent) => onClick(event));
+window?.addEventListener('popstate', (event: PopStateEvent) => onPopState(event));

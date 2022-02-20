@@ -29,6 +29,9 @@ async function interpolate(args?: {
 }): Promise<PRPLCacheManager['cache']> {
   const { options = {} } = args || {};
 
+  // Create build id if none exists
+  options.buildId = options?.buildId ?? String(Date.now());
+
   // Make sure dist exists
   await ensureDir(resolve('dist'));
 
