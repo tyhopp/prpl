@@ -15,8 +15,6 @@ import { ensureDir } from '../lib/ensure-dir.js';
 import { interpolateHTML } from './interpolate-html.js';
 import { PRPLCache } from '../lib/cache.js';
 
-const buildId: number = Date.now();
-
 const PRPLClientScripts: PRPLClientScript[] = [
   PRPLClientScript.prefetch,
   PRPLClientScript.prefetchWorker,
@@ -56,7 +54,7 @@ async function interpolate(args?: {
           await ensureDir(items?.[i]?.targetDir);
 
           if (items?.[i]?.extension === PRPLSourceFileExtension.html) {
-            await interpolateHTML({ srcTree: items?.[i], options, buildId });
+            await interpolateHTML({ srcTree: items?.[i], options });
             break;
           }
 
