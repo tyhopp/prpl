@@ -16,15 +16,16 @@ import { interpolateList } from './interpolate-list.js';
 async function interpolateHTML(args: {
   srcTree: PRPLFileSystemTree;
   options?: PRPLInterpolateOptions;
-  buildId?: number;
 }): Promise<void> {
-  const { srcTree, options = {}, buildId = Date.now() } = args || {};
+  const { srcTree, options = {} } = args || {};
 
   // Inject build id, prefetch and router scripts
   if (!options?.noClientJS) {
     srcTree.src = srcTree?.src?.replace(
       /<\/head>/,
-      `<meta prpl-build-id="${buildId}"></meta>\n<script defer type="module" src="prefetch.js"></script>\n<script defer type="module" src="router.js"></script>\n</head>`
+      `<meta name="prpl-build-id" content="${
+        options?.buildId ?? Date.now()
+      }"></meta>\n<script defer type="module" src="prefetch.js"></script>\n<script defer type="module" src="router.js"></script>\n</head>`
     );
   }
 

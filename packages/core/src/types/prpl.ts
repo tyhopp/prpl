@@ -102,4 +102,5 @@ export interface PRPLInterpolateOptions {
   noClientJS?: boolean;
   templateRegex?: RegExp | ((key: string) => RegExp | any);
   markedOptions?: marked.MarkedOptions;
+  buildId?: string
 }

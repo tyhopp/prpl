@@ -11,7 +11,7 @@ function getPaths(): string[] {
 }
 
 function getPRPLBuildId(): string {
-  return document.querySelector('meta[prpl-build-id]').getAttribute('prpl-build-id');
+  return document.querySelector('meta[name="prpl-build-id"]')?.getAttribute('content');
 }
 
 if (window.Worker) {
