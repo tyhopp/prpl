@@ -15,15 +15,15 @@ const fragments = {
 
 const { a, b } = fragments;
 
-let dom;
+let document;
 
 test.before(async () => {
-  dom = await constructDOM('plugin-html-imports.html');
+  document = await constructDOM('plugin-html-imports.html');
 });
 
 test('should interpolate HTML imports', () => {
-  assert.is(dom.document.querySelector(`[data-cy=fragment-${a.id}]`).textContent, a.text);
-  assert.is(dom.document.querySelector(`[data-cy=fragment-${b.id}]`).textContent, b.text);
+  assert.is(document.querySelector(`[data-cy=fragment-${a.id}]`).textContent, a.text);
+  assert.is(document.querySelector(`[data-cy=fragment-${b.id}]`).textContent, b.text);
 });
 
 test.run();

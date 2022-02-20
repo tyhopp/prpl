@@ -1,12 +1,13 @@
 import path from 'path';
 import { readFile } from 'fs/promises';
-import { parseHTML } from 'linkedom';
+import { DOMParser } from 'linkedom';
 
-async function constructDOM(filePath) {
+async function constructDOM(filePath, mimeType = 'text/html') {
   try {
     const buffer = await readFile(path.resolve(`../test-site/dist/${filePath}`));
-    const html = buffer.toString();
-    return parseHTML(html);
+    const string = buffer.toString();
+    const parser = new DOMParser();
+    return parser.parseFromString(string, mimeType);
   } catch (error) {
     console.error(error);
   }
