@@ -1,0 +1,13 @@
+{
+  "name": "integration-tests",
+  "version": "0.0.1",
+  "description": "Integration tests for PRPL",
+  "type": "module",
+  "scripts": {
+    "test": "uvu tests"
+  },
+  "dependencies": {
+    "linkedom": "^0.14.2",
+    "uvu": "^0.5.3"
+  }
+}
