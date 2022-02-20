@@ -209,7 +209,8 @@ import { interpolate } from '@prpl/core';
 const options = {
   noClientJS: false,
   templateRegex: (key) => new RegExp(`\\[${key}\\]`, 'g'),
-  markedOptions: {}
+  markedOptions: {},
+  buildId: Date.now()
 };
 
 async function build() {
@@ -226,6 +227,7 @@ build();
   your preference
 - `markedOptions` are options you can pass to [`marked`](https://marked.js.org/using_advanced#options), the only
   dependency of `@prpl/core`
+- `buildId` is an identifier used for invalidation of your site's IndexedDB cache. It should be unique to each build
 
 ## Events
 
