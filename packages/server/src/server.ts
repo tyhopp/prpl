@@ -20,6 +20,8 @@ import {
 let ws;
 let socketInjectedPages: string[] = [];
 
+let buildId: string;
+
 /**
  * Start the local dev server.
  */
@@ -29,7 +31,9 @@ async function server(): Promise<void> {
 
   // Inject socket on index page
   server.on('connection', async (): Promise<void> => {
-    await injectSocketOptionally('./dist/index.html');
+    const index = './dist/index.html';
+    buildId = await getBuildId(index);
+    await injectSocketOptionally(index);
   });
 
   // Handle requests
@@ -96,11 +100,25 @@ async function server(): Promise<void> {
 }
 
 /**
- * Helper function to inject the socket on the page if it does not already have it.
+ * Get the build id once on connect so we can use it when handling page updates or creation.
+ */
+async function getBuildId(filePath: string): Promise<string> {
+  const pageExists = await exists(filePath);
+  if (!pageExists) {
+    return;
+  }
+  const pageBuffer = await readFile(resolve(filePath));
+  let page = pageBuffer?.toString();
+  const [, buildId] = page?.match(/\<meta\sname=\"prpl-build-id\"\scontent=\"(.*?)\"\>/) || [];
+  return buildId;
+}
+
+/**
+ * Inject the socket on the page if it does not already have it.
  */
 async function injectSocketOptionally(filePath: string): Promise<void> {
-  const socketExists = await exists(filePath);
-  if (!socketExists) {
+  const pageExists = await exists(filePath);
+  if (!pageExists) {
     return;
   }
 
@@ -128,7 +146,7 @@ async function injectSocketOptionally(filePath: string): Promise<void> {
 }
 
 /**
- * Helper function to create a new or update an existing file in dist.
+ * Create a new or update an existing file in dist.
  */
 async function createOrUpdateFile(changedFilePath: string, event: string): Promise<void> {
   const item: PRPLFileSystemTree = await generateFileSystemTree({
@@ -140,7 +158,7 @@ async function createOrUpdateFile(changedFilePath: string, event: string): Promi
 
   try {
     if (item?.extension === PRPLSourceFileExtension.html) {
-      await interpolateHTML({ srcTree: item });
+      await interpolateHTML({ srcTree: item, options: { buildId } });
     } else {
       await copyFile(item?.path, item?.targetFilePath);
     }
@@ -159,7 +177,7 @@ async function createOrUpdateFile(changedFilePath: string, event: string): Promi
 }
 
 /**
- * Helper function to remove a file from dist.
+ * Remove a file from dist.
  */
 async function removeFile(removedFilePath: string) {
   const item: PRPLFileSystemTree = await generateFileSystemTree({

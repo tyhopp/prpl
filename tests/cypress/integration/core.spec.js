@@ -35,6 +35,21 @@ const misc = {
 const { index, notes } = pages;
 const { a, b } = content;
 
+describe('All pages', () => {
+  it('should have a build id meta tag', () => {
+    cy.visit(index.route);
+    cy.get('meta[name="prpl-build-id"]').invoke('attr', 'content').should('exist');
+
+    // Check existance after DOM diff
+    cy.visit(notes.route);
+    cy.get('meta[name="prpl-build-id"]').invoke('attr', 'content').should('exist');
+
+    // Check existence on other page's actual HTML
+    cy.reload();
+    cy.get('meta[name="prpl-build-id"]').invoke('attr', 'content').should('exist');
+  });
+});
+
 describe('Files without PRPL tags', () => {
   it('should be copied without interpolation', () => {
     cy.visit(index.route);
