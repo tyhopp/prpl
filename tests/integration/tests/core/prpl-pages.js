@@ -22,8 +22,8 @@ const page = {
 const document = {};
 
 test.before(async () => {
-  document.a = await constructDOM('notes/a.html');
-  document.b = await constructDOM('notes/b.html');
+  document.a = await constructDOM('dist/notes/a.html');
+  document.b = await constructDOM('dist/notes/b.html');
 });
 
 test('should interpolate templates', () => {

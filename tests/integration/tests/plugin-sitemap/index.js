@@ -15,7 +15,7 @@ const slugs = {
 let document;
 
 test.before(async () => {
-  document = await constructDOM('sitemap.xml', 'text/xml');
+  document = await constructDOM('dist/sitemap.xml', 'text/xml');
 });
 
 test('should output a list of urls', () => {

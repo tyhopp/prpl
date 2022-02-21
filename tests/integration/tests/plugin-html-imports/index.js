@@ -18,7 +18,7 @@ const { a, b } = fragments;
 let document;
 
 test.before(async () => {
-  document = await constructDOM('plugin-html-imports.html');
+  document = await constructDOM('dist/plugin-html-imports.html');
 });
 
 test('should interpolate HTML imports', () => {

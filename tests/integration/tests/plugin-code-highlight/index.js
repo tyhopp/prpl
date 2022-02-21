@@ -5,7 +5,7 @@ import { constructDOM } from '../../utils/construct-dom.js';
 let document;
 
 test.before(async () => {
-  document = await constructDOM('plugin-code-highlight.html');
+  document = await constructDOM('dist/plugin-code-highlight.html');
 });
 
 test('should highlight code blocks', () => {

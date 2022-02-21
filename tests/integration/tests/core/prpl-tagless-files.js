@@ -5,7 +5,7 @@ import { constructDOM } from '../../utils/construct-dom.js';
 let document;
 
 test.before(async () => {
-  document = await constructDOM('index.html');
+  document = await constructDOM('dist/index.html');
 });
 
 test('should be copied without interpolation', () => {

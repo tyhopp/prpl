@@ -24,7 +24,7 @@ const { a, b } = {
 let document;
 
 test.before(async () => {
-  document = await constructDOM('rss.xml', 'text/xml');
+  document = await constructDOM('dist/rss.xml', 'text/xml');
 });
 
 test('should output a feed title', () => {
