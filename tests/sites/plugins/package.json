@@ -1,0 +1,13 @@
+{
+  "name": "test-site-plugins",
+  "version": "0.0.1",
+  "description": "PRPL site to run tests against",
+  "dependencies": {
+    "@prpl/core": "file:../../../packages/core",
+    "@prpl/plugin-code-highlight": "file:../../../packages/plugin-code-highlight",
+    "@prpl/plugin-css-imports": "file:../../../packages/plugin-css-imports",
+    "@prpl/plugin-html-imports": "file:../../../packages/plugin-html-imports",
+    "@prpl/plugin-rss": "file:../../../packages/plugin-rss",
+    "@prpl/plugin-sitemap": "file:../../../packages/plugin-sitemap"
+  }
+}
