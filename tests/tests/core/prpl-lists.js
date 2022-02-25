@@ -1,6 +1,6 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOM } from '../../utils/construct-dom.js';
+import { constructDOMFromFile } from '../../utils/construct-dom.js';
 
 const page = {
   a: {
@@ -24,7 +24,7 @@ const page = {
 let document;
 
 test.before(async () => {
-  document = await constructDOM('core/dist/notes.html');
+  document = await constructDOMFromFile('core/dist/notes.html');
 });
 
 test('should interpolate templates', () => {

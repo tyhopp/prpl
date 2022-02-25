@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "setup": "sh scripts/setup.sh",
-    "test": "sh scripts/test.sh"
+    "test:build": "sh scripts/test.sh build",
+    "test:server": "sh scripts/test.sh server"
   },
   "devDependencies": {
     "cssom": "^0.5.0",

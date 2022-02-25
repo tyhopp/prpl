@@ -1,16 +1,38 @@
-sites=(core plugins server)
-extensions=(cjs mjs)
+mode=$1 # build or server
+sites=(core plugins)
+extensions=(mjs)
 
-for site in ${sites[@]}; do
-  cd sites/$site
+if [ "$mode" = "build" ]
+then
+  for site in ${sites[@]}; do
+    cd sites/$site
+
+    for ext in ${extensions[@]}; do
+      rm -rf dist
+      node scripts/build.$ext
+      cd ../..
+      uvu tests/$site
+      cd sites/$site
+    done
+    
+    cd ../..
+  done
+fi
+
+if [ "$mode" = "server" ]
+then
+  cd sites/server
 
   for ext in ${extensions[@]}; do
     rm -rf dist
     node scripts/build.$ext
+    node scripts/serve.$ext &
+    sleep 1
     cd ../..
-    uvu tests/${site}
-    cd sites/$site
+    uvu tests/server
+    killall node
+    cd sites/server
   done
   
   cd ../..
-done
+fi

@@ -1,6 +1,6 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOM } from '../../utils/construct-dom.js';
+import { constructDOMFromFile } from '../../utils/construct-dom.js';
 
 const fragments = {
   a: {
@@ -18,7 +18,7 @@ const { a, b } = fragments;
 let document;
 
 test.before(async () => {
-  document = await constructDOM('plugins/dist/plugin-html-imports.html');
+  document = await constructDOMFromFile('plugins/dist/plugin-html-imports.html');
 });
 
 test('should interpolate HTML imports', () => {

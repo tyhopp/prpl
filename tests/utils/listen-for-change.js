@@ -7,20 +7,22 @@ function wait(ms) {
 async function listenForChange(filePath, currentModified) {
   let changedAt;
   let changed = false;
+  let html;
 
   for (let i = 0; i < 30; i++) {
-    const { lastModified } = await fetch(filePath);
+    const { data, lastModified } = await fetch(filePath);
 
     if (currentModified !== lastModified) {
       changedAt = lastModified;
       changed = true;
+      html = data;
       break;
     }
 
     await wait(100);
   }
 
-  return { changed, changedAt };
+  return { changed, changedAt, html };
 }
 
 export { listenForChange };
