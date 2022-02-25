@@ -30,6 +30,7 @@ then
     sleep 1
     cd ../..
     uvu tests/server
+    sleep 1
     killall node
     cd sites/server
   done
