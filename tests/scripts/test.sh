@@ -11,7 +11,7 @@ then
       rm -rf dist
       node scripts/build.$ext
       cd ../..
-      uvu tests/$site
+      uvu tests/$site --bail
       cd sites/$site
     done
     
@@ -29,7 +29,7 @@ then
     node scripts/serve.$ext &
     sleep 1
     cd ../..
-    uvu tests/server
+    uvu tests/server --bail
     sleep 1
     killall node
     cd sites/server
