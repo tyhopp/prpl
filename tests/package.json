@@ -5,6 +5,7 @@
   "type": "module",
   "scripts": {
     "setup": "sh scripts/setup.sh",
+    "test": "npm run test:build && npm run test:server",
     "test:build": "sh scripts/test.sh build",
     "test:server": "sh scripts/test.sh server"
   },
