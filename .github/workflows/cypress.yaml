@@ -17,26 +17,14 @@ jobs:
       - name: Build PRPL modules
         run: npm run bootstrap && npm run build:all
 
-      - name: Install integration test dependencies
-        working-directory: tests/integration
+      - name: Install test dependencies
+        working-directory: tests
         run: npm i
 
       - name: Install test site dependencies
-        working-directory: tests/test-site
-        run: npm i
+        working-directory: tests
+        run: npm run setup
 
-      - name: Build CJS test site
-        working-directory: tests/test-site
-        run: npm run build:cjs
-
-      - name: Run CJS integration tests
-        working-directory: tests/integration
-        run: npm run test
-
-      - name: Build ESM test site
-        working-directory: tests/test-site
-        run: npm run build:mjs
-
-      - name: Run ESM integration tests
-        working-directory: tests/integration
+      - name: Run tests
+        working-directory: tests
         run: npm run test

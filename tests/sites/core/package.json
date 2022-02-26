@@ -1,0 +1,8 @@
+{
+  "name": "test-site-core",
+  "version": "0.0.1",
+  "description": "PRPL site to run tests against",
+  "dependencies": {
+    "@prpl/core": "file:../../../packages/core"
+  }
+}
