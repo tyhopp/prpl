@@ -10,6 +10,8 @@ async function listenForChange(filePath, currentModified) {
   let html;
 
   for (let i = 0; i < 30; i++) {
+    await wait(100);
+
     const { data, lastModified } = await fetch(filePath);
 
     if (currentModified !== lastModified) {
@@ -18,8 +20,6 @@ async function listenForChange(filePath, currentModified) {
       html = data;
       break;
     }
-
-    await wait(100);
   }
 
   return { changed, changedAt, html };
