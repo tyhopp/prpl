@@ -1,4 +1,6 @@
-mode=$1 # build or server
+set -e # Exit on error, see https://www.gnu.org/savannah-checkouts/gnu/bash/manual/bash.html#The-Set-Builtin
+
+mode=$1
 sites=(core plugins)
 extensions=(mjs)
 
