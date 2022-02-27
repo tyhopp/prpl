@@ -5,28 +5,20 @@
   ],
   "scripts": {
     "bootstrap": "lerna bootstrap && lerna exec npm install",
-    "clear": "rm -rf packages/*/dist",
     "dev": "bash scripts/dev.sh",
-    "build:all": "bash scripts/build-all.sh",
-    "build:changed": "bash scripts/build-changed.sh",
-    "release:changed": "npm run build:changed && lerna publish",
-    "release:all": "npm run build:all && lerna publish --force-publish",
+    "clear": "rm -rf packages/*/dist",
+    "build": "npm run clear && rollup -c rollup.config.js",
+    "release": "npm run build && lerna publish",
     "reset": "bash scripts/reset.sh",
-    "update:sites": "bash ./scripts/update-sites.sh"
+    "update:sites": "bash scripts/update-sites.sh"
   },
   "devDependencies": {
-    "@lerna/filter-packages": "^4.0.0",
-    "@lerna/project": "^4.0.0",
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@types/node": "^16.0.0",
     "lerna": "^4.0.0",
-    "minimist": "^1.2.5",
     "prettier": "^2.3.2",
     "rollup": "^2.52.7",
-    "rollup-plugin-analyzer": "^4.0.0",
-    "rollup-plugin-auto-external": "^2.0.0",
-    "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-typescript2": "^0.31.1",
     "typescript": "^4.3.5"
   }
