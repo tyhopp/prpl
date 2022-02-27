@@ -3,7 +3,7 @@
 PRPL is a **lightweight** library for building **fast** static sites. PRPL does two things:
 
 - Interpolate your content into HTML files
-- Maximize your site's runtime speed with the PRPL pattern
+- Maximize your site's runtime speed with the [PRPL pattern](https://web.dev/apply-instant-loading-with-prpl/)
 
 ## Features
 
