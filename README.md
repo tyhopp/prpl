@@ -103,7 +103,7 @@ Commands for developing PRPL modules.
 In this repo root:
 
 - `npm run bootstrap` to install local module dependencies
-- `npm run dev -- [PKG]` to bundle a package in watch mode, e.g. `npm run dev -- core` to bundle core. One exception is client scripts in core, run `npm run dev -- client` instead
+- `npm run dev -- [PKG]` to bundle packages in watch mode, e.g. `npm run dev -- core server plugin-rss` to bundle these three packages. Client scripts will be automatically bundled for packages that include them.
 
 In your project root:
 
