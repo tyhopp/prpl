@@ -4,13 +4,9 @@ A plugin for [PRPL](https://github.com/tyhopp/prpl) that resolves HTML import st
 
 The PRPL dev server is not yet aware of the graph of resources in your site and will not be able to detect changes in imported HTML files. Given that [HTML imports](https://caniuse.com/?search=html%20import) is a deprecated specification, it's recommended to only use this plugin for fragments of HTML that you do not need live reloads of during development (for example, meta tags).
 
-### Dependencies
+## Dependencies
 
 `@prpl/plugin-html-imports` has zero dependencies.
-
-### Functions
-
-[`resolveHTMLImports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-html-imports/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-html-imports/src/index.ts) for its signature.
 
 ### Usage
 

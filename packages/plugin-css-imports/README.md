@@ -5,13 +5,9 @@ avoid extra requests at runtime for imported CSS files.
 
 This plugin should be disabled when using the PRPL dev server. The dev server is not yet aware of the graph of resources in your site and will not be able to detect changes in imported CSS files. There should be no difference in behavior given the [CSS at-rule](https://caniuse.com/?search=css%20import) is supported in all modern browsers.
 
-### Dependencies
+## Dependencies
 
 `@prpl/plugin-css-imports` has zero dependencies.
-
-### Functions
-
-[`resolveCSSImports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-css-imports/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-css-imports/src/index.ts) for its signature.
 
 ### Usage
 

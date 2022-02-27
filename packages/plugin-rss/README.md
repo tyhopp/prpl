@@ -3,13 +3,9 @@
 A plugin for [PRPL](https://github.com/tyhopp/prpl) that generates [Atom feeds](https://en.wikipedia.org/wiki/Atom_
 (Web_standard)).
 
-### Dependencies
+## Dependencies
 
 `@prpl/plugin-rss` has zero dependencies.
-
-### Functions
-
-[`generateRSSFeed`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-rss/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-rss/src/index.ts) for its signature.
 
 ### Usage
 

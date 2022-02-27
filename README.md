@@ -1,7 +1,18 @@
 # PRPL
 
-PRPL is a **modular** static site generator built for **longevity**. It lets you interpolate content with a single HTML
-element.
+PRPL is a **lightweight** library for building **fast** static sites. PRPL does two things:
+
+- Interpolate your content into HTML files
+- Maximize your site's runtime speed with the PRPL pattern
+
+## Features
+
+- Web-compliant HTML API
+- Zero or near-zero dependency modules
+- CLI, CJS and ESM module interfaces
+- Fully typed
+- Option to define your own template syntax
+- Option to ship zero JavaScript
 
 ## Why?
 
@@ -15,129 +26,14 @@ All the static site generators I have tried have one or more of these problems:
 - Forces a huge leap from hello world to a real world implementation
 
 PRPL is my answer to these gripes.
-
 ## Usage
 
-PRPL transforms a directory of content into HTML via `<prpl>` tags:
+PRPL requires [Node](https://nodejs.org/en/) [LTS or greater](https://nodejs.org/en/about/releases/).
 
-Given this source HTML file:
+To clone the minimal starter and run it locally, run:
 
-```html
-<!DOCTYPE html>
-<prpl type="page" src="content/notes">
-  <head>
-    <title>[title]</title>
-  </head>
-  <body>
-    <main>
-      <h1>[title]</h1>
-      [body]
-    </main>
-  </body>
-</prpl>
+```
+npx -y create-prpl@latest
 ```
 
-and this content markdown file:
-
-```markdown
-<!--
-title: Hello world!
-slug: /notes/my-first-note
--->
-
-This is my first note
-```
-
-the output is:
-
-```html
-<!DOCTYPE html>
-<head>
-  <title>Hello World!</title>
-</head>
-<body>
-  <main>
-    <h1>Hello World!</h1>
-    <p>This is my first note</p>
-  </main>
-</body>
-```
-
-- PRPL supports [Node](https://nodejs.org/en/) [current and LTS versions](https://nodejs.org/en/about/releases/)
-- Run `npx -y create-prpl@latest` to clone the minimal starter and run it locally
-- See [prpl.dev](https://prpl.dev) for full documentation, guides and design decisions
-
-## Features
-
-- HTML-based API compliant with web standards
-- Command line, CommonJS and ECMAScript module interfaces
-- Source code that is fully typed, explicitly commented and readable in one sitting
-- Library architecture for modular adoption
-- Minimally invasive, removable in seconds
-- Opt-out of client side JavaScript entirely
-- Define your own template syntax
-
-## Architecture
-
-PRPL is structured as a library that consists of these modules:
-
-| Module | Description |
-| --- | --- |
-| [`@prpl/core`](https://github.com/tyhopp/prpl/tree/main/packages/core) | Core functions for content interpolation |
-| [`@prpl/server`](https://github.com/tyhopp/prpl/tree/main/packages/server) | Development server |
-| [`@prpl/plugin-aws`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-aws) | Plugin for working with AWS S3 |
-| [`@prpl/plugin-code-highlight`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-code-highlight) | Plugin for highlighting code blocks |
-| [`@prpl/plugin-css-imports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-css-imports) | Plugin for resolving CSS imports |
-| [`@prpl/plugin-html-imports`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-html-imports) | Plugin for resolving HTML imports |
-| [`@prpl/plugin-rss`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-rss) | Plugin for generating RSS feeds |
-| [`@prpl/plugin-sitemap`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-sitemap) | Plugin for generating a sitemap |
-
-- `@prpl/core` is the only required module for a site to interpolate content into HTML, others are optional
-- `@prpl/server` is easily replaced with other local development servers, you're not married to it if you use PRPL
-- Most modules have zero dependencies, and those that do have the fewest number practical
-
-## Development
-
-Commands for developing PRPL modules.
-
-In this repo root:
-
-- `npm run bootstrap` to install local module dependencies
-- `npm run dev -- [PKG]` to bundle packages in watch mode, e.g. `npm run dev -- core server plugin-rss` to bundle these three packages. Client scripts will be automatically bundled for packages that include them.
-
-In your project root:
-
-- `npm link @prpl/[PKG]` from your project root to symlink to the globally linked module, e.g. `npm link @prpl/core` to link core
-- `npm unlink -g @prpl/[PKG]` to unlink when you're done
-
-## Testing
-
-Tooling, CI and commands for testing PRPL modules.
-
-- All modules are tested with [Cypress](https://www.cypress.io)
-- Tests run in continuous integration via [GitHub Actions](https://github.com/features/actions) when new PRs are
-  opened or changes are made to the branch the PR is opened from
-- All modules are tested using both the CommonJS and ESM interfaces
-
-To run tests locally:
-
-- Navigate to the `tests/test-site` directory
-- `npm install` to install dependencies for the test site
-- `npm run dev:cjs` or `npm run dev:mjs` to run the local development server
-- `npm run test:open` to open Cypress and select which test suites to run
-
-## Publishing
-
-Tooling and commands for publishing PRPL modules.
-
-This repo is a monorepo orchestrated with [Lerna](https://lerna.js.org).
-
-Before a new release is created with Lerna:
-
-- A newly created package must be published initially with `npm publish --access public` in the package root
-- All local changes must be committed first
-- The branch must be pushed to remote
-
-To create a new release with Lerna:
-
-- `npm run release:changed` from the project root and follow the prompts
+Visit [prpl.dev](https://prpl.dev) for full documentation, guides and design decisions.

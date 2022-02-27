@@ -5,15 +5,11 @@
 A plugin for [PRPL](https://github.com/tyhopp/prpl) for cache manipulation. Useful for defining cache partitions that 
 subsequent plugins may access.
 
-### Dependencies
+## Dependencies
 
 `@prpl/plugin-cache` has zero dependencies.
 
-### Functions
-
-[`createCachePartition`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-cache/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-cache/src/index.ts) for its signature.
-
-### Usage
+## Usage
 
 For example, you may want to pre-define a partition that reads all HTML and CSS files in `dist` so that those files 
 can be accessed in memory:

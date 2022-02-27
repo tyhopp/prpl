@@ -7,13 +7,6 @@ you would rather have your content files stored in S3 instead of checked in unde
 
 `@prpl/plugin-aws` relies on one dependency, [`aws-sdk`](https://github.com/aws/aws-sdk-js).
 
-## Functions
-
-| Name | Description |
-| --- | --- |
-| [`fetchFromS3`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-aws/src/fetch-from-s3.ts) | Fetch file(s) from an S3 bucket and write to the local file system |
-| [`uploadToS3`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-aws/src/upload-to-s3.ts) | Upload file(s) to an S3 bucket from the local file system |
-
 ## Requirements
 
 For this plugin to work, you must have:
