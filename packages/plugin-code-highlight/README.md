@@ -2,16 +2,12 @@
 
 A plugin for [PRPL](https://github.com/tyhopp/prpl) that highlights code blocks with [Highlight.js](https://github.com/highlightjs/highlight.js).
 
-### Dependencies
+## Dependencies
 
 `@prpl/plugin-code-highlight` has two dependencies, [highlight.js](https://github.com/highlightjs/highlight.js) and 
 [html-escaper](https://github.com/WebReflection/html-escaper).
 
-### Functions
-
-[`highlightCode`](https://github.com/tyhopp/prpl/tree/main/packages/plugin-code-highlight/src/index.ts) is the only export. See [the source code](https://github.com/tyhopp/prpl/tree/main/packages/plugin-code-highlight/src/index.ts) for its signature.
-
-### Usage
+## Usage
 
 ```javascript
 import { interpolate } from '@prpl/core';
