@@ -29,7 +29,7 @@
   ],
   "license": "MIT",
   "peerDependencies": {
-    "@prpl/core": ">=0.2.0"
+    "@prpl/core": ">=0.3.4"
   },
   "dependencies": {
     "aws-sdk": "^2.953.0"
