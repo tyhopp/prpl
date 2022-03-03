@@ -10,9 +10,9 @@
     "build": "deno run --unstable --compat --allow-read --allow-write --allow-net --import-map=node_modules/@prpl/core/deno-import-map.json scripts/build.js"
   },
   "dependencies": {
-    "@prpl/core": "^0.3.4"
+    "@prpl/core": "^0.3.5"
   },
   "devDependencies": {
-    "@prpl/server": "^0.1.10"
+    "@prpl/server": "^0.1.11"
   }
 }
