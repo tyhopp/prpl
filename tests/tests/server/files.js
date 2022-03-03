@@ -15,7 +15,7 @@ test.before(async () => {
   currentModified = lastModified;
 });
 
-const files = { 'index.html': null, 'index.css': null };
+const files = { 'index.html': null, 'index.css': null, 'index.js': null };
 
 test.before.each(async () => {
   for (const file in files) {
@@ -47,20 +47,31 @@ test('should update if a source HTML file is changed', async () => {
 });
 
 test('should update if a source CSS file is changed', async () => {
-  const cssFile = 'index.css';
+  const file = 'index.css';
   const color = 'blue';
   const cssRule = `h1 {color: ${color} !important;}`;
 
-  const srcCssom = await constructCSSOM({ src: `server/src/${cssFile}` });
+  const srcCssom = await constructCSSOM({ src: `server/src/${file}` });
   srcCssom.insertRule(cssRule);
-  await writeSiteFile({ target: `server/src/${cssFile}`, om: srcCssom, type: 'css' });
+  await writeSiteFile({ target: `server/src/${file}`, om: srcCssom, type: 'css' });
 
-  const { changed, data: css } = await listenForChange('/index.css', currentModified);
+  const { changed, data: css } = await listenForChange(`/${file}`, currentModified);
   assert.ok(changed);
 
   const serverCssom = await constructCSSOM({ src: css, type: 'string' });
   const [editedServerRule] = serverCssom.cssRules;
   assert.equal(editedServerRule.cssText, cssRule);
+});
+
+test('should update if a source JS file is changed', async () => {
+  const file = 'index.js';
+  const contents = `document.querySelector('p').textContent = 'I was updated by JavaScript twice';`;
+
+  await writeFile(resolve(`sites/server/src/${file}`), contents);
+
+  const { changed, data: js } = await listenForChange(`/${file}`, currentModified);
+  assert.ok(changed);
+  assert.equal(js, contents);
 });
 
 test.run();
