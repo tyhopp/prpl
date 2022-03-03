@@ -3,6 +3,17 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.11](https://github.com/tyhopp/prpl/compare/@prpl/server@0.1.10...@prpl/server@0.1.11) (2022-03-03)
+
+
+### Bug Fixes
+
+* **server:** Hard reload for all non html/css files ([c8771e6](https://github.com/tyhopp/prpl/commit/c8771e6e0efb987600f602b94ce779bbb79a5fab))
+
+
+
+
+
 ## [0.1.10](https://github.com/tyhopp/prpl/compare/@prpl/server@0.1.9...@prpl/server@0.1.10) (2021-12-26)
 
 **Note:** Version bump only for package @prpl/server

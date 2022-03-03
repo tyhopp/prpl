@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-aws",
-  "version": "0.2.10",
+  "version": "0.2.11",
   "description": "PRPL plugin for working with AWS S3",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
