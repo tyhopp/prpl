@@ -2,6 +2,9 @@
   "name": "test-site-server",
   "version": "0.0.1",
   "description": "PRPL site to run tests against",
+  "scripts": {
+    "dev": "rm -rf dist && prpl && prpl-server"
+  },
   "dependencies": {
     "@prpl/core": "file:../../../packages/core"
   },
