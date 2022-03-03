@@ -1,6 +1,7 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOMFromFile, constructDOMFromString } from '../../utils/construct-dom.js';
+import { constructDOM } from '../../utils/construct-dom.js';
+import { constructCSSOM } from '../../utils/construct-cssom.js';
 import { fetch } from '../../utils/fetch.js';
 import { listenForChange } from '../../utils/listen-for-change.js';
 import { writeSiteFile } from '../../utils/write-site-file.js';
@@ -34,15 +35,32 @@ const edited = 'I was edited and reloaded by PRPL server';
 test('should update if a source HTML file is changed', async () => {
   const file = 'index.html';
 
-  const srcDom = await constructDOMFromFile(`server/src/${file}`);
+  const { document: srcDom } = await constructDOM({ src: `server/src/${file}` });
   srcDom.querySelector('h1').textContent = edited;
-  await writeSiteFile(`server/src/${file}`, srcDom);
+  await writeSiteFile({ target: `server/src/${file}`, om: srcDom });
 
-  const { changed, html } = await listenForChange('/', currentModified);
+  const { changed, data: html } = await listenForChange('/', currentModified);
   assert.ok(changed);
 
-  const serverDom = await constructDOMFromString(html);
+  const { document: serverDom } = await constructDOM({ src: html, type: 'string' });
   assert.equal(serverDom.querySelector('h1').textContent, edited);
+});
+
+test('should update if a source CSS file is changed', async () => {
+  const cssFile = 'index.css';
+  const color = 'blue';
+  const cssRule = `h1 {color: ${color} !important;}`;
+
+  const srcCssom = await constructCSSOM({ src: `server/src/${cssFile}` });
+  srcCssom.insertRule(cssRule);
+  await writeSiteFile({ target: `server/src/${cssFile}`, om: srcCssom, type: 'css' });
+
+  const { changed, data: css } = await listenForChange('/index.css', currentModified);
+  assert.ok(changed);
+
+  const serverCssom = await constructCSSOM({ src: css, type: 'string' });
+  const [editedServerRule] = serverCssom.cssRules;
+  assert.equal(editedServerRule.cssText, cssRule);
 });
 
 test.run();

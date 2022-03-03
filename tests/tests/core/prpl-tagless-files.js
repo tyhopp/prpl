@@ -1,11 +1,12 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOMFromFile } from '../../utils/construct-dom.js';
+import { constructDOM } from '../../utils/construct-dom.js';
 
 let document;
 
 test.before(async () => {
-  document = await constructDOMFromFile('core/dist/index.html');
+  const { document: indexDocument } = await constructDOM({ src: 'core/dist/index.html' });
+  document = indexDocument;
 });
 
 test('should be copied without interpolation', () => {

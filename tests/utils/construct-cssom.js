@@ -1,15 +1,20 @@
-import path from 'path';
+import { resolve } from 'path';
 import { readFile } from 'fs/promises';
 import { parse as parseCSS } from 'cssom';
 
-async function constructCSSOMFromFile(filePath) {
+async function constructCSSOM({ src, type = 'file' }) {
   try {
-    const buffer = await readFile(path.resolve(`sites/${filePath}`));
-    const css = buffer.toString();
+    let css = src;
+
+    if (type === 'file') {
+      const buffer = await readFile(resolve(`sites/${src}`));
+      css = buffer.toString();
+    }
+
     return parseCSS(css);
   } catch (error) {
     console.error(error);
   }
 }
 
-export { constructCSSOMFromFile };
+export { constructCSSOM };

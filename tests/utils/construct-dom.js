@@ -1,25 +1,26 @@
-import path from 'path';
+import { resolve } from 'path';
 import { readFile } from 'fs/promises';
-import { DOMParser } from 'linkedom';
+import { DOMParser, parseHTML } from 'linkedom';
 
-async function constructDOMFromFile(filePath, mimeType = 'text/html') {
+async function constructDOM({ src, type = 'file', mimeType = 'text/html' }) {
   try {
-    const buffer = await readFile(path.resolve(`sites/${filePath}`));
-    const string = buffer.toString();
+    let data = src;
+
+    if (type === 'file') {
+      const buffer = await readFile(resolve(`sites/${src}`));
+      data = buffer.toString();
+    }
+
+    if (mimeType === 'text/html') {
+      return parseHTML(data);
+    }
+
     const parser = new DOMParser();
-    return parser.parseFromString(string, mimeType);
+    return {
+      document: parser.parseFromString(data, mimeType)
+    };
   } catch (error) {
     console.error(error);
   }
 }
-
-async function constructDOMFromString(html, mimeType = 'text/html') {
-  try {
-    const parser = new DOMParser();
-    return parser.parseFromString(html, mimeType);
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-export { constructDOMFromFile, constructDOMFromString };
+export { constructDOM };

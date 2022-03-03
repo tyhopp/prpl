@@ -1,28 +1,25 @@
 import { fetch } from './fetch.js';
-
-function wait(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
-}
+import { wait } from './wait.js';
 
 async function listenForChange(filePath, currentModified) {
   let changedAt;
   let changed = false;
-  let html;
+  let data;
 
   for (let i = 0; i < 30; i++) {
     await wait(100);
 
-    const { data, lastModified } = await fetch(filePath);
+    const { data: fetchedData, lastModified } = await fetch(filePath);
 
     if (currentModified !== lastModified) {
       changedAt = lastModified;
       changed = true;
-      html = data;
+      data = fetchedData;
       break;
     }
   }
 
-  return { changed, changedAt, html };
+  return { changed, changedAt, data };
 }
 
 export { listenForChange };
