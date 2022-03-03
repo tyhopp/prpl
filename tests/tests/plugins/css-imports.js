@@ -1,11 +1,11 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructCSSOMFromFile } from '../../utils/construct-cssom.js';
+import { constructCSSOM } from '../../utils/construct-cssom.js';
 
 let cssom;
 
 test.before(async () => {
-  cssom = await constructCSSOMFromFile('plugins/dist/plugin-css-imports.css');
+  cssom = await constructCSSOM({ src: 'plugins/dist/plugin-css-imports.css' });
 });
 
 test('should interpolate CSS imports', () => {

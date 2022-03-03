@@ -1,9 +1,9 @@
 import { writeFile } from 'fs/promises';
-import path from 'path';
+import { resolve } from 'path';
 
-async function writeSiteFile(filePath, dom) {
-  const srcPath = path.resolve(`sites/${filePath}`);
-  await writeFile(srcPath, dom.toString());
+async function writeSiteFile({ target, om }) {
+  const srcPath = resolve(`sites/${target}`);
+  await writeFile(srcPath, om.toString());
 }
 
 export { writeSiteFile };

@@ -1,11 +1,14 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOMFromFile } from '../../utils/construct-dom.js';
+import { constructDOM } from '../../utils/construct-dom.js';
 
 let document;
 
 test.before(async () => {
-  document = await constructDOMFromFile('plugins/dist/plugin-code-highlight.html');
+  const { document: codeHighlightDocument } = await constructDOM({
+    src: 'plugins/dist/plugin-code-highlight.html'
+  });
+  document = codeHighlightDocument;
 });
 
 test('should highlight code blocks', () => {

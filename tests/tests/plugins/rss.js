@@ -1,6 +1,6 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOMFromFile } from '../../utils/construct-dom.js';
+import { constructDOM } from '../../utils/construct-dom.js';
 
 const feedTitle = 'Test feed';
 const author = 'Ty Hopp';
@@ -24,7 +24,11 @@ const { a, b } = {
 let document;
 
 test.before(async () => {
-  document = await constructDOMFromFile('plugins/dist/rss.xml', 'text/xml');
+  const { document: rssDocument } = await constructDOM({
+    src: 'plugins/dist/rss.xml',
+    mimeType: 'text/xml'
+  });
+  document = rssDocument;
 });
 
 test('should output a feed title', () => {
