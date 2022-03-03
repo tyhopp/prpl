@@ -32,8 +32,10 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "@types/marked": "^4.0.2",
     "marked": "^4.0.12"
+  },
+  "devDependencies": {
+    "@types/marked": "^4.0.2"
   },
   "gitHead": "57646bee5e16c078b43aa2de487372464594de1c"
 }
