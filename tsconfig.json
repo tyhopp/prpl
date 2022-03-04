@@ -16,7 +16,6 @@
     "allowUnreachableCode": false,
     "allowUnusedLabels": false,
     "baseUrl": ".",
-    "rootDir": ".",
     "paths": {
       "@prpl/*": ["packages/*/dist"]
     },

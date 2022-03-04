@@ -113,6 +113,9 @@ async function createClientFileConfigs(watchPackages = []) {
 
   const serverClientFiles = [resolve('packages/server/src/socket.ts')];
 
+  const knownRegularPackages = await getKnownPackages();
+  const packageDependencies = await getPackageDependencies(knownRegularPackages);
+
   for (const watchPackage of watchPackages) {
     switch (watchPackage) {
       case 'core':
@@ -137,6 +140,7 @@ async function createClientFileConfigs(watchPackages = []) {
           format: 'es'
         }
       ],
+      external: (id) => packageDependencies.some((dep) => id.includes(dep)),
       plugins: [
         typescript({
           tsconfigOverride: {
