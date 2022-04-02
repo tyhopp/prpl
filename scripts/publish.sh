@@ -1,9 +1,14 @@
-# Publish packages. Examples:
+# Publish packages.
+
+# Example usage:
+
 #  - `npm run publish`
 #  - `npm run publish --dry-run`
 #  - `npm run publish core server`
 #  - `npm run publish --dry-run core server`
-# Does not bump versions automatically, do this yourself manually.
+
+# Does not automatically bump versions or write changelogs, do
+# this prior to running this script.
 
 pkgs=$@
 run_state=""

@@ -1,4 +1,7 @@
-# Develop packages. Examples:
+# Develop packages.
+
+# Example usage:
+
 #   `npm run dev core`
 #   `npm run dev core server`
 

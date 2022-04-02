@@ -1,106 +1,13 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+Notable changes to this module will be documented in this file.
 
-## [0.1.12](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.11...@prpl/plugin-sitemap@0.1.12) (2022-03-03)
+The latest note here may not correspond to the the latest version published.
 
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.11](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.10...@prpl/plugin-sitemap@0.1.11) (2021-12-26)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.10](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.9...@prpl/plugin-sitemap@0.1.10) (2021-12-23)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.9](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.8...@prpl/plugin-sitemap@0.1.9) (2021-12-21)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.8](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.7...@prpl/plugin-sitemap@0.1.8) (2021-12-13)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.7](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.6...@prpl/plugin-sitemap@0.1.7) (2021-11-03)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.6](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.5...@prpl/plugin-sitemap@0.1.6) (2021-10-29)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.5](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.4...@prpl/plugin-sitemap@0.1.5) (2021-08-21)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.4](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.3...@prpl/plugin-sitemap@0.1.4) (2021-08-13)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.3](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.2...@prpl/plugin-sitemap@0.1.3) (2021-08-11)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.2](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.1...@prpl/plugin-sitemap@0.1.2) (2021-08-08)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
-
-## [0.1.1](https://github.com/tyhopp/prpl/compare/@prpl/plugin-sitemap@0.1.0...@prpl/plugin-sitemap@0.1.1) (2021-08-08)
-
-**Note:** Version bump only for package @prpl/plugin-sitemap
-
-
-
-
+If you're looking for what the latest published version is, see [package.json](./package.json)
+or [npm](https://www.npmjs.com/package/@prpl/plugin-sitemap).
 
 # 0.1.0 (2021-08-08)
-
 
 ### Features
 
