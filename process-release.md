@@ -13,7 +13,7 @@ the [`npm version`](https://docs.npmjs.com/cli/v8/commands/npm-version) command 
 If you want to bump all packages (e.g. with a patch bump), run:
 
 ```
-npm run version -- patch
+npm run version patch
 ```
 
 If you want to only bump certain packages, then you can manually navigate to the respective package directories (e.g. core), and run:
@@ -37,13 +37,13 @@ Run a dry run of the publish command prior to running an actual publish.
 To dry run a publish of all packages, run:
 
 ```
-npm run publish -- --dry-run
+npm run publish --dry-run
 ```
 
 To dry run a publish of certain packages (e.g. `core` and `server`), run:
 
 ```
-npm run publish -- --dry-run core server
+npm run publish --dry-run core server
 ```
 
 This should build the relevant packages and show log output of what package versions would have been published.
@@ -61,7 +61,7 @@ npm run publish
 To publish certain packages (e.g. `core` and `server`), run:
 
 ```
-npm run publish -- core server
+npm run publish core server
 ```
 
 ## Verify
