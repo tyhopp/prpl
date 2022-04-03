@@ -36,14 +36,18 @@ Run a dry run of the publish command prior to running an actual publish.
 
 To dry run a publish of all packages, run:
 
+**Note** - Arguments are positional.
+
 ```
-npm run publish --dry-run
+npm run publish dry-run
 ```
 
 To dry run a publish of certain packages (e.g. `core` and `server`), run:
 
+**Note** - Arguments are positional.
+
 ```
-npm run publish --dry-run core server
+npm run publish dry-run core server
 ```
 
 This should build the relevant packages and show log output of what package versions would have been published.
@@ -52,16 +56,20 @@ This should build the relevant packages and show log output of what package vers
 
 Run an actual publish the same way as the dry run but without the dry run argument:
 
-To publish all packages, run:
+To publish all packages, get a one-time password from an authenticator app and run:
+
+**Note** - Arguments are positional.
 
 ```
-npm run publish
+npm run publish [OTP]
 ```
 
 To publish certain packages (e.g. `core` and `server`), run:
 
+**Note** - Arguments are positional.
+
 ```
-npm run publish core server
+npm run publish [OTP] core server
 ```
 
 ## Verify
