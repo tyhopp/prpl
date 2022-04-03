@@ -10,6 +10,7 @@
     "dev": "bash scripts/dev.sh",
     "clear": "rm -rf packages/*/dist",
     "build": "npm run clear && rollup -c rollup.config.js",
+    "version": "bash scripts/version.sh",
     "publish": "npm run build && bash scripts/publish.sh",
     "update:sites": "bash scripts/update-sites.sh"
   },

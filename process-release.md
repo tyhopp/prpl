@@ -10,15 +10,23 @@ you want to release a new version of.
 Versions should follow [semver](https://semver.org) guidelines and make use of
 the [`npm version`](https://docs.npmjs.com/cli/v8/commands/npm-version) command to do the bump locally.
 
-Commit these changes together with the changelogs for all packages in the release. The commit message can
-be simply `Publish` to match what Lerna used to do. See an [example from the last Lerna publish](https://github.com/tyhopp/prpl/commit/8e8ae1544f7f3bde2c949445ba8158bd89c5b5a7).
+If you want to bump all packages (e.g. with a patch bump), run:
 
-This process is manual for the time being since the project no longer uses Lerna.
+```
+npm run version -- patch
+```
+
+If you want to only bump certain packages, then you can manually navigate to the respective package directories (e.g. core), and run:
+
+```
+npm version patch
+```
+
+These changes can be in the same commit together with the changelog updates in the next step.
 
 ## Changelog update
 
-Update the changelogs with relevant information for each updated package. Follow the conventions used
-already in the changelog and only include meaningful changes.
+Update the changelogs with relevant information for each updated package. Follow the conventions used already in the changelog and only include meaningful changes.
 
 This process is manual for the time being since the project no longer uses Lerna.
 
