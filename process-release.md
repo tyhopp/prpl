@@ -87,7 +87,7 @@ Once the released packages are verified, update docs and example sites by checki
 ```
 git checkout -b chore-update-sites
 npm run update:sites
-git push
+git push --set-upstream origin chore-update-sites
 ```
 
 Create a PR in the GitHub web app, review changes, and merge to `main`.
