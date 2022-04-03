@@ -1,7 +1,10 @@
 {
   "private": "true",
   "workspaces": [
-    "packages/*"
+    "packages/*",
+    "examples/*",
+    "tests",
+    "docs"
   ],
   "scripts": {
     "dev": "bash scripts/dev.sh",
