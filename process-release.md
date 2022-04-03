@@ -98,4 +98,4 @@ That's it!
 
 This project used to have more automation, but has removed Lerna since it's no longer maintained and does way more than what this project requires.
 
-Over time I'd like to automate version bumping and changelog updates again but without any third party dependencies. If you're interested in helping out, please feel free to open a PR!
+Over time I'd like to automat changelog updates again but without any third party dependencies. If you're interested in helping out, please feel free to open a PR!
