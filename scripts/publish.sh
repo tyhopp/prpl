@@ -13,13 +13,15 @@
 pkgs=$@
 run_state=""
 
-if [ $1 = "--dry-run" ]; then
+if [ "$1" == "--dry-run" ]; then
    pkgs="${pkgs/--dry-run /}"
    run_state="--dry-run"
 fi
 
 if [ $# -eq 0 ]; then
-   npm publish $run_state --workspaces
+   for pkg in packages/*; do
+      npm publish $run_state --workspace $pkg
+   done
    exit 0
 fi
 
