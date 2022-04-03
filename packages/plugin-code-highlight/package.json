@@ -1,6 +1,6 @@
 {
   "name": "@prpl/plugin-code-highlight",
-  "version": "0.3.7",
+  "version": "0.3.8",
   "description": "PRPL plugin that highlights code blocks with Highlight.js",
   "author": "Ty Hopp (https://tyhopp.com)",
   "exports": {
