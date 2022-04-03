@@ -15,15 +15,7 @@ jobs:
         run: npm i
 
       - name: Build PRPL modules
-        run: npm run bootstrap && npm run build
-
-      - name: Install test dependencies
-        working-directory: tests
-        run: npm i
-
-      - name: Install test site dependencies
-        working-directory: tests
-        run: npm run setup
+        run: npm run build
 
       - name: Run tests
         working-directory: tests

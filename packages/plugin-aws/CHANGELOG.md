@@ -1,174 +1,31 @@
 # Change Log
 
-All notable changes to this project will be documented in this file.
-See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
+Notable changes to this module will be documented in this file.
 
-## [0.2.11](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.10...@prpl/plugin-aws@0.2.11) (2022-03-03)
+The latest note here may not correspond to the the latest version published.
 
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.2.10](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.9...@prpl/plugin-aws@0.2.10) (2021-12-26)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.2.9](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.8...@prpl/plugin-aws@0.2.9) (2021-12-23)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.2.8](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.7...@prpl/plugin-aws@0.2.8) (2021-12-21)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.2.7](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.6...@prpl/plugin-aws@0.2.7) (2021-12-13)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.2.6](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.5...@prpl/plugin-aws@0.2.6) (2021-11-03)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.2.5](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.4...@prpl/plugin-aws@0.2.5) (2021-10-29)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.2.4](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.3...@prpl/plugin-aws@0.2.4) (2021-08-21)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
+If you're looking for what the latest published version is, see [package.json](./package.json)
+or [npm](https://www.npmjs.com/package/@prpl/plugin-aws).
 
 ## [0.2.3](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.2...@prpl/plugin-aws@0.2.3) (2021-08-13)
-
 
 ### Bug Fixes
 
 * **plugin-aws:** Upload entire file ([a625359](https://github.com/tyhopp/prpl/commit/a62535922d8f675a1bd724301295080343addd64))
 
-
-
-
-
-## [0.2.2](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.1...@prpl/plugin-aws@0.2.2) (2021-08-11)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.2.1](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.2.0...@prpl/plugin-aws@0.2.1) (2021-08-08)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-# [0.2.0](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.7...@prpl/plugin-aws@0.2.0) (2021-08-08)
-
-
-### Features
-
-* **plugin-sitemap:** Introduce sitemap plugin ([ad28f8f](https://github.com/tyhopp/prpl/commit/ad28f8fa2ad7882fd328a41fcc2757b70599a565))
-
-
-
-
-
-## [0.1.7](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.6...@prpl/plugin-aws@0.1.7) (2021-08-07)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.1.6](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.5...@prpl/plugin-aws@0.1.6) (2021-08-07)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.1.5](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.4...@prpl/plugin-aws@0.1.5) (2021-08-07)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.1.4](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.3...@prpl/plugin-aws@0.1.4) (2021-08-07)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
-## [0.1.3](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.2...@prpl/plugin-aws@0.1.3) (2021-08-07)
-
-**Note:** Version bump only for package @prpl/plugin-aws
-
-
-
-
-
 ## [0.1.2](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.1...@prpl/plugin-aws@0.1.2) (2021-07-25)
-
 
 ### Bug Fixes
 
 * **plugin-aws:** Ensure dir slash ([c43ba59](https://github.com/tyhopp/prpl/commit/c43ba59151266927f9d9aa3301d0698b8a3494c2))
 
-
-
-
-
 ## [0.1.1](https://github.com/tyhopp/prpl/compare/@prpl/plugin-aws@0.1.0...@prpl/plugin-aws@0.1.1) (2021-07-25)
-
 
 ### Bug Fixes
 
 * **plugin-aws:** Ensure dir ([ce46740](https://github.com/tyhopp/prpl/commit/ce46740e7b7872943bf454c453cc0c19fa5e18fa))
 
-
-
-
-
 # 0.1.0 (2021-07-25)
-
 
 ### Features
 

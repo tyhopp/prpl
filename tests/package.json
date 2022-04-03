@@ -4,10 +4,9 @@
   "description": "Tests for PRPL",
   "type": "module",
   "scripts": {
-    "setup": "bash scripts/setup.sh",
     "test": "npm run test:build && npm run test:server",
-    "test:build": "bash scripts/test.sh build",
-    "test:server": "bash scripts/test.sh server"
+    "test:build": "bash test.sh build",
+    "test:server": "bash test.sh server"
   },
   "devDependencies": {
     "cssom": "^0.5.0",
