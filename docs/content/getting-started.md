@@ -59,7 +59,7 @@ commands are mapped to npm scripts:
 ## Deploy your website
 
 PRPL outputs static HTML files, so you can host your site wherever you like easily. A recommended solution is
-[Netlify](https://www.netlify.com).
+[Firebase Hosting](https://firebase.google.com/docs/hosting).
 
 ---
 
