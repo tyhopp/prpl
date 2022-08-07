@@ -13,7 +13,8 @@
   "license": "MIT",
   "scripts": {
     "dev": "rm -rf dist && node scripts/build.js && prpl-server",
-    "build": "rm -rf dist && node scripts/build.js"
+    "build": "rm -rf dist && node scripts/build.js",
+    "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
     "@prpl/core": "^0.3.6",
