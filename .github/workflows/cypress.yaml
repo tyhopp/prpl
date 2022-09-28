@@ -36,19 +36,3 @@ jobs:
       - name: Run tests
         working-directory: tests
         run: npm run test
-
-  test-macos:
-    runs-on: macos-latest
-    steps:
-      - name: Checkout repo
-        uses: actions/checkout@v2
-
-      - name: Install monorepo dependencies
-        run: npm i
-
-      - name: Build PRPL modules
-        run: npm run build
-
-      - name: Run tests
-        working-directory: tests
-        run: npm run test
