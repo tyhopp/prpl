@@ -1,4 +1,4 @@
-import { resolve, join } from 'path';
+import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
 import {
   generateOrRetrieveFileSystemTree,
@@ -71,12 +71,12 @@ async function highlightCode(args?: {
             for (let [block, language, code] of codeBlocks) {
               language = mappedAliases?.[language] ?? language;
 
-              const languagePath = join('highlight.js', 'lib', 'languages', language);
+              const languageModuleImport = `highlight.js/lib/languages/${language}`;
               const languageRegistered = Boolean(hljs?.getLanguage(language));
 
               // Register language if it is not already
               if (!languageRegistered) {
-                const { default: languageGrammar } = await import(languagePath);
+                const { default: languageGrammar } = await import(languageModuleImport);
 
                 if (typeof languageGrammar !== 'function') {
                   log.error(`Failed to load language grammar for ${language}`);
