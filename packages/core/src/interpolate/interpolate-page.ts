@@ -85,10 +85,6 @@ async function interpolatePage(args: {
           src: contentFiles?.[p]?.src,
           srcRelativeFilePath: contentFiles?.[p]?.srcRelativeFilePath
         });
-
-        // TODO: Remove, this is temporary to debug Windows in CI
-        console.log(`Parsing metadata for ${contentFiles?.[p]?.srcRelativeFilePath}`, { metadata });
-
         metadata.body = await transformMarkdown({
           markdown: metadata?.body,
           options
