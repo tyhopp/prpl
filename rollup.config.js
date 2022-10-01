@@ -1,3 +1,4 @@
+import { EOL } from 'os';
 import { resolve } from 'path';
 import { readdir, readFile } from 'fs/promises';
 import nodeResolve from '@rollup/plugin-node-resolve';
@@ -63,7 +64,7 @@ async function createPackageConfigs(watchPackages = []) {
   }
 
   for (const regularPackage of regularPackages) {
-    const banner = regularPackage === 'create-prpl' ? '#!/usr/bin/env node\n' : '';
+    const banner = regularPackage === 'create-prpl' ? `#!/usr/bin/env node${EOL}` : '';
 
     packageConfigs.push({
       input: resolve(`packages/${regularPackage}/src/index.ts`),

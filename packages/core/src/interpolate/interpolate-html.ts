@@ -1,3 +1,4 @@
+import { EOL } from 'os';
 import { resolve } from 'path';
 import { writeFile } from 'fs/promises';
 import { parsePRPLAttributes } from './parse-prpl-attributes.js';
@@ -23,7 +24,7 @@ async function interpolateHTML(args: {
   if (!options?.noClientJS) {
     srcTree.src = srcTree?.src?.replace(
       /<\/head>/,
-      `<script type="module" src="prefetch.js"></script>\n<script type="module" src="router.js"></script>\n</head>`
+      `<script type="module" src="prefetch.js"></script>${EOL}<script type="module" src="router.js"></script>${EOL}</head>`
     );
   }
 
