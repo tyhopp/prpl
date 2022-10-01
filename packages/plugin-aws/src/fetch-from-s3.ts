@@ -27,7 +27,7 @@ async function fetchFromS3(keys: PRPLPluginAWSKeys, targetDir?: string): Promise
       const getObjectResponse = await s3.getObject({ Bucket: AWSContentBucket, Key }).promise();
       const content = getObjectResponse.Body.toString();
 
-      const targetFilePath = resolve(`${targetDir || 'content'}/${Key}.md`);
+      const targetFilePath = resolve(targetDir || 'content', `${Key}.md`);
       await ensureDir(parse(targetFilePath)?.dir);
       await writeFile(targetFilePath, content);
     }

@@ -1,6 +1,6 @@
 // noinspection JSUnusedGlobalSymbols
 
-import { resolve } from 'path';
+import { resolve, sep } from 'path';
 import { writeFile } from 'fs/promises';
 import {
   generateOrRetrieveFileSystemTree,
@@ -79,7 +79,7 @@ async function generateSitemap(args: {
 
             // Calculate url
             const slug = items?.[i]?.srcRelativeFilePath
-              ?.replace('/dist/', '')
+              ?.replace(`${sep}dist${sep}`, '')
               ?.replace('.html', '');
 
             const templateKeys = {
@@ -116,7 +116,7 @@ async function generateSitemap(args: {
     ${urls}
   </urlset>`;
 
-  await writeFile(resolve('dist/sitemap.xml'), sitemap);
+  await writeFile(resolve('dist', 'sitemap.xml'), sitemap);
 
   log.info('Generated sitemap');
 

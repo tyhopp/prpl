@@ -116,7 +116,7 @@ async function generateRSSFeed(args: {
     ${entries}
   </feed>`;
 
-  await writeFile(resolve('dist/rss.xml'), feed);
+  await writeFile(resolve('dist', 'rss.xml'), feed);
 
   log.info('Generated RSS feed');
 

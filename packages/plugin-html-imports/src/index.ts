@@ -1,5 +1,3 @@
-// noinspection JSUnusedGlobalSymbols
-
 import { resolve } from 'path';
 import { readFile, writeFile } from 'fs/promises';
 import {
@@ -58,12 +56,12 @@ async function resolveHTMLImports(args?: {
       };
     }
 
-    const firstImportTargetFilePath = resolve('dist/', firstImport?.[1]);
+    const firstImportTargetFilePath = resolve('dist', firstImport?.[1]);
 
     let fragment = await PRPLCache?.get(partitionKey, firstImportTargetFilePath);
 
     if (!fragment) {
-      const fragmentFileBuffer = await readFile(resolve('dist/', firstImport?.[1]));
+      const fragmentFileBuffer = await readFile(resolve('dist', firstImport?.[1]));
       fragment = fragmentFileBuffer?.toString();
       await PRPLCache?.set(partitionKey, firstImportTargetFilePath, fragment);
     }
