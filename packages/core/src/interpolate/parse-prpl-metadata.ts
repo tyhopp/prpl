@@ -17,7 +17,7 @@ async function parsePRPLMetadata(args: {
     const metadataStringRegex = new RegExp(`${EOL}$`, `s`);
     const metadataString = /<!--(.*?)-->/s?.exec(src)?.[1]?.replace(metadataStringRegex, '');
 
-    const metadataArrayRegex = new RegExp(`${EOL}(.*?): /`, `m`);
+    const metadataArrayRegex = new RegExp(`${EOL}(.*?): `, `m`);
     const metadataArray = metadataString?.split(metadataArrayRegex)?.slice(1);
 
     metadata = metadataArray?.reduce((acc, curr, index) => {
