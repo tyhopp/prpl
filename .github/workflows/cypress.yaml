@@ -4,6 +4,10 @@ on:
   pull_request:
     types: [opened, synchronize]
 
+defaults:
+  run:
+    shell: bash
+
 jobs:
   test-ubuntu:
     runs-on: ubuntu-latest
