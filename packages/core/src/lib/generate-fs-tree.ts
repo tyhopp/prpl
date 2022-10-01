@@ -1,5 +1,5 @@
 import { readFile, stat } from 'fs/promises';
-import { basename, extname, join, parse, resolve } from 'path';
+import { basename, extname, join, parse, resolve, sep } from 'path';
 import { PRPLFileSystemTree, PRPLFileSystemTreeEntity } from '../types/prpl.js';
 import { readDirSafe } from './read-dir-safe.js';
 
@@ -17,10 +17,9 @@ async function generateFileSystemTree(
   const { entityPath, readFileRegExp } = args;
 
   const name = basename(entityPath);
-  const path = entityPath?.replace(/\\/g, '/');
 
   const item: PRPLFileSystemTree = {
-    path,
+    path: entityPath,
     name,
     entity: null
   };
@@ -28,21 +27,21 @@ async function generateFileSystemTree(
   let stats;
 
   try {
-    stats = await stat(path);
+    stats = await stat(entityPath);
   } catch (_) {
     return null;
   }
 
   if (stats?.isFile()) {
-    const { dir, base: name } = parse(path);
+    const { dir, base: name } = parse(entityPath);
 
     item.srcRelativeDir = dir?.replace(resolve('.'), '');
-    item.srcRelativeFilePath = `${item?.srcRelativeDir?.replace('/src', '')}/${name}`;
+    item.srcRelativeFilePath = `${item?.srcRelativeDir?.replace(`${sep}src`, '')}${sep}${name}`;
 
-    item.targetFilePath = path?.replace('src', 'dist');
+    item.targetFilePath = entityPath?.replace('src', 'dist');
     item.targetDir = parse(item?.targetFilePath)?.dir;
 
-    item.extension = extname(path)?.toLowerCase();
+    item.extension = extname(entityPath)?.toLowerCase();
     item.entity = PRPLFileSystemTreeEntity.file;
 
     try {
