@@ -28,6 +28,9 @@ jobs:
   test-windows:
     runs-on: windows-latest
     steps:
+      - name: List known bash commands
+        run: compgen -c
+
       - name: Checkout repo
         uses: actions/checkout@v2
 
