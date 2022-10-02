@@ -33,10 +33,10 @@ async function generateFileSystemTree(
   }
 
   if (stats?.isFile()) {
-    const { dir, base: name } = parse(entityPath);
+    const { dir, base } = parse(entityPath);
 
     item.srcRelativeDir = dir?.replace(resolve('.'), '');
-    item.srcRelativeFilePath = `${item?.srcRelativeDir?.replace(`${sep}src`, '')}${sep}${name}`;
+    item.srcRelativeFilePath = `${item?.srcRelativeDir.split(sep).slice(1).join(sep)}${sep}${base}`;
 
     item.targetFilePath = entityPath?.replace('src', 'dist');
     item.targetDir = parse(item?.targetFilePath)?.dir;
