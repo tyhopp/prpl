@@ -1,5 +1,3 @@
-// noinspection JSUnusedGlobalSymbols
-
 import { resolve } from 'path';
 import { readFile, writeFile } from 'fs/promises';
 import {

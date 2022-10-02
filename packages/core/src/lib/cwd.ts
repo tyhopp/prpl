@@ -1,4 +1,5 @@
 import { parse } from 'path';
+import { fileURLToPath } from 'url';
 import { log } from './log.js';
 
 /**
@@ -6,9 +7,7 @@ import { log } from './log.js';
  */
 async function cwd(importMeta: ImportMeta): Promise<string> {
   try {
-    const { pathname } = new URL(importMeta?.url);
-    const { base } = parse(pathname);
-    return pathname?.replace(base, '');
+    return parse(fileURLToPath(importMeta.url)).dir;
   } catch (error) {
     log.error('Failed to get current working directory. Error:', error?.message);
   }

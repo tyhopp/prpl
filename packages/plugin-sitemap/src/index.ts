@@ -1,6 +1,4 @@
-// noinspection JSUnusedGlobalSymbols
-
-import { resolve } from 'path';
+import { resolve, parse, sep, posix } from 'path';
 import { writeFile } from 'fs/promises';
 import {
   generateOrRetrieveFileSystemTree,
@@ -77,10 +75,11 @@ async function generateSitemap(args: {
 
             let urlTemplateInstance = String(urlTemplate);
 
-            // Calculate url
-            const slug = items?.[i]?.srcRelativeFilePath
-              ?.replace('/dist/', '')
-              ?.replace('.html', '');
+            const { dir, name } = parse(items?.[i]?.srcRelativeFilePath);
+
+            // We want slugs written with posix separators
+            const distRelativeDir = dir.split(sep).slice(1).join(posix.sep);
+            const slug = posix.join(distRelativeDir, name);
 
             const templateKeys = {
               url: slug === 'index' ? origin : `${origin}/${slug}`,
@@ -116,7 +115,7 @@ async function generateSitemap(args: {
     ${urls}
   </urlset>`;
 
-  await writeFile(resolve('dist/sitemap.xml'), sitemap);
+  await writeFile(resolve('dist', 'sitemap.xml'), sitemap);
 
   log.info('Generated sitemap');
 

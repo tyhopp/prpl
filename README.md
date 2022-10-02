@@ -7,13 +7,13 @@ PRPL is a **lightweight** library for building **fast** static sites. It does tw
 
 ## Features
 
-- Web-compliant HTML API
+- Tiny HTML-based API
 - Zero configuration
-- Zero or near-zero dependency modules
+- Zero or near-zero module dependencies
 - CLI, CJS and ESM module interfaces
-- Fully typed
-- Option to define your own template syntax
-- Option to ship zero JavaScript
+- Define your own template syntax
+- Ship no client JavaScript
+- Works on Linux, MacOS and Windows
 
 ## Why?
 

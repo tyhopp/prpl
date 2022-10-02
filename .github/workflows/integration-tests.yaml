@@ -1,0 +1,30 @@
+name: Integration tests
+
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  test:
+    name: ${{ matrix.os }}
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, windows-latest, macos-latest]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Install monorepo dependencies
+        run: npm i
+
+      - name: Build PRPL modules
+        run: npm run build
+
+      - name: Run tests
+        working-directory: tests
+        run: npm run test

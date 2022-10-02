@@ -37,8 +37,8 @@ async function interpolate(args?: {
     for (let s = 0; s < PRPLClientScripts.length; s++) {
       try {
         await copyFile(
-          resolve(await cwd(import.meta), `client/${PRPLClientScripts[s]}.js`),
-          resolve(`dist/${PRPLClientScripts[s]}.js`)
+          resolve(await cwd(import.meta), 'client', `${PRPLClientScripts[s]}.js`),
+          resolve(`dist`, `${PRPLClientScripts[s]}.js`)
         );
       } catch (error) {
         log.error(`Failed to copy '${PRPLClientScripts[s]}.js' to dist. Error:`, error?.message);

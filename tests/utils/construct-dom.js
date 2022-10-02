@@ -7,7 +7,7 @@ async function constructDOM({ src, type = 'file', mimeType = 'text/html' }) {
     let data = src;
 
     if (type === 'file') {
-      const buffer = await readFile(resolve(`sites/${src}`));
+      const buffer = await readFile(resolve('sites', src));
       data = buffer.toString();
     }
 
