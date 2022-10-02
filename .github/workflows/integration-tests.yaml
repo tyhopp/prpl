@@ -21,8 +21,8 @@ jobs:
 
       - name: Set up node
         uses: actions/setup-node@v3
-          with:
-            node-version: 18
+        with:
+          node-version: 18
 
       - name: Install monorepo dependencies
         run: npm install
