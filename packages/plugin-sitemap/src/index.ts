@@ -1,6 +1,4 @@
-// noinspection JSUnusedGlobalSymbols
-
-import { resolve, sep } from 'path';
+import { resolve, parse, sep, join } from 'path';
 import { writeFile } from 'fs/promises';
 import {
   generateOrRetrieveFileSystemTree,
@@ -77,10 +75,12 @@ async function generateSitemap(args: {
 
             let urlTemplateInstance = String(urlTemplate);
 
-            // Calculate url
-            const slug = items?.[i]?.srcRelativeFilePath
-              ?.replace(`${sep}dist${sep}`, '')
-              ?.replace('.html', '');
+            const { dir, name } = parse(items?.[i]?.srcRelativeFilePath);
+            const distRelativeDir = dir.split(sep).slice(1).join(sep);
+            const slug = join(distRelativeDir, name);
+
+            // TODO: Remove, this is a debug log for Windows CI
+            console.log(items?.[i], slug);
 
             const templateKeys = {
               url: slug === 'index' ? origin : `${origin}/${slug}`,
