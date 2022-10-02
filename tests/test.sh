@@ -33,7 +33,7 @@ then
     cd ../..
     uvu tests/server --bail
     sleep 1
-    pkill node
+    kill %node
     cd sites/server
   done
   
