@@ -6,6 +6,14 @@
     "tests",
     "docs"
   ],
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "engines": {
+    "node": ">=16.17.1"
+  },
   "scripts": {
     "dev": "bash scripts/dev.sh",
     "clear": "rm -rf packages/*/dist",
