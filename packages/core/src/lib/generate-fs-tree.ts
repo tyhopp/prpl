@@ -16,6 +16,9 @@ async function generateFileSystemTree(
 ): Promise<PRPLFileSystemTree> {
   const { entityPath, readFileRegExp } = args;
 
+  // TODO: Remove, this is a debug log for Windows CI
+  console.log({ entityPath, readFileRegExp });
+
   const name = basename(entityPath);
 
   const item: PRPLFileSystemTree = {
