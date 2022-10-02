@@ -1,4 +1,4 @@
-import { resolve, parse, sep, join } from 'path';
+import { resolve, parse, sep, join, posix } from 'path';
 import { writeFile } from 'fs/promises';
 import {
   generateOrRetrieveFileSystemTree,
@@ -76,8 +76,10 @@ async function generateSitemap(args: {
             let urlTemplateInstance = String(urlTemplate);
 
             const { dir, name } = parse(items?.[i]?.srcRelativeFilePath);
-            const distRelativeDir = dir.split(sep).slice(1).join(sep);
-            const slug = join(distRelativeDir, name);
+
+            // We want slugs written with posix separators
+            const distRelativeDir = dir.split(sep).slice(1).join(posix.sep);
+            const slug = posix.join(distRelativeDir, name);
 
             // TODO: Remove, this is a debug log for Windows CI
             console.log(items?.[i], { slug });
