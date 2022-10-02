@@ -81,9 +81,6 @@ async function generateSitemap(args: {
             const distRelativeDir = dir.split(sep).slice(1).join(posix.sep);
             const slug = posix.join(distRelativeDir, name);
 
-            // TODO: Remove, this is a debug log for Windows CI
-            console.log(items?.[i], { slug });
-
             const templateKeys = {
               url: slug === 'index' ? origin : `${origin}/${slug}`,
               date
@@ -113,9 +110,6 @@ async function generateSitemap(args: {
 
   // Walk dist tree to generate sitemap urls
   await walkDistTree(distTree?.children || []);
-
-  // TODO: Remove, this is a debug log for Windows CI
-  console.log({ urls });
 
   const sitemap = `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
     ${urls}
