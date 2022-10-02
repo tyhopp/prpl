@@ -3,7 +3,8 @@
   "workspaces": [
     "packages/*",
     "examples/*",
-    "tests"
+    "tests",
+    "docs"
   ],
   "scripts": {
     "dev": "bash scripts/dev.sh",
