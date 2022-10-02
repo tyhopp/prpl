@@ -14,10 +14,10 @@ async function parsePRPLMetadata(args: {
   let body;
 
   try {
-    const metadataStringRegex = new RegExp(`${EOL}$`, `s`);
+    const metadataStringRegex = new RegExp(`${EOL}$`, 's');
     const metadataString = /<!--(.*?)-->/s?.exec(src)?.[1]?.replace(metadataStringRegex, '');
 
-    const metadataArrayRegex = new RegExp(`${EOL}(.*?): `, `m`);
+    const metadataArrayRegex = new RegExp(`${EOL}(.*?): `, 'm');
     const metadataArray = metadataString?.split(metadataArrayRegex)?.slice(1);
 
     metadata = metadataArray?.reduce((acc, curr, index) => {
@@ -27,7 +27,7 @@ async function parsePRPLMetadata(args: {
       return acc;
     }, {});
 
-    const metadataBodyRegex = new RegExp(`-->${EOL}(.*?)$`, `s`);
+    const metadataBodyRegex = new RegExp(`-->${EOL}(.*?)$`, 's');
     body = metadataBodyRegex.exec(src)?.[1];
   } catch (error) {
     console.error(
