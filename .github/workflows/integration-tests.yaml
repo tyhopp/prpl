@@ -10,7 +10,7 @@ defaults:
 
 jobs:
   test:
-    name: test-${{ matrix.os }}
+    name: ${{ matrix.os }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
