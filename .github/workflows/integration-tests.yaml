@@ -10,17 +10,24 @@ defaults:
 
 jobs:
   test:
-    name: ${{ matrix.os }}
+    name: ${{ matrix.os }}-node-${{ matrix.node }}
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
+        node: [16, 18]
+
     steps:
       - name: Checkout repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+
+      - name: Set up node
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.nodejs }}
 
       - name: Install monorepo dependencies
-        run: npm i
+        run: npm install
 
       - name: Build PRPL modules
         run: npm run build

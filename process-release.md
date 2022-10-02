@@ -86,7 +86,7 @@ Update docs and example sites by checking out `main` and then running:
 
 ```
 git checkout -b chore-update-sites
-npm run update:sites
+npm run update-sites
 git push --set-upstream origin chore-update-sites
 ```
 

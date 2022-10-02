@@ -3,15 +3,24 @@
   "workspaces": [
     "packages/*",
     "examples/*",
-    "tests"
+    "tests",
+    "docs"
   ],
+  "os": [
+    "darwin",
+    "linux",
+    "win32"
+  ],
+  "engines": {
+    "node": ">=16.17.1"
+  },
   "scripts": {
     "dev": "bash scripts/dev.sh",
     "clear": "rm -rf packages/*/dist",
     "build": "npm run clear && rollup -c rollup.config.js",
     "version": "bash scripts/version.sh",
     "publish": "npm run build && bash scripts/publish.sh",
-    "update:sites": "bash scripts/update-sites.sh"
+    "update-sites": "bash scripts/update-sites.sh"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^19.0.0",
