@@ -1,4 +1,4 @@
-import { resolve, parse, sep, join, posix } from 'path';
+import { resolve, parse, sep, posix } from 'path';
 import { writeFile } from 'fs/promises';
 import {
   generateOrRetrieveFileSystemTree,
