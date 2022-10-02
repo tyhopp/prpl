@@ -24,12 +24,6 @@ npm version patch
 
 These changes can be in the same commit together with the changelog updates in the next step.
 
-## Changelog update
-
-Update the changelogs with relevant information for each updated package. Follow the conventions used already in the changelog and only include meaningful changes.
-
-This process is manual for the time being since the project no longer uses Lerna.
-
 ## Publish dry run
 
 Run a dry run of the publish command prior to running an actual publish.
@@ -80,9 +74,15 @@ Verify packages were published successfully, check [npmjs.com](https://www.npmjs
 npm view [PACKAGE]
 ```
 
+## Changelog update
+
+Update the changelogs with relevant information for each updated package.
+
+This process is manual for the time being since the project no longer uses Lerna.
+
 ## Update sites
 
-Once the released packages are verified, update docs and example sites by checking out `main` and then running:
+Update docs and example sites by checking out `main` and then running:
 
 ```
 git checkout -b chore-update-sites
