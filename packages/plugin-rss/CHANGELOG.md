@@ -7,7 +7,13 @@ The latest note here may not correspond to the the latest version published.
 If you're looking for what the latest published version is, see [package.json](./package.json)
 or [npm](https://www.npmjs.com/package/@prpl/plugin-rss).
 
-## [0.2.8](https://github.com/tyhopp/prpl/compare/@prpl/plugin-rss@0.2.7...@prpl/plugin-rss@0.2.8) (2021-12-21)
+# [0.3.0](https://github.com/tyhopp/prpl/compare/@prpl/core@0.3.5...@prpl/core@0.4.0) (2022-10-02)
+
+### Features
+
+* Windows support ([#72](https://github.com/tyhopp/prpl/pull/72))
+
+##  0.2.8 (2021-12-21)
 
 ### Bug Fixes
 

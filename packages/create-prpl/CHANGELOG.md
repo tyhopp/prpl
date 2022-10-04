@@ -7,7 +7,7 @@ The latest note here may not correspond to the the latest version published.
 If you're looking for what the latest published version is, see [package.json](./package.json)
 or [npm](https://www.npmjs.com/package/create-prpl).
 
-## [0.0.31](https://github.com/tyhopp/prpl/compare/create-prpl@0.0.30...create-prpl@0.0.31) (2021-12-23)
+## 0.0.31 (2021-12-23)
 
 ### Bug Fixes
 
