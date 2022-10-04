@@ -4,66 +4,59 @@ Steps to take when releasing new module versions.
 
 ## Version bump
 
-On the `main` branch, bump the `package.json` and `package-lock.json` files for each package you want to release a new version of.
+Check out the `main` branch and `git pull` so you have the latest.
 
-If you want to bump all packages (e.g. with a patch bump), run:
+To bump all packages:
 
+```bash
+npm run version patch # Or minor, major, etc.
 ```
-npm run version patch
-```
 
-If you want to only bump certain packages, then you can manually navigate to the respective package directories (e.g. core), and run:
+To bump certain packages:
 
-```
-npm version patch
+```bash
+cd packages/core # Or some other package
+npm version patch # Or minor, major, etc.
 ```
 
 Stage and commit the changes:
 
-```
+```bash
 git add .
 git commit -m "chore: Release 0.4.0" # Swap with target version
 ```
 
 ## Publish dry run
 
-Run a dry run of the publish command prior to running an actual publish.
+> Note - Arguments are positional for the publish script.
 
-To dry run a publish of all packages, run:
+To dry run a publish of all packages:
 
-**Note** - Arguments are positional.
-
-```
+```bash
 npm run publish dry-run
 ```
 
-To dry run a publish of certain packages (e.g. `core` and `server`), run:
+To dry run a publish of certain packages (e.g. `core` and `server`):
 
-**Note** - Arguments are positional.
-
-```
+```bash
 npm run publish dry-run core server
 ```
 
-This should build the relevant packages and show log output of what package versions would have been published.
+This should build the relevant packages and show log output of what package versions would have been published. Check it is correct.
 
 ## Publish
 
-Run an actual publish the same way as the dry run but without the dry run argument:
+> Note - Arguments are positional for the publish script.
 
-To publish all packages, get a one-time password from an authenticator app and run:
+To publish all packages:
 
-**Note** - Arguments are positional.
-
-```
+```bash
 npm run publish [OTP]
 ```
 
-To publish certain packages (e.g. `core` and `server`), run:
+To publish certain packages (e.g. `core` and `server`):
 
-**Note** - Arguments are positional.
-
-```
+```bash
 npm run publish [OTP] core server
 ```
 
@@ -71,15 +64,27 @@ npm run publish [OTP] core server
 
 Verify packages were published successfully, check [npmjs.com](https://www.npmjs.com) and/or run:
 
-```
+```bash
 npm view [PACKAGE]
 ```
 
-Push the version bump changes commit to remote:
+Once verified, push the version bump changes commit to remote:
 
-```
+```bash
 git push
 ```
+
+## Create tag
+
+If `core` was bumped, create a new tag and push it:
+
+```bash
+# Swap with target versions
+git tag @prpl/core@0.4.0
+git push origin @prpl/core@0.4.0
+```
+
+Tags should not be created for other packages.
 
 ## Changelog update
 
@@ -91,7 +96,7 @@ This process is manual for the time being since the project no longer uses Lerna
 
 Update docs and example sites by checking out `main` and then running:
 
-```
+```bash
 git checkout -b chore-update-sites
 npm run update-sites
 git push
@@ -101,16 +106,7 @@ Create a PR in the GitHub web app, review changes, and merge to `main`.
 
 ## Create a GitHub release (optional)
 
-For substantial changes, create a GitHub release.
-
-Make sure the release commit is checked out, create a new tag for `core` and push it:
-
-```
-git tag @prpl/core@0.4.0 # Swap with target version
-git push --tags
-```
-
-Then create a new release with that tag in GitHub. List what the release contains in the description with links to PRs.
+For substantial changes, create a GitHub release from the new tag in GitHub. List what the release contains in the description with links to PRs.
 
 ## Done
 
