@@ -4,11 +4,7 @@ Steps to take when releasing new module versions.
 
 ## Version bump
 
-First, bump the `package.json` and `package-lock.json` files for each package
-you want to release a new version of.
-
-Versions should follow [semver](https://semver.org) guidelines and make use of
-the [`npm version`](https://docs.npmjs.com/cli/v8/commands/npm-version) command to do the bump locally.
+On the `main` branch, bump the `package.json` and `package-lock.json` files for each package you want to release a new version of.
 
 If you want to bump all packages (e.g. with a patch bump), run:
 
@@ -22,7 +18,12 @@ If you want to only bump certain packages, then you can manually navigate to the
 npm version patch
 ```
 
-These changes can be in the same commit together with the changelog updates in the next step.
+Stage and commit the changes:
+
+```
+git add .
+git commit -m "chore: Release 0.4.0" # Swap with target version
+```
 
 ## Publish dry run
 
@@ -74,6 +75,12 @@ Verify packages were published successfully, check [npmjs.com](https://www.npmjs
 npm view [PACKAGE]
 ```
 
+Push the version bump changes commit to remote:
+
+```
+git push
+```
+
 ## Changelog update
 
 Update the changelogs with relevant information for each updated package.
@@ -87,10 +94,23 @@ Update docs and example sites by checking out `main` and then running:
 ```
 git checkout -b chore-update-sites
 npm run update-sites
-git push --set-upstream origin chore-update-sites
+git push
 ```
 
 Create a PR in the GitHub web app, review changes, and merge to `main`.
+
+## Create a GitHub release (optional)
+
+For substantial changes, create a GitHub release.
+
+Make sure the release commit is checked out, create a new tag for `core` and push it:
+
+```
+git tag @prpl/core@0.4.0 # Swap with target version
+git push --tags
+```
+
+Then create a new release with that tag in GitHub. List what the release contains in the description with links to PRs.
 
 ## Done
 
@@ -98,4 +118,4 @@ That's it!
 
 This project used to have more automation, but has removed Lerna since it's no longer maintained and does way more than what this project requires.
 
-Over time I'd like to automat changelog updates again but without any third party dependencies. If you're interested in helping out, please feel free to open a PR!
+Over time I'd like to automate changelog updates again but without any third party dependencies. If you're interested in helping out, please feel free to open a PR!
