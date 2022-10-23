@@ -3,12 +3,14 @@
   "version": "0.0.1",
   "description": "PRPL site to run tests against",
   "scripts": {
-    "dev": "rm -rf dist && prpl && prpl-server"
+    "clear": "rimraf dist",
+    "dev": "npm run clear && prpl && prpl-server"
   },
   "dependencies": {
     "@prpl/core": "file:../../../packages/core"
   },
   "devDependencies": {
-    "@prpl/server": "file:../../../packages/server"
+    "@prpl/server": "file:../../../packages/server",
+    "rimraf": "^3.0.2"
   }
 }

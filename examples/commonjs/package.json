@@ -3,13 +3,15 @@
   "version": "0.0.1",
   "description": "Example site using PRPL in a CommonJS module",
   "scripts": {
-    "dev": "rm -rf dist && node scripts/build.js && prpl-server",
-    "build": "rm -rf dist && node scripts/build.js"
+    "clear": "rimraf dist",
+    "dev": "npm run clear && node scripts/build.js && prpl-server",
+    "build": "npm run clear && node scripts/build.js"
   },
   "dependencies": {
     "@prpl/core": "^0.4.0"
   },
   "devDependencies": {
-    "@prpl/server": "^0.2.0"
+    "@prpl/server": "^0.2.0",
+    "rimraf": "^3.0.2"
   }
 }

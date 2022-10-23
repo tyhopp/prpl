@@ -5,14 +5,16 @@
   "description": "Example site using PRPL with Deno",
   "type": "module",
   "scripts": {
-    "dev": "rm -rf dist && node scripts/build.js && prpl-server",
-    "dev:deno": "rm -rf dist && npm run build && prpl-server",
+    "clear": "rimraf dist",
+    "dev": "npm run clear && node scripts/build.js && prpl-server",
+    "dev:deno": "npm run clear && npm run build && prpl-server",
     "build": "deno run --unstable --compat --allow-read --allow-write --allow-net --import-map=node_modules/@prpl/core/deno-import-map.json scripts/build.js"
   },
   "dependencies": {
     "@prpl/core": "^0.4.0"
   },
   "devDependencies": {
-    "@prpl/server": "^0.2.0"
+    "@prpl/server": "^0.2.0",
+    "rimraf": "^3.0.2"
   }
 }
