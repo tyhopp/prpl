@@ -15,7 +15,7 @@
     "node": ">=16.17.1"
   },
   "scripts": {
-    "dev": "bash scripts/dev.sh",
+    "dev": "npx rollup --watch --config rollup.config.js",
     "clear": "rimraf packages/*/dist",
     "build": "npm run clear && rollup -c rollup.config.js",
     "version": "bash scripts/version.sh",
