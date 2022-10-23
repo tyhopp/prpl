@@ -15,10 +15,9 @@
     "node": ">=16.17.1"
   },
   "scripts": {
-    "dev": "npx rollup --watch --config rollup.config.js",
     "clear": "rimraf packages/*/dist",
-    "build": "npm run clear && rollup --config rollup.config.js",
-    "update-sites": "bash scripts/update-sites.sh"
+    "dev": "npx rollup --watch --config rollup.config.js",
+    "build": "npm run clear && rollup --config rollup.config.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^19.0.0",
