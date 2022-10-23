@@ -1,10 +1,12 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOM } from '../../utils/construct-dom.js';
+import { buildSite } from '../utils/build-site.js';
+import { constructDOM } from '../utils/construct-dom.js';
 
 let document;
 
 test.before(async () => {
+  await buildSite('plugins');
   const { document: codeHighlightDocument } = await constructDOM({
     src: 'plugins/dist/plugin-code-highlight.html'
   });

@@ -1,6 +1,7 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOM } from '../../utils/construct-dom.js';
+import { buildSite } from '../utils/build-site.js';
+import { constructDOM } from '../utils/construct-dom.js';
 
 const page = {
   a: {
@@ -22,6 +23,7 @@ const page = {
 const document = {};
 
 test.before(async () => {
+  await buildSite('core');
   const { document: documentA } = await constructDOM({ src: 'core/dist/notes/a.html' });
   const { document: documentB } = await constructDOM({ src: 'core/dist/notes/b.html' });
   document.a = documentA;

@@ -8,20 +8,20 @@ Check out the `main` branch and `git pull` so you have the latest.
 
 To bump all packages:
 
-```bash
+```shell
 npm version patch --workspace=packages # Or minor, major, etc.
 ```
 
 To bump certain packages:
 
-```bash
+```shell
 cd packages/core # Or some other package
 npm version patch # Or minor, major, etc.
 ```
 
 Stage and commit the changes:
 
-```bash
+```shell
 git add .
 git commit -m "chore: Release 0.4.0" # Swap with target version
 ```
@@ -30,13 +30,13 @@ git commit -m "chore: Release 0.4.0" # Swap with target version
 
 To dry run a publish of all packages:
 
-```bash
+```shell
 npm publish --dry-run --workspace=packages
 ```
 
 To dry run a publish of certain packages (e.g. `core`):
 
-```bash
+```shell
 cd packages/core # Or some other package
 npm publish --dry-run
 ```
@@ -51,13 +51,13 @@ Use the same commands as the publish dry run without the `--dry-run` argument.
 
 Verify packages were published successfully, check [npmjs.com](https://www.npmjs.com) and/or run:
 
-```bash
+```shell
 npm view [PACKAGE]
 ```
 
 Once verified, push the version bump changes commit to remote:
 
-```bash
+```shell
 git push
 ```
 
@@ -65,7 +65,7 @@ git push
 
 If `core` was bumped, create a new tag and push it:
 
-```bash
+```shell
 # Swap with target versions
 git tag @prpl/core@0.4.0
 git push origin @prpl/core@0.4.0

@@ -4,13 +4,12 @@
   "description": "Tests for PRPL",
   "type": "module",
   "scripts": {
-    "test": "npm run test:build && npm run test:server",
-    "test:build": "bash test.sh build",
-    "test:server": "bash test.sh server"
+    "test": "uvu tests --bail"
   },
   "devDependencies": {
     "cssom": "^0.5.0",
     "linkedom": "^0.14.2",
+    "rimraf": "^3.0.2",
     "uvu": "^0.5.3"
   }
 }

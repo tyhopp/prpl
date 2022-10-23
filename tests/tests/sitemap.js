@@ -1,6 +1,7 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOM } from '../../utils/construct-dom.js';
+import { buildSite } from '../utils/build-site.js';
+import { constructDOM } from '../utils/construct-dom.js';
 
 const origin = 'http://localhost:8000';
 
@@ -15,6 +16,7 @@ const slugs = {
 let document;
 
 test.before(async () => {
+  await buildSite('plugins');
   const { document: sitemapDocument } = await constructDOM({
     src: 'plugins/dist/sitemap.xml',
     mimeType: 'text/xml'
