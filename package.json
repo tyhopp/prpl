@@ -15,18 +15,16 @@
     "node": ">=16.17.1"
   },
   "scripts": {
-    "dev": "bash scripts/dev.sh",
-    "clear": "rm -rf packages/*/dist",
-    "build": "npm run clear && rollup -c rollup.config.js",
-    "version": "bash scripts/version.sh",
-    "publish": "npm run build && bash scripts/publish.sh",
-    "update-sites": "bash scripts/update-sites.sh"
+    "clear": "rimraf packages/*/dist",
+    "dev": "npx rollup --watch --config rollup.config.js",
+    "build": "npm run clear && rollup --config rollup.config.js"
   },
   "devDependencies": {
     "@rollup/plugin-commonjs": "^19.0.0",
     "@rollup/plugin-node-resolve": "^13.0.0",
     "@types/node": "^16.0.0",
     "prettier": "^2.3.2",
+    "rimraf": "^3.0.2",
     "rollup": "^2.52.7",
     "rollup-plugin-typescript2": "^0.31.1",
     "typescript": "^4.3.5"

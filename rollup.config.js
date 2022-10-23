@@ -6,8 +6,8 @@ import commonjs from '@rollup/plugin-commonjs';
 import typescript from 'rollup-plugin-typescript2';
 
 async function bundle(args) {
-  const watchPackages = args?.scope?.split(',');
-  delete args?.scope;
+  const watchPackages = args?.input
+  delete args?.input;
 
   const packageConfigs = await createPackageConfigs(watchPackages);
   const clientFileConfigs = await createClientFileConfigs(watchPackages);

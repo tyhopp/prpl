@@ -12,8 +12,9 @@
   ],
   "license": "MIT",
   "scripts": {
-    "dev": "rm -rf dist && node scripts/build.js && prpl-server",
-    "build": "rm -rf dist && node scripts/build.js",
+    "clear": "rimraf dist",
+    "dev": "npm run clear && node scripts/build.js && prpl-server",
+    "build": "npm run clear && node scripts/build.js",
     "deploy": "firebase deploy --only hosting"
   },
   "dependencies": {
@@ -24,6 +25,7 @@
     "@prpl/plugin-sitemap": "^0.2.0"
   },
   "devDependencies": {
-    "@prpl/server": "^0.2.0"
+    "@prpl/server": "^0.2.0",
+    "rimraf": "^3.0.2"
   }
 }

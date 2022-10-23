@@ -4,10 +4,10 @@ import { DOMParser, parseHTML } from 'linkedom';
 
 async function constructDOM({ src, type = 'file', mimeType = 'text/html' }) {
   try {
-    let data = src;
+    let data;
 
     if (type === 'file') {
-      const buffer = await readFile(resolve('sites', src));
+      const buffer = await readFile(resolve(process.cwd(), 'fixtures', src));
       data = buffer.toString();
     }
 

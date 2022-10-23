@@ -3,13 +3,15 @@
   "version": "0.0.1",
   "description": "Basic PRPL example site",
   "scripts": {
-    "dev": "rm -rf dist && prpl && prpl-server",
-    "build": "rm -rf dist && prpl"
+    "clear": "rimraf dist",
+    "dev": "npm run clear && prpl && prpl-server",
+    "build": "npm run clear && prpl"
   },
   "dependencies": {
     "@prpl/core": "^0.4.0"
   },
   "devDependencies": {
-    "@prpl/server": "^0.2.0"
+    "@prpl/server": "^0.2.0",
+    "rimraf": "^3.0.2"
   }
 }

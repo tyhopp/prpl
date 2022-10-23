@@ -8,69 +8,56 @@ Check out the `main` branch and `git pull` so you have the latest.
 
 To bump all packages:
 
-```bash
-npm run version patch # Or minor, major, etc.
+```shell
+npm version patch --workspace=packages # Or minor, major, etc.
 ```
 
 To bump certain packages:
 
-```bash
+```shell
 cd packages/core # Or some other package
 npm version patch # Or minor, major, etc.
 ```
 
 Stage and commit the changes:
 
-```bash
+```shell
 git add .
 git commit -m "chore: Release 0.4.0" # Swap with target version
 ```
 
 ## Publish dry run
 
-> Note - Arguments are positional for the publish script.
-
 To dry run a publish of all packages:
 
-```bash
-npm run publish dry-run
+```shell
+npm publish --dry-run --workspace=packages
 ```
 
-To dry run a publish of certain packages (e.g. `core` and `server`):
+To dry run a publish of certain packages (e.g. `core`):
 
-```bash
-npm run publish dry-run core server
+```shell
+cd packages/core # Or some other package
+npm publish --dry-run
 ```
 
 This should build the relevant packages and show log output of what package versions would have been published. Check it is correct.
 
 ## Publish
 
-> Note - Arguments are positional for the publish script.
-
-To publish all packages:
-
-```bash
-npm run publish [OTP]
-```
-
-To publish certain packages (e.g. `core` and `server`):
-
-```bash
-npm run publish [OTP] core server
-```
+Use the same commands as the publish dry run without the `--dry-run` argument.
 
 ## Verify
 
 Verify packages were published successfully, check [npmjs.com](https://www.npmjs.com) and/or run:
 
-```bash
+```shell
 npm view [PACKAGE]
 ```
 
 Once verified, push the version bump changes commit to remote:
 
-```bash
+```shell
 git push
 ```
 
@@ -78,7 +65,7 @@ git push
 
 If `core` was bumped, create a new tag and push it:
 
-```bash
+```shell
 # Swap with target versions
 git tag @prpl/core@0.4.0
 git push origin @prpl/core@0.4.0
@@ -94,15 +81,9 @@ This process is manual for the time being since the project no longer uses Lerna
 
 ## Update sites
 
-Update docs and example sites by checking out `main` and then running:
+Update docs and example sites with the new published versions.
 
-```bash
-git checkout -b chore-update-sites
-npm run update-sites
-git push
-```
-
-Create a PR in the GitHub web app, review changes, and merge to `main`.
+This process is manual for the time being, try [npm update --workspaces=1](https://docs.npmjs.com/cli/v8/commands/npm-update#workspaces) and see if it works. 
 
 ## Create a GitHub release (optional)
 

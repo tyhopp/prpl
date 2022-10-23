@@ -1,5 +1,7 @@
 import { execSync } from 'child_process';
 import path from 'path';
+import rimraf from 'rimraf';
+import fsExtra from 'fs-extra';
 
 const cwd = path.resolve('');
 
@@ -23,14 +25,14 @@ sh(`git sparse-checkout set examples/${example}`, { cwd: path.resolve('prpl') })
 const originalExamplePath = path.resolve(`prpl/examples/${example}`);
 const renamedExample = `prpl-example-${example}`;
 
-// Move example
-sh(`mv ${originalExamplePath} ${renamedExample}`);
+// Copy to renamed example
+fsExtra.copySync(originalExamplePath, renamedExample);
 
-// Remove prpl
-sh(`rm -rf prpl`);
+// Remove original example
+rimraf.sync('prpl');
 
 // Remove git history
-sh('rm -rf .git', { cwd: renamedExample });
+rimraf.sync(path.join(renamedExample, '.git'));
 
 // Install dependencies
 sh('npm install', { cwd: renamedExample });

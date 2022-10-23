@@ -7,7 +7,7 @@ async function constructCSSOM({ src, type = 'file' }) {
     let css = src;
 
     if (type === 'file') {
-      const buffer = await readFile(resolve('sites', src));
+      const buffer = await readFile(resolve(process.cwd(), 'fixtures', src));
       css = buffer.toString();
     }
 

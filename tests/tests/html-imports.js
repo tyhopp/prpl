@@ -1,6 +1,7 @@
 import { test } from 'uvu';
 import * as assert from 'uvu/assert';
-import { constructDOM } from '../../utils/construct-dom.js';
+import { buildSite } from '../utils/build-site.js';
+import { constructDOM } from '../utils/construct-dom.js';
 
 const fragments = {
   a: {
@@ -18,6 +19,7 @@ const { a, b } = fragments;
 let document;
 
 test.before(async () => {
+  await buildSite('plugins');
   const { document: htmlImportsDocument } = await constructDOM({
     src: 'plugins/dist/plugin-html-imports.html'
   });
