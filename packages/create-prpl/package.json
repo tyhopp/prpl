@@ -26,5 +26,9 @@
     "prpl",
     "initializer"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^10.1.0",
+    "rimraf": "^3.0.2"
+  }
 }
