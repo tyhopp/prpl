@@ -28,37 +28,24 @@ git commit -m "chore: Release 0.4.0" # Swap with target version
 
 ## Publish dry run
 
-> Note - Arguments are positional for the publish script.
-
 To dry run a publish of all packages:
 
 ```bash
-npm run publish dry-run
+npm publish --dry-run --workspace=packages
 ```
 
-To dry run a publish of certain packages (e.g. `core` and `server`):
+To dry run a publish of certain packages (e.g. `core`):
 
 ```bash
-npm run publish dry-run core server
+cd packages/core # Or some other package
+npm publish --dry-run
 ```
 
 This should build the relevant packages and show log output of what package versions would have been published. Check it is correct.
 
 ## Publish
 
-> Note - Arguments are positional for the publish script.
-
-To publish all packages:
-
-```bash
-npm run publish [OTP]
-```
-
-To publish certain packages (e.g. `core` and `server`):
-
-```bash
-npm run publish [OTP] core server
-```
+Use the same commands as the publish dry run without the `--dry-run` argument.
 
 ## Verify
 
