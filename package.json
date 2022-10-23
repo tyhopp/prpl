@@ -18,7 +18,6 @@
     "dev": "npx rollup --watch --config rollup.config.js",
     "clear": "rimraf packages/*/dist",
     "build": "npm run clear && rollup --config rollup.config.js",
-    "version": "bash scripts/version.sh",
     "publish": "npm run build && bash scripts/publish.sh",
     "update-sites": "bash scripts/update-sites.sh"
   },

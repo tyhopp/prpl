@@ -9,7 +9,7 @@ Check out the `main` branch and `git pull` so you have the latest.
 To bump all packages:
 
 ```bash
-npm run version patch # Or minor, major, etc.
+npm version patch --workspace=packages # Or minor, major, etc.
 ```
 
 To bump certain packages:
