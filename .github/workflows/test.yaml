@@ -4,10 +4,6 @@ on:
   pull_request:
     types: [opened, synchronize]
 
-defaults:
-  run:
-    shell: bash # TODO: Run on PowerShell if OS is Windows
-
 jobs:
   test:
     name: ${{ matrix.os }}-node-${{ matrix.node }}
