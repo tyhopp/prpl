@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest, windows-latest, macos-latest]
-        node: [16, 18]
+        node: [18, 19]
 
     steps:
       - name: Checkout repo
@@ -20,7 +20,7 @@ jobs:
       - name: Set up node
         uses: actions/setup-node@v3
         with:
-          node-version: ${{ matrix.nodejs }}
+          node-version: ${{ matrix.node }}
 
       - name: Install monorepo dependencies
         run: npm install
