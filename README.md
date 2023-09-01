@@ -1,3 +1,5 @@
+**This project is no longer actively maintained.**
+
 # PRPL
 
 PRPL is a **lightweight** library for building **fast** static sites. It does two things:
@@ -37,4 +39,4 @@ To clone the minimal starter and run it locally, run:
 npx -y create-prpl@latest
 ```
 
-Visit [prpl.dev](https://prpl.dev) for full documentation, guides and design decisions.
+Visit [docs](./docs/README.md) for full documentation, guides and design decisions.
